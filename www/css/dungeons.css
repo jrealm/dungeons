@@ -1,0 +1,42 @@
+@import url(overlay.css);
+
+td, th {
+    white-space: nowrap;
+}
+
+.image-preview {
+    display: inline-block;
+    max-width: calc(100% - 60px);
+}
+
+.image-preview img {
+    background-image: url(img/transparent.jpg);
+    max-height: 200px;
+    max-width: 100%;
+}
+
+.nav-link:not([href]) {
+    cursor: pointer;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: azure;
+}
+
+.w-1 {
+    width: 1%;
+}
+
+@media (min-width: 1200px) {
+    .form-wrapper {
+        column-count: 2;
+    }
+
+    .form-wrapper > div {
+        break-inside: avoid;
+    }
+}

@@ -1,0 +1,46 @@
+{% extends 'backend/content-wrapper.twig' %}
+
+{% set data, formId = result.data, random() %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="card-body form-wrapper" id="_{{ formId }}">
+                {% for style in result.styles %}
+                    {% if style.type == 'hidden' %}
+                        {% include 'backend/component/hidden.twig' with {'data': data, 'style': style} only %}
+                    {% else %}
+                        <div class="form-group">
+                            <label>
+                                {% if style.required %}
+                                    <span class="text-danger">*</span>
+                                {% endif %}
+                                {{ style.label }}
+                            </label>
+                            <span class="invalid-feedback" data-name="{{ style.name }}"></span>
+                            {% include 'backend/component/' ~ style.type ~ '.twig' with {'class': 'form-control', 'data': data, 'style': style} only %}
+                            <span class="text-secondary text-xs">{{ style.remark }}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if result.buttons %}
+                <div class="card-footer">
+                {% for button in result.buttons %}
+                    {% if button.method %}
+                        <button class="btn {{ button.class }}" data-ajax="{{ button.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
+                    {% else %}
+                        <a class="btn {{ button.class }}" data-ajax href="{{ button.path }}">{{ button.label }}</a>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block postprocess %}
+    {{ parent() }}
+
+    initForm($("#_{{ formId }}"));
+{% endblock %}

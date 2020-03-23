@@ -1,0 +1,41 @@
+{% extends 'backend/response.twig' %}
+
+{% block target %}.modal-wrapper{% endblock %}
+
+{% block html %}
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ i18n('backend.delete.confirm') }}</h4>
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ i18n('backend.delete.confirm.message') }}</p>
+                </div>
+                <div class="justify-content-between modal-footer">
+                    <button class="btn {{ cfg('backend.delete.cancel.button') }}" data-dismiss="modal">{{ i18n('backend.delete.cancel') }}</button>
+                    <button class="btn {{ cfg('backend.delete.button') }}" data-submit>{{ i18n('backend.delete.submit') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postprocess %}
+    var modal = $(".modal-wrapper .modal").modal();
+
+    modal.on("hidden.bs.modal", function (event) {
+        if (modal.data("submit")) {
+            perform("{{ build(result.path, null, {confirm: 1}) }}", {});
+        }
+
+        modal.remove();
+    });
+
+    modal.find("[data-submit]").focus().on("click", function () {
+        modal.data("submit", true).modal("hide");
+    });
+{% endblock %}

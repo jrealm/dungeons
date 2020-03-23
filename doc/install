@@ -1,0 +1,16 @@
+cp -R vendor/jrealm/dungeons/{doc/config-sample.php,www} .
+cp vendor/jrealm/dungeons/doc/gitignore .gitignore
+echo 'Require all denied' > .htaccess
+
+mkdir -p {data,logs,www/files}
+chmod 777 {data,logs,www/files}
+
+rm -rf www/adminlte
+mkdir -p www/adminlte
+cp -R vendor/almasaeed2010/adminlte/{dist,plugins} www/adminlte
+
+mkdir -p www/{,en/,tw/}backend
+
+rm -rf www/bootstrap
+mkdir -p www/bootstrap
+cp -R vendor/twbs/bootstrap/dist/* www/bootstrap

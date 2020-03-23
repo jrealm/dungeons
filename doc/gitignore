@@ -1,0 +1,15 @@
+/.htaccess
+/composer.lock
+/config-sample.php
+/data/
+/logs/
+/vendor/
+/www/.htaccess
+/www/adminlte/
+/www/bootstrap/
+/www/css/dungeons.css
+/www/css/img/
+/www/css/overlay.css
+/www/files/
+/www/index.php
+/www/js/dungeons.js

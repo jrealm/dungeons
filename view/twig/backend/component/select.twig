@@ -1,0 +1,13 @@
+{% set value = string(data[style.name]) %}
+{% if style.readonly %}
+    <div class="py-2">{{ style.options[value] }}</div>
+{% else %}
+    <select class="{{ class }} select2bs4" name="{{ style.name }}" style="width: 100%;">
+        {% if not style.required %}
+            <option value="">&nbsp;</option>
+        {% endif %}
+        {% for name, item in style.options %}
+            <option{% if name == value %} selected{% endif %} value="{{ name }}">{{ item }}</option>
+        {% endfor %}
+    </select>
+{% endif %}

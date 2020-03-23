@@ -1,0 +1,10 @@
+<div>
+    <span class="image-preview">{% if data[style.name] %}<img class="border shadow" src="{{ data[style.name] | img }}">{% endif %}</span>
+    {% if not style.readonly %}
+        <label class="align-top">
+            <input data-error="{{ i18n('error.InvalidFileType') }}" name="{{ style.name }}" type="hidden" value="{{ data[style.name] }}">
+            <input class="d-none" data-format="image" type="file">
+            <a class="btn btn-default btn-lg" title="{{ i18n('backend.browser') }}"><i class="far fa-image"></i></a>
+        </label>
+    {% endif %}
+</div>
