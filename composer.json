@@ -18,6 +18,7 @@
     "require": {
         "almasaeed2010/adminlte": "^3.0",
         "filp/whoops": "^2.7",
+        "mhor/php-mediainfo": "^4.1",
         "monolog/monolog": "^2.0",
         "twbs/bootstrap": "^4.4",
         "twig/string-extra": "^3.0",
