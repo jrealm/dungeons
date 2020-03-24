@@ -20,6 +20,7 @@
         "filp/whoops": "^2.7",
         "monolog/monolog": "^2.0",
         "twbs/bootstrap": "^4.4",
+        "twig/string-extra": "^3.0",
         "twig/twig": "^3.0"
     }
 }
