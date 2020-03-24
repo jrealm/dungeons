@@ -4,6 +4,14 @@ td, th {
     white-space: nowrap;
 }
 
+.color-picker {
+    background-image: url(img/transparent.jpg);
+}
+
+.color-picker .input-group-text {
+    background-color: transparent;
+}
+
 .image-preview {
     display: inline-block;
     max-width: calc(100% - 60px);

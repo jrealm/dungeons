@@ -1,0 +1,14 @@
+{% if style.readonly %}
+    <div class="input-group">
+        <div class="color-picker">
+            <span class="input-group-text" style="background-color: {{ data[style.name] | default('transparent') }};">&nbsp;&nbsp;&nbsp;</span>
+        </div>
+    </div>
+{% else %}
+    <div class="input-group" data-format="color">
+        <input class="{{ class }}" name="{{ style.name }}" placeholder="{{ style.remark }}" type="text" value="{{ data[style.name] }}">
+        <div class="color-picker input-group-append">
+            <span class="input-group-text">&nbsp;&nbsp;&nbsp;</span>
+        </div>
+    </div>
+{% endif %}

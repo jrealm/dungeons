@@ -3,6 +3,7 @@
 namespace dungeons\view;
 
 use Twig\Environment;
+use Twig\Extra\String\StringExtension;
 use Twig\Loader\FilesystemLoader;
 use dungeons\Resource;
 
@@ -28,6 +29,8 @@ class Twig {
         $paths[] = DUNGEONS . 'view/twig/';
 
         $twig = new Environment(new FilesystemLoader($paths));
+
+        $twig->addExtension(new StringExtension());
 
         $twig->registerUndefinedFilterCallback(function ($name) {
             return Resource::load("twig/filter/{$name}.php") ?: false;
