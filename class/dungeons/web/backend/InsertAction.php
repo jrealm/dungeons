@@ -6,7 +6,7 @@ use dungeons\web\UserAction;
 
 class InsertAction extends UserAction {
 
-    use Validator;
+    use Validator, Wrapper;
 
     public function __construct() {
         parent::__construct();

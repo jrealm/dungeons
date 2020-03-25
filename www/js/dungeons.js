@@ -246,15 +246,17 @@
 
         form.find("input[data-format=image]").on("change", function (event) {
             var file = event.currentTarget.files && event.currentTarget.files[0];
-            var input = $(event.currentTarget).siblings("input");
-            var feedback = input.closest('div').siblings(".invalid-feedback").hide().empty();
+            var input = $(event.currentTarget).siblings("input[data-image]");
+            var feedback = input.closest("div").siblings(".invalid-feedback").hide().empty();
 
             if (file) {
                 if (file.type.startsWith("image/")) {
                     var reader = new FileReader();
 
                     reader.onload = function () {
-                        input.val(reader.result).closest('div').find(".image-preview").html("<img class=\"border shadow\" src=\"" + reader.result + "\">");
+                        input.val(reader.result);
+                        input.siblings("input[data-filename]").val(file.name);
+                        input.closest("div").find(".image-preview").html("<img class=\"border shadow\" src=\"" + reader.result + "\">");
                     };
 
                     reader.readAsDataURL(file);
