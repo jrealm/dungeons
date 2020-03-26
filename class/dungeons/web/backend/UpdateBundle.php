@@ -2,7 +2,8 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\{Attachment,Resource};
+use dungeons\{Attachment,Config,Resource};
+use dungeons\utility\ValueObject;
 use dungeons\web\UserAction;
 
 class UpdateBundle extends UserAction {
@@ -65,7 +66,7 @@ class UpdateBundle extends UserAction {
             if ($new instanceof Attachment) {
                 $new->save();
 
-                $diff[$name] = $new->getPath();
+                $diff[$name] = strval($new);
             } else if ($new !== $value) {
                 $diff[$name] = $new;
             }
@@ -82,16 +83,20 @@ class UpdateBundle extends UserAction {
 
     protected function validate($form) {
         $errors = [];
-        $styles = $this->styles();
 
-        if ($styles) {
-            foreach ($styles as $name => $style) {
-                $value = @$form[$name];
+        foreach ($this->styles() as $name => $style) {
+            $value = @$form[$name];
 
-                if (is_null($value)) {
-                    if (@$style['required']) {
-                        $errors[] = ['name' => $name, 'type' => 'required'];
-                    }
+            if (is_null($value)) {
+                if (@$style['required']) {
+                    $errors[] = ['name' => $name, 'type' => 'required'];
+                }
+            } else {
+                $options = new ValueObject(Config::load("column/{$style['column']}"));
+                $type = validate($value, $options);
+
+                if ($type) {
+                    $errors[] = ['name' => $name, 'type' => $type];
                 }
             }
         }
@@ -101,15 +106,13 @@ class UpdateBundle extends UserAction {
 
     protected function wrap() {
         $form = parent::wrap();
-        $styles = $this->styles();
 
-        if ($styles) {
-            foreach ($styles as $name => $style) {
-                switch ($style['type']) {
-                    case 'image':
-                        $form = Attachment::wrap($form, $name);
-                        break;
-                }
+        foreach ($this->styles() as $name => $style) {
+            switch ($style['column']) {
+                case 'File':
+                case 'Image':
+                    $form = Attachment::wrap($form, $name);
+                    break;
             }
         }
 

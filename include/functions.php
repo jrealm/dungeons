@@ -79,3 +79,13 @@ function table($name) {
 
     throw new Exception("Table `{$name}` not found.");
 }
+
+function validate($value, $options) {
+    foreach (preg_split('/\|/', $options->validation(), 0, PREG_SPLIT_NO_EMPTY) as $type) {
+        if (!Resource::load("validator/{$type}.php")->validate($value, $options)) {
+            return $type;
+        }
+    }
+
+    return null;
+}

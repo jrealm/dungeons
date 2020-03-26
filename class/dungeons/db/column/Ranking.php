@@ -2,8 +2,6 @@
 
 namespace dungeons\db\column;
 
-use dungeons\Config;
-
 class Ranking extends AbstractSequence {
 
     public function generate($value) {

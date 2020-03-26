@@ -2,8 +2,6 @@
 
 namespace dungeons\db\column;
 
-use dungeons\Config;
-
 class Id extends AbstractSequence {
 
     public function generate($value) {

@@ -15,12 +15,4 @@ class Integer extends Column {
         return PDO::PARAM_INT;
     }
 
-    public function validate($value) {
-        if (filter_var($value, FILTER_VALIDATE_INT) === false) {
-            return $this->validation();
-        }
-
-        return null;
-    }
-
 }

@@ -40,10 +40,13 @@ require 'breadcrumb.php';
 $styles = [];
 
 foreach ($result['data'] as $name => $ignore) {
-    $style = $result['styles'][$name] ?? ['type' => 'text'];
+    $style = $result['styles'][$name] ?? ['column' => 'Text'];
+    $column = Config::load("column/{$style['column']}");
 
     $style['label'] = $name;
     $style['name'] = $name;
+    $style['pattern'] = $style['pattern'] ?? @$column['pattern'];
+    $style['type'] = $column['formStyle'];
 
     $styles[] = $style;
 }

@@ -22,7 +22,7 @@ trait Validator {
                     }
                 }
             } else {
-                $type = $column->validate($value);
+                $type = validate($value, $column);
 
                 if ($type) {
                     $errors[] = ['name' => $name, 'type' => $type];

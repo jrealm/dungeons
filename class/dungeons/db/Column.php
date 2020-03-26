@@ -126,8 +126,4 @@ abstract class Column extends ValueObject {
 
     abstract public function type();
 
-    public function validate($value) {
-        return null;
-    }
-
 }

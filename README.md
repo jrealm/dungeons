@@ -17,16 +17,13 @@
 
         composer install
 
-    或
-
-        composer update
-
 # 檔案與目錄
 
 | 名稱              | 說明                          |
 |-------------------|-------------------------------|
 | action/           | Controller                    |
 | class/            | PHP 類別                      |
+| composer.json     | 套件管理                      |
 | config/           | 系統設定                      |
 | doc/              | 說明文件                      |
 | include/          | App 啟動程序                  |
@@ -34,6 +31,6 @@
 | message/          | 語言包                        |
 | table/            | Model 描述                    |
 | twig/             | Twig 樣板引擎 function/filter |
+| validator/        | 資料驗證器                    |
 | view/             | View 樣板                     |
 | www/              | 網頁靜態檔案 html/css/js      |
-| composer.json     | 套件管理                      |

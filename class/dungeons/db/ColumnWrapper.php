@@ -33,8 +33,4 @@ class ColumnWrapper extends Column {
         return $this->column->type();
     }
 
-    public function validate($value) {
-        return $this->column->validate($value);
-    }
-
 }
