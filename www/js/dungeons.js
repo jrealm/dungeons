@@ -231,14 +231,17 @@
             output.css("background-color", input.val());
         });
 
-        form.find("input[data-format=date]").each(function (ignore, element) {
+        form.find("input[data-format=date],input[data-format=datetime]").each(function (ignore, element) {
             var input = $(element);
 
             input.daterangepicker({
                 autoUpdateInput: false,
                 locale: {format: input.data("pattern")},
                 showDropdowns: true,
-                singleDatePicker: true
+                singleDatePicker: true,
+                timePicker: input.data("format").indexOf("time") >= 0,
+                timePicker24Hour: true,
+                timePickerSeconds: true
             }).on("apply.daterangepicker", function (event, picker) {
                 $(event.currentTarget).val(picker.startDate.format(input.data("pattern")));
             });

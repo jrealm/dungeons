@@ -4,6 +4,8 @@ return [
 
     'Boolean' => '布林值',
 
+    'Color' => '顏色',
+
     'CreateTime' => '資料建立時間',
 
     'Creator' => '資料作者',
@@ -12,9 +14,13 @@ return [
 
     'Double' => '浮點數',
 
-    'Email' => '電子郵件信箱',
+    'Email' => '電子郵件',
+
+    'Html' => 'Html',
 
     'Id' => 'Id',
+
+    'Image' => '圖檔',
 
     'Integer' => '整數',
 

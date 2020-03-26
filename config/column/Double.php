@@ -2,8 +2,8 @@
 
 return [
 
-    'formStyle' => 'float',
+    'formStyle' => 'double',
 
-    'validation' => 'float',
+    'validation' => 'double',
 
 ];
