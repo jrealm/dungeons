@@ -1,7 +1,6 @@
 <?php //>
 
-use dungeons\Config;
-use dungeons\Resource;
+use dungeons\{Config,Resource};
 
 return new class() extends dungeons\web\UserAction {
 

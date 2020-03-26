@@ -3,8 +3,7 @@
 namespace dungeons\web;
 
 use dungeons\App as AbstractApp;
-use dungeons\Config;
-use dungeons\Resource;
+use dungeons\{Config,Resource};
 
 class App extends AbstractApp {
 

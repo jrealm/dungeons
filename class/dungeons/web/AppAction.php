@@ -2,8 +2,7 @@
 
 namespace dungeons\web;
 
-use dungeons\Config;
-use dungeons\Resource;
+use dungeons\{Config,Resource};
 
 class AppAction extends MemberAction {
 

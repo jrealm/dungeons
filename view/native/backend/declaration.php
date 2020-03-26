@@ -1,8 +1,6 @@
 <?php //>
 
-use dungeons\Config;
-use dungeons\Message;
-use dungeons\Resource;
+use dungeons\{Config,Message,Resource};
 
 $cfg = Config::load('backend');
 $labels = Message::load("table/{$action->table()->name()}");

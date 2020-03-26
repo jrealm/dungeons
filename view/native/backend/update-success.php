@@ -1,7 +1,6 @@
 <?php //>
 
-use dungeons\Config;
-use dungeons\Resource;
+use dungeons\{Config,Resource};
 
 $menus = Resource::loadMenu(explode('|', Config::get('backend.menus')));
 $path = preg_replace('/\/backend\/(.*)/', '$1', $action->name());

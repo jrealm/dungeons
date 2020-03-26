@@ -1,8 +1,6 @@
 <?php //>
 
-use dungeons\Config;
-use dungeons\Message;
-use dungeons\Resource;
+use dungeons\{Config,Message,Resource};
 use dungeons\view\Twig;
 
 $cfg = Config::load('backend');

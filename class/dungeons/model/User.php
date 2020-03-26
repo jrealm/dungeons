@@ -3,8 +3,7 @@
 namespace dungeons\model;
 
 use Exception;
-use dungeons\db\Criteria;
-use dungeons\db\Model;
+use dungeons\db\{Criteria,Model};
 
 class User extends Model {
 
