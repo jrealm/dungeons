@@ -6,6 +6,8 @@ return [
 
     'CreateTime' => '資料建立時間',
 
+    'Creator' => '資料作者',
+
     'Date' => '日期',
 
     'Double' => '浮點數',
@@ -29,7 +31,5 @@ return [
     'Timestamp' => '日期時間',
 
     'Url' => '網址',
-
-    'UserId' => '資料作者',
 
 ];

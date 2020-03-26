@@ -3,6 +3,7 @@
 namespace dungeons\db;
 
 use PDO;
+use dungeons\Attachment;
 
 class Model {
 
@@ -78,6 +79,10 @@ class Model {
             if (is_null($value)) {
                 $value = $column->default();
             } else {
+                if ($value instanceof Attachment) {
+                    $value->save();
+                }
+
                 $value = $column->convert($value);
             }
 
@@ -149,6 +154,10 @@ class Model {
             $value = @$data[$name];
 
             if (!is_null($value)) {
+                if ($value instanceof Attachment) {
+                    $value->save();
+                }
+
                 $value = $column->convert($value);
             }
 

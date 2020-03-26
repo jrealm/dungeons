@@ -2,7 +2,7 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\Resource;
+use dungeons\{Attachment,Resource};
 use dungeons\web\UserAction;
 
 class UpdateBundle extends UserAction {
@@ -10,6 +10,7 @@ class UpdateBundle extends UserAction {
     public function __construct() {
         parent::__construct();
 
+        $this->validationView('backend/validation.php');
         $this->view('backend/update-success.php');
     }
 
@@ -57,7 +58,15 @@ class UpdateBundle extends UserAction {
         foreach ($data as $name => $value) {
             $new = @$form[$name];
 
-            if (!is_null($new) && $new !== $value) {
+            if (is_null($new)) {
+                continue;
+            }
+
+            if ($new instanceof Attachment) {
+                $new->save();
+
+                $diff[$name] = $new->getPath();
+            } else if ($new !== $value) {
                 $diff[$name] = $new;
             }
         }
@@ -71,27 +80,35 @@ class UpdateBundle extends UserAction {
         return ['success' => true];
     }
 
+    protected function validate($form) {
+        $errors = [];
+        $styles = $this->styles();
+
+        if ($styles) {
+            foreach ($styles as $name => $style) {
+                $value = @$form[$name];
+
+                if (is_null($value)) {
+                    if (@$style['required']) {
+                        $errors[] = ['name' => $name, 'type' => 'required'];
+                    }
+                }
+            }
+        }
+
+        return $errors;
+    }
+
     protected function wrap() {
         $form = parent::wrap();
         $styles = $this->styles();
 
-        if ($styles && defined('APP_FILES')) {
+        if ($styles) {
             foreach ($styles as $name => $style) {
-                if ($style['type'] === 'image') {
-                    $value = @$form[$name];
-
-                    if ($value && preg_match('/^data:/', $value)) {
-                        $folder = create_folder(APP_FILES . date('Ymd/'));
-
-                        if ($folder) {
-                            $file = tempnam($folder, '');
-                            $value = substr($value, strpos($value, ','));
-
-                            if (file_put_contents($file, base64_decode($value)) !== false) {
-                                $form[$name] = substr($file, strlen(APP_FILES));
-                            }
-                        }
-                    }
+                switch ($style['type']) {
+                    case 'image':
+                        $form = Attachment::wrap($form, $name);
+                        break;
                 }
             }
         }
