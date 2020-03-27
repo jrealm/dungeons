@@ -11,7 +11,7 @@ class AppAction extends MemberAction {
     }
 
     protected function postprocess($form, $result) {
-        $menus = Resource::loadMenu(explode('|', Config::get('app.menus')));
+        $menus = Resource::loadMenu(Config::get('app.menus'));
         $path = preg_replace('/\/(.*)/', '$1', $this->name());
         $node = @$menus[$path];
 

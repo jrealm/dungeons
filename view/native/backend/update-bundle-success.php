@@ -2,7 +2,7 @@
 
 use dungeons\{Config,Resource};
 
-$menus = Resource::loadMenu(explode('|', Config::get('backend.menus')));
+$menus = Resource::loadMenu(Config::get('backend.menus'));
 $path = preg_replace('#^/backend/([\w]+/[\w]+/update)/[\w-]+$#', '$1', $action->path());
 
 $result['type'] = 'redirect';

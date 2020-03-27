@@ -41,6 +41,10 @@ class Resource {
     public static function loadMenu($names) {
         $bundle = [];
 
+        if (is_string($names)) {
+            $names = explode('|', $names);
+        }
+
         foreach ($names as $name) {
             $nodes = self::load("menu/{$name}.php");
 
