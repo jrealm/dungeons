@@ -6,7 +6,7 @@ use dungeons\view\Twig;
 $cfg = Config::load('backend');
 $id = $action->args()[1];
 $menus = Resource::loadMenu($cfg['menus']);
-$path = preg_replace('#^/backend/([\w]+/[\w]+/)[\w-]+$#', '$1', $action->path());
+$path = preg_replace('/^\/backend\/(.+\/)[\w-]+$/', '$1', $action->path());
 $node = @$menus[$path];
 
 $result['title'] = $node['title'];

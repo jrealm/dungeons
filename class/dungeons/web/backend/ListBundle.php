@@ -14,7 +14,9 @@ class ListBundle extends UserAction {
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match("#^{$this->name()}/([\w]+)$#", $this->path());
+            $pattern = preg_quote($this->name(), '/');
+
+            return preg_match("/^{$pattern}\/([\w]+)$/", $this->path());
         }
 
         return false;

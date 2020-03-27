@@ -12,7 +12,7 @@ class AppAction extends MemberAction {
 
     protected function postprocess($form, $result) {
         $menus = Resource::loadMenu(Config::get('app.menus'));
-        $path = preg_replace('/\/(.*)/', '$1', $this->name());
+        $path = substr($this->name(), 1);
         $node = @$menus[$path];
 
         $result['title'] = $node['title'];

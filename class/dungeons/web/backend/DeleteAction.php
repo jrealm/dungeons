@@ -15,7 +15,9 @@ class DeleteAction extends UserAction {
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match("#^{$this->name()}/.+$#", $this->path());
+            $pattern = preg_quote($this->name(), '/');
+
+            return preg_match("/^{$pattern}\/[\/\w-]+$/", $this->path());
         }
 
         return false;
@@ -24,7 +26,7 @@ class DeleteAction extends UserAction {
     protected function process($form) {
         if (empty($form['confirm'])) {
             return [
-                'path' => preg_replace('/\/backend\/(.*)/', '$1', $this->path()),
+                'path' => preg_replace('/^\/backend\/(.+)$/', '$1', $this->path()),
                 'view' => $this->confirm(),
             ];
         }

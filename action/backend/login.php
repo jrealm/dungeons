@@ -12,7 +12,9 @@ return new class() extends dungeons\web\Action {
 
     public function available() {
         if ($this->method() === 'GET') {
-            return preg_match("#^{$this->name()}(/[^/]+)?$#", $this->path());
+            $pattern = preg_quote($this->name(), '/');
+
+            return preg_match("/^{$pattern}(\/[\w-]+)?$/", $this->path());
         }
 
         return false;

@@ -17,7 +17,10 @@ class UpdateBundle extends UserAction {
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match('#^/backend/(config|message)/[\w]+/update/[\w-]+$#', $this->path());
+            $info = pathinfo($this->name());
+            $pattern = preg_quote($info['dirname'], '/');
+
+            return preg_match("/^{$pattern}\/[\w]+\/{$info['basename']}\/[\w-]+$/", $this->path());
         }
 
         return false;

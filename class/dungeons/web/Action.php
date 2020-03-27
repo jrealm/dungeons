@@ -16,7 +16,7 @@ class Action extends AbstractAction {
                 return $this->wrapGet();
 
             case 'POST':
-                if (preg_match('/application\/json/i', @$_SERVER['CONTENT_TYPE'])) {
+                if (preg_match('/^application\/json$/i', @$_SERVER['CONTENT_TYPE'])) {
                     return $this->wrapJson();
                 } else {
                     return $this->wrapPost();
