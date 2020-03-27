@@ -4,10 +4,10 @@ use dungeons\{Config,Message,Resource};
 use dungeons\view\Twig;
 
 $cfg = Config::load('backend');
-$id = $action->args()[0];
+$id = $action->args()[1];
 $menus = Resource::loadMenu(explode('|', $cfg['menus']));
-$path = preg_replace('/\/backend\/(.*)/', '$1', $action->name());
-$node = $menus[$path];
+$path = preg_replace('#^/backend/([\w]+/[\w]+/)[\w-]+$#', '$1', $action->path());
+$node = @$menus[$path];
 
 $result['title'] = "{$node['title']} :: {$id}";
 

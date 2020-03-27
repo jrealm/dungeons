@@ -14,17 +14,18 @@ abstract class GetBundle extends UserAction {
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match("#^{$this->name()}[^/]+$#", $this->path());
+            return preg_match("#^{$this->name()}[\w]+/[\w-]+$#", $this->path());
         }
 
         return false;
     }
 
-    abstract protected function load($name);
+    abstract protected function load($folder, $name);
 
     protected function process($form) {
-        $args = $this->args();
-        $data = (count($args) === 1) ? $this->load($args[0]) : null;
+        list($folder, $name) = $this->args();
+
+        $data = $this->load($folder, $name);
 
         if (!$data) {
             return ['error' => 'error.DataNotFound'];

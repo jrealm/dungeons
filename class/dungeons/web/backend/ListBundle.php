@@ -12,6 +12,14 @@ class ListBundle extends UserAction {
         $this->view('backend/list-bundle.php');
     }
 
+    public function available() {
+        if ($this->method() === 'POST') {
+            return preg_match("#^{$this->name()}/([\w]+)$#", $this->path());
+        }
+
+        return false;
+    }
+
     protected function process($form) {
         $folder = DUNGEONS . $this->folder();
         $files = is_dir($folder) ? scandir($folder) : [];

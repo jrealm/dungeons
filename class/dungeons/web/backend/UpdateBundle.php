@@ -12,27 +12,24 @@ class UpdateBundle extends UserAction {
         parent::__construct();
 
         $this->validationView('backend/validation.php');
-        $this->view('backend/update-success.php');
+        $this->view('backend/update-bundle-success.php');
     }
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match("#^{$this->name()}/[^/]+$#", $this->path());
+            return preg_match('#^/backend/(config|message)/[\w]+/update/[\w-]+$#', $this->path());
         }
 
         return false;
     }
 
     protected function init() {
-        $file = "{$this->folder()}/{$this->args()[0]}";
+        $file = "{$this->folder()}/{$this->args()[1]}";
         $data = Resource::union("{$file}.php");
 
-        $this->file($file);
         $this->data($data);
-
-        if ($data) {
-            $this->styles($data['@'] ?? []);
-        }
+        $this->file($file);
+        $this->styles($data['@'] ?? []);
     }
 
     protected function process($form) {
