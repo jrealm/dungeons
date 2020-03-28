@@ -4,7 +4,7 @@ return [
 
     'formStyle' => 'image',
 
-    'mimeType' => 'image/[\w]+',
+    'mimeType' => 'image\/[\w]+',
 
     'validation' => 'image',
 

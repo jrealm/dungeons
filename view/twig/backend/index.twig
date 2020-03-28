@@ -7,15 +7,15 @@
         <title>{{ i18n('backend.title') }}</title>
         <base href="{{ constant('APP_ROOT') }}backend/">
         <link href="{{ constant('APP_PATH') }}favicon.ico" rel="icon">
-        <link href="{{ constant('APP_PATH') }}adminlte/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
-        <link href="{{ constant('APP_PATH') }}adminlte/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
-        <link href="{{ constant('APP_PATH') }}adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
+        <link href="{{ constant('APP_PATH') }}adminlte/dist/css/adminlte.min.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}adminlte/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+        <link href="{{ constant('APP_PATH') }}adminlte/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
+        <link href="{{ constant('APP_PATH') }}adminlte/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="{{ constant('APP_PATH') }}adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}adminlte/plugins/select2/css/select2.min.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}adminlte/plugins/summernote/summernote-bs4.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}adminlte/plugins/toastr/toastr.min.css" rel="stylesheet">
-        <link href="{{ constant('APP_PATH') }}adminlte/dist/css/adminlte.min.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}css/dungeons.css" rel="stylesheet">
     </head>
     <body class="hold-transition layout-fixed layout-footer-fixed layout-navbar-fixed">
@@ -27,13 +27,14 @@
                     </li>
                 </ul>
                 <ul class="ml-auto navbar-nav">
-                    {% if result.languages|length > 1 %}
+                    {% set languages = cfg('system.supportedLanguages') | split('|') %}
+                    {% if languages | length > 1 %}
                         <li class="dropdown nav-item">
                             <a class="nav-link" data-toggle="dropdown">
                                 <i class="fas fa-globe"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                {% for language in result.languages %}
+                                {% for language in languages %}
                                     {% if loop.index0 %}
                                         <div class="dropdown-divider"></div>
                                     {% endif %}
@@ -49,7 +50,7 @@
                             <i class="fas fa-user-cog"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <span class="dropdown-header">{{ result.username }}</span>
+                            <span class="dropdown-header">{{ action.user().username }}</span>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item" data-ajax="user/password-form">
                                 <i class="fas fa-lock"></i>
@@ -88,15 +89,14 @@
         <div class="overlay-wrapper"><i class="fas fa-10x fa-cog fa-spin text-light"></i></div>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/jquery/jquery.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ constant('APP_PATH') }}adminlte/plugins/moment/moment.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-        <script src="{{ constant('APP_PATH') }}adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        <script src="{{ constant('APP_PATH') }}adminlte/plugins/moment/moment.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/daterangepicker/daterangepicker.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/select2/js/select2.full.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/summernote/summernote-bs4.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/toastr/toastr.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/dist/js/adminlte.min.js"></script>
-        <script data-landing-path="{{ result.path }}" src="{{ constant('APP_PATH') }}js/dungeons.js"></script>
+        <script data-landing-path="{{ action.args() | join('/') }}" src="{{ constant('APP_PATH') }}js/dungeons.js"></script>
     </body>
 </html>
 {% macro render_menu(nodes) %}

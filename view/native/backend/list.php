@@ -49,7 +49,7 @@ require 'breadcrumb.php';
 
 $styles = [];
 
-foreach ($action->columns() ?? $action->table()->getColumns() as $name => $column) {
+foreach ($action->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,

@@ -45,10 +45,7 @@ return new class() extends dungeons\web\UserAction {
 
         return [
             'success' => true,
-            'languages' => explode('|', Config::get('system.supportedLanguages')),
             'nodes' => $nodes,
-            'path' => implode('/', $this->args()),
-            'username' => $this->user()['username'],
         ];
     }
 

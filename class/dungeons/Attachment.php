@@ -5,10 +5,8 @@ namespace dungeons;
 class Attachment {
 
     public static function validate($file, $mime_type) {
-        $pattern = preg_quote($mime_type, '/');
-
         if ($file instanceof self) {
-            if (preg_match("/^{$pattern}$/", $file->info['mime_type'])) {
+            if (preg_match("/^{$mime_type}$/", $file->info['mime_type'])) {
                 return true;
             } else {
                 unlink($file->info['file']);
@@ -16,7 +14,7 @@ class Attachment {
         } else {
             $info = model('File')->find(['path' => $file]);
 
-            if ($info && preg_match("/^{$pattern}$/", $info['mime_type'])) {
+            if ($info && preg_match("/^{$mime_type}$/", $info['mime_type'])) {
                 return true;
             }
         }

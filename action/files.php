@@ -7,7 +7,7 @@ return new class() extends dungeons\web\Action {
     }
 
     protected function process($form) {
-        return ['success' => true, 'view' => '404.php'];
+        return ['view' => '404.php'];
     }
 
 };

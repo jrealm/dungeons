@@ -23,8 +23,7 @@ class GetAction extends UserAction {
     }
 
     protected function process($form) {
-        $args = $this->args();
-        $data = (count($args) === 1) ? $this->table()->model()->get($args[0]) : null;
+        $data = $this->table()->model()->get($this->args()[0]);
 
         if (!$data) {
             return ['error' => 'error.DataNotFound'];

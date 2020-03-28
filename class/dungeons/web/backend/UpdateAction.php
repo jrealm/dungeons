@@ -27,8 +27,7 @@ class UpdateAction extends UserAction {
     }
 
     protected function process($form) {
-        $args = $this->args();
-        $form['id'] = (count($args) === 1) ? $args[0] : null;
+        $form['id'] = $this->args()[0];
 
         $data = $this->table()->model()->update($form);
 
