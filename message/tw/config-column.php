@@ -12,9 +12,13 @@ return [
 
     'Date' => '日期',
 
+    'DisableTime' => '下架時間',
+
     'Double' => '浮點數',
 
     'Email' => '電子郵件',
+
+    'EnableTime' => '上架時間',
 
     'Html' => 'Html',
 
@@ -31,6 +35,8 @@ return [
     'Ranking' => '排序',
 
     'Text' => '文字',
+
+    'Textarea' => '文字',
 
     'Time' => '時間',
 

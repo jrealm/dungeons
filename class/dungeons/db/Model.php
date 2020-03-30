@@ -13,6 +13,7 @@ class Model {
 
     protected $db;
     protected $dialect;
+    protected $filter;
     protected $table;
 
     public function __construct($db, $table) {
@@ -22,7 +23,7 @@ class Model {
     }
 
     public function count($conditions = null) {
-        $criteria = $this->createCriteria($conditions);
+        $criteria = $this->createCriteria($conditions, $this->filter);
         $command = $this->dialect->makeCountSelection($this->table, $criteria);
         $statement = $this->db->prepare($command);
 
@@ -54,6 +55,10 @@ class Model {
         }
 
         return false;
+    }
+
+    public function enableFilter($filter = true) {
+        $this->filter = $filter;
     }
 
     public function find($conditions) {
@@ -119,7 +124,7 @@ class Model {
     }
 
     public function query($conditions = null, $orders = true, $size = 0, $page = 1) {
-        $criteria = $this->createCriteria($conditions);
+        $criteria = $this->createCriteria($conditions, $this->filter);
         $command = $this->dialect->makeSelection($this->table, $criteria, $orders);
 
         if ($size > 0 && $page > 0) {
@@ -205,8 +210,27 @@ class Model {
         return $curr;
     }
 
-    protected function createCriteria($conditions) {
+    protected function createCriteria($conditions, $filter = false) {
         $criteria = Criteria::createAnd();
+
+        if ($filter) {
+            $enable = $this->table->enableTime();
+
+            if ($enable) {
+                $now = date($enable->pattern());
+
+                $conditions[] = $enable->notNull();
+                $conditions[] = $enable->lessThanOrEqual($now);
+            }
+
+            $disable = $this->table->disableTime();
+
+            if ($disable) {
+                $now = date($disable->pattern());
+
+                $conditions[] = Criteria::createOr($disable->isNull(), $disable->greaterThan($now));
+            }
+        }
 
         if ($conditions) {
             foreach ($conditions as $name => $value) {
