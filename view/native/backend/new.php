@@ -5,22 +5,21 @@ use dungeons\view\Twig;
 
 require 'declaration.php';
 
+$result['path'] = $node['parent'];
+
 //--
 
 $buttons = [];
-$parent = $node['parent'];
 
 $buttons[] = [
     'class' => $cfg['new.cancel.button'],
     'label' => Message::get('backend.new.cancel'),
-    'path' => $parent,
 ];
 
 $buttons[] = [
     'class' => $cfg['new.submit.button'],
     'label' => Message::get('backend.new.submit'),
     'method' => 'insert',
-    'path' => $parent,
 ];
 
 $result['buttons'] = $buttons;

@@ -9,25 +9,23 @@ $menus = Resource::loadMenu($cfg['menus']);
 $path = preg_replace('/^\/backend\/(.+\/)[\w-]+$/', '$1', $action->path());
 $node = @$menus[$path];
 
+$result['path'] = $node['parent'];
 $result['title'] = $node['title'];
 $result['sub_title'] = $id;
 
 //--
 
 $buttons = [];
-$parent = $node['parent'];
 
 $buttons[] = [
     'class' => $cfg['edit.cancel.button'],
     'label' => Message::get('backend.edit.cancel'),
-    'path' => $parent,
 ];
 
 $buttons[] = [
     'class' => $cfg['edit.button'],
     'label' => Message::get('backend.edit.submit'),
     'method' => 'update',
-    'path' => $parent,
 ];
 
 $result['buttons'] = $buttons;

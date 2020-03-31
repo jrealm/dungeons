@@ -5,24 +5,22 @@ use dungeons\view\Twig;
 
 require 'declaration.php';
 
+$result['path'] = $node['parent'];
 $result['sub_title'] = $table->model()->toString($result['data']);
 
 //--
 
 $buttons = [];
-$parent = $node['parent'];
 
 $buttons[] = [
     'class' => $cfg['edit.cancel.button'],
     'label' => Message::get('backend.edit.cancel'),
-    'path' => $parent,
 ];
 
 $buttons[] = [
     'class' => $cfg['edit.button'],
     'label' => Message::get('backend.edit.submit'),
     'method' => 'update',
-    'path' => $parent,
 ];
 
 $result['buttons'] = $buttons;

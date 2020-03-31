@@ -8,12 +8,13 @@ $menus = Resource::loadMenu($cfg['menus']);
 $path = preg_replace('/^\/backend\/(.+)$/', '$1', $action->path());
 $node = @$menus[$path];
 
+$result['path'] = $path;
 $result['title'] = $node['title'];
 
 //--
 
 $result['operations'] = [
-    ['class' => $cfg['edit.button'], 'icon' => $cfg['edit.icon'], 'label' => Message::get('backend.edit'), 'path' => $path],
+    ['class' => $cfg['edit.button'], 'icon' => $cfg['edit.icon'], 'label' => Message::get('backend.edit')],
 ];
 
 //--

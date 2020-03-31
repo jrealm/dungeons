@@ -27,9 +27,9 @@
             <div class="card-footer">
             {% for button in result.buttons %}
                 {% if button.method %}
-                    <button class="btn {{ button.class }}" data-ajax="{{ button.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
+                    <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
                 {% else %}
-                    <a class="btn {{ button.class }}" data-ajax href="{{ button.path }}">{{ button.label }}</a>
+                    <a class="btn {{ button.class }}" data-ajax href="{{ result.path }}">{{ button.label }}</a>
                 {% endif %}
             {% endfor %}
             </div>
