@@ -59,6 +59,10 @@ foreach ($action->columns() ?? $table->getColumns() as $name => $column) {
     if (empty($style['type'])) {
         $style['readonly'] = true;
         $style['type'] = $column->formStyle();
+
+        if ($style['type'] === 'hidden') {
+            continue;
+        }
     }
 
     $options = $column->options();
