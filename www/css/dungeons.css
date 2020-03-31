@@ -27,6 +27,10 @@ td, th {
     cursor: pointer;
 }
 
+.table .image-preview img {
+    max-width: 200px;
+}
+
 .table td {
     vertical-align: middle;
 }

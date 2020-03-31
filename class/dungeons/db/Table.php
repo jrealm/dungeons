@@ -74,7 +74,7 @@ class Table extends ValueObject {
             }
 
             if ($relation['type'] === 'composition') {
-                $column = new column\Integer(['name' => $column]);
+                $column = new column\Counter(['name' => $column, 'parameter' => $alias]);
             } else {
                 $column = $relation['foreign']->$column;
             }

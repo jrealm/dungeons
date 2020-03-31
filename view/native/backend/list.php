@@ -22,24 +22,22 @@ $result['controls'] = $controls;
 
 //--
 
-$actions = [];
+$operations = [];
 
-$actions[] = [
+$operations[] = [
     'class' => $cfg['edit.button'],
     'icon' => $cfg['edit.icon'],
     'label' => Message::get('backend.edit'),
-    'path' => $path,
 ];
 
-$actions[] = [
+$operations[] = [
     'class' => $cfg['delete.button'],
     'icon' => $cfg['delete.icon'],
     'label' => Message::get('backend.delete'),
     'method' => 'delete',
-    'path' => $path,
 ];
 
-$result['actions'] = $actions;
+$result['operations'] = $operations;
 
 //--
 
@@ -53,6 +51,7 @@ foreach ($action->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
+        'parameter' => $column->parameter(),
         'type' => $column->listStyle(),
     ];
 

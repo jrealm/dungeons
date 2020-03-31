@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th class="w-1">#</th>
-                        {% if result.actions %}
+                        {% if result.operations %}
                             <th class="w-1">{{ i18n('backend.operation') }}</th>
                         {% endif %}
                         {% for style in result.styles %}
@@ -32,16 +32,16 @@
                     {% for data in result.data %}
                         <tr>
                             <td>{{ num + loop.index }}</td>
-                            {% if result.actions %}
+                            {% if result.operations %}
                                 <td>
-                                    {% for action in result.actions %}
-                                        {% if action.method %}
-                                            <button class="btn {{ action.class }}" data-ajax="{{ action.path }}/{{ action.method }}/{{ data.id }}" title="{{ action.label }}">
-                                                <i class="{{ action.icon }}"></i>
+                                    {% for op in result.operations %}
+                                        {% if op.method %}
+                                            <button class="btn {{ op.class }}" data-ajax="{{ result.path }}/{{ op.method }}/{{ data.id }}" title="{{ op.label }}">
+                                                <i class="{{ op.icon }}"></i>
                                             </button>
                                         {% else %}
-                                            <a class="btn {{ action.class }}" data-ajax href="{{ action.path }}/{{ data.id }}" title="{{ action.label }}">
-                                                <i class="{{ action.icon }}"></i>
+                                            <a class="btn {{ op.class }}" data-ajax href="{{ result.path }}/{{ data.id }}" title="{{ op.label }}">
+                                                <i class="{{ op.icon }}"></i>
                                             </a>
                                         {% endif %}
                                     {% endfor %}
@@ -49,13 +49,13 @@
                             {% endif %}
                             {% for style in result.styles %}
                                 <td>
-                                    {% include 'backend/component/' ~ style.type ~ '.twig' with {'data': data, 'style': style} only %}
+                                    {% include 'backend/component/' ~ style.type ~ '.twig' with {'data': data, 'path': result.path, 'style': style} only %}
                                 </td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
                     {% if not result.data %}
-                        <tr><td class="text-center" colspan="{{ result.actions|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                        <tr><td class="text-center" colspan="{{ result.operations|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
                     {% endif %}
                 </tbody>
             </table>

@@ -12,7 +12,7 @@ $result['title'] = $node['title'];
 
 //--
 
-$result['actions'] = [
+$result['operations'] = [
     ['class' => $cfg['edit.button'], 'icon' => $cfg['edit.icon'], 'label' => Message::get('backend.edit'), 'path' => $path],
 ];
 
