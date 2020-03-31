@@ -59,6 +59,8 @@ class Model {
 
     public function enableFilter($filter = true) {
         $this->filter = $filter;
+
+        return $this;
     }
 
     public function find($conditions) {
