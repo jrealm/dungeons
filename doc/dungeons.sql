@@ -69,6 +69,14 @@ CREATE TABLE base_group (
 
 INSERT INTO base_group VALUES (1,'系統管理員');
 
+CREATE TABLE base_page (
+    id           INTEGER   NOT NULL PRIMARY KEY,
+    path         TEXT      NOT NULL UNIQUE,
+    title        TEXT      NOT NULL,
+    enable_time  TIMESTAMP     NULL,
+    disable_time TIMESTAMP     NULL
+);
+
 CREATE TABLE base_member (
     id       INTEGER NOT NULL PRIMARY KEY,
     username TEXT    NOT NULL UNIQUE,
