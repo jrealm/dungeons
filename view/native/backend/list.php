@@ -15,7 +15,7 @@ $controls[] = [
     'class' => $cfg['new.button'],
     'icon' => $cfg['new.icon'],
     'label' => Message::get('backend.new'),
-    'path' => "{$path}/new",
+    'path' => preg_replace('/^\/backend\/(.+)$/', '$1/new', $action->path()),
 ];
 
 $result['controls'] = $controls;

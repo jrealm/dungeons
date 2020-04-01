@@ -5,7 +5,7 @@ use dungeons\view\Twig;
 
 require 'declaration.php';
 
-$result['path'] = $node['parent'];
+$result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $action->path());
 
 //--
 
