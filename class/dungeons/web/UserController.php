@@ -2,7 +2,7 @@
 
 namespace dungeons\web;
 
-class UserAction extends Action {
+class UserController extends Controller {
 
     public function available() {
         return ($this->method() === 'POST' && $this->name() === $this->path());

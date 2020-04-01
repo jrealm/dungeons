@@ -32,7 +32,7 @@ class App extends AbstractApp {
 
         define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
-        $this->action = $this->find($info[3] ?? '/', $_SERVER['REQUEST_METHOD']);
+        $this->controller = $this->find($info[3] ?? '/', $_SERVER['REQUEST_METHOD']);
     }
 
     protected function find($path, $method) {
@@ -47,15 +47,15 @@ class App extends AbstractApp {
             $token = array_shift($tokens);
             $name = "{$current}/{$token}";
 
-            if (Resource::find("action{$name}.php")) {
+            if (Resource::find("controller{$name}.php")) {
                 $found = true;
                 $candidates[] = [$name, '', array_merge($args, $tokens)];
             }
 
-            if ($tokens && Resource::find("action{$name}/")) {
+            if ($tokens && Resource::find("controller{$name}/")) {
                 $found = true;
 
-                if (Resource::find("action{$name}/content.php")) {
+                if (Resource::find("controller{$name}/content.php")) {
                     $candidates[] = ["{$name}/", 'content', array_merge($args, $tokens)];
                 }
             }
@@ -70,18 +70,18 @@ class App extends AbstractApp {
         while ($candidates) {
             list($name, $file, $args) = array_pop($candidates);
 
-            $action = Resource::load("action{$name}{$file}.php");
+            $controller = Resource::load("controller{$name}{$file}.php");
 
-            if ($action instanceof Action) {
-                $action->args($args)->method($method)->name($name)->path($path);
+            if ($controller instanceof Controller) {
+                $controller->args($args)->method($method)->name($name)->path($path);
 
-                if ($action->available()) {
-                    return $action;
+                if ($controller->available()) {
+                    return $controller;
                 }
             }
         }
 
-        return new Action(['path' => $path, 'view' => '404.php']);
+        return new Controller(['path' => $path, 'view' => '404.php']);
     }
 
 }

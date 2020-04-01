@@ -1,6 +1,6 @@
 <?php //>
 
-return new class() extends dungeons\web\Action {
+return new class() extends dungeons\web\Controller {
 
     public function available() {
         return true;

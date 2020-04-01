@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserAction;
+use dungeons\web\UserController;
 
-class BlankAction extends UserAction {
+class BlankController extends UserController {
 
     public function __construct() {
         parent::__construct();

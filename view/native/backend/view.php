@@ -34,7 +34,7 @@ require 'association.php';
 
 $styles = [];
 
-foreach ($action->columns() ?? $table->getColumns() as $name => $column) {
+foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
@@ -61,4 +61,4 @@ $result['styles'] = $styles;
 
 //--
 
-(new Twig('backend/view.twig'))->render($action, $form, $result);
+(new Twig('backend/view.twig'))->render($controller, $form, $result);

@@ -4,9 +4,9 @@ use dungeons\{Config,Message,Resource};
 use dungeons\view\Twig;
 
 $cfg = Config::load('backend');
-$id = $action->args()[1];
+$id = $controller->args()[1];
 $menus = Resource::loadMenu($cfg['menus']);
-$path = preg_replace('/^\/backend\/(.+\/)[\w-]+$/', '$1', $action->path());
+$path = preg_replace('/^\/backend\/(.+\/)[\w-]+$/', '$1', $controller->path());
 $node = @$menus[$path];
 
 $result['path'] = $node['parent'];
@@ -58,4 +58,4 @@ $result['data']['id'] = $id;
 
 //--
 
-(new Twig('backend/view.twig'))->render($action, $form, $result);
+(new Twig('backend/view.twig'))->render($controller, $form, $result);

@@ -2,7 +2,7 @@
 
 namespace dungeons\web;
 
-class MemberAction extends Action {
+class MemberController extends Controller {
 
     public function execute() {
         if ($this->authorize()) {

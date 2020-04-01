@@ -6,7 +6,7 @@ use dungeons\db\Connection;
 use dungeons\utility\ValueObject;
 use dungeons\view\{Native,Twig};
 
-abstract class Action extends ValueObject {
+abstract class Controller extends ValueObject {
 
     public function execute() {
         $this->init();

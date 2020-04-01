@@ -21,10 +21,10 @@
 
 | 名稱              | 說明                          |
 |-------------------|-------------------------------|
-| action/           | Controller                    |
 | class/            | PHP 類別                      |
 | composer.json     | 套件管理                      |
 | config/           | 系統設定                      |
+| controller/       | Controller                    |
 | doc/              | 說明文件                      |
 | include/          | App 啟動程序                  |
 | menu/             | 選單                          |

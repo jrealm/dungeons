@@ -18,16 +18,16 @@ abstract class App {
         self::$instance = new static();
     }
 
-    protected $action;
+    protected $controller;
 
-    public function action() {
-        return $this->action;
+    public function controller() {
+        return $this->controller;
     }
 
     public function run() {
-        define('ACTION_NAME', $this->action->name());
+        define('CONTROLLER_NAME', $this->controller->name());
 
-        $this->action->execute();
+        $this->controller->execute();
     }
 
 }

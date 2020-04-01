@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserAction;
+use dungeons\web\UserController;
 
-class ListBundle extends UserAction {
+class ListBundle extends UserController {
 
     public function __construct() {
         parent::__construct();

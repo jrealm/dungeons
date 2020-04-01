@@ -15,7 +15,7 @@ class Twig {
         $this->view = $view;
     }
 
-    public function render($action, $form, $result) {
+    public function render($controller, $form, $result) {
         $paths = [];
 
         if (defined('APP_HOME')) {
@@ -41,7 +41,7 @@ class Twig {
         });
 
         echo $twig->render($this->view, [
-            'action' => $action,
+            'controller' => $controller,
             'form' => $form,
             'result' => $result,
         ]);

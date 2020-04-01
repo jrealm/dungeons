@@ -12,7 +12,7 @@ class Native {
         $this->view = $view;
     }
 
-    public function render($action, $form, $result) {
+    public function render($controller, $form, $result) {
         require Resource::find("view/native/{$this->view}");
     }
 

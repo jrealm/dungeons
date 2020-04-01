@@ -1,7 +1,7 @@
 <?php //>
 
 $result['type'] = 'redirect';
-$result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $action->path());
+$result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->path());
 
 unset($result['data']);
 

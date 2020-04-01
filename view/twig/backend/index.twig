@@ -50,7 +50,7 @@
                             <i class="fas fa-user-cog"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <span class="dropdown-header">{{ action.user().username }}</span>
+                            <span class="dropdown-header">{{ controller.user().username }}</span>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item" data-ajax="user/password-form">
                                 <i class="fas fa-lock"></i>
@@ -96,7 +96,7 @@
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/summernote/summernote-bs4.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/plugins/toastr/toastr.min.js"></script>
         <script src="{{ constant('APP_PATH') }}adminlte/dist/js/adminlte.min.js"></script>
-        <script data-landing-path="{{ action.args() | join('/') }}" src="{{ constant('APP_PATH') }}js/dungeons.js"></script>
+        <script data-landing-path="{{ controller.args() | join('/') }}" src="{{ constant('APP_PATH') }}js/dungeons.js"></script>
     </body>
 </html>
 {% macro render_menu(nodes) %}

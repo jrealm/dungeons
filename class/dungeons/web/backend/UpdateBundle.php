@@ -4,9 +4,9 @@ namespace dungeons\web\backend;
 
 use dungeons\{Attachment,Config,Resource};
 use dungeons\utility\ValueObject;
-use dungeons\web\UserAction;
+use dungeons\web\UserController;
 
-class UpdateBundle extends UserAction {
+class UpdateBundle extends UserController {
 
     public function __construct() {
         parent::__construct();

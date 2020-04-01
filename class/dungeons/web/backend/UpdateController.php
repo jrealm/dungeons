@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserAction;
+use dungeons\web\UserController;
 
-class UpdateAction extends UserAction {
+class UpdateController extends UserController {
 
     use Validator, Wrapper;
 

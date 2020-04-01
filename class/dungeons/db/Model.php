@@ -300,9 +300,9 @@ class Model {
             }
         }
 
-        $statement = $this->db->prepare('INSERT INTO base_manipulation_log (type, action, user_id, member_id, ip, data_type, data_id, previous, current) VALUES (?,?,?,?,?,?,?,?,?)');
+        $statement = $this->db->prepare('INSERT INTO base_manipulation_log (type, controller, user_id, member_id, ip, data_type, data_id, previous, current) VALUES (?,?,?,?,?,?,?,?,?)');
         $statement->bindValue(1, $type, PDO::PARAM_INT);
-        $statement->bindValue(2, constant('ACTION_NAME'), PDO::PARAM_STR);
+        $statement->bindValue(2, constant('CONTROLLER_NAME'), PDO::PARAM_STR);
         $statement->bindValue(3, @constant('USER_ID'), PDO::PARAM_INT);
         $statement->bindValue(4, @constant('MEMBER_ID'), PDO::PARAM_INT);
         $statement->bindValue(5, @constant('REMOTE_ADDR'), PDO::PARAM_STR);

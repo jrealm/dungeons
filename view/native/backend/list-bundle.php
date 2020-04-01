@@ -5,7 +5,7 @@ use dungeons\view\Twig;
 
 $cfg = Config::load('backend');
 $menus = Resource::loadMenu($cfg['menus']);
-$path = preg_replace('/^\/backend\/(.+)$/', '$1', $action->path());
+$path = preg_replace('/^\/backend\/(.+)$/', '$1', $controller->path());
 $node = @$menus[$path];
 
 $result['path'] = $path;
@@ -30,4 +30,4 @@ $result['styles'] = [
 
 //--
 
-(new Twig('backend/list.twig'))->render($action, $form, $result);
+(new Twig('backend/list.twig'))->render($controller, $form, $result);

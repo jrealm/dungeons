@@ -4,7 +4,7 @@ namespace dungeons\web;
 
 use dungeons\{Config,Resource};
 
-class AppAction extends MemberAction {
+class AppController extends MemberController {
 
     public function available() {
         return ($this->method() === 'POST' && $this->name() === $this->path());

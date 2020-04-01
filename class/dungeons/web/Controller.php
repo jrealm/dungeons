@@ -2,9 +2,9 @@
 
 namespace dungeons\web;
 
-use dungeons\Action as AbstractAction;
+use dungeons\Controller as AbstractController;
 
-class Action extends AbstractAction {
+class Controller extends AbstractController {
 
     public function available() {
         return ($this->method() === 'GET' && $this->name() === $this->path());

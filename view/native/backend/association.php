@@ -2,7 +2,7 @@
 
 $bundles = [];
 
-foreach ($action->table()->getRelations() as $relation) {
+foreach ($controller->table()->getRelations() as $relation) {
     if ($relation['type'] === 'association' && !$relation['super']) {
         if (empty($relation['enable'])) {
             $foreign = table($relation['foreign']);

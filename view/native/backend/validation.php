@@ -3,7 +3,7 @@
 use dungeons\Message;
 
 $errors = [];
-$table = $action->table();
+$table = $controller->table();
 $labels = $table ? Message::load("table/{$table->name()}") : [];
 
 foreach ($result as $error) {

@@ -15,7 +15,7 @@ $controls[] = [
     'class' => $cfg['new.button'],
     'icon' => $cfg['new.icon'],
     'label' => Message::get('backend.new'),
-    'path' => preg_replace('/^\/backend\/(.+)$/', '$1/new', $action->path()),
+    'path' => preg_replace('/^\/backend\/(.+)$/', '$1/new', $controller->path()),
 ];
 
 $result['controls'] = $controls;
@@ -47,7 +47,7 @@ require 'breadcrumb.php';
 
 $styles = [];
 
-foreach ($action->columns() ?? $table->getColumns() as $name => $column) {
+foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
@@ -77,4 +77,4 @@ $result['styles'] = $styles;
 
 //--
 
-(new Twig('backend/list.twig'))->render($action, $form, $result);
+(new Twig('backend/list.twig'))->render($controller, $form, $result);

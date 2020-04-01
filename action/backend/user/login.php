@@ -2,7 +2,7 @@
 
 use dungeons\web\Session;
 
-return new class() extends dungeons\web\Action {
+return new class() extends dungeons\web\Controller {
 
     public function available() {
         return ($this->method() === 'POST' && $this->name() === $this->path());
