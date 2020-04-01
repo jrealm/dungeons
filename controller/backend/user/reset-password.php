@@ -3,7 +3,7 @@
 use dungeons\Message;
 use dungeons\web\Session;
 
-return new class() extends dungeons\web\UserAction {
+return new class() extends dungeons\web\UserController {
 
     public function __construct() {
         parent::__construct();

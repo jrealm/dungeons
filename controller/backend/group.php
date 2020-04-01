@@ -1,6 +1,6 @@
 <?php //>
 
-return new class() extends dungeons\web\backend\ListAction {
+return new class() extends dungeons\web\backend\ListController {
 
     protected function init() {
         $table = table('Group');
