@@ -16,4 +16,6 @@ $tbl->add('enable_time', EnableTime::class);
 
 $tbl->add('disable_time', DisableTime::class);
 
+$tbl->id->composite('blocks', 'Block', 'page_id');
+
 return $tbl;

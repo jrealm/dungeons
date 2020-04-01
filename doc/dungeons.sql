@@ -77,6 +77,21 @@ CREATE TABLE base_page (
     disable_time TIMESTAMP     NULL
 );
 
+CREATE TABLE base_block (
+    id           INTEGER   NOT NULL PRIMARY KEY,
+    page_id      INTEGER   NOT NULL,
+    module       TEXT      NOT NULL,
+    name         TEXT      NOT NULL,
+    title        TEXT          NULL,
+    content      TEXT          NULL,
+    image        TEXT          NULL,
+    url          TEXT          NULL,
+    extra        TEXT          NULL,
+    enable_time  TIMESTAMP     NULL,
+    disable_time TIMESTAMP     NULL,
+    ranking      INTEGER   NOT NULL
+);
+
 CREATE TABLE base_member (
     id       INTEGER NOT NULL PRIMARY KEY,
     username TEXT    NOT NULL UNIQUE,
