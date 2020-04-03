@@ -1,16 +1,13 @@
 <?php //>
 
-use dungeons\{Config,Message,Resource};
+use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-$cfg = Config::load('backend');
 $id = $controller->args()[1];
-$menus = Resource::loadMenu($cfg['menus']);
-$path = preg_replace('/^\/backend\/(.+\/)[\w-]+$/', '$1', $controller->path());
-$node = @$menus[$path];
+$menu = $controller->menu();
 
-$result['path'] = $node['parent'];
-$result['title'] = $node['title'];
+$result['path'] = $menu['parent'];
+$result['title'] = $menu['title'];
 $result['sub_title'] = $id;
 
 //--
@@ -18,12 +15,13 @@ $result['sub_title'] = $id;
 $buttons = [];
 
 $buttons[] = [
-    'class' => $cfg['edit.cancel.button'],
+    'class' => Config::get('backend.edit.cancel.button'),
     'label' => Message::get('backend.edit.cancel'),
+    'method' => 'cancel',
 ];
 
 $buttons[] = [
-    'class' => $cfg['edit.button'],
+    'class' => Config::get('backend.edit.button'),
     'label' => Message::get('backend.edit.submit'),
     'method' => 'update',
 ];
@@ -32,7 +30,9 @@ $result['buttons'] = $buttons;
 
 //--
 
-require 'breadcrumb.php';
+$result['data']['.title'] = $id;
+
+$result['breadcrumbs'] = $controller->createBreadcrumbs([$result['data']]);
 
 //--
 

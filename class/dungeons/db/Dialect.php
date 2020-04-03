@@ -89,7 +89,7 @@ class Dialect {
 
         if ($orders) {
             if ($orders === true) {
-                $orders = [($table->ranking() ?? $table->id())->name()];
+                $orders = [$table->ranking() ?? $table->id()];
             }
 
             $command = $this->makeOrder($command, $expressions, $orders);

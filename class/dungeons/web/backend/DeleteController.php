@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class DeleteController extends UserController {
+class DeleteController extends BackendController {
 
     public function __construct() {
         parent::__construct();

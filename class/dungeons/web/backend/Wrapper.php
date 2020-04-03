@@ -7,9 +7,7 @@ use dungeons\db\column\File;
 
 trait Wrapper {
 
-    protected function wrap() {
-        $form = parent::wrap();
-
+    private function wrapModel($form) {
         foreach ($this->columns() ?? $this->table()->getColumns() as $name => $column) {
             if ($column instanceof File) {
                 $form = Attachment::wrap($form, $name);

@@ -7,7 +7,7 @@ class Ranking extends AbstractSequence {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->table()->ranking($this);
+        $this->table()->ranking($this->name());
     }
 
     public function generate($value) {

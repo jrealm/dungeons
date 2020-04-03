@@ -5,6 +5,10 @@
 
     "use strict";
 
+    var backward = function () {
+        $(".breadcrumb-item a").last().click();
+    };
+
     var combine = function (data, name, value) {
         if (empty(value)) {
             value = null;
@@ -118,6 +122,9 @@
         var target;
 
         switch (response.type) {
+        case "backward":
+            backward();
+            break;
         case "delete-success":
             perform(history.state.path, {});
             break;
@@ -306,8 +313,8 @@
 
     window.perform = perform;
 
-    window.toggleMenu = function (path) {
-        var menu = $("a[data-leaf][href='" + path + "']").blur();
+    window.toggleMenu = function () {
+        var menu = $("a[data-leaf][href='" + $(".breadcrumb-item[data-menu]").first().data("menu") + "']").blur();
 
         $("a.active[data-leaf]").removeClass("active");
 
@@ -345,6 +352,8 @@
         }
 
         perform(button.data("ajax"), form, options);
+    }).delegate("button[data-backward]", "click", function () {
+        backward();
     }).ready(function () {
         $("ul[data-widget=treeview]").on("collapsed.lte.treeview expanded.lte.treeview", saveMenu);
 

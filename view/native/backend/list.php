@@ -1,50 +1,61 @@
 <?php //>
 
-use dungeons\Message;
+use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-require 'declaration.php';
+$path = preg_replace('/^\/backend\/(.+)$/', '$1', $controller->path());
 
 $result['path'] = $path;
+$result['title'] = $controller->menu()['title'];
 
 //--
 
 $controls = [];
 
 $controls[] = [
-    'class' => $cfg['new.button'],
-    'icon' => $cfg['new.icon'],
+    'class' => Config::get('backend.new.button'),
+    'icon' => Config::get('backend.new.icon'),
     'label' => Message::get('backend.new'),
-    'path' => preg_replace('/^\/backend\/(.+)$/', '$1/new', $controller->path()),
+    'path' => "{$path}/new",
 ];
 
 $result['controls'] = $controls;
 
 //--
 
-$operations = [];
+$actions = [];
 
-$operations[] = [
-    'class' => $cfg['edit.button'],
-    'icon' => $cfg['edit.icon'],
+$actions[] = [
+    'class' => Config::get('backend.edit.button'),
+    'icon' => Config::get('backend.edit.icon'),
     'label' => Message::get('backend.edit'),
 ];
 
-$operations[] = [
-    'class' => $cfg['delete.button'],
-    'icon' => $cfg['delete.icon'],
+$actions[] = [
+    'class' => Config::get('backend.delete.button'),
+    'icon' => Config::get('backend.delete.icon'),
     'label' => Message::get('backend.delete'),
     'method' => 'delete',
 ];
 
-$result['operations'] = $operations;
+$result['actions'] = $actions;
 
 //--
 
-require 'breadcrumb.php';
+$table = $controller->table();
+$list = $table->model()->parents($form);
+
+$result['breadcrumbs'] = $controller->createBreadcrumbs($list);
 
 //--
 
+$titles = array_filter(array_column($list, '.title'), 'is_string');
+
+$result['sub_title'] = array_pop($titles);
+
+//--
+
+$labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
@@ -74,6 +85,10 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 }
 
 $result['styles'] = $styles;
+
+//--
+
+$result['parameters'] = array_intersect_key($form, array_flip(['o', 'p', 's']));
 
 //--
 

@@ -2,14 +2,24 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class ListController extends UserController {
+class ListController extends BackendController {
 
     public function __construct() {
         parent::__construct();
 
         $this->view('backend/list.php');
+    }
+
+    protected function preprocess($form) {
+        $relation = $this->table()->getMasterRelation();
+
+        if ($relation) {
+            $form[$relation['column']->name()] = $this->args()[0];
+        }
+
+        return $form;
     }
 
     protected function process($form) {

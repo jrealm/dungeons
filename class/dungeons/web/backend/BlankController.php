@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class BlankController extends UserController {
+class BlankController extends BackendController {
 
     public function __construct() {
         parent::__construct();
@@ -17,6 +17,12 @@ class BlankController extends UserController {
 
         foreach ($this->table()->getColumns() as $name => $column) {
             $data[$name] = $column->default();
+        }
+
+        $relation = $this->table()->getMasterRelation();
+
+        if ($relation) {
+            $data[$relation['column']->name()] = $this->args()[0];
         }
 
         return ['success' => true, 'data' => $data];

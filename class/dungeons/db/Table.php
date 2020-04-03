@@ -101,6 +101,22 @@ class Table extends ValueObject {
         return $this->columns;
     }
 
+    public function getMasterRelation() {
+        $master = false;
+
+        foreach ($this->relations as $relation) {
+            if (@$relation['super']) {
+                if ($master) {
+                    return false;
+                }
+
+                $master = $relation;
+            }
+        }
+
+        return $master;
+    }
+
     public function getRelations() {
         return $this->relations;
     }

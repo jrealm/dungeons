@@ -7,7 +7,7 @@ class Id extends AbstractSequence {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->table()->id($this);
+        $this->table()->id($this->name());
     }
 
     public function generate($value) {

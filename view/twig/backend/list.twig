@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th class="w-1">#</th>
-                        {% if result.operations %}
+                        {% if result.actions %}
                             <th class="w-1">{{ i18n('backend.operation') }}</th>
                         {% endif %}
                         {% for style in result.styles %}
@@ -32,16 +32,16 @@
                     {% for data in result.data %}
                         <tr>
                             <td>{{ num + loop.index }}</td>
-                            {% if result.operations %}
+                            {% if result.actions %}
                                 <td>
-                                    {% for op in result.operations %}
-                                        {% if op.method %}
-                                            <button class="btn {{ op.class }}" data-ajax="{{ result.path }}/{{ op.method }}/{{ data.id }}" title="{{ op.label }}">
-                                                <i class="{{ op.icon }}"></i>
+                                    {% for action in result.actions %}
+                                        {% if action.method %}
+                                            <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label }}">
+                                                <i class="{{ action.icon }}"></i>
                                             </button>
                                         {% else %}
-                                            <a class="btn {{ op.class }}" data-ajax href="{{ result.path }}/{{ data.id }}" title="{{ op.label }}">
-                                                <i class="{{ op.icon }}"></i>
+                                            <a class="btn {{ action.class }}" data-ajax href="{{ controller.node }}/{{ data.id }}" title="{{ action.label }}">
+                                                <i class="{{ action.icon }}"></i>
                                             </a>
                                         {% endif %}
                                     {% endfor %}
@@ -49,13 +49,13 @@
                             {% endif %}
                             {% for style in result.styles %}
                                 <td>
-                                    {% include 'backend/component/' ~ style.type ~ '.twig' with {'data': data, 'path': result.path, 'style': style} only %}
+                                    {% include 'backend/component/' ~ style.type ~ '.twig' with {'controller': controller, 'data': data, 'style': style} only %}
                                 </td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
                     {% if not result.data %}
-                        <tr><td class="text-center" colspan="{{ result.operations|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                        <tr><td class="text-center" colspan="{{ result.actions|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
                     {% endif %}
                 </tbody>
             </table>
@@ -65,21 +65,21 @@
                 <ul class="float-right m-0 pagination">
                     {% set max = (result.count / result.size) | round(0, 'ceil') %}
                     {% if result.page > 1 %}
-                        {{ _self.pager(result, form, -1, '&laquo;') }}
+                        {{ _self.pager(result, -1, '&laquo;') }}
                     {% endif %}
                     {% for num in 3..1 %}
                         {% if result.page > num %}
-                            {{ _self.pager(result, form, -num) }}
+                            {{ _self.pager(result, -num) }}
                         {% endif %}
                     {% endfor %}
-                    {{ _self.pager(result, form, 0) }}
+                    {{ _self.pager(result, 0) }}
                     {% for num in 1..3 %}
                         {% if result.page + num <= max %}
-                            {{ _self.pager(result, form, num) }}
+                            {{ _self.pager(result, num) }}
                         {% endif %}
                     {% endfor %}
                     {% if result.page < max %}
-                        {{ _self.pager(result, form, 1, '&raquo;') }}
+                        {{ _self.pager(result, 1, '&raquo;') }}
                     {% endif %}
                 </ul>
             {% endif %}
@@ -87,12 +87,12 @@
     </div>
 {% endblock %}
 
-{% macro pager(data, args, diff, label) %}
+{% macro pager(data, diff, label) %}
     {% set page = data.page + diff %}
     {% if page == 1 %}
-        {% set path = build(data.path, args, null, ['p']) %}
+        {% set path = build(data.path, data.parameters, null, ['p']) %}
     {% else %}
-        {% set path = build(data.path, args, {p: page}) %}
+        {% set path = build(data.path, data.parameters, {p: page}) %}
     {% endif %}
     <li class="page-item{% if not diff %} active{% endif %}"><a class="page-link" data-ajax href="{{ path }}">{{ label | default(page) | raw }}</a></li>
 {% endmacro %}

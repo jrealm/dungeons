@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class ListBundle extends UserController {
+class ListBundle extends BackendController {
 
     public function __construct() {
         parent::__construct();
@@ -20,6 +20,10 @@ class ListBundle extends UserController {
         }
 
         return false;
+    }
+
+    protected function getMenuName() {
+        return preg_replace('/^\/backend\/(.+)$/', '$1', $this->path());
     }
 
     protected function process($form) {

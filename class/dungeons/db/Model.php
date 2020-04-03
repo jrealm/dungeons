@@ -125,6 +125,35 @@ class Model {
         return false;
     }
 
+    public function parents($data) {
+        if (!is_null($data)) {
+            $relation = $this->table->getMasterRelation();
+
+            if ($relation) {
+                if (@$relation['enable']) {
+                    $foreign = $relation['foreign'];
+                    $target = $relation['target'];
+                } else {
+                    $foreign = table($relation['foreign']);
+                    $target = $foreign->{$relation['target']};
+                }
+
+                $model = $foreign->model();
+                $value = is_array($data) ? $data[$relation['column']->name()] : $data;
+                $parent = $model->find([$target->equal($value)]);
+
+                if ($parent) {
+                    $parents = $model->parents($parent);
+                    $parents[] = $parent;
+
+                    return $parents;
+                }
+            }
+        }
+
+        return [];
+    }
+
     public function query($conditions = null, $orders = true, $size = 0, $page = 1) {
         $criteria = $this->createCriteria($conditions, $this->filter);
         $command = $this->dialect->makeSelection($this->table, $criteria, $orders);
@@ -143,7 +172,7 @@ class Model {
     public function toString($data) {
         $title = $this->table->title() ?? 'title';
 
-        return $data[isset($this->table->$title) ? $title : 'id'];
+        return isset($this->table->$title) ? "{$data[$title]}" : null;
     }
 
     public function update($data) {
@@ -219,18 +248,20 @@ class Model {
             $enable = $this->table->enableTime();
 
             if ($enable) {
-                $now = date($enable->pattern());
+                $column = $this->table->$enable;
+                $now = date($column->pattern());
 
-                $conditions[] = $enable->notNull();
-                $conditions[] = $enable->lessThanOrEqual($now);
+                $conditions[] = $column->notNull();
+                $conditions[] = $column->lessThanOrEqual($now);
             }
 
             $disable = $this->table->disableTime();
 
             if ($disable) {
-                $now = date($disable->pattern());
+                $column = $this->table->$disable;
+                $now = date($column->pattern());
 
-                $conditions[] = Criteria::createOr($disable->isNull(), $disable->greaterThan($now));
+                $conditions[] = Criteria::createOr($column->isNull(), $column->greaterThan($now));
             }
         }
 
@@ -258,7 +289,13 @@ class Model {
     }
 
     protected function fetch($statement) {
-        return $statement->fetchAll();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as &$row) {
+            $row['.title'] = $this->toString($row);
+        }
+
+        return $rows;
     }
 
     private function log($prev, $curr) {

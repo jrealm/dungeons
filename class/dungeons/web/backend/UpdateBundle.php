@@ -4,9 +4,9 @@ namespace dungeons\web\backend;
 
 use dungeons\{Attachment,Config,Resource};
 use dungeons\utility\ValueObject;
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class UpdateBundle extends UserController {
+class UpdateBundle extends BackendController {
 
     public function __construct() {
         parent::__construct();
@@ -24,6 +24,10 @@ class UpdateBundle extends UserController {
         }
 
         return false;
+    }
+
+    protected function getMenuName() {
+        return preg_replace('/^\/backend\/(.+)\/[\w-]+$/', '$1', $this->path());
     }
 
     protected function init() {

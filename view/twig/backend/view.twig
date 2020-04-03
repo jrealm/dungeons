@@ -26,10 +26,10 @@
         {% if result.buttons %}
             <div class="card-footer">
             {% for button in result.buttons %}
-                {% if button.method %}
-                    <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
+                {% if button.method == 'cancel' %}
+                    <button class="btn {{ button.class }}" data-backward>{{ button.label }}</button>
                 {% else %}
-                    <a class="btn {{ button.class }}" data-ajax href="{{ result.path }}">{{ button.label }}</a>
+                    <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
                 {% endif %}
             {% endfor %}
             </div>

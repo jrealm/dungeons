@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-abstract class GetBundle extends UserController {
+abstract class GetBundle extends BackendController {
 
     public function __construct() {
         parent::__construct();
@@ -20,6 +20,10 @@ abstract class GetBundle extends UserController {
         }
 
         return false;
+    }
+
+    protected function getMenuName() {
+        return preg_replace('/^\/backend\/(.+\/)[\w-]+$/', '$1', $this->path());
     }
 
     abstract protected function load($folder, $name);

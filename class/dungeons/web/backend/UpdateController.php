@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class UpdateController extends UserController {
+class UpdateController extends BackendController {
 
     use Validator, Wrapper;
 
@@ -40,6 +40,10 @@ class UpdateController extends UserController {
         }
 
         return ['success' => true, 'data' => $data];
+    }
+
+    protected function wrap() {
+        return $this->wrapModel(parent::wrap());
     }
 
 }

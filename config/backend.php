@@ -3,6 +3,7 @@
 return [
 
     'delete.button' => 'btn-danger',
+    'delete.cancel.button' => 'btn-default',
     'delete.icon' => 'fas fa-trash-alt',
 
     'edit.button' => 'btn-primary',

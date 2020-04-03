@@ -2,9 +2,9 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\web\UserController;
+use dungeons\web\BackendController;
 
-class InsertController extends UserController {
+class InsertController extends BackendController {
 
     use Validator, Wrapper;
 
@@ -24,6 +24,17 @@ class InsertController extends UserController {
         }
 
         return ['success' => true, 'data' => $data];
+    }
+
+    protected function wrap() {
+        $form = $this->wrapModel(parent::wrap());
+        $relation = $this->table()->getMasterRelation();
+
+        if ($relation) {
+            $form[$relation['column']->name()] = $this->args()[0];
+        }
+
+        return $form;
     }
 
 }

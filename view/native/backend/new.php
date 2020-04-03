@@ -1,23 +1,23 @@
 <?php //>
 
-use dungeons\Message;
+use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-require 'declaration.php';
-
 $result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->path());
+$result['title'] = $controller->menu()['title'];
 
 //--
 
 $buttons = [];
 
 $buttons[] = [
-    'class' => $cfg['new.cancel.button'],
+    'class' => Config::get('backend.new.cancel.button'),
     'label' => Message::get('backend.new.cancel'),
+    'method' => 'cancel',
 ];
 
 $buttons[] = [
-    'class' => $cfg['new.submit.button'],
+    'class' => Config::get('backend.new.submit.button'),
     'label' => Message::get('backend.new.submit'),
     'method' => 'insert',
 ];
@@ -26,11 +26,25 @@ $result['buttons'] = $buttons;
 
 //--
 
-require 'breadcrumb.php';
+$table = $controller->table();
+$list = $table->model()->parents($result['data']);
+$list[] = $result['data'];
+
+$result['breadcrumbs'] = $controller->createBreadcrumbs($list);
+
+//--
+
+$titles = array_filter(array_column($list, '.title'), 'is_string');
+
+$result['sub_title'] = array_pop($titles);
+
+//--
+
 require 'association.php';
 
 //--
 
+$labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {

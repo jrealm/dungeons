@@ -1,12 +1,6 @@
 <?php //>
 
-use dungeons\{Config,Resource};
-
-$menus = Resource::loadMenu(Config::get('backend.menus'));
-$path = preg_replace('/^\/backend\/(.+)\/[\w-]+$/', '$1', $controller->path());
-
-$result['type'] = 'redirect';
-$result['path'] = $menus[$path]['parent'];
+$result['type'] = 'backward';
 
 unset($result['data']);
 
