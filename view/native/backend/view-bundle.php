@@ -39,6 +39,10 @@ $result['breadcrumbs'] = $controller->createBreadcrumbs([$result['data']]);
 $styles = [];
 
 foreach ($result['data'] as $name => $ignore) {
+    if ($name[0] === '.') {
+        continue;
+    }
+
     $style = $result['styles'][$name] ?? ['column' => 'Text'];
     $column = Config::load("column/{$style['column']}");
 
