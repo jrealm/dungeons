@@ -27,7 +27,7 @@ abstract class Column extends ValueObject {
             'target' => $target,
         ]);
 
-        return $this;
+        return $this->association(true)->invisible($super);
     }
 
     public function between($from, $to) {

@@ -55,7 +55,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
         'placeholder' => $labels["{$name}.blankPlaceholder"] ?? @$labels["{$name}.placeholder"],
         'remark' => $labels["{$name}.blankRemark"] ?? @$labels["{$name}.remark"],
         'required' => $column->required(),
-        'type' => $column->blankStyle() ?? $column->formStyle(),
+        'type' => $column->invisible() ? 'hidden' : $column->blankStyle() ?? $column->formStyle(),
     ];
 
     $options = $column->options();
