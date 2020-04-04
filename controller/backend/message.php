@@ -12,7 +12,7 @@ return new class() extends dungeons\web\backend\ListBundle {
             $this->labels(Message::load('message'));
         } else {
             $this->folder('message/' . constant('LANGUAGE') . '/' . $folder);
-            $this->labels(Message::load('message-{$folder}'));
+            $this->labels(Message::load("message-{$folder}"));
         }
     }
 

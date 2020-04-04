@@ -6,6 +6,8 @@ return [
 
     'Color' => '顏色',
 
+    'Counter' => '子項目資料筆數',
+
     'CreateTime' => '資料建立時間',
 
     'Creator' => '資料作者',
