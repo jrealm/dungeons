@@ -36,6 +36,10 @@ function create_folder($path) {
     return $path;
 }
 
+function execute($args) {
+    return (new $args['class']())->execute($args);
+}
+
 function isolate_require() {
     return require func_get_arg(0);
 }
