@@ -21,9 +21,8 @@ return new class() extends dungeons\web\UserController {
     }
 
     protected function process($form) {
-        $names = explode('|', Config::get('backend.menus'));
         $nodes = [];
-        $menus = Resource::loadMenu($names);
+        $menus = Resource::loadMenu(Config::get('backend.menus'));
 
         foreach ($menus as $path => &$menu) {
             if (empty($menu['ranking'])) {
@@ -38,15 +37,12 @@ return new class() extends dungeons\web\UserController {
                 } else {
                     $menus[$parent]['nodes'] = [$path => &$menu];
                 }
-            } else if (in_array($path, $names)) {
+            } else {
                 $nodes[$path] = &$menu;
             }
         }
 
-        return [
-            'success' => true,
-            'nodes' => $nodes,
-        ];
+        return ['success' => true, 'nodes' => $nodes];
     }
 
 };
