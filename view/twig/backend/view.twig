@@ -1,6 +1,6 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set data, formId = result.data, random() %}
+{% set breadcrumbs, data, description, formId, title = result.breadcrumbs, result.data, result.sub_title, random(), controller.menu().title %}
 
 {% block content %}
     <div class="card card-tabs">

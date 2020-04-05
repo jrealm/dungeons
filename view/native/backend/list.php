@@ -6,7 +6,6 @@ use dungeons\view\Twig;
 $path = preg_replace('/^\/backend\/(.+)$/', '$1', $controller->path());
 
 $result['path'] = $path;
-$result['title'] = $controller->menu()['title'];
 
 //--
 

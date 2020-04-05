@@ -1,5 +1,7 @@
 {% extends 'backend/content-wrapper.twig' %}
 
+{% set breadcrumbs, description, title = result.breadcrumbs, result.sub_title, controller.menu().title %}
+
 {% block content %}
     {% if result.controls %}
         <div class="card">

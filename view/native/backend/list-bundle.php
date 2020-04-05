@@ -4,7 +4,6 @@ use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
 $result['path'] = $controller->node();
-$result['title'] = $controller->menu()['title'];
 
 //--
 

@@ -3,12 +3,7 @@
 use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-$id = $controller->args()[1];
-$menu = $controller->menu();
-
-$result['path'] = $menu['parent'];
-$result['title'] = $menu['title'];
-$result['sub_title'] = $id;
+$result['path'] = $controller->menu()['parent'];
 
 //--
 
@@ -30,9 +25,11 @@ $result['buttons'] = $buttons;
 
 //--
 
+$id = $controller->args()[1];
 $result['data']['.title'] = $id;
 
 $result['breadcrumbs'] = $controller->createBreadcrumbs([$result['data']]);
+$result['sub_title'] = $id;
 
 //--
 

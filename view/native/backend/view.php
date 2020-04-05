@@ -3,10 +3,7 @@
 use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-$menu = $controller->menu();
-
-$result['path'] = $menu['parent'];
-$result['title'] = $menu['title'];
+$result['path'] = $controller->menu()['parent'];
 
 //--
 

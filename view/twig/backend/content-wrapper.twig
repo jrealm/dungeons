@@ -8,13 +8,13 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        {% block title %}{{ result.title }}<span class="font-weight-normal h6 ml-2 text-secondary">{{ result.sub_title }}</span>{% endblock %}
+                        {% block title %}{{ title }}<span class="font-weight-normal h6 ml-2 text-secondary">{{ description }}</span>{% endblock %}
                     </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         {% block breadcrumb %}
-                            {% for node in result.breadcrumbs %}
+                            {% for node in breadcrumbs %}
                                 {% if node.path %}
                                     {% if loop.last %}
                                         <li class="breadcrumb-item active" data-menu="{{ node.path }}">{{ node.title }}</li>
