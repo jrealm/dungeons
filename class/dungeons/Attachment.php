@@ -22,11 +22,13 @@ class Attachment {
         return false;
     }
 
-    public static function wrap($form, $name) {
-        $file = self::toFile(@$form[$name]);
+    public static function wrap($form, ...$names) {
+        foreach ($names as $name) {
+            $file = self::toFile(@$form[$name]);
 
-        if ($file) {
-            $form[$name] = new self(@$form["{$name}#filename"], $file);
+            if ($file) {
+                $form[$name] = new self(@$form["{$name}#filename"], $file);
+            }
         }
 
         return $form;

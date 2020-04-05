@@ -1,5 +1,5 @@
 <?php //>
 
-$result['type'] = 'delete-success';
+$result['type'] = 'refresh';
 
 require __DIR__ . '/../raw.php';

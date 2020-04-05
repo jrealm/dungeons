@@ -125,11 +125,11 @@
         case "backward":
             backward();
             break;
-        case "delete-success":
-            perform(history.state.path, {});
-            break;
         case "redirect":
             redirect({path: response.path});
+            break;
+        case "refresh":
+            perform(history.state.path, {});
             break;
         case "reload":
             location.reload();
