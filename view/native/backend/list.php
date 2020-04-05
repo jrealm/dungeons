@@ -82,6 +82,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 
     if ($options) {
         $style['options'] = Message::load("options/{$options}");
+        $style['type'] = 'select';
     }
 
     $styles[] = $style;
