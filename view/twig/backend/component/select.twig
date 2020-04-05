@@ -2,7 +2,7 @@
 {% if style.readonly %}
     <div class="py-2">{{ style.options[value] }}</div>
 {% else %}
-    <select class="{{ class }} select2bs4" name="{{ style.name }}" style="width: 100%;">
+    <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" style="width: 100%;">
         {% if not style.required %}
             <option value="">&nbsp;</option>
         {% endif %}

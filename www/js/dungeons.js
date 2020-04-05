@@ -303,7 +303,7 @@
         }
 
         if ($.fn.summernote) {
-            form.find("textarea[data-format=html]").summernote();
+            form.find("textarea[data-format=html]").summernote().filter("[data-disabled]").summernote("disable");
         }
     };
 

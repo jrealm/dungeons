@@ -1,5 +1,5 @@
 {% if style.readonly %}
     <div class="py-2">{{ data[style.name] }}</div>
 {% else %}
-    <input class="{{ class }}" data-format="datetime" data-pattern="{{ datetime_format(style.pattern) }}" name="{{ style.name }}" placeholder="{{ style.placeholder }}" type="text" value="{{ data[style.name] }}">
+    <input class="{{ class }}" data-format="datetime" data-pattern="{{ datetime_format(style.pattern) }}"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" placeholder="{{ style.placeholder }}" type="text" value="{{ data[style.name] }}">
 {% endif %}

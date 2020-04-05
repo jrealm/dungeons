@@ -1,5 +1,5 @@
 {% if style.readonly %}
     <div class="py-2">{{ data[style.name] | striptags | u.trim().replaceMatches('/\\s+/', ' ').truncate(23, '...') }}</div>
 {% else %}
-    <textarea data-format="html" name="{{ style.name }}">{{ data[style.name] }}</textarea>
+    <textarea{% if style.disabled %} data-disabled{% endif %} data-format="html" name="{{ style.name }}">{{ data[style.name] }}</textarea>
 {% endif %}

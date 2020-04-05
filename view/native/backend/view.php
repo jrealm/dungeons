@@ -47,13 +47,16 @@ $labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
+    $disabled = $column->readonly();
+
     $style = [
+        'disabled' => $disabled,
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
         'pattern' => $column->pattern(),
         'placeholder' => @$labels["{$name}.placeholder"],
         'remark' => @$labels["{$name}.remark"],
-        'required' => $column->required(),
+        'required' => !$disabled && $column->required(),
         'type' => $column->invisible() ? 'hidden' : $column->formStyle(),
     ];
 

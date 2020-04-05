@@ -6,7 +6,7 @@
         {% set id = random() %}
         {% for name, item in style.options %}
             <span class="icheck-primary mr-3">
-                <input{% if name == value %} checked{% endif %} id="{{ name }}-{{ id }}" name="{{ style.name }}" type="radio" value="{{ name }}">
+                <input{% if name == value %} checked{% endif %}{% if style.disabled %} disabled{% endif %} id="{{ name }}-{{ id }}" name="{{ style.name }}" type="radio" value="{{ name }}">
                 <label for="{{ name }}-{{ id }}">{{ item }}</label>
             </span>
         {% endfor %}

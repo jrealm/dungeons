@@ -3,9 +3,11 @@
     {% if not style.readonly %}
         <label class="align-top">
             <input data-error="{{ i18n('error.InvalidFileType') }}" data-image name="{{ style.name }}" type="hidden" value="{{ data[style.name] }}">
-            <input data-filename name="{{ style.name }}#filename" type="hidden">
-            <input accept="image/*" class="d-none" data-format="image" type="file">
-            <a class="btn btn-default btn-lg" title="{{ i18n('backend.browser') }}"><i class="far fa-image"></i></a>
+            {% if not style.disabled %}
+                <input data-filename name="{{ style.name }}#filename" type="hidden">
+                <input accept="image/*" class="d-none" data-format="image" type="file">
+                <a class="btn btn-default btn-lg" title="{{ i18n('backend.browser') }}"><i class="far fa-image"></i></a>
+            {% endif %}
         </label>
     {% endif %}
 </div>
