@@ -6,36 +6,58 @@ use dungeons\{Config,Resource};
 
 class AppController extends MemberController {
 
+    private $menus;
+
     public function available() {
         return ($this->method() === 'POST' && $this->name() === $this->path());
     }
 
-    protected function postprocess($form, $result) {
-        $menus = Resource::loadMenu(Config::get('app.menus'));
-        $path = substr($this->name(), 1);
-        $node = @$menus[$path];
-
-        $result['title'] = $node['title'];
-
-        $breadcrumb = [];
+    public function createBreadcrumbs() {
+        $breadcrumbs = [];
+        $menus = $this->loadMenus();
+        $menu = $this->menu();
+        $node = $this->node();
         $visible = null;
 
-        while ($node) {
+        while ($menu) {
             if (!$visible) {
-                $node['path'] = $path;
-                $result['menu'] = $path;
-                $visible = @$node['ranking'];
+                $menu['path'] = $node;
+                $visible = @$menu['ranking'];
             }
 
-            $breadcrumb[] = $node;
-
-            $path = $node['parent'];
-            $node = $path ? $menus[$path] : null;
+            $breadcrumbs[] = $menu;
+            $node = $menu['parent'];
+            $menu = @$menus[$node];
         }
 
-        $result['breadcrumb'] = array_reverse($breadcrumb);
+        return array_reverse($breadcrumbs);
+    }
 
-        return $result;
+    protected function authorize() {
+        if (parent::authorize()) {
+            $node = $this->getMenuName();
+            $menu = @$this->loadMenus()[$node];
+
+            if ($menu) {
+                $this->menu($menu)->node($node);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function getMenuName() {
+        return substr($this->name(), 1);
+    }
+
+    private function loadMenus() {
+        if (!$this->menus) {
+            $this->menus = Resource::loadMenu(Config::get('app.menus'));
+        }
+
+        return $this->menus;
     }
 
 }
