@@ -16,4 +16,6 @@ return [
 
             'page/update' => ['parent' => 'page'],
 
+            'page/blocks' => ['parent' => 'page'],
+
 ];
