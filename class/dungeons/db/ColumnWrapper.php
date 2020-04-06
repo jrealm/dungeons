@@ -21,6 +21,10 @@ class ColumnWrapper extends Column {
         return $this->column->generate($value);
     }
 
+    public function isCounter() {
+        return ($this->column instanceof column\Counter);
+    }
+
     public function prefix() {
         return $this->prefix;
     }

@@ -3,7 +3,9 @@
 use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-$result['path'] = $controller->menu()['parent'];
+$path = $controller->menu()['parent'];
+
+$result['path'] = $path;
 
 //--
 
@@ -15,11 +17,13 @@ $buttons[] = [
     'method' => 'cancel',
 ];
 
-$buttons[] = [
-    'class' => Config::get('backend.edit.button'),
-    'label' => Message::get('backend.edit.submit'),
-    'method' => 'update',
-];
+if ($controller->hasPermission("{$path}/update")) {
+    $buttons[] = [
+        'class' => Config::get('backend.edit.button'),
+        'label' => Message::get('backend.edit.submit'),
+        'method' => 'update',
+    ];
+}
 
 $result['buttons'] = $buttons;
 

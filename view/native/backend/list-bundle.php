@@ -3,15 +3,23 @@
 use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
-$result['path'] = $controller->node();
+$path = $controller->node();
+
+$result['path'] = $path;
 
 //--
 
-$result['actions'] = [[
-    'class' => Config::get('backend.edit.button'),
-    'icon' => Config::get('backend.edit.icon'),
-    'label' => Message::get('backend.edit')
-]];
+$actions = [];
+
+if ($controller->hasPermission("{$path}/")) {
+    $actions[] = [
+        'class' => Config::get('backend.edit.button'),
+        'icon' => Config::get('backend.edit.icon'),
+        'label' => Message::get('backend.edit')
+    ];
+}
+
+$result['actions'] = $actions;
 
 //--
 

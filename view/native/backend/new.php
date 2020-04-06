@@ -3,6 +3,8 @@
 use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
+$node = $controller->menu()['parent'];
+
 $result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->path());
 
 //--
@@ -15,11 +17,13 @@ $buttons[] = [
     'method' => 'cancel',
 ];
 
-$buttons[] = [
-    'class' => Config::get('backend.new.submit.button'),
-    'label' => Message::get('backend.new.submit'),
-    'method' => 'insert',
-];
+if ($controller->hasPermission("{$node}/insert")) {
+    $buttons[] = [
+        'class' => Config::get('backend.new.submit.button'),
+        'label' => Message::get('backend.new.submit'),
+        'method' => 'insert',
+    ];
+}
 
 $result['buttons'] = $buttons;
 

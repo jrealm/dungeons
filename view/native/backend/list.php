@@ -3,6 +3,7 @@
 use dungeons\{Config,Message};
 use dungeons\view\Twig;
 
+$node = $controller->node();
 $path = preg_replace('/^\/backend\/(.+)$/', '$1', $controller->path());
 
 $result['path'] = $path;
@@ -11,12 +12,14 @@ $result['path'] = $path;
 
 $controls = [];
 
-$controls[] = [
-    'class' => Config::get('backend.new.button'),
-    'icon' => Config::get('backend.new.icon'),
-    'label' => Message::get('backend.new'),
-    'path' => "{$path}/new",
-];
+if ($controller->hasPermission("{$node}/new")) {
+    $controls[] = [
+        'class' => Config::get('backend.new.button'),
+        'icon' => Config::get('backend.new.icon'),
+        'label' => Message::get('backend.new'),
+        'path' => "{$path}/new",
+    ];
+}
 
 $result['controls'] = $controls;
 
@@ -24,18 +27,22 @@ $result['controls'] = $controls;
 
 $actions = [];
 
-$actions[] = [
-    'class' => Config::get('backend.edit.button'),
-    'icon' => Config::get('backend.edit.icon'),
-    'label' => Message::get('backend.edit'),
-];
+if ($controller->hasPermission("{$node}/")) {
+    $actions[] = [
+        'class' => Config::get('backend.edit.button'),
+        'icon' => Config::get('backend.edit.icon'),
+        'label' => Message::get('backend.edit'),
+    ];
+}
 
-$actions[] = [
-    'class' => Config::get('backend.delete.button'),
-    'icon' => Config::get('backend.delete.icon'),
-    'label' => Message::get('backend.delete'),
-    'method' => 'delete',
-];
+if ($controller->hasPermission("{$node}/delete")) {
+    $actions[] = [
+        'class' => Config::get('backend.delete.button'),
+        'icon' => Config::get('backend.delete.icon'),
+        'label' => Message::get('backend.delete'),
+        'method' => 'delete',
+    ];
+}
 
 $result['actions'] = $actions;
 
@@ -60,6 +67,12 @@ $styles = [];
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     if ($column->association()) {
         continue;
+    }
+
+    if ($column->isCounter()) {
+        if (!$controller->hasPermission("{$node}/{$column->parameter()}")) {
+            continue;
+        }
     }
 
     $style = [
