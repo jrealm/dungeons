@@ -1,8 +1,8 @@
 <?php //>
 
-use dungeons\{Config,Resource};
-
 return new class() extends dungeons\web\UserController {
+
+    use dungeons\web\backend\Authorizer;
 
     public function __construct() {
         parent::__construct();
@@ -22,7 +22,7 @@ return new class() extends dungeons\web\UserController {
 
     protected function process($form) {
         $nodes = [];
-        $menus = Resource::loadMenu(Config::get('backend.menus'));
+        $menus = $this->loadMenus();
 
         foreach ($menus as $path => &$menu) {
             if (empty($menu['ranking'])) {
@@ -42,7 +42,25 @@ return new class() extends dungeons\web\UserController {
             }
         }
 
-        return ['success' => true, 'nodes' => $nodes];
+        return ['success' => true, 'nodes' => $this->filter($nodes)];
+    }
+
+    private function filter($nodes) {
+        foreach ($nodes as $path => &$node) {
+            if (@$node['nodes']) {
+                $node['nodes'] = $this->filter($node['nodes']);
+
+                if (!$node['nodes']) {
+                    $node = null;
+                }
+            } else {
+                if (!$this->hasPermission($path)) {
+                    $node = null;
+                }
+            }
+        }
+
+        return array_filter($nodes);
     }
 
 };
