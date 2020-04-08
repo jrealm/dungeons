@@ -4,6 +4,6 @@ return [
 
     'formStyle' => 'radio',
 
-    'options' => 'YesNo',
+    'options' => 'yes-no',
 
 ];
