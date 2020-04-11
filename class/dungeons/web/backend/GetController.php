@@ -22,6 +22,10 @@ class GetController extends BackendController {
         return false;
     }
 
+    public function remix($styles, $data) {
+        return $styles;
+    }
+
     protected function process($form) {
         $data = $this->table()->model()->get($this->args()[0]);
 

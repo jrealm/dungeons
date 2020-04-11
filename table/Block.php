@@ -7,9 +7,12 @@ $tbl = new Table('base_block');
 
 $tbl->add('page_id', Integer::class)
     ->associate('page', 'Page', 'id', true)
+    ->readonly(true)
     ->required(true);
 
 $tbl->add('module', Text::class)
+    ->options('block-module')
+    ->readonly(true)
     ->required(true);
 
 $tbl->add('name', Text::class)
@@ -33,6 +36,7 @@ $tbl->add('ranking', Integer::class)
     ->required(true);
 
 $tbl->ranking('ranking');
+$tbl->title('name');
 
 $tbl->id->composite('items', 'BlockItem', 'block_id');
 
