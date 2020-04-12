@@ -15,10 +15,12 @@ return new class() extends dungeons\web\backend\ListController {
 
     protected function init() {
         $table = table('Block');
+        $table->add('items_count', 'items.count');
 
         $names = [
             'module',
             'name',
+            'items_count',
             'enable_time',
             'disable_time',
             'ranking',

@@ -12,6 +12,10 @@ class BlankController extends BackendController {
         $this->view('backend/new.php');
     }
 
+    public function remix($styles, $list) {
+        return $styles;
+    }
+
     protected function process($form) {
         $data = [];
 

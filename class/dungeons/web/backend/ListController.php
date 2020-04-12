@@ -12,6 +12,10 @@ class ListController extends BackendController {
         $this->view('backend/list.php');
     }
 
+    public function remix($styles, $list) {
+        return $styles;
+    }
+
     protected function preprocess($form) {
         $relation = $this->table()->getMasterRelation();
 

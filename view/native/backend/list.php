@@ -101,7 +101,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $styles[] = $style;
 }
 
-$result['styles'] = $styles;
+$result['styles'] = $controller->remix($styles, $list);
 
 //--
 

@@ -22,7 +22,7 @@ class GetController extends BackendController {
         return false;
     }
 
-    public function remix($styles, $data) {
+    public function remix($styles, $list) {
         return $styles;
     }
 

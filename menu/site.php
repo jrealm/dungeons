@@ -28,4 +28,15 @@ return [
 
                 'page/blocks/update' => ['parent' => 'page/blocks'],
 
+                'page/blocks/items' => ['parent' => 'page/blocks', 'pattern' => 'page/blocks/{{ id }}/items'],
+
+                    'page/blocks/items/' => ['parent' => 'page/blocks/items'],
+
+                    'page/blocks/items/delete' => ['parent' => 'page/blocks/items'],
+
+                    'page/blocks/items/insert' => ['parent' => 'page/blocks/items'],
+
+                    'page/blocks/items/new' => ['parent' => 'page/blocks/items'],
+
+                    'page/blocks/items/update' => ['parent' => 'page/blocks/items'],
 ];

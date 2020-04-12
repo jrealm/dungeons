@@ -16,4 +16,10 @@ return [
 
     'page/blocks/new' => '新增網頁區塊',
 
+    'page/blocks/items' => '區塊子項目',
+
+    'page/blocks/items/' => '編輯區塊子項目',
+
+    'page/blocks/items/new' => '新增區塊子項目',
+
 ];

@@ -4,7 +4,8 @@ use dungeons\{Config,Message};
 
 return new class() extends dungeons\web\backend\GetController {
 
-    public function remix($styles, $data) {
+    public function remix($styles, $list) {
+        $data = array_pop($list);
         $fields = [];
         $labels = Message::load("module/{$data['module']}");
         $module = Config::load("module/{$data['module']}");

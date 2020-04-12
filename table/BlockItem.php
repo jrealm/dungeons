@@ -7,6 +7,7 @@ $tbl = new Table('base_block_item');
 
 $tbl->add('block_id', Integer::class)
     ->associate('block', 'Block', 'id', true)
+    ->readonly(true)
     ->required(true);
 
 $tbl->add('title', Text::class);
