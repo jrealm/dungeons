@@ -4,7 +4,7 @@ return new class() extends dungeons\web\backend\BlankController {
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match("/^\/backend\/page\/[\d]+\/blocks\/new$/", $this->path());
+            return preg_match("/^\/backend\/page\/[\d]+\/block\/new$/", $this->path());
         }
 
         return false;

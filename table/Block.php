@@ -38,6 +38,6 @@ $tbl->add('ranking', Integer::class)
 $tbl->ranking('ranking');
 $tbl->title('name');
 
-$tbl->id->composite('items', 'BlockItem', 'block_id');
+$tbl->id->composite('item', 'BlockItem', 'block_id');
 
 return $tbl;

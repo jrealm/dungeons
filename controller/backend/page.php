@@ -4,12 +4,12 @@ return new class() extends dungeons\web\backend\ListController {
 
     protected function init() {
         $table = table('Page');
-        $table->add('blocks_count', 'blocks.count');
+        $table->add('block_count', 'block.count');
 
         $names = [
             'path',
             'title',
-            'blocks_count',
+            'block_count',
             'enable_time',
             'disable_time',
         ];

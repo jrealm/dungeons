@@ -6,7 +6,7 @@ return new class() extends dungeons\web\backend\InsertController {
 
     public function available() {
         if ($this->method() === 'POST') {
-            return preg_match("/^\/backend\/page\/[\d]+\/blocks\/insert$/", $this->path());
+            return preg_match("/^\/backend\/page\/[\d]+\/block\/insert$/", $this->path());
         }
 
         return false;

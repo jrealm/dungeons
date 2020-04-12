@@ -16,27 +16,27 @@ return [
 
             'page/update' => ['parent' => 'page'],
 
-            'page/blocks' => ['parent' => 'page', 'pattern' => 'page/{{ id }}/blocks'],
+            'page/block' => ['parent' => 'page', 'pattern' => 'page/{{ id }}/block'],
 
-                'page/blocks/' => ['parent' => 'page/blocks'],
+                'page/block/' => ['parent' => 'page/block'],
 
-                'page/blocks/delete' => ['parent' => 'page/blocks'],
+                'page/block/delete' => ['parent' => 'page/block'],
 
-                'page/blocks/insert' => ['parent' => 'page/blocks'],
+                'page/block/insert' => ['parent' => 'page/block'],
 
-                'page/blocks/new' => ['parent' => 'page/blocks'],
+                'page/block/new' => ['parent' => 'page/block'],
 
-                'page/blocks/update' => ['parent' => 'page/blocks'],
+                'page/block/update' => ['parent' => 'page/block'],
 
-                'page/blocks/items' => ['parent' => 'page/blocks', 'pattern' => 'page/blocks/{{ id }}/items'],
+                'page/block/item' => ['parent' => 'page/block', 'pattern' => 'page/block/{{ id }}/item'],
 
-                    'page/blocks/items/' => ['parent' => 'page/blocks/items'],
+                    'page/block/item/' => ['parent' => 'page/block/item'],
 
-                    'page/blocks/items/delete' => ['parent' => 'page/blocks/items'],
+                    'page/block/item/delete' => ['parent' => 'page/block/item'],
 
-                    'page/blocks/items/insert' => ['parent' => 'page/blocks/items'],
+                    'page/block/item/insert' => ['parent' => 'page/block/item'],
 
-                    'page/blocks/items/new' => ['parent' => 'page/blocks/items'],
+                    'page/block/item/new' => ['parent' => 'page/block/item'],
 
-                    'page/blocks/items/update' => ['parent' => 'page/blocks/items'],
+                    'page/block/item/update' => ['parent' => 'page/block/item'],
 ];
