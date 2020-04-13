@@ -8,8 +8,12 @@ class InsertController extends BackendController {
 
     use Validator, Wrapper;
 
-    public function __construct() {
+    public function __construct($tableName = null) {
         parent::__construct();
+
+        if ($tableName) {
+            $this->table(table($tableName));
+        }
 
         $this->generator('generate');
         $this->validationView('backend/validation.php');

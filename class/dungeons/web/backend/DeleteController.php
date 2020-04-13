@@ -6,8 +6,12 @@ use dungeons\web\BackendController;
 
 class DeleteController extends BackendController {
 
-    public function __construct() {
+    public function __construct($tableName = null) {
         parent::__construct();
+
+        if ($tableName) {
+            $this->table(table($tableName));
+        }
 
         $this->confirm('backend/confirm-delete.twig');
         $this->view('backend/delete-success.php');

@@ -1,9 +1,3 @@
 <?php //>
 
-return new class() extends dungeons\web\backend\DeleteController {
-
-    protected function init() {
-        $this->table(table('BlockItem'));
-    }
-
-};
+return new dungeons\web\backend\DeleteController('BlockItem');
