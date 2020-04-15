@@ -100,7 +100,7 @@
     </body>
 </html>
 {% macro render_menu(nodes) %}
-    {% for path, node in nodes %}
+    {% for path, node in nodes | sort((a, b) => a.ranking <=> b.ranking) %}
         {% if node.nodes %}
             <li class="has-treeview nav-item">
                 <a class="nav-link" data-branch="{{ path }}">

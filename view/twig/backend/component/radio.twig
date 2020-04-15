@@ -5,9 +5,9 @@
     <div class="p-1">
         {% set id = random() %}
         {% for name, item in style.options %}
-            <span class="icheck-primary mr-3">
+            <span class="icheck-primary">
                 <input{% if name == value %} checked{% endif %}{% if style.disabled %} disabled{% endif %} id="{{ name }}-{{ id }}" name="{{ style.name }}" type="radio" value="{{ name }}">
-                <label for="{{ name }}-{{ id }}">{{ item }}</label>
+                <label class="mr-3" for="{{ name }}-{{ id }}">{{ item }}</label>
             </span>
         {% endfor %}
     </div>

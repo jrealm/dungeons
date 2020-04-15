@@ -6,42 +6,42 @@ return [
 
         'configuration' => ['icon' => 'fas fa-cogs', 'ranking' => 100, 'parent' => 'system'],
 
-            'config/base' => ['icon' => 'fas fa-cog', 'ranking' => 100, 'parent' => 'configuration'],
+            'config/base' => ['icon' => 'fas fa-cog', 'ranking' => 100, 'parent' => 'configuration', 'group' => true, 'tag' => 'query'],
 
-                'config/base/' => ['parent' => 'config/base'],
+                'config/base/' => ['parent' => 'config/base', 'tag' => 'query'],
 
-                'config/base/update' => ['parent' => 'config/base'],
+                'config/base/update' => ['parent' => 'config/base', 'tag' => 'update'],
 
-            'config/column' => ['icon' => 'far fa-file-alt', 'ranking' => 200, 'parent' => 'configuration'],
+            'config/column' => ['icon' => 'far fa-file-alt', 'ranking' => 200, 'parent' => 'configuration', 'group' => true, 'tag' => 'query'],
 
-                'config/column/' => ['parent' => 'config/column'],
+                'config/column/' => ['parent' => 'config/column', 'tag' => 'query'],
 
-                'config/column/update' => ['parent' => 'config/column'],
+                'config/column/update' => ['parent' => 'config/column', 'tag' => 'update'],
 
         'multilingual' => ['icon' => 'fas fa-globe', 'ranking' => 200, 'parent' => 'system'],
 
-            'message/base' => ['icon' => 'fas fa-language', 'ranking' => 100, 'parent' => 'multilingual'],
+            'message/base' => ['icon' => 'fas fa-language', 'ranking' => 100, 'parent' => 'multilingual', 'group' => true, 'tag' => 'query'],
 
-                'message/base/' => ['parent' => 'message/base'],
+                'message/base/' => ['parent' => 'message/base', 'tag' => 'query'],
 
-                'message/base/update' => ['parent' => 'message/base'],
+                'message/base/update' => ['parent' => 'message/base', 'tag' => 'update'],
 
-            'message/menu' => ['icon' => 'fas fa-bars', 'ranking' => 200, 'parent' => 'multilingual'],
+            'message/menu' => ['icon' => 'fas fa-bars', 'ranking' => 200, 'parent' => 'multilingual', 'group' => true, 'tag' => 'query'],
 
-                'message/menu/' => ['parent' => 'message/menu'],
+                'message/menu/' => ['parent' => 'message/menu', 'tag' => 'query'],
 
-                'message/menu/update' => ['parent' => 'message/menu'],
+                'message/menu/update' => ['parent' => 'message/menu', 'tag' => 'update'],
 
-            'message/options' => ['icon' => 'fas fa-check', 'ranking' => 300, 'parent' => 'multilingual'],
+            'message/options' => ['icon' => 'fas fa-check', 'ranking' => 300, 'parent' => 'multilingual', 'group' => true, 'tag' => 'query'],
 
-                'message/options/' => ['parent' => 'message/options'],
+                'message/options/' => ['parent' => 'message/options', 'tag' => 'query'],
 
-                'message/options/update' => ['parent' => 'message/options'],
+                'message/options/update' => ['parent' => 'message/options', 'tag' => 'update'],
 
-            'message/table' => ['icon' => 'fas fa-table', 'ranking' => 400, 'parent' => 'multilingual'],
+            'message/table' => ['icon' => 'fas fa-table', 'ranking' => 400, 'parent' => 'multilingual', 'group' => true, 'tag' => 'query'],
 
-                'message/table/' => ['parent' => 'message/table'],
+                'message/table/' => ['parent' => 'message/table', 'tag' => 'query'],
 
-                'message/table/update' => ['parent' => 'message/table'],
+                'message/table/update' => ['parent' => 'message/table', 'tag' => 'update'],
 
 ];
