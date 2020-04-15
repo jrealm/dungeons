@@ -16,7 +16,7 @@ class App extends AbstractApp {
             session_start();
         }
 
-        define('APP_PATH', dirname($_SERVER['SCRIPT_NAME']) . '/');
+        define('APP_PATH', preg_replace('/^(.*\/)[^\/]+$/', '$1', $_SERVER['SCRIPT_NAME']));
 
         $languages = Config::get('system.supportedLanguages');
 
