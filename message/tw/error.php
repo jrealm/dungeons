@@ -10,7 +10,9 @@ return [
 
     'InvalidFileType' => '檔案格式錯誤',
 
-    'Unknown' => 'Unknown Error',
+    'PermissionDenied' => '權限不足',
+
+    'Unknown' => '未知的錯誤',
 
     'UpdateFailed' => '儲存失敗',
 

@@ -26,6 +26,8 @@ abstract class Controller extends ValueObject {
                 }
 
                 $result = $this->process($form);
+            } catch (AppException $exception) {
+                $result = ['error' => $exception->getMessage()];
             } finally {
                 if (!$result) {
                     $result = [];

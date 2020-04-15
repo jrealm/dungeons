@@ -10,6 +10,10 @@ return new class() extends dungeons\web\backend\GetController {
     }
 
     protected function postprocess($form, $result) {
+        if ($result['data']['id'] === 1) {
+            return ['error' => 'error.DataNotFound'];
+        }
+
         unset($result['data']['password']);
 
         return $result;

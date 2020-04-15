@@ -42,6 +42,8 @@ return new class() extends dungeons\web\backend\GetController {
             }
         }
 
+        unset($nodes['system']);
+
         $styles[] = [
             'label' => Message::get('table/Group.permissions'),
             'name' => 'permissions',

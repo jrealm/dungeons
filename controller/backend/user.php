@@ -18,4 +18,10 @@ return new class() extends dungeons\web\backend\ListController {
         $this->columns($table->getColumns($names));
     }
 
+    protected function preprocess($form) {
+        $form[] = $this->table()->id->greaterThan(1);
+
+        return $form;
+    }
+
 };

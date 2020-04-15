@@ -2,7 +2,7 @@
 
 namespace dungeons\model;
 
-use Exception;
+use dungeons\AppException;
 use dungeons\db\{Criteria,Model};
 
 class User extends Model {
@@ -19,13 +19,16 @@ class User extends Model {
         switch ($type) {
             case self::DELETE:
                 if ($prev['id'] === 1) {
-                    throw new Exception('Permission denied.');
+                    throw new AppException('error.PermissionDenied');
                 }
                 break;
             case self::INSERT:
                 $encrypt = isset($curr['password']);
                 break;
             case self::UPDATE:
+                if ($prev['id'] === 1) {
+                    throw new AppException('error.PermissionDenied');
+                }
                 if (isset($curr['password'])) {
                     $encrypt = ($curr['password'] !== $prev['password']);
                 } else {
