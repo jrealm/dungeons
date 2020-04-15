@@ -58,7 +58,7 @@ CREATE TABLE base_user (
     disabled    BOOLEAN NOT NULL
 );
 
-INSERT INTO base_user VALUES (1,'admin','?',1,CURRENT_DATE,null,false);
+INSERT INTO base_user VALUES (1,'root','?',NULL,CURRENT_DATE,NULL,false);
 
 -- UPDATE base_user SET password = MD5(id || '::' || 'password') WHERE id = 1;
 
@@ -66,8 +66,6 @@ CREATE TABLE base_group (
     id    INTEGER NOT NULL PRIMARY KEY,
     title TEXT    NOT NULL UNIQUE
 );
-
-INSERT INTO base_group VALUES (1,'系統管理員');
 
 CREATE TABLE base_page (
     id           INTEGER   NOT NULL PRIMARY KEY,
