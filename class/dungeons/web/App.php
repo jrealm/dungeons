@@ -3,7 +3,7 @@
 namespace dungeons\web;
 
 use dungeons\App as AbstractApp;
-use dungeons\{Config,Resource};
+use dungeons\Config;
 
 class App extends AbstractApp {
 
@@ -32,56 +32,11 @@ class App extends AbstractApp {
 
         define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
-        $this->controller = $this->find($info[3] ?? '/', $_SERVER['REQUEST_METHOD']);
-    }
+        $this->controller = $this->find($info[3], $_SERVER['REQUEST_METHOD']);
 
-    protected function find($path, $method) {
-        $args = [];
-        $current = '';
-        $tokens = preg_split('/\//', $path, 0, PREG_SPLIT_NO_EMPTY);
-
-        $candidates = [['/', 'index', $tokens]];
-
-        while ($tokens) {
-            $found = false;
-            $token = array_shift($tokens);
-            $name = "{$current}/{$token}";
-
-            if (Resource::find("controller{$name}.php")) {
-                $found = true;
-                $candidates[] = [$name, '', array_merge($args, $tokens)];
-            }
-
-            if ($tokens && Resource::find("controller{$name}/")) {
-                $found = true;
-
-                if (Resource::find("controller{$name}/content.php")) {
-                    $candidates[] = ["{$name}/", 'content', array_merge($args, $tokens)];
-                }
-            }
-
-            if ($found) {
-                $current = $name;
-            } else {
-                $args[] = $token;
-            }
+        if (is_null($this->controller)) {
+            $this->controller = new Controller(['path' => $info[3], 'view' => '404.php']);
         }
-
-        while ($candidates) {
-            list($name, $file, $args) = array_pop($candidates);
-
-            $controller = Resource::load("controller{$name}{$file}.php");
-
-            if ($controller instanceof Controller) {
-                $controller->args($args)->method($method)->name($name)->path($path);
-
-                if ($controller->available()) {
-                    return $controller;
-                }
-            }
-        }
-
-        return new Controller(['path' => $path, 'view' => '404.php']);
     }
 
 }
