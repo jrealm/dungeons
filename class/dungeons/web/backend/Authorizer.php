@@ -14,11 +14,13 @@ trait Authorizer {
 
         if ($menu) {
             $user = $this->user();
-
-            $permissions = $this->loadPermissions($user['group_id']);
             $path = @$menu['group'] ? $node : $menu['parent'];
 
-            if (@$permissions[$path][$menu['tag']] || $user['id'] === 1) {
+            if (!$this->permissions) {
+                $this->permissions = $this->loadPermissions($user['group_id']);
+            }
+
+            if (@$this->permissions[$path][$menu['tag']] || $user['id'] === 1) {
                 return $menu;
             }
         }
@@ -35,15 +37,15 @@ trait Authorizer {
     }
 
     private function loadPermissions($groupId) {
-        if (!$this->permissions && defined('APP_DATA')) {
+        if (defined('APP_DATA')) {
             $file = APP_DATA . 'permission/' . $groupId;
 
             if (is_file($file)) {
-                $this->permissions = json_decode(file_get_contents($file), true);
+                return json_decode(file_get_contents($file), true);
             }
         }
 
-        return $this->permissions;
+        return null;
     }
 
 }
