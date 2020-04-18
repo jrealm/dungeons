@@ -2,6 +2,10 @@
 
 {% set breadcrumbs, data, description, formId, title = result.breadcrumbs, result.data, result.sub_title, random(), controller.menu().title %}
 
+{% block header %}
+    {% include 'backend/header.twig' %}
+{% endblock %}
+
 {% block content %}
     <div class="card card-tabs">
         <div class="card-body form-wrapper" id="_{{ formId }}">

@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-sm-6">
+        <h3>
+            {% block title %}{{ title }}<span class="font-weight-normal h6 ml-2 text-secondary">{{ description }}</span>{% endblock %}
+        </h3>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right p-2">
+            {% for node in breadcrumbs %}
+                {% if node.path %}
+                    {% if loop.last %}
+                        <li class="breadcrumb-item active" data-menu="{{ node.path }}">{{ node.title }}</li>
+                    {% else %}
+                        <li class="breadcrumb-item" data-menu="{{ node.path }}"><a data-ajax href="{{ node.path }}">{{ node.title }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li class="breadcrumb-item">{{ node.title }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div>
+</div>

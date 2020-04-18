@@ -2,6 +2,10 @@
 
 {% set breadcrumbs, description, title = result.breadcrumbs, result.sub_title, controller.menu().title %}
 
+{% block header %}
+    {% include 'backend/header.twig' %}
+{% endblock %}
+
 {% block content %}
     {% if result.controls %}
         <div class="card">
