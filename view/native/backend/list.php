@@ -65,7 +65,7 @@ $labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
-    if ($column->association()) {
+    if ($column->association() || $column->invisible()) {
         continue;
     }
 

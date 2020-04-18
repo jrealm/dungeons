@@ -62,8 +62,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer clearfix">
-            {% if result.count > result.size %}
+        {% if result.count > result.size %}
+            <div class="card-footer">
                 <ul class="float-right m-0 pagination">
                     {% set max = (result.count / result.size) | round(0, 'ceil') %}
                     {% if result.page > 1 %}
@@ -84,8 +84,8 @@
                         {{ _self.pager(result, 1, '&raquo;') }}
                     {% endif %}
                 </ul>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
