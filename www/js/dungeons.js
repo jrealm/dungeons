@@ -126,6 +126,9 @@
             backward();
             break;
         case "redirect":
+            if (response.message) {
+                toastr.info(response.message);
+            }
             redirect({path: response.path});
             break;
         case "refresh":
@@ -330,9 +333,15 @@
     });
 
     $(document).delegate("a[data-ajax]", "click", function (event) {
-        var path = $(event.currentTarget).attr("href");
+        var anchor = $(event.currentTarget);
+        var modal = anchor.closest(".modal");
+        var path = anchor.attr("href");
 
-        if (path === history.state.path) {
+        if (modal.length) {
+            modal.one("hidden.bs.modal", function () {
+                redirect({path});
+            }).modal("hide");
+        } else if (path === history.state.path) {
             perform(path, {});
         } else {
             redirect({path});

@@ -27,7 +27,7 @@
 {% block postprocess %}
     var modal = $(".modal-wrapper .modal").modal();
 
-    modal.on("hidden.bs.modal", function (event) {
+    modal.on("hidden.bs.modal", function () {
         if (modal.data("submit")) {
             perform("{{ build(result.path, null, {confirm: 1}) }}", {});
         }

@@ -32,7 +32,7 @@ class App extends AbstractApp {
 
         define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
-        $this->controller = $this->find($info[3], $_SERVER['REQUEST_METHOD']);
+        $this->controller = $this->find(@$info[3], $_SERVER['REQUEST_METHOD']);
 
         if (is_null($this->controller)) {
             $this->controller = new Controller(['path' => $info[3], 'view' => '404.php']);
