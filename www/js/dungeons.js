@@ -132,6 +132,9 @@
             redirect({path: response.path});
             break;
         case "refresh":
+            if (response.message) {
+                toastr.info(response.message);
+            }
             perform(history.state.path, {});
             break;
         case "reload":
