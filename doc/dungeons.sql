@@ -102,6 +102,16 @@ CREATE TABLE base_block_item (
     ranking      INTEGER   NOT NULL
 );
 
+CREATE TABLE base_menu (
+    id           INTEGER   NOT NULL PRIMARY KEY,
+    parent_id    INTEGER       NULL,
+    title        TEXT      NOT NULL,
+    url          TEXT          NULL,
+    enable_time  TIMESTAMP     NULL,
+    disable_time TIMESTAMP     NULL,
+    ranking      INTEGER   NOT NULL
+);
+
 CREATE TABLE base_member (
     id       INTEGER NOT NULL PRIMARY KEY,
     username TEXT    NOT NULL UNIQUE,

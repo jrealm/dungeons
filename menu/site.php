@@ -4,7 +4,31 @@ return [
 
     'site' => ['icon' => 'fas fa-sitemap', 'ranking' => 500, 'parent' => null],
 
-        'page' => ['icon' => 'far fa-newspaper', 'ranking' => 100, 'parent' => 'site', 'group' => true, 'tag' => 'query'],
+        'menu' => ['icon' => 'fas fa-bars', 'ranking' => 100, 'parent' => 'site', 'group' => true, 'tag' => 'query'],
+
+            'menu/' => ['parent' => 'menu', 'tag' => 'query'],
+
+            'menu/delete' => ['parent' => 'menu', 'tag' => 'delete'],
+
+            'menu/insert' => ['parent' => 'menu', 'tag' => 'insert'],
+
+            'menu/new' => ['parent' => 'menu', 'tag' => 'insert'],
+
+            'menu/update' => ['parent' => 'menu', 'tag' => 'update'],
+
+            'menu/item' => ['parent' => 'menu', 'pattern' => 'menu/{{ id }}/item', 'group' => true, 'tag' => 'query'],
+
+                'menu/item/' => ['parent' => 'menu/item', 'tag' => 'query'],
+
+                'menu/item/delete' => ['parent' => 'menu/item', 'tag' => 'delete'],
+
+                'menu/item/insert' => ['parent' => 'menu/item', 'tag' => 'insert'],
+
+                'menu/item/new' => ['parent' => 'menu/item', 'tag' => 'insert'],
+
+                'menu/item/update' => ['parent' => 'menu/item', 'tag' => 'update'],
+
+        'page' => ['icon' => 'far fa-newspaper', 'ranking' => 200, 'parent' => 'site', 'group' => true, 'tag' => 'query'],
 
             'page/' => ['parent' => 'page', 'tag' => 'query'],
 
