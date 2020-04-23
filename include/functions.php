@@ -51,7 +51,8 @@ function logger($name) {
         $handlers = [];
 
         if (defined('APP_LOG') && is_dir(APP_LOG) && is_writable(APP_LOG)) {
-            $handlers[] = new RotatingFileHandler(APP_LOG . $name);
+            $file = (PHP_SAPI === 'cli') ? "cli-{$name}" : $name;
+            $handlers[] = new RotatingFileHandler(APP_LOG . $file);
         }
 
         if (defined('DEBUG') && DEBUG) {
