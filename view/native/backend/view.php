@@ -64,14 +64,16 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
         'type' => $column->invisible() ? 'hidden' : $column->formStyle(),
     ];
 
-    $options = $column->options();
+    if ($style['type'] !== 'hidden') {
+        $options = $column->options();
 
-    if ($options) {
-        $style['options'] = Message::load("options/{$options}");
-        $style['type'] = 'radio';
-    } else if (key_exists($name, $bundles)) {
-        $style['options'] = $bundles[$name];
-        $style['type'] = 'select';
+        if ($options) {
+            $style['options'] = Message::load("options/{$options}");
+            $style['type'] = 'radio';
+        } else if (key_exists($name, $bundles)) {
+            $style['options'] = $bundles[$name];
+            $style['type'] = 'select';
+        }
     }
 
     $styles[] = $style;
