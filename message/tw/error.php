@@ -12,7 +12,7 @@ return [
 
     'PermissionDenied' => '權限不足',
 
-    'Unknown' => '未知的錯誤',
+    'Undefined' => '未知的錯誤',
 
     'UpdateFailed' => '儲存失敗',
 
