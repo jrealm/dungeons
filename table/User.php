@@ -1,7 +1,11 @@
 <?php //>
 
+use dungeons\db\column\Boolean;
+use dungeons\db\column\Date;
+use dungeons\db\column\Integer;
+use dungeons\db\column\Password;
+use dungeons\db\column\Text;
 use dungeons\db\Table;
-use dungeons\db\column\{Boolean,Date,Integer,Password,Text};
 
 $tbl = new Table('base_user');
 

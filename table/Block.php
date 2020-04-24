@@ -1,7 +1,12 @@
 <?php //>
 
+use dungeons\db\column\DisableTime;
+use dungeons\db\column\EnableTime;
+use dungeons\db\column\Image;
+use dungeons\db\column\Integer;
+use dungeons\db\column\Text;
+use dungeons\db\column\Url;
 use dungeons\db\Table;
-use dungeons\db\column\{DisableTime,EnableTime,Image,Integer,Text,Url};
 
 $tbl = new Table('base_block');
 

@@ -1,7 +1,8 @@
 <?php //>
 
-use dungeons\{Config,Message};
+use dungeons\Config;
 use dungeons\db\column\Text;
+use dungeons\Message;
 use dungeons\view\Twig;
 
 $path = $controller->menu()['parent'];

@@ -2,10 +2,10 @@
 
 namespace dungeons\view;
 
+use dungeons\Resource;
 use Twig\Environment;
 use Twig\Extra\String\StringExtension;
 use Twig\Loader\FilesystemLoader;
-use dungeons\Resource;
 
 class Twig {
 

@@ -2,7 +2,8 @@
 
 namespace dungeons\web;
 
-use dungeons\{Config,Resource};
+use dungeons\Config;
+use dungeons\Resource;
 
 class AppController extends MemberController {
 

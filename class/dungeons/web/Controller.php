@@ -12,18 +12,18 @@ class Controller extends AbstractController {
 
     protected function wrap() {
         switch ($_SERVER['REQUEST_METHOD']) {
-            case 'GET':
-                return $this->wrapGet();
+        case 'GET':
+            return $this->wrapGet();
 
-            case 'POST':
-                if (preg_match('/^application\/json$/i', @$_SERVER['CONTENT_TYPE'])) {
-                    return $this->wrapJson();
-                } else {
-                    return $this->wrapPost();
-                }
+        case 'POST':
+            if (preg_match('/^application\/json$/i', @$_SERVER['CONTENT_TYPE'])) {
+                return $this->wrapJson();
+            } else {
+                return $this->wrapPost();
+            }
 
-            default:
-                return [];
+        default:
+            return [];
         }
     }
 

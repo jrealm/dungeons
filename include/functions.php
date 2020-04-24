@@ -1,10 +1,11 @@
 <?php //>
 
+use dungeons\Resource;
+use Monolog\Handler\FirePHPHandler;
+use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
-use Monolog\Handler\{FirePHPHandler,RotatingFileHandler};
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
-use dungeons\Resource;
 
 function base64_urldecode($data) {
     return base64_decode(str_replace(['-', '_'], ['+', '/'], $data));

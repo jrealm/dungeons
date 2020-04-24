@@ -1,9 +1,10 @@
 <?php //>
 
 use Monolog\ErrorHandler;
-use Whoops\Handler\{JsonResponseHandler,PlainTextHandler,PrettyPageHandler};
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PlainTextHandler;
+use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
-use dungeons\Resource;
 
 define('DUNGEONS', dirname(__DIR__) . '/');
 
@@ -23,7 +24,7 @@ if (defined('APP_HOME')) {
 
 ErrorHandler::register(logger('ERROR'));
 
-call_user_func(function() {
+call_user_func(function () {
     if (PHP_SAPI === 'cli') {
         $handler = PlainTextHandler::class;
         $loader = 'cli.php';

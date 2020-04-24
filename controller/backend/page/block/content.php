@@ -1,6 +1,7 @@
 <?php //>
 
-use dungeons\{Config,Message};
+use dungeons\Config;
+use dungeons\Message;
 
 return new class() extends dungeons\web\backend\GetController {
 

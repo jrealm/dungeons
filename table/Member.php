@@ -1,7 +1,9 @@
 <?php //>
 
+use dungeons\db\column\Boolean;
+use dungeons\db\column\Password;
+use dungeons\db\column\Text;
 use dungeons\db\Table;
-use dungeons\db\column\{Boolean,Password,Text};
 
 $tbl = new Table('base_member');
 

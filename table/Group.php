@@ -1,7 +1,7 @@
 <?php //>
 
-use dungeons\db\Table;
 use dungeons\db\column\Text;
+use dungeons\db\Table;
 
 $tbl = new Table('base_group');
 

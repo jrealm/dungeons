@@ -2,8 +2,8 @@
 
 namespace dungeons\db;
 
-use PDO;
 use dungeons\Attachment;
+use PDO;
 
 class Model {
 

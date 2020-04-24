@@ -2,7 +2,8 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\{Config,Resource};
+use dungeons\Config;
+use dungeons\Resource;
 
 trait Authorizer {
 

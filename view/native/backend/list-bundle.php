@@ -1,6 +1,7 @@
 <?php //>
 
-use dungeons\{Config,Message};
+use dungeons\Config;
+use dungeons\Message;
 use dungeons\view\Twig;
 
 $path = $controller->node();
@@ -15,7 +16,7 @@ if ($controller->hasPermission("{$path}/")) {
     $actions[] = [
         'class' => Config::get('backend.edit.button'),
         'icon' => Config::get('backend.edit.icon'),
-        'label' => Message::get('backend.edit')
+        'label' => Message::get('backend.edit'),
     ];
 }
 

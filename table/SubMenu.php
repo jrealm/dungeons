@@ -1,7 +1,10 @@
 <?php //>
 
+use dungeons\db\column\DisableTime;
+use dungeons\db\column\EnableTime;
+use dungeons\db\column\Integer;
+use dungeons\db\column\Text;
 use dungeons\db\Table;
-use dungeons\db\column\{DisableTime,EnableTime,Integer,Text};
 
 $tbl = new Table('base_menu');
 

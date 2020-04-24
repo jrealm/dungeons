@@ -4,7 +4,8 @@ namespace dungeons;
 
 use dungeons\db\Connection;
 use dungeons\utility\ValueObject;
-use dungeons\view\{Native,Twig};
+use dungeons\view\Native;
+use dungeons\view\Twig;
 
 abstract class Controller extends ValueObject {
 
@@ -77,8 +78,8 @@ abstract class Controller extends ValueObject {
 
     protected function resolve($view) {
         switch (pathinfo($view, PATHINFO_EXTENSION)) {
-            case 'twig':
-                return new Twig($view);
+        case 'twig':
+            return new Twig($view);
         }
 
         return new Native($view);

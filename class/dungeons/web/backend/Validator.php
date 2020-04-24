@@ -2,8 +2,8 @@
 
 namespace dungeons\web\backend;
 
-use ReflectionMethod;
 use dungeons\db\Column;
+use ReflectionMethod;
 
 trait Validator {
 

@@ -2,9 +2,9 @@
 
 namespace dungeons\db;
 
-use Exception;
 use dungeons\db\column\Id;
 use dungeons\utility\ValueObject;
+use Exception;
 
 class Table extends ValueObject {
 
@@ -18,9 +18,7 @@ class Table extends ValueObject {
             $this->traceable(true);
         }
 
-        $this->add('id', Id::class)
-             ->readonly(true)
-             ->required(true);
+        $this->add('id', Id::class)->readonly(true)->required(true);
     }
 
     public function __get($name) {

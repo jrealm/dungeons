@@ -16,16 +16,16 @@ class Member extends Model {
 
     protected function before($type, $prev, $curr) {
         switch ($type) {
-            case self::INSERT:
-                $encrypt = isset($curr['password']);
-                break;
-            case self::UPDATE:
-                if (isset($curr['password'])) {
-                    $encrypt = ($curr['password'] !== $prev['password']);
-                } else {
-                    $curr['password'] = $prev['password'];
-                }
-                break;
+        case self::INSERT:
+            $encrypt = isset($curr['password']);
+            break;
+        case self::UPDATE:
+            if (isset($curr['password'])) {
+                $encrypt = ($curr['password'] !== $prev['password']);
+            } else {
+                $curr['password'] = $prev['password'];
+            }
+            break;
         }
 
         if (!empty($encrypt)) {

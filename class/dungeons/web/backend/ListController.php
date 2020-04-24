@@ -38,7 +38,7 @@ class ListController extends BackendController {
         $model = $this->table()->model();
 
         $count = $model->count($form);
-        $data = $count ? $model->query($form, $orders ?: true, $size, $page) : [];
+        $data = $count ? $model->query($form, $orders ?: true, $size, $page): [];
 
         return [
             'success' => true,

@@ -2,8 +2,8 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\{Attachment,Config,Resource};
-use dungeons\utility\ValueObject;
+use dungeons\Attachment;
+use dungeons\Resource;
 use dungeons\web\BackendController;
 
 class UpdateBundle extends BackendController {
@@ -113,10 +113,10 @@ class UpdateBundle extends BackendController {
 
         foreach ($this->styles() as $name => $style) {
             switch ($style['column']) {
-                case 'File':
-                case 'Image':
-                    $form = Attachment::wrap($form, $name);
-                    break;
+            case 'File':
+            case 'Image':
+                $form = Attachment::wrap($form, $name);
+                break;
             }
         }
 

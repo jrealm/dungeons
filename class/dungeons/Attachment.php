@@ -81,13 +81,13 @@ class Attachment {
         ];
 
         switch (strstr($mime_type, '/', true)) {
-            case 'image':
-                $size = @getimagesize($file);
-                if ($size) {
-                    $info['width'] = $size[0];
-                    $info['height'] = $size[1];
-                }
-                break;
+        case 'image':
+            $size = @getimagesize($file);
+            if ($size) {
+                $info['width'] = $size[0];
+                $info['height'] = $size[1];
+            }
+            break;
         }
 
         $this->info = $info;

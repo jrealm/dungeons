@@ -2,8 +2,8 @@
 
 namespace dungeons\db\column;
 
-use PDO;
 use dungeons\db\Column;
+use PDO;
 
 abstract class AbstractDateTime extends Column {
 

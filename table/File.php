@@ -1,7 +1,11 @@
 <?php //>
 
+use dungeons\db\column\Boolean;
+use dungeons\db\column\Creator;
+use dungeons\db\column\Integer;
+use dungeons\db\column\ModifiedTime;
+use dungeons\db\column\Text;
 use dungeons\db\Table;
-use dungeons\db\column\{Boolean,Creator,Integer,ModifiedTime,Text};
 
 $tbl = new Table('base_file');
 

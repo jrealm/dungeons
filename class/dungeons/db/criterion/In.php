@@ -8,15 +8,15 @@ class In extends AbstractCriterion {
         $count = count($this->values);
 
         switch ($count) {
-            case 0:
-                return '1 <> 1';
+        case 0:
+            return '1 <> 1';
 
-            case 1:
-                return "{$this->columnName()} = ?";
+        case 1:
+            return "{$this->columnName()} = ?";
 
-            default:
-                $values = implode(',', array_fill(0, $count, '?'));
-                return "{$this->columnName()} IN ({$values})";
+        default:
+            $values = implode(',', array_fill(0, $count, '?'));
+            return "{$this->columnName()} IN ({$values})";
         }
     }
 
