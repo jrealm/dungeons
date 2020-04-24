@@ -1,6 +1,7 @@
 <?php //>
 
 use dungeons\{Config,Message};
+use dungeons\db\column\Text;
 use dungeons\view\Twig;
 
 $path = $controller->menu()['parent'];
@@ -44,13 +45,13 @@ foreach ($result['data'] as $name => $ignore) {
         continue;
     }
 
-    $style = $result['styles'][$name] ?? ['column' => 'Text'];
-    $column = Config::load("column/{$style['column']}");
+    $style = $result['styles'][$name] ?? ['column' => Text::class];
+    $column = new $style['column']();
 
     $style['label'] = $name;
     $style['name'] = $name;
-    $style['pattern'] = $style['pattern'] ?? @$column['pattern'];
-    $style['type'] = $column['formStyle'];
+    $style['pattern'] = $style['pattern'] ?? $column->pattern();
+    $style['type'] = $column->formStyle();
 
     $styles[] = $style;
 }

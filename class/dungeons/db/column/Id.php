@@ -7,6 +7,9 @@ class Id extends AbstractSequence {
     public function __construct($values = []) {
         parent::__construct($values);
 
+        $this->values['formStyle'] = 'hidden';
+        $this->values['sequence'] = 'base_id';
+
         $this->table()->id($this->name());
     }
 

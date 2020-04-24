@@ -2,7 +2,6 @@
 
 namespace dungeons\db;
 
-use dungeons\Config;
 use dungeons\utility\ValueObject;
 
 abstract class Column extends ValueObject {
@@ -10,12 +9,6 @@ abstract class Column extends ValueObject {
     protected static $defaults = [
         'mapping' => 'name',
     ];
-
-    public function __construct($values = []) {
-        $defaults = Config::load(preg_replace('/^.*?([\w]+)$/', 'column/$1', static::class));
-
-        parent::__construct($defaults ? array_merge($defaults, $values) : $values);
-    }
 
     public function associate($alias, $foreign, $target = 'id', $super = false) {
         $this->table()->register([

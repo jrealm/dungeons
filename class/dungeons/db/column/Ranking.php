@@ -7,6 +7,9 @@ class Ranking extends AbstractSequence {
     public function __construct($values = []) {
         parent::__construct($values);
 
+        $this->values['formStyle'] = 'hidden';
+        $this->values['sequence'] = 'base_ranking';
+
         $this->table()->ranking($this->name());
     }
 

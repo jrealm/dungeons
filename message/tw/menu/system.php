@@ -10,10 +10,6 @@ return [
 
     'config/base/' => '編輯一般設定',
 
-    'config/column' => '資料型別',
-
-    'config/column/' => '編輯資料型別',
-
     'multilingual' => '多國語言',
 
     'message/base' => '文字訊息',

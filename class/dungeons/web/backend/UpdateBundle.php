@@ -96,7 +96,7 @@ class UpdateBundle extends BackendController {
                     $errors[] = ['name' => $name, 'type' => 'required'];
                 }
             } else {
-                $options = new ValueObject(Config::load("column/{$style['column']}"));
+                $options = new $style['column']();
                 $type = validate($value, $options);
 
                 if ($type) {

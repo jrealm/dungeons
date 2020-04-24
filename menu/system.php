@@ -12,12 +12,6 @@ return [
 
                 'config/base/update' => ['parent' => 'config/base', 'tag' => 'update'],
 
-            'config/column' => ['icon' => 'far fa-file-alt', 'ranking' => 200, 'parent' => 'configuration', 'group' => true, 'tag' => 'query'],
-
-                'config/column/' => ['parent' => 'config/column', 'tag' => 'query'],
-
-                'config/column/update' => ['parent' => 'config/column', 'tag' => 'update'],
-
         'multilingual' => ['icon' => 'fas fa-globe', 'ranking' => 200, 'parent' => 'system'],
 
             'message/base' => ['icon' => 'fas fa-language', 'ranking' => 100, 'parent' => 'multilingual', 'group' => true, 'tag' => 'query'],
