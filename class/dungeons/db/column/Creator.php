@@ -7,7 +7,7 @@ class Creator extends Integer {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->values['formStyle'] = 'hidden';
+        $this->formStyle('hidden');
     }
 
     public function generate($value) {

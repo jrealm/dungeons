@@ -10,8 +10,8 @@ class Integer extends Column {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->values['formStyle'] = 'integer';
-        $this->values['validation'] = 'integer';
+        $this->formStyle('integer');
+        $this->validation('integer');
     }
 
     public function convert($value) {

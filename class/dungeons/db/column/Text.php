@@ -10,7 +10,7 @@ class Text extends Column {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->values['formStyle'] = 'text';
+        $this->formStyle('text');
     }
 
     public function convert($value) {

@@ -10,8 +10,8 @@ class Boolean extends Column {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->values['formStyle'] = 'radio';
-        $this->values['options'] = 'yes-no';
+        $this->formStyle('radio');
+        $this->options('yes-no');
     }
 
     public function convert($value) {

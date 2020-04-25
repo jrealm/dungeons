@@ -7,7 +7,7 @@ class CreateTime extends Timestamp {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->values['blankStyle'] = 'hidden';
+        $this->blankStyle('hidden');
     }
 
     public function generate($value) {

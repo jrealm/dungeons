@@ -7,7 +7,7 @@ class Color extends Text {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->values['formStyle'] = 'color';
+        $this->formStyle('color');
     }
 
 }
