@@ -10,7 +10,7 @@ abstract class Column extends ValueObject {
         'mapping' => 'name',
     ];
 
-    public function associate($alias, $foreign, $target = 'id', $super = false) {
+    public function associate($alias, $foreign, $target = 'id', $super = false, $filter = []) {
         $this->table()->register([
             'alias' => $alias,
             'type' => 'association',
@@ -18,6 +18,7 @@ abstract class Column extends ValueObject {
             'column' => $this,
             'foreign' => $foreign,
             'target' => $target,
+            'filter' => $filter,
         ]);
 
         return $this->association(true)->invisible($super);

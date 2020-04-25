@@ -4,6 +4,10 @@ td, th {
     white-space: nowrap;
 }
 
+th a, th:hover a {
+    color: inherit;
+}
+
 .color-picker {
     background-image: url(img/transparent.jpg);
 }

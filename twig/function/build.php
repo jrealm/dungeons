@@ -3,7 +3,11 @@
 return new Twig\TwigFunction('build', function ($path, $query, $append = null, $remove = null) {
     if ($append) {
         foreach ($append as $name => $value) {
-            $query[$name] = $value;
+            if (is_null($value)) {
+                unset($query[$name]);
+            } else {
+                $query[$name] = $value;
+            }
         }
     }
 

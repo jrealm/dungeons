@@ -62,6 +62,20 @@ $result['sub_title'] = array_pop($titles);
 
 //--
 
+$orders = [];
+
+foreach ($result['orders'] as $index => $name) {
+    if ($name[0] === '-') {
+        $orders[substr($name, 1)] = -1 - $index;
+    } else {
+        $orders[$name] = $index + 1;
+    }
+}
+
+$result['orders'] = $orders;
+
+//--
+
 $labels = Message::load("table/{$table->name()}");
 $styles = [];
 

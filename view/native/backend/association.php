@@ -16,7 +16,7 @@ foreach ($controller->table()->getRelations() as $relation) {
         $model = $foreign->model();
         $name = $target->name();
 
-        foreach ($model->query() as $data) {
+        foreach ($model->query($relation['filter']) as $data) {
             $bundle[$data[$name]] = $model->toString($data);
         }
 

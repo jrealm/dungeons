@@ -29,7 +29,20 @@
                             <th class="w-1">{{ i18n('backend.operation') }}</th>
                         {% endif %}
                         {% for style in result.styles %}
-                            <th>{{ style.label }}</th>
+                            <th>
+                                {% if style.unordered %}
+                                    {{ style.label }}
+                                {% else %}
+                                    {% if not result.orders[style.name] %}
+                                        {% set icon, order = 'fas fa-sort', style.name %}
+                                    {% elseif result.orders[style.name] > 0 %}
+                                        {% set icon, order = 'fas fa-sort-up', '-' ~ style.name %}
+                                    {% else %}
+                                        {% set icon, order = 'fas fa-sort-down', null %}
+                                    {% endif %}
+                                    <a data-ajax href="{{ build(result.path, result.parameters, {o: order}) }}">{{ style.label }}<i class="{{ icon }} ml-2"></i></a>
+                                {% endif %}
+                            </th>
                         {% endfor %}
                     </tr>
                 </thead>
