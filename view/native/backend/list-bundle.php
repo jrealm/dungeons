@@ -29,8 +29,8 @@ $result['breadcrumbs'] = $controller->createBreadcrumbs([]);
 //--
 
 $result['styles'] = [
-    ['label' => Message::get('bundle.name'), 'name' => 'name', 'readonly' => true, 'type' => 'text'],
-    ['label' => Message::get('bundle.remark'), 'name' => 'remark', 'readonly' => true, 'type' => 'text'],
+    ['label' => Message::get('bundle.name'), 'name' => 'name', 'readonly' => true, 'type' => 'text', 'unordered' => true],
+    ['label' => Message::get('bundle.remark'), 'name' => 'remark', 'readonly' => true, 'type' => 'text', 'unordered' => true],
 ];
 
 //--

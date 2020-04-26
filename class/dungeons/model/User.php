@@ -27,7 +27,7 @@ class User extends Model {
             $encrypt = isset($curr['password']);
             break;
         case self::UPDATE:
-            if ($prev['id'] === 1) {
+            if ($prev['id'] === 1 && @constant('USER_ID') !== 1) {
                 throw new AppException('error.PermissionDenied');
             }
             if (isset($curr['password'])) {

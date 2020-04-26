@@ -95,6 +95,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
         'name' => $name,
         'parameter' => $column->parameter(),
         'type' => $column->listStyle(),
+        'unordered' => $column->unordered(),
     ];
 
     if (empty($style['type'])) {

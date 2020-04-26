@@ -9,6 +9,7 @@ class Image extends File {
 
         $this->formStyle('image');
         $this->mimeType('image\/[\w]+');
+        $this->unordered(true);
         $this->validation('image');
     }
 

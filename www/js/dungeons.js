@@ -314,6 +314,8 @@
     };
 
     window.onpopstate = function (event) {
+        $(".modal-wrapper .modal").modal("hide");
+
         perform(event.state.path, {});
     };
 
