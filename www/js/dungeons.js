@@ -314,7 +314,7 @@
     };
 
     window.onpopstate = function (event) {
-        $(".modal-wrapper .modal").modal("hide");
+        $(".ekko-lightbox, .modal-wrapper .modal").modal("hide");
 
         perform(event.state.path, {});
     };
@@ -351,6 +351,10 @@
         } else {
             redirect({path});
         }
+
+        return false;
+    }).delegate("a[data-toggle=lightbox]", "click", function (event) {
+        $(event.currentTarget).ekkoLightbox();
 
         return false;
     }).delegate("button[data-ajax]", "click", function (event) {

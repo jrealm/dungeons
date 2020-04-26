@@ -1,5 +1,11 @@
 <div>
-    <span class="image-preview">{% if data[style.name] %}<img class="border shadow" src="{{ data[style.name] | img }}">{% endif %}</span>
+    <span class="image-preview">
+        {% if data[style.name] %}
+            <a data-gallery="gallery" data-title="{{ data['.title'] }}" data-toggle="lightbox" data-type="image" href="{{ data[style.name] | img }}">
+                <img class="border shadow" src="{{ data[style.name] | img }}">
+            </a>
+        {% endif %}
+    </span>
     {% if not style.readonly %}
         <label class="align-top">
             <input data-error="{{ i18n('error.InvalidFileType') }}" data-image name="{{ style.name }}" type="hidden" value="{{ data[style.name] }}">
