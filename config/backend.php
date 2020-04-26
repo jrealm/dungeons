@@ -12,6 +12,8 @@ return [
 
     'menus' => 'authority|system',
 
+    'multiple-delete.button' => 'btn-app',
+
     'new.button' => 'btn-app',
     'new.cancel.button' => 'btn-default',
     'new.icon' => 'fas fa-plus',

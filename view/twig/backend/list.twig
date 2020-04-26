@@ -7,14 +7,23 @@
 {% endblock %}
 
 {% block content %}
+    {% set selectable = false %}
     {% if result.controls %}
         <div class="card">
             <div class="card-body p-1">
                 {% for item in result.controls %}
-                    <a class="btn {{ item.class }} m-1" data-ajax href="{{ item.path }}">
-                        <i class="{{ item.icon }}"></i>
-                        {{ item.label }}
-                    </a>
+                    {% if item.method %}
+                        {% set selectable = random() + 1 %}
+                        <button class="btn {{ item.class }} m-1" data-ajax="{{ controller.node }}/{{ item.method }}" data-least="{{ item.least }}"{% if item.least %} disabled{% endif %}>
+                            <i class="{{ item.icon }}"></i>
+                            {{ item.label }}
+                        </button>
+                    {% else %}
+                        <a class="btn {{ item.class }} m-1" data-ajax href="{{ item.path }}">
+                            <i class="{{ item.icon }}"></i>
+                            {{ item.label }}
+                        </a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -25,6 +34,13 @@
                 <thead>
                     <tr>
                         <th class="w-1">#</th>
+                        {% if selectable %}
+                            <th class="w-1">
+                                <div class="icheck-navy d-inline">
+                                    <input data-all id="_{{ selectable }}" type="checkbox"><label for="_{{ selectable }}"></label>
+                                </div>
+                            </th>
+                        {% endif %}
                         {% if result.actions %}
                             <th class="w-1">{{ i18n('backend.operation') }}</th>
                         {% endif %}
@@ -51,6 +67,13 @@
                     {% for data in result.data %}
                         <tr>
                             <td>{{ num + loop.index }}</td>
+                            {% if selectable %}
+                                <td>
+                                    <div class="icheck-navy d-inline">
+                                        <input data-id="{{ data.id }}" id="_{{ selectable }}_{{ data.id }}" type="checkbox"><label for="_{{ selectable }}_{{ data.id }}"></label>
+                                    </div>
+                                </td>
+                            {% endif %}
                             {% if result.actions %}
                                 <td>
                                     {% for action in result.actions %}

@@ -22,6 +22,16 @@ if ($controller->hasPermission("{$node}/new")) {
     ];
 }
 
+if ($controller->hasPermission("{$node}/delete")) {
+    $controls[] = [
+        'class' => Config::get('backend.multiple-delete.button'),
+        'icon' => Config::get('backend.delete.icon'),
+        'label' => Message::get('backend.delete'),
+        'least' => 1,
+        'method' => 'delete',
+    ];
+}
+
 $result['controls'] = $controls;
 
 //--

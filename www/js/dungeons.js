@@ -243,6 +243,20 @@
         }
     };
 
+    var toggleControls = function (checked) {
+        var list = [];
+
+        checked.each(function (ignore, input) {
+            list.push($(input).data("id"));
+        });
+
+        $("button[data-least]").data("args", list.join("/")).each(function (ignore, element) {
+            var button = $(element);
+
+            button.prop("disabled", list.length < button.data("least"));
+        });
+    };
+
     window.initForm = function (form) {
         form.find("div[data-format=color]").each(function (ignore, element) {
             var target = $(element);
@@ -359,8 +373,15 @@
         return false;
     }).delegate("button[data-ajax]", "click", function (event) {
         var button = $(event.currentTarget);
+        var args = button.data("args");
         var form = button.data("form");
         var options;
+
+        if (args) {
+            args = "/" + args;
+        } else {
+            args = "";
+        }
 
         if (form) {
             $(".invalid-feedback", form).hide().empty();
@@ -369,9 +390,22 @@
             form = {};
         }
 
-        perform(button.data("ajax"), form, options);
+        perform(button.data("ajax") + args, form, options);
     }).delegate("button[data-backward]", "click", function () {
         backward();
+    }).delegate("input[data-all][type=checkbox]", "change", function (event) {
+        var list = $("input[data-id][type=checkbox]");
+
+        list.prop("checked", $(event.currentTarget).prop("checked"));
+
+        toggleControls(list.filter(":checked"));
+    }).delegate("input[data-id][type=checkbox]", "change", function () {
+        var list = $("input[data-id][type=checkbox]");
+        var checked = list.filter(":checked");
+
+        $("input[data-all][type=checkbox]").prop("checked", list.length === checked.length);
+
+        toggleControls(checked);
     }).ready(function () {
         $("ul[data-widget=treeview]").on("collapsed.lte.treeview expanded.lte.treeview", saveMenu);
 
