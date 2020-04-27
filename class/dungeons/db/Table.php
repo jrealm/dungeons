@@ -2,6 +2,7 @@
 
 namespace dungeons\db;
 
+use dungeons\db\column\Counter;
 use dungeons\db\column\Id;
 use dungeons\utility\ValueObject;
 use Exception;
@@ -72,7 +73,7 @@ class Table extends ValueObject {
             }
 
             if ($relation['type'] === 'composition') {
-                $column = new column\Counter(['name' => $column, 'parameter' => $alias]);
+                $column = new Counter(['name' => $column, 'relation' => $relation]);
             } else {
                 $column = $relation['foreign']->$column;
             }

@@ -95,7 +95,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     }
 
     if ($column->isCounter()) {
-        if (!$controller->hasPermission("{$node}/{$column->parameter()}")) {
+        if (!$controller->hasPermission("{$node}/{$column->relation()['alias']}")) {
             continue;
         }
     }
@@ -103,7 +103,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
-        'parameter' => $column->parameter(),
+        'relation' => $column->relation(),
         'type' => $column->listStyle(),
         'unordered' => $column->unordered(),
     ];
