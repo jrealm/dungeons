@@ -36,7 +36,7 @@
                         <th class="w-1">#</th>
                         {% if selectable %}
                             <th class="w-1">
-                                <div class="icheck-navy d-inline">
+                                <div class="d-inline icheck-primary">
                                     <input data-all id="_{{ selectable }}" type="checkbox"><label for="_{{ selectable }}"></label>
                                 </div>
                             </th>
@@ -69,7 +69,7 @@
                             <td>{{ num + loop.index }}</td>
                             {% if selectable %}
                                 <td>
-                                    <div class="icheck-navy d-inline">
+                                    <div class="d-inline icheck-primary">
                                         <input data-id="{{ data.id }}" id="_{{ selectable }}_{{ data.id }}" type="checkbox"><label for="_{{ selectable }}_{{ data.id }}"></label>
                                     </div>
                                 </td>
