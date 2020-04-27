@@ -79,10 +79,12 @@ class Dialect {
         $expressions = [];
 
         foreach ($table->getColumns() as $name => $column) {
+            $default = $column->default();
             $expression = "_{$column->prefix()}.{$column->mapping()}";
 
-            if ($column->isCounter()) {
-                $expression = "COALESCE({$expression}, 0)";
+            if (!is_null($default)) {
+                $default = var_export($default, true);
+                $expression = "COALESCE({$expression}, {$default})";
             }
 
             $expressions[$name] = "{$expression} AS \"{$name}\"";
