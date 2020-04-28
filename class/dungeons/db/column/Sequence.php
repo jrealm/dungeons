@@ -4,9 +4,9 @@ namespace dungeons\db\column;
 
 use dungeons\db\Connection;
 
-class AbstractSequence extends Integer {
+trait Sequence {
 
-    protected function nextSequence() {
+    private function nextSequence() {
         return Connection::getInstance()->nextSequence($this->sequence());
     }
 

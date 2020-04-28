@@ -2,7 +2,9 @@
 
 namespace dungeons\db\column;
 
-class Id extends AbstractSequence {
+class Id extends Integer {
+
+    use Sequence;
 
     public function __construct($values = []) {
         parent::__construct($values);

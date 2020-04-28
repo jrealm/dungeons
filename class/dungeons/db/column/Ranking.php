@@ -2,7 +2,9 @@
 
 namespace dungeons\db\column;
 
-class Ranking extends AbstractSequence {
+class Ranking extends Integer {
+
+    use Sequence;
 
     public function __construct($values = []) {
         parent::__construct($values);
