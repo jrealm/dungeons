@@ -16,6 +16,10 @@ th a, th:hover a {
     background-color: transparent;
 }
 
+.content-wrapper {
+    background-image: url(img/inspiration-geometry.png);
+}
+
 .image-preview {
     display: inline-block;
     max-width: calc(100% - 60px);
@@ -41,6 +45,10 @@ th a, th:hover a {
 
 .table-hover tbody tr:hover td {
     background-color: azure;
+}
+
+.wrapper .main-sidebar {
+    background-image: url(img/always-grey.png);
 }
 
 .w-1 {
