@@ -11,6 +11,7 @@ class Text extends Column {
         parent::__construct($values);
 
         $this->formStyle('text');
+        $this->searchStyle('like');
     }
 
     public function convert($value) {

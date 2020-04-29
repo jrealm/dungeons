@@ -11,6 +11,7 @@ class Integer extends Column {
         parent::__construct($values);
 
         $this->formStyle('integer');
+        $this->searchStyle('between');
         $this->validation('integer');
     }
 

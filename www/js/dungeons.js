@@ -393,6 +393,21 @@
         perform(button.data("ajax") + args, form, options);
     }).delegate("button[data-backward]", "click", function () {
         backward();
+    }).delegate("button[data-search]", "click", function (event) {
+        var form = serialize($(event.currentTarget).data("form"));
+        var search = [];
+
+        $.each(Object.keys(form), function (ignore, name) {
+            var value = $.trim(form[name]);
+
+            if (value) {
+                search.push(name + "=" + encodeURIComponent(value));
+            }
+        });
+
+        if (search.length) {
+            redirect({path: history.state.path.replace(/(\?.*)/, "") + "?" + search.join("&")});
+        }
     }).delegate("input[data-all][type=checkbox]", "change", function (event) {
         var list = $("input[data-id][type=checkbox]");
 

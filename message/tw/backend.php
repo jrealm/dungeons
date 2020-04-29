@@ -26,6 +26,8 @@ return [
 
     'password' => '變更密碼',
 
+    'search' => '查詢',
+
     'title' => '後台管理',
 
 ];

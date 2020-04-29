@@ -11,6 +11,7 @@ class Double extends Column {
         parent::__construct($values);
 
         $this->formStyle('double');
+        $this->searchStyle('between');
         $this->validation('double');
     }
 

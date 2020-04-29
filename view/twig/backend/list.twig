@@ -1,6 +1,6 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set breadcrumbs, description, title = result.breadcrumbs, result.sub_title, controller.menu().title %}
+{% set breadcrumbs, description, formId, title = result.breadcrumbs, result.sub_title, random(), controller.menu().title %}
 
 {% block header %}
     {% include 'backend/header.twig' %}
@@ -25,6 +25,42 @@
                         </a>
                     {% endif %}
                 {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% if result.filters %}
+        <div class="card">
+            <div class="card-body p-0" id="_{{ formId }}">
+                <div class="form-group pt-2 m-0 row">
+                    {% for input in result.filters %}
+                        <div class="col-12 {{ input.search == 'between' ? 'col-md-8 col-lg-8 col-xl-6' : 'col-md-4 col-lg-4 col-xl-3' }} d-flex">
+                            <label class="col-form-label ml-1 mr-3 text-nowrap">
+                                {{ input.label }}
+                            </label>
+                            <div class="flex-grow-1 ml-1">
+                                <div class="row">
+                                    {% if input.search == 'between' %}
+                                        {% set classes = input.type == 'timestame' ? 'col-12 col-sm-6' : 'col' %}
+                                        <div class="{{ classes }} mb-2 pl-0">
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': form, 'style': input} only %}
+                                        </div>
+                                        {% set input = input | merge({'name': '-' ~ input.name}) %}
+                                        <div class="{{ classes }} mb-2 pl-0">
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': form, 'style': input} only %}
+                                        </div>
+                                    {% else %}
+                                        <div class="col mb-2 pl-0">
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': form, 'style': input} only %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card-footer p-2 text-right">
+                <button class="btn btn-default" data-form="#_{{ formId }}" data-search>{{ i18n('backend.search') }}</button>
             </div>
         </div>
     {% endif %}
@@ -127,6 +163,12 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block postprocess %}
+    {{ parent() }}
+
+    initForm($("#_{{ formId }}"));
 {% endblock %}
 
 {% macro pager(data, diff, label) %}

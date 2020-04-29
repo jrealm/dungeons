@@ -31,14 +31,43 @@ class ListController extends BackendController {
     }
 
     protected function process($form) {
+        $conditions = [];
+
+        foreach ($this->filters() ?? [] as $name => $column) {
+            $from = @$form[$name];
+            $to = @$form["-{$name}"];
+
+            if ($from === null) {
+                if ($to === null) {
+                    continue;
+                } else {
+                    $from = $to;
+                    $to = null;
+                }
+            }
+
+            switch ($column->searchStyle()) {
+            case 'like':
+                $conditions[] = $column->like("%{$from}%", true);
+                break;
+            case 'between':
+                if ($to !== null) {
+                    $conditions[] = $column->between($from, $to);
+                    break;
+                }
+            default:
+                $conditions[] = $column->equal($from);
+            }
+        }
+
         $page = $this->positive_integer(@$form['p'], 1);
         $size = $this->positive_integer(@$form['s'], 10);
         $orders = preg_split('/[, ]/', @$form['o'], 0, PREG_SPLIT_NO_EMPTY);
 
         $model = $this->table()->model();
 
-        $count = $model->count($form);
-        $data = $count ? $model->query($form, $orders ?: true, $size, $page): [];
+        $count = $model->count($conditions);
+        $data = $count ? $model->query($conditions, $orders ?: true, $size, $page): [];
 
         return [
             'success' => true,
@@ -51,7 +80,19 @@ class ListController extends BackendController {
     }
 
     protected function wrap() {
-        return $this->wrapGet();
+        $form = $this->wrapGet();
+
+        foreach ($this->filters() ?? [] as $name => $column) {
+            foreach ([$name, "-{$name}"] as $token) {
+                $value = @$form[$token];
+
+                if ($value !== null && validate($value, $column)) {
+                    unset($form[$token]);
+                }
+            }
+        }
+
+        return $form;
     }
 
     private function positive_integer($value, $default) {

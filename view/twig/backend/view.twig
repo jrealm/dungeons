@@ -28,7 +28,7 @@
             {% endfor %}
         </div>
         {% if result.buttons %}
-            <div class="card-footer">
+            <div class="card-footer text-right">
             {% for button in result.buttons %}
                 {% if button.method == 'cancel' %}
                     <button class="btn {{ button.class }}" data-backward>{{ button.label }}</button>

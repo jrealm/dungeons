@@ -72,6 +72,10 @@ $result['sub_title'] = array_pop($titles);
 
 //--
 
+require 'association.php';
+
+//--
+
 $orders = [];
 
 foreach ($result['orders'] as $index => $name) {
@@ -128,6 +132,38 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 }
 
 $result['styles'] = $controller->remix($styles, $list);
+
+//--
+
+$filters = [];
+
+foreach ($controller->filters() ?? [] as $name => $column) {
+    $filter = [
+        'label' => $labels[$name] ?? "[{$name}]",
+        'name' => $name,
+        'pattern' => $column->pattern(),
+        'search' => $column->searchStyle(),
+        'type' => $column->formStyle(),
+    ];
+
+    $options = $column->options();
+
+    if ($options) {
+        $options = Message::load("options/{$options}");
+    } else if (key_exists($name, $bundles)) {
+        $options = $bundles[$name];
+    }
+
+    if ($options) {
+        $filter['options'] = $options;
+        $filter['search'] = null;
+        $filter['type'] = 'select';
+    }
+
+    $filters[] = $filter;
+}
+
+$result['filters'] = $filters;
 
 //--
 
