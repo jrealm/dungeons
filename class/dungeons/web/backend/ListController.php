@@ -2,6 +2,7 @@
 
 namespace dungeons\web\backend;
 
+use dungeons\db\Criteria;
 use dungeons\web\BackendController;
 
 class ListController extends BackendController {
@@ -31,7 +32,7 @@ class ListController extends BackendController {
     }
 
     protected function process($form) {
-        $conditions = [];
+        $criteria = Criteria::createAnd();
 
         foreach ($this->filters() ?? [] as $name => $column) {
             $from = @$form[$name];
@@ -48,26 +49,35 @@ class ListController extends BackendController {
 
             switch ($column->searchStyle()) {
             case 'like':
-                $conditions[] = $column->like("%{$from}%", true);
+                $criteria->add($column->like("%{$from}%", true));
                 break;
             case 'between':
                 if ($to !== null) {
-                    $conditions[] = $column->between($from, $to);
+                    $criteria->add($column->between($from, $to));
                     break;
                 }
             default:
-                $conditions[] = $column->equal($from);
+                $criteria->add($column->equal($from));
             }
+
+            unset($form[$name], $form["-{$name}"]);
         }
 
         $page = $this->positive_integer(@$form['p'], 1);
         $size = $this->positive_integer(@$form['s'], 10);
         $orders = preg_split('/[, ]/', @$form['o'], 0, PREG_SPLIT_NO_EMPTY);
 
-        $model = $this->table()->model();
+        if (!$criteria->size() && $this->passive() === true) {
+            $count = 0;
+            $data = null;
+        } else {
+            $form[] = $criteria;
 
-        $count = $model->count($conditions);
-        $data = $count ? $model->query($conditions, $orders ?: true, $size, $page): [];
+            $model = $this->table()->model();
+
+            $count = $model->count($form);
+            $data = $count ? $model->query($form, $orders ?: true, $size, $page) : [];
+        }
 
         return [
             'success' => true,
@@ -81,13 +91,22 @@ class ListController extends BackendController {
 
     protected function wrap() {
         $form = $this->wrapGet();
+        $search = @$form['q'];
 
-        foreach ($this->filters() ?? [] as $name => $column) {
-            foreach ([$name, "-{$name}"] as $token) {
-                $value = @$form[$token];
+        if ($search) {
+            $search = json_decode(base64_urldecode($search), true);
 
-                if ($value !== null && validate($value, $column)) {
-                    unset($form[$token]);
+            foreach ($this->filters() ?? [] as $name => $column) {
+                foreach ([$name, "-{$name}"] as $token) {
+                    $value = @$search[$token];
+
+                    if ($value !== null) {
+                        $value = urldecode($value);
+
+                        if ($column->searchStyle() === 'like' || !validate($value, $column)) {
+                            $form[$token] = $value;
+                        }
+                    }
                 }
             }
         }

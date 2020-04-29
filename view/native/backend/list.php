@@ -167,7 +167,7 @@ $result['filters'] = $filters;
 
 //--
 
-$result['parameters'] = array_intersect_key($form, array_flip(['o', 'p', 's']));
+$result['parameters'] = array_intersect_key($form, array_flip(['o', 'p', 'q', 's']));
 
 //--
 

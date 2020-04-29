@@ -1,4 +1,4 @@
-/*global $,toastr*/
+/*global $,btoa,toastr*/
 /*jslint browser,long*/
 
 (function () {
@@ -395,19 +395,23 @@
         backward();
     }).delegate("button[data-search]", "click", function (event) {
         var form = serialize($(event.currentTarget).data("form"));
-        var search = [];
+        var path = history.state.path.replace(/(\?.*)/, "");
+        var search = {};
 
         $.each(Object.keys(form), function (ignore, name) {
             var value = $.trim(form[name]);
 
             if (value) {
-                search.push(name + "=" + encodeURIComponent(value));
+                search[name] = encodeURIComponent(value);
             }
         });
 
-        if (search.length) {
-            redirect({path: history.state.path.replace(/(\?.*)/, "") + "?" + search.join("&")});
+        if (Object.keys(search).length) {
+            search = btoa(JSON.stringify(search));
+            path += "?q=" + search.replace(/\+/g, "-").replace(/\//g, "_").replace(/\=/g, "");
         }
+
+        redirect({path});
     }).delegate("input[data-all][type=checkbox]", "change", function (event) {
         var list = $("input[data-id][type=checkbox]");
 

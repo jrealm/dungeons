@@ -4,13 +4,17 @@ namespace dungeons\db;
 
 class ColumnWrapper extends Column {
 
+    private $alias;
     private $column;
-    private $prefix;
 
-    public function __construct($prefix, $column) {
-        $this->prefix = $prefix;
+    public function __construct($alias, $column) {
+        $this->alias = $alias;
         $this->column = $column;
         $this->values = &$column->values;
+    }
+
+    public function alias() {
+        return $this->alias;
     }
 
     public function convert($value) {
@@ -23,10 +27,6 @@ class ColumnWrapper extends Column {
 
     public function isCounter() {
         return ($this->column instanceof column\Counter);
-    }
-
-    public function prefix() {
-        return $this->prefix;
     }
 
     public function regenerate($value) {

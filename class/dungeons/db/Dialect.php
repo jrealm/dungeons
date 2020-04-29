@@ -80,7 +80,7 @@ class Dialect {
 
         foreach ($table->getColumns() as $name => $column) {
             $default = $column->default();
-            $expression = "_{$column->prefix()}.{$column->mapping()}";
+            $expression = "_{$column->alias()}.{$column->mapping()}";
 
             if (!is_null($default)) {
                 $default = var_export($default, true);
@@ -137,7 +137,7 @@ class Dialect {
                 continue;
             }
 
-            $prefix = $relation['column']->prefix();
+            $prefix = $relation['column']->alias();
             $column = $relation['column']->mapping();
             $foreign = $relation['foreign']->mapping();
             $target = $relation['target']->mapping();
