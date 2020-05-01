@@ -55,6 +55,10 @@
         return value === "" || value === null || value === undefined;
     };
 
+    var encode = function (text) {
+        return btoa(text).replace(/\+/g, "-").replace(/\//g, "_").replace(/\=/g, "");
+    };
+
     var error = function (response) {
         overlay.hide();
 
@@ -407,8 +411,7 @@
         });
 
         if (Object.keys(search).length) {
-            search = btoa(JSON.stringify(search));
-            path += "?q=" + search.replace(/\+/g, "-").replace(/\//g, "_").replace(/\=/g, "");
+            path += "?q=" + encode(JSON.stringify(search));
         }
 
         redirect({path});
