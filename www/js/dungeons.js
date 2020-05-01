@@ -254,7 +254,7 @@
             list.push($(input).data("id"));
         });
 
-        $("button[data-least]").data("args", list.join("/")).each(function (ignore, element) {
+        $("button[data-least]").data("args", list).each(function (ignore, element) {
             var button = $(element);
 
             button.prop("disabled", list.length < button.data("least"));
@@ -377,24 +377,17 @@
         return false;
     }).delegate("button[data-ajax]", "click", function (event) {
         var button = $(event.currentTarget);
-        var args = button.data("args");
         var form = button.data("form");
         var options;
-
-        if (args) {
-            args = "/" + args;
-        } else {
-            args = "";
-        }
 
         if (form) {
             $(".invalid-feedback", form).hide().empty();
             options = {parameters: {"form-id": form}};
         } else {
-            form = {};
+            form = {args: button.data("args")};
         }
 
-        perform(button.data("ajax") + args, form, options);
+        perform(button.data("ajax"), form, options);
     }).delegate("button[data-backward]", "click", function () {
         backward();
     }).delegate("button[data-search]", "click", function (event) {

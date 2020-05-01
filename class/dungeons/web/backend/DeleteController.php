@@ -21,21 +21,30 @@ class DeleteController extends BackendController {
         if ($this->method() === 'POST') {
             $pattern = preg_quote($this->name(), '/');
 
-            return preg_match("/^{$pattern}\/[\/\w-]+$/", $this->path());
+            return preg_match("/^{$pattern}(\/[\/\w-]+)?$/", $this->path());
         }
 
         return false;
     }
 
     protected function process($form) {
+        $args = $this->args();
+
+        if (!$args) {
+            $args = @$form['args'];
+
+            if (!$args || !is_array($args)) {
+                return ['error' => 'error.DataNotFound'];
+            }
+        }
+
         if (empty($form['confirm'])) {
             return [
-                'path' => preg_replace('/^\/backend\/(.+)$/', '$1', $this->path()),
+                'args' => $args,
                 'view' => $this->confirm(),
             ];
         }
 
-        $args = $this->args();
         $model = $this->table()->model();
         $data = null;
 
@@ -56,10 +65,6 @@ class DeleteController extends BackendController {
         }
 
         return ['success' => true];
-    }
-
-    protected function wrap() {
-        return $this->wrapGet();
     }
 
 }
