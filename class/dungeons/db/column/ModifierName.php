@@ -2,7 +2,7 @@
 
 namespace dungeons\db\column;
 
-class ModifiedTime extends CreateTime {
+class ModifierName extends CreatorName {
 
     public function __construct($values = []) {
         parent::__construct($values);
