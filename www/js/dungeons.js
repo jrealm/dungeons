@@ -1,4 +1,4 @@
-/*global $,btoa,toastr*/
+/*global $,Blob,atob,btoa,toastr*/
 /*jslint browser,long*/
 
 (function () {
@@ -45,6 +45,28 @@
         }
 
         target.hide().empty();
+    };
+
+    var download = function (response) {
+        var anchor;
+        var file;
+        var raw = atob(response.content);
+        var size = raw.length;
+        var data = new Array(size);
+
+        while (size) {
+            size -= 1;
+            data[size] = raw.charCodeAt(size);
+        }
+
+        file = new Blob([new Uint8Array(data)], {type: response.contentType});
+
+        anchor = document.getElementById("download-anchor");
+        anchor.download = response.filename;
+        anchor.href = URL.createObjectURL(file);
+        anchor.click();
+
+        URL.revokeObjectURL(anchor.href);
     };
 
     var empty = function (value) {
@@ -128,6 +150,9 @@
         switch (response.type) {
         case "backward":
             backward();
+            break;
+        case "download":
+            download(response);
             break;
         case "redirect":
             if (response.message) {

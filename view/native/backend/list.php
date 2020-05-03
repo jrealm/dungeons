@@ -2,6 +2,7 @@
 
 use dungeons\Config;
 use dungeons\Message;
+use dungeons\view\Native;
 use dungeons\view\Twig;
 
 $node = $controller->node();
@@ -28,9 +29,18 @@ if ($controller->hasPermission("{$node}/delete")) {
         'icon' => Config::get('backend.delete.icon'),
         'label' => Message::get('backend.delete'),
         'least' => 1,
-        'method' => 'delete',
+        'path' => "{$node}/delete",
     ];
 }
+
+$controls[] = [
+    'class' => Config::get('backend.export.button'),
+    'icon' => Config::get('backend.export.icon'),
+    'label' => Message::get('backend.export'),
+    'least' => 0,
+    'parameters' => array_intersect_key($form, array_flip(['o', 'q'])) + ['t' => $controller->exportFormat()],
+    'path' => $path,
+];
 
 $result['controls'] = $controls;
 
@@ -171,4 +181,12 @@ $result['parameters'] = array_intersect_key($form, array_flip(['o', 'p', 'q', 's
 
 //--
 
-(new Twig('backend/list.twig'))->render($controller, $form, $result);
+switch ($result['export']) {
+case 'xlsx':
+    $view = new Native('backend/export-xlsx.php');
+    break;
+default:
+    $view = new Twig('backend/list.twig');
+}
+
+$view->render($controller, $form, $result);

@@ -14,6 +14,7 @@ class ListController extends BackendController {
             $this->table(table($tableName));
         }
 
+        $this->exportFormat('xlsx');
         $this->view('backend/list.php');
     }
 
@@ -63,15 +64,31 @@ class ListController extends BackendController {
             unset($form[$name], $form["-{$name}"]);
         }
 
-        $page = $this->positive_integer(@$form['p'], 1);
-        $size = $this->positive_integer(@$form['s'], 10);
+        $export = @$form['t'];
+
+        if ($export) {
+            $page = 1;
+            $size = 0;
+        } else {
+            $page = $this->positive_integer(@$form['p'], 1);
+            $size = $this->positive_integer(@$form['s'], 10);
+        }
+
         $orders = preg_split('/[, ]/', @$form['o'], 0, PREG_SPLIT_NO_EMPTY);
 
-        if (!$criteria->size() && $this->passive() === true) {
+        if (!$criteria->size() && !$export && $this->passive() === true) {
             $count = 0;
             $data = null;
         } else {
             $form[] = $criteria;
+
+            if ($export) {
+                $args = @$form['args'];
+
+                if ($args && is_array($args)) {
+                    $form[] = $this->table()->id->in($args);
+                }
+            }
 
             $model = $this->table()->model();
 
@@ -81,6 +98,7 @@ class ListController extends BackendController {
 
         return [
             'success' => true,
+            'export' => $export,
             'count' => $count,
             'data' => $data,
             'page' => $page,
@@ -111,7 +129,7 @@ class ListController extends BackendController {
             }
         }
 
-        return $form;
+        return array_merge($this->wrapJson(), $form);
     }
 
     private function positive_integer($value, $default) {

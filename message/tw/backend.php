@@ -16,6 +16,8 @@ return [
     'edit.cancel' => '取消',
     'edit.submit' => '儲存',
 
+    'export' => '匯出',
+
     'logout' => '登出',
 
     'new' => '新增',

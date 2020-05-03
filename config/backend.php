@@ -10,6 +10,9 @@ return [
     'edit.cancel.button' => 'btn-default',
     'edit.icon' => 'fas fa-edit',
 
+    'export.button' => 'btn-app',
+    'export.icon' => 'fas fa-file-export',
+
     'menus' => 'authority|system',
 
     'multiple-delete.button' => 'btn-app text-danger',
