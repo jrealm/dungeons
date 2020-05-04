@@ -4,6 +4,8 @@ return [
 
     'browser' => '瀏覽',
 
+    'close' => '關閉',
+
     'copyright' => 'Copyright © 2020',
 
     'delete' => '刪除',

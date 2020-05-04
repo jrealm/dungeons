@@ -84,4 +84,12 @@ $result['styles'] = $controller->remix($styles, $list);
 
 //--
 
-(new Twig('backend/view.twig'))->render($controller, $form, $result);
+switch (@$form['args']) {
+case 'modal':
+    $view = 'backend/modal-view.twig';
+    break;
+default:
+    $view = 'backend/view.twig';
+}
+
+(new Twig($view))->render($controller, $form, $result);

@@ -1,0 +1,2 @@
+{% set path = style.column.path | default(style.relation.alias) %}
+<button class="btn btn-link p-0" data-ajax="{{ path }}/{{ data[style.relation.column.name()] }}" data-args="modal">{{ data[style.name] }}</button>

@@ -115,6 +115,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     }
 
     $style = [
+        'column' => $column,
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
         'relation' => $column->relation(),

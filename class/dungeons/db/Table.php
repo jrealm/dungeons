@@ -73,12 +73,12 @@ class Table extends ValueObject {
             }
 
             if ($relation['type'] === 'composition') {
-                $column = new Counter(['name' => $column, 'relation' => $relation]);
+                $column = new Counter(['name' => $column]);
             } else {
                 $column = $relation['foreign']->$column;
             }
 
-            $column = new ColumnWrapper($alias, $column);
+            $column = new ColumnWrapper($alias, $column, $relation);
         }
 
         $this->columns[$name] = $column;

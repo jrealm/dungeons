@@ -6,10 +6,12 @@ class ColumnWrapper extends Column {
 
     private $alias;
     private $column;
+    private $relation;
 
-    public function __construct($alias, $column) {
+    public function __construct($alias, $column, $relation) {
         $this->alias = $alias;
         $this->column = $column;
+        $this->relation = $relation;
         $this->values = &$column->values;
     }
 
@@ -31,6 +33,10 @@ class ColumnWrapper extends Column {
 
     public function regenerate($value) {
         return $this->column->regenerate($value);
+    }
+
+    public function relation() {
+        return $this->relation;
     }
 
     public function type() {
