@@ -35,6 +35,10 @@ class Dialect {
         $expressions = [];
 
         foreach ($columns as $column) {
+            if ($column->pseudo()) {
+                continue;
+            }
+
             $expressions[] = $column->mapping();
         }
 
@@ -79,6 +83,10 @@ class Dialect {
         $expressions = [];
 
         foreach ($table->getColumns() as $name => $column) {
+            if ($column->pseudo()) {
+                continue;
+            }
+
             $default = $column->default();
             $expression = "_{$column->alias()}.{$column->mapping()}";
 
@@ -118,7 +126,7 @@ class Dialect {
         $expressions = [];
 
         foreach ($columns as $column) {
-            if ($column->readonly()) {
+            if ($column->pseudo() || $column->readonly()) {
                 continue;
             }
 

@@ -81,6 +81,10 @@ class Model {
 
     public function insert($data) {
         foreach ($this->table->getColumns() as $name => $column) {
+            if ($column->pseudo()) {
+                continue;
+            }
+
             $value = @$data[$name];
 
             if (is_null($value)) {
@@ -103,6 +107,10 @@ class Model {
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns() as $name => $column) {
+            if ($column->pseudo()) {
+                continue;
+            }
+
             $value = $data[$name];
             $bindings[] = $value;
 
@@ -183,7 +191,7 @@ class Model {
         }
 
         foreach ($this->table->getColumns() as $name => $column) {
-            if ($column->readonly()) {
+            if ($column->pseudo() || $column->readonly()) {
                 continue;
             }
 
@@ -208,7 +216,7 @@ class Model {
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns() as $name => $column) {
-            if ($column->readonly()) {
+            if ($column->pseudo() || $column->readonly()) {
                 continue;
             }
 
@@ -310,7 +318,7 @@ class Model {
                 $diff = [];
 
                 foreach ($this->table->getColumns() as $name => $column) {
-                    if ($column->readonly() || $prev[$name] === $curr[$name]) {
+                    if ($column->pseudo() || $column->readonly() || $prev[$name] === $curr[$name]) {
                         continue;
                     }
 
