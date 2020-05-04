@@ -17,6 +17,7 @@ if ($controller->hasPermission("{$path}/")) {
         'class' => Config::get('backend.edit.button'),
         'icon' => Config::get('backend.edit.icon'),
         'label' => Message::get('backend.edit'),
+        'ranking' => 100,
     ];
 }
 

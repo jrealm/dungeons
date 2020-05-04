@@ -20,6 +20,7 @@ if ($controller->hasPermission("{$node}/new")) {
         'icon' => Config::get('backend.new.icon'),
         'label' => Message::get('backend.new'),
         'path' => "{$path}/new",
+        'ranking' => 100,
     ];
 }
 
@@ -30,6 +31,7 @@ if ($controller->hasPermission("{$node}/delete")) {
         'label' => Message::get('backend.delete'),
         'least' => 1,
         'path' => "{$node}/delete",
+        'ranking' => 200,
     ];
 }
 
@@ -40,6 +42,7 @@ $controls[] = [
     'least' => 0,
     'parameters' => array_intersect_key($form, array_flip(['o', 'q'])) + ['t' => $controller->exportFormat()],
     'path' => $path,
+    'ranking' => 300,
 ];
 
 $result['controls'] = $controls;
@@ -53,6 +56,7 @@ if ($controller->hasPermission("{$node}/")) {
         'class' => Config::get('backend.edit.button'),
         'icon' => Config::get('backend.edit.icon'),
         'label' => Message::get('backend.edit'),
+        'ranking' => 100,
     ];
 }
 
@@ -62,6 +66,7 @@ if ($controller->hasPermission("{$node}/delete")) {
         'icon' => Config::get('backend.delete.icon'),
         'label' => Message::get('backend.delete'),
         'method' => 'delete',
+        'ranking' => 200,
     ];
 }
 
@@ -187,7 +192,7 @@ case 'xlsx':
     $view = new Native('backend/export-xlsx.php');
     break;
 default:
-    $view = new Twig('backend/list.twig');
+    $view = new Twig($controller->customView() ?? 'backend/list.twig');
 }
 
 $view->render($controller, $form, $result);

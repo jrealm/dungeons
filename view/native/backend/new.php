@@ -16,6 +16,7 @@ $buttons[] = [
     'class' => Config::get('backend.new.cancel.button'),
     'label' => Message::get('backend.new.cancel'),
     'method' => 'cancel',
+    'ranking' => 100,
 ];
 
 if ($controller->hasPermission("{$node}/insert")) {
@@ -23,6 +24,7 @@ if ($controller->hasPermission("{$node}/insert")) {
         'class' => Config::get('backend.new.submit.button'),
         'label' => Message::get('backend.new.submit'),
         'method' => 'insert',
+        'ranking' => 200,
     ];
 }
 
@@ -79,4 +81,4 @@ $result['styles'] = $controller->remix($styles, $list);
 
 //--
 
-(new Twig('backend/view.twig'))->render($controller, $form, $result);
+(new Twig($controller->customView() ?? 'backend/view.twig'))->render($controller, $form, $result);

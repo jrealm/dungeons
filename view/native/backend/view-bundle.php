@@ -17,6 +17,7 @@ $buttons[] = [
     'class' => Config::get('backend.edit.cancel.button'),
     'label' => Message::get('backend.edit.cancel'),
     'method' => 'cancel',
+    'ranking' => 100,
 ];
 
 if ($controller->hasPermission("{$path}/update")) {
@@ -24,6 +25,7 @@ if ($controller->hasPermission("{$path}/update")) {
         'class' => Config::get('backend.edit.button'),
         'label' => Message::get('backend.edit.submit'),
         'method' => 'update',
+        'ranking' => 200,
     ];
 }
 

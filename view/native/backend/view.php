@@ -16,6 +16,7 @@ $buttons[] = [
     'class' => Config::get('backend.edit.cancel.button'),
     'label' => Message::get('backend.edit.cancel'),
     'method' => 'cancel',
+    'ranking' => 100,
 ];
 
 if ($controller->hasPermission("{$node}/update")) {
@@ -23,6 +24,7 @@ if ($controller->hasPermission("{$node}/update")) {
         'class' => Config::get('backend.edit.button'),
         'label' => Message::get('backend.edit.submit'),
         'method' => 'update',
+        'ranking' => 200,
     ];
 }
 
@@ -89,7 +91,7 @@ case 'modal':
     $view = 'backend/modal-view.twig';
     break;
 default:
-    $view = 'backend/view.twig';
+    $view = $controller->customView() ?? 'backend/view.twig';
 }
 
 (new Twig($view))->render($controller, $form, $result);

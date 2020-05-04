@@ -11,7 +11,7 @@
     {% if result.controls %}
         <div class="card">
             <div class="card-body p-1">
-                {% for item in result.controls %}
+                {% for item in result.controls | sort((a, b) => a.ranking <=> b.ranking) %}
                     {% if item.least is not null %}
                         {% set selectable = random() + 1 %}
                         <button class="btn {{ item.class }} m-1" data-ajax="{{ build(item.path, item.parameters) }}" data-least="{{ item.least }}"{% if item.least %} disabled{% endif %}>
@@ -65,6 +65,7 @@
         </div>
     {% endif %}
     {% if result.data is not null %}
+        {% set actions = result.actions | sort((a, b) => a.ranking <=> b.ranking) %}
         <div class="card card-tabs">
             <div class="card-body p-2">
                 <table class="table table-hover table-responsive table-striped">
@@ -78,7 +79,7 @@
                                     </div>
                                 </th>
                             {% endif %}
-                            {% if result.actions %}
+                            {% if actions %}
                                 <th class="w-1">{{ i18n('backend.operation') }}</th>
                             {% endif %}
                             {% for style in result.styles %}
@@ -111,9 +112,9 @@
                                         </div>
                                     </td>
                                 {% endif %}
-                                {% if result.actions %}
+                                {% if actions %}
                                     <td>
-                                        {% for action in result.actions %}
+                                        {% for action in actions %}
                                             {% if action.method %}
                                                 <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label }}">
                                                     <i class="{{ action.icon }}"></i>
@@ -134,7 +135,7 @@
                             </tr>
                         {% endfor %}
                         {% if not result.data %}
-                            <tr><td class="text-center" colspan="{{ result.actions|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                            <tr><td class="text-center" colspan="{{ actions|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
                         {% endif %}
                     </tbody>
                 </table>
