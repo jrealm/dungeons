@@ -46,7 +46,7 @@ class DeleteController extends BackendController {
         }
 
         $model = $this->table()->model();
-        $data = null;
+        $list = [];
 
         foreach ($args as $id) {
             $data = $model->delete($id);
@@ -58,13 +58,15 @@ class DeleteController extends BackendController {
             if ($data === false) {
                 return ['error' => 'error.DeleteFailed'];
             }
+
+            $list[] = $data;
         }
 
-        if (is_null($data)) {
+        if (!$list) {
             return ['error' => 'error.DataNotFound'];
         }
 
-        return ['success' => true];
+        return ['success' => true, 'list' => $list];
     }
 
 }
