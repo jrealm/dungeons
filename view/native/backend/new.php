@@ -91,7 +91,7 @@ case 'modal':
     break;
 default:
     if (@$form['d']) {
-        $result['data'] = json_decode(base64_urldecode($form['d']), true);
+        $result['data'] = json_decode(urldecode(base64_urldecode($form['d'])), true);
     }
     $view = $controller->customView() ?? 'backend/view.twig';
 }

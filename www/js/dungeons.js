@@ -167,7 +167,7 @@
             }
             if (response.modal) {
                 $(".modal-wrapper .modal").modal("hide");
-                parameters = {d: encode(JSON.stringify(serialize(".form-wrapper")))};
+                parameters = {d: encode(encodeURIComponent(JSON.stringify(serialize(".form-wrapper"))))};
             }
             perform(history.state.path, parameters || {});
             break;
