@@ -2,9 +2,7 @@
 
 namespace dungeons\db\column;
 
-class Ranking extends Integer {
-
-    use Sequence;
+class Ranking extends Serial {
 
     public function __construct($values = []) {
         parent::__construct($values);
@@ -13,14 +11,6 @@ class Ranking extends Integer {
         $this->sequence('base_ranking');
 
         $this->table()->ranking($this->name());
-    }
-
-    public function generate($value) {
-        if (is_null($value)) {
-            return $this->nextSequence();
-        }
-
-        return $value;
     }
 
     public function regenerate($value) {

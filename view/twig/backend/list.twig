@@ -135,7 +135,7 @@
                             </tr>
                         {% endfor %}
                         {% if not result.data %}
-                            <tr><td class="text-center" colspan="{{ actions|length + result.styles|length + 1 }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                            <tr><td class="text-center" colspan="{{ actions|length + result.styles|length + 1 + (selectable ? 1 : 0) }}">{{ i18n('error.DataNotFound') }}</td></tr>
                         {% endif %}
                     </tbody>
                 </table>

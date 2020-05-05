@@ -2,9 +2,7 @@
 
 namespace dungeons\db\column;
 
-class Id extends Integer {
-
-    use Sequence;
+class Id extends Serial {
 
     public function __construct($values = []) {
         parent::__construct($values);
@@ -13,14 +11,6 @@ class Id extends Integer {
         $this->sequence('base_id');
 
         $this->table()->id($this->name());
-    }
-
-    public function generate($value) {
-        if (is_null($value)) {
-            return $this->nextSequence();
-        }
-
-        return $value;
     }
 
 }
