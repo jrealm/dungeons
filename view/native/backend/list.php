@@ -60,16 +60,6 @@ if ($controller->hasPermission("{$node}/")) {
     ];
 }
 
-if ($controller->hasPermission("{$node}/delete")) {
-    $actions[] = [
-        'class' => Config::get('backend.delete.button'),
-        'icon' => Config::get('backend.delete.icon'),
-        'label' => Message::get('backend.delete'),
-        'method' => 'delete',
-        'ranking' => 200,
-    ];
-}
-
 $result['actions'] = $actions;
 
 //--
