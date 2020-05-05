@@ -1,6 +1,13 @@
 <?php //>
 
-$result['type'] = 'backward';
+switch (@$form['form-type']) {
+case 'modal':
+    $result['modal'] = true;
+    $result['type'] = 'refresh';
+    break;
+default:
+    $result['type'] = 'backward';
+}
 
 unset($result['data']);
 

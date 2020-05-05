@@ -1,6 +1,7 @@
 <?php //>
 
 $bundles = [];
+$relations = [];
 
 foreach ($controller->table()->getRelations() as $relation) {
     if ($relation['type'] === 'association' && !$relation['super']) {
@@ -21,5 +22,6 @@ foreach ($controller->table()->getRelations() as $relation) {
         }
 
         $bundles[$relation['column']->name()] = $bundle;
+        $relations[$relation['column']->name()] = $relation;
     }
 }

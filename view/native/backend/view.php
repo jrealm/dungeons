@@ -57,6 +57,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $readonly = $column->readonly();
 
     $style = [
+        'column' => $column,
         'disabled' => $readonly || $column->disabled(),
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
@@ -75,6 +76,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
             $style['type'] = 'radio';
         } else if (key_exists($name, $bundles)) {
             $style['options'] = $bundles[$name];
+            $style['relation'] = $relations[$name];
             $style['type'] = 'select';
         }
     }
@@ -91,6 +93,9 @@ case 'modal':
     $view = 'backend/modal-view.twig';
     break;
 default:
+    if (@$form['d']) {
+        $result['data'] = json_decode(base64_urldecode($form['d']), true);
+    }
     $view = $controller->customView() ?? 'backend/view.twig';
 }
 

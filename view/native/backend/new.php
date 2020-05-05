@@ -55,6 +55,7 @@ $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
+        'column' => $column,
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
         'pattern' => $column->pattern(),
@@ -72,6 +73,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
             $style['type'] = 'radio';
         } else if (key_exists($name, $bundles)) {
             $style['options'] = $bundles[$name];
+            $style['relation'] = $relations[$name];
             $style['type'] = 'select';
         }
     }
@@ -83,4 +85,15 @@ $result['styles'] = $controller->remix($styles, $list);
 
 //--
 
-(new Twig($controller->customView() ?? 'backend/view.twig'))->render($controller, $form, $result);
+switch (@$form['args']) {
+case 'modal':
+    $view = 'backend/modal-blank.twig';
+    break;
+default:
+    if (@$form['d']) {
+        $result['data'] = json_decode(base64_urldecode($form['d']), true);
+    }
+    $view = $controller->customView() ?? 'backend/view.twig';
+}
+
+(new Twig($view))->render($controller, $form, $result);

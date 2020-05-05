@@ -2,12 +2,22 @@
 {% if style.readonly %}
     <div class="py-2">{{ style.options[value] }}</div>
 {% else %}
-    <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" style="width: 100%;">
-        {% if not style.required %}
-            <option value="">&nbsp;</option>
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" style="width: 100%;">
+                {% if not style.required %}
+                    <option value="">&nbsp;</option>
+                {% endif %}
+                {% for name, item in style.options %}
+                    <option{% if name == value %} selected{% endif %} value="{{ name }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if style.relation %}
+            <div class="ml-1">
+                {% set path = style.column.path | default(style.relation.alias) %}
+                <button class="btn btn-default" data-ajax="{{ path }}/new" data-args="modal" title="{{ i18n('backend.new') }}"><i class="fas fa-plus"></i></button>
+            </div>
         {% endif %}
-        {% for name, item in style.options %}
-            <option{% if name == value %} selected{% endif %} value="{{ name }}">{{ item }}</option>
-        {% endfor %}
-    </select>
+    </div>
 {% endif %}

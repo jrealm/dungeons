@@ -145,6 +145,7 @@
     };
 
     var processJson = function (response) {
+        var parameters;
         var target;
 
         switch (response.type) {
@@ -164,7 +165,11 @@
             if (response.message) {
                 toastr.info(response.message);
             }
-            perform(history.state.path, {});
+            if (response.modal) {
+                $(".modal-wrapper .modal").modal("hide");
+                parameters = {d: encode(JSON.stringify(serialize(".form-wrapper")))};
+            }
+            perform(history.state.path, parameters || {});
             break;
         case "reload":
             location.reload();
