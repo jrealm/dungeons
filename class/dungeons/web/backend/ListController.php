@@ -2,6 +2,7 @@
 
 namespace dungeons\web\backend;
 
+use dungeons\Config;
 use dungeons\db\Criteria;
 use dungeons\web\BackendController;
 
@@ -81,6 +82,7 @@ class ListController extends BackendController {
             $data = null;
         } else {
             $form[] = $criteria;
+            $form[] = $this->groupFilter(@$form['g']);
 
             if ($export) {
                 $args = @$form['args'];
@@ -130,6 +132,54 @@ class ListController extends BackendController {
         }
 
         return array_merge($this->wrapJson(), $form);
+    }
+
+    private function groupFilter($group) {
+        $criteria = Criteria::createAnd();
+        $enable = $this->table()->enableTime();
+        $enable = $enable ? $this->table()->$enable : null;
+        $disable = $this->table()->disableTime();
+        $disable = $disable ? $this->table()->$disable : null;
+        $now = date(Config::get('system.timestamp'));
+
+        switch ($group) {
+        case 1:
+            if ($enable) {
+                $criteria->add($enable->notNull());
+                $criteria->add($enable->lessThanOrEqual($now));
+            }
+            if ($disable) {
+                $criteria->add(Criteria::createOr($disable->isNull(), $disable->greaterThan($now)));
+            }
+            break;
+        case 2:
+            if ($disable) {
+                $criteria->add($disable->notNull());
+                $criteria->add($disable->lessThanOrEqual($now));
+            }
+            if ($enable) {
+                $criteria = Criteria::createOr($enable->isNull(), $enable->greaterThan($now), $criteria);
+            }
+            break;
+        case 3:
+            if ($enable) {
+                $criteria->add($enable->notNull());
+                $criteria->add($enable->greaterThan($now));
+            }
+            break;
+        case 4:
+            if ($disable) {
+                if ($enable) {
+                    $criteria->add($enable->notNull());
+                    $criteria->add($enable->lessThanOrEqual($now));
+                }
+                $criteria->add($disable->notNull());
+                $criteria->add($disable->greaterThan($now));
+            }
+            break;
+        }
+
+        return $criteria;
     }
 
     private function positive_integer($value, $default) {

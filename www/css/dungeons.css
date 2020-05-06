@@ -20,6 +20,10 @@ th a, th:hover a {
     background-image: url(img/arches.png);
 }
 
+.dropdown-menu {
+    min-width: 1rem;
+}
+
 .image-preview {
     display: inline-block;
     max-width: calc(100% - 60px);

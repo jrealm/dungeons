@@ -1,0 +1,43 @@
+{% extends 'backend/response.twig' %}
+
+{% set data, formId = result.data, random() %}
+
+{% block target %}.modal-wrapper{% endblock %}
+
+{% block html %}
+    <div class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ (result.breadcrumbs | reverse)[1].title }}</h4>
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="_{{ formId }}">
+                    {% include 'backend/form-input.twig' %}
+                    <input name="form-type" type="hidden" value="modal">
+                </div>
+                <div class="justify-content-end modal-footer">
+                    {% for button in result.buttons | sort((a, b) => a.ranking <=> b.ranking) %}
+                        {% if button.method == 'cancel' %}
+                            <button class="btn {{ button.class }}" data-dismiss="modal">{{ button.label }}</button>
+                        {% else %}
+                            <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}" data-form="#_{{ formId }}">{{ button.label }}</button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postprocess %}
+    var modal = $(".modal-wrapper .modal").modal();
+
+    modal.on("hidden.bs.modal", function () {
+        modal.remove();
+    });
+
+    initForm($("#_{{ formId }}"));
+{% endblock %}

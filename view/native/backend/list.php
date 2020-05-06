@@ -173,7 +173,13 @@ $result['filters'] = $filters;
 
 //--
 
-$result['parameters'] = array_intersect_key($form, array_flip(['o', 'p', 'q', 's']));
+$result['parameters'] = array_intersect_key($form, array_flip(['g', 'o', 'p', 'q', 's']));
+
+if ($table->enableTime()) {
+    $result['groups'] = $table->disableTime() ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];
+} else {
+    $result['groups'] = $table->disableTime() ? [0, 1, 2, 4] : [];
+}
 
 //--
 
