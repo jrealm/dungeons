@@ -31,6 +31,10 @@ th a, th:hover a {
     max-width: 100%;
 }
 
+.modal-wrapper .operators {
+    display: none;
+}
+
 .nav-link:not([href]) {
     cursor: pointer;
 }

@@ -13,8 +13,8 @@
                 {% endfor %}
             </select>
         </div>
-        {% if style.relation %}
-            <div class="ml-1">
+        {% if style.operators and style.relation %}
+            <div class="ml-1 operators">
                 {% set path = style.column.path | default(style.relation.alias) %}
                 <button class="btn btn-default" data-ajax="{{ path }}/new" data-args="modal" title="{{ i18n('backend.new') }}"><i class="fas fa-plus"></i></button>
             </div>
