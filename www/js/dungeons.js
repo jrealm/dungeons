@@ -155,6 +155,9 @@
         case "download":
             download(response);
             break;
+        case "location":
+            location.href = response.path;
+            break;
         case "redirect":
             if (response.message) {
                 toastr.info(response.message);
