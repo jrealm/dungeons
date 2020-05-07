@@ -356,6 +356,12 @@
         if ($.fn.select2) {
             form.find("select.select2bs4").select2({
                 theme: "bootstrap4"
+            }).filter("[data-search]").on("change", function (event) {
+                var select = $(event.currentTarget);
+                var inputs = select.closest("[id]").find("[data-name]");
+
+                inputs.filter(":visible").addClass("d-none").find("input,select").val("").filter("select").trigger("change");
+                inputs.filter("[data-name='" + select.val() + "']").removeClass("d-none");
             });
         }
 

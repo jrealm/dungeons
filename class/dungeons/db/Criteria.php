@@ -52,8 +52,4 @@ class Criteria implements Criterion {
         return false;
     }
 
-    public function size() {
-        return count($this->criteria);
-    }
-
 }

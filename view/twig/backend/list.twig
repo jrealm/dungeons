@@ -1,6 +1,6 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set breadcrumbs, description, formId, title = result.breadcrumbs, result.sub_title, random(), controller.menu().title %}
+{% set breadcrumbs, conditions, description, formId, title = result.breadcrumbs, controller.conditions, result.sub_title, random(), controller.menu().title %}
 
 {% block header %}
     {% include 'backend/header.twig' %}
@@ -42,15 +42,15 @@
                                     {% if input.search == 'between' %}
                                         {% set classes = input.type == 'timestame' ? 'col-12 col-sm-6' : 'col' %}
                                         <div class="{{ classes }} mb-2 pl-0">
-                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': form, 'style': input} only %}
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                         </div>
                                         {% set input = input | merge({'name': '-' ~ input.name}) %}
                                         <div class="{{ classes }} mb-2 pl-0">
-                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': form, 'style': input} only %}
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                         </div>
                                     {% else %}
                                         <div class="col mb-2 pl-0">
-                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': form, 'style': input} only %}
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -68,10 +68,10 @@
         {% set actions = result.actions | sort((a, b) => a.ranking <=> b.ranking) %}
         <div class="card">
             <div class="card-body p-0">
-                <div class="d-md-flex justify-content-between mx-2">
+                <div class="d-xl-flex mx-2">
                     <div class="mt-2">
                         {% if result.groups %}
-                            <div class="btn-group">
+                            <div class="btn-group mr-1">
                                 <button type="button" class="btn btn-default">{{ i18n('options/list-group.' ~ form.g | default(0)) }}</button>
                                 <button type="button" class="btn btn-default dropdown-icon dropdown-toggle" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
@@ -84,6 +84,39 @@
                         {% endif %}
                     </div>
                     <div class="mt-2">
+                        {% if result.simple_filters %}
+                            <div class="d-flex" id="_{{ formId }}">
+                                <div class="mr-1">
+                                    <select class="form-control select2bs4" data-search style="min-width:10rem;">
+                                        {% for input in result.simple_filters %}
+                                            <option value="{{ input.name }}"{% if input.selected %} selected{% endif %}>{{ input.label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="row ml-0 mr-1" style="width:24rem;">
+                                    {% for input in result.simple_filters %}
+                                        {% if input.search == 'between' %}
+                                            <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mr-1 p-0" data-name="{{ input.name }}">
+                                                {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                            </div>
+                                            <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mt-1 mt-md-0 p-0" data-name="{{ input.name }}">
+                                                {% set input = input | merge({'name': '-' ~ input.name}) %}
+                                                {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                            </div>
+                                        {% else %}
+                                            <div class="{% if not input.selected %}d-none{% endif %} col p-0" data-name="{{ input.name }}">
+                                                {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <button class="btn btn-default" data-form="#_{{ formId }}" data-search title="{{ i18n('backend.search') }}">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

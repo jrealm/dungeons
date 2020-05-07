@@ -173,6 +173,51 @@ $result['filters'] = $filters;
 
 //--
 
+if (!$filters) {
+    $selected = false;
+
+    foreach ($result['styles'] as $style) {
+        if ($style['unordered']) {
+            continue;
+        }
+
+        $name = $style['name'];
+
+        $filter = [
+            'label' => $style['label'],
+            'name' => $name,
+            'pattern' => $style['column']->pattern(),
+            'search' => $style['column']->searchStyle(),
+            'type' => $style['type'],
+        ];
+
+        $options = @$style['options'];
+
+        if ($options) {
+            $filter['options'] = $options;
+            $filter['search'] = null;
+            $filter['type'] = 'select';
+        }
+
+        if (!$selected && $style['column']->inSearch()) {
+            $filter['selected'] = true;
+            $selected = true;
+        }
+
+        $filters[] = $filter;
+    }
+
+    if ($filter) {
+        if (!$selected) {
+            $filters[0]['selected'] = true;
+        }
+
+        $result['simple_filters'] = $filters;
+    }
+}
+
+//--
+
 $result['parameters'] = array_intersect_key($form, array_flip(['g', 'o', 'p', 'q', 's']));
 
 if ($table->enableTime()) {

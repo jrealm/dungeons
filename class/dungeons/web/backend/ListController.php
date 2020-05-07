@@ -34,37 +34,7 @@ class ListController extends BackendController {
     }
 
     protected function process($form) {
-        $criteria = Criteria::createAnd();
-
-        foreach ($this->filters() ?? [] as $name => $column) {
-            $from = @$form[$name];
-            $to = @$form["-{$name}"];
-
-            if ($from === null) {
-                if ($to === null) {
-                    continue;
-                } else {
-                    $from = $to;
-                    $to = null;
-                }
-            }
-
-            switch ($column->searchStyle()) {
-            case 'like':
-                $criteria->add($column->like("%{$from}%", true));
-                break;
-            case 'between':
-                if ($to !== null) {
-                    $criteria->add($column->between($from, $to));
-                    break;
-                }
-            default:
-                $criteria->add($column->equal($from));
-            }
-
-            unset($form[$name], $form["-{$name}"]);
-        }
-
+        $criteria = $this->criteria();
         $export = @$form['t'];
 
         if ($export) {
@@ -77,7 +47,7 @@ class ListController extends BackendController {
 
         $orders = preg_split('/[, ]/', @$form['o'], 0, PREG_SPLIT_NO_EMPTY);
 
-        if (!$criteria->size() && !$export && $this->passive() === true) {
+        if (!$criteria && !$export && $this->passive() === true) {
             $count = 0;
             $data = null;
         } else {
@@ -114,9 +84,11 @@ class ListController extends BackendController {
         $search = @$form['q'];
 
         if ($search) {
+            $columns = $this->columns() ?? $this->table()->getColumns();
+            $conditions = [];
             $search = json_decode(base64_urldecode($search), true);
 
-            foreach ($this->filters() ?? [] as $name => $column) {
+            foreach ($columns as $name => $column) {
                 foreach ([$name, "-{$name}"] as $token) {
                     $value = @$search[$token];
 
@@ -124,10 +96,46 @@ class ListController extends BackendController {
                         $value = urldecode($value);
 
                         if ($column->searchStyle() === 'like' || !validate($value, $column)) {
-                            $form[$token] = $value;
+                            $conditions[$token] = $value;
                         }
                     }
                 }
+            }
+
+            if ($conditions) {
+                $criteria = Criteria::createAnd();
+
+                foreach ($columns as $name => $column) {
+                    $from = @$conditions[$name];
+                    $to = @$conditions["-{$name}"];
+
+                    if ($from === null) {
+                        if ($to === null) {
+                            continue;
+                        } else {
+                            $from = $to;
+                            $to = null;
+                        }
+                    }
+
+                    switch ($column->searchStyle()) {
+                    case 'like':
+                        $criteria->add($column->like("%{$from}%", true));
+                        break;
+                    case 'between':
+                        if ($to !== null) {
+                            $criteria->add($column->between($from, $to));
+                            break;
+                        }
+                    default:
+                        $criteria->add($column->equal($from));
+                    }
+
+                    $column->inSearch(true);
+                }
+
+                $this->conditions($conditions);
+                $this->criteria($criteria);
             }
         }
 
