@@ -1,5 +1,5 @@
 {% if style.readonly %}
-    <div class="py-2">{{ data[style.name] | u.trim().replaceMatches('/\\s+/', ' ').truncate(23, '...') }}</div>
+    <div class="py-2">{{ data[style.name]|u.trim().replaceMatches('/\\s+/', ' ').truncate(23, '...') }}</div>
 {% else %}
     <textarea class="{{ class }}"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" placeholder="{{ style.placeholder }}" rows="5">{{ data[style.name] }}</textarea>
 {% endif %}

@@ -1,8 +1,8 @@
 <div>
     <span class="image-preview">
         {% if data[style.name] %}
-            <a data-gallery="gallery" data-title="{{ data['.title'] }}" data-toggle="lightbox" data-type="image" href="{{ data[style.name] | img }}">
-                <img class="border shadow" src="{{ data[style.name] | img }}">
+            <a data-gallery="gallery" data-title="{{ data['.title'] }}" data-toggle="lightbox" data-type="image" href="{{ data[style.name]|img }}">
+                <img class="border shadow" src="{{ data[style.name]|img }}">
             </a>
         {% endif %}
     </span>

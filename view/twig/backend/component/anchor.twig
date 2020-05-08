@@ -1,5 +1,5 @@
 {% if style.relation %}
-    {% set id, path = data[style.relation.column.name()], style.column.path | default(style.relation.alias) %}
+    {% set id, path = data[style.relation.column.name()], style.column.path|default(style.relation.alias) %}
 {% else %}
     {% set id, path = data.id, controller.node %}
 {% endif %}
