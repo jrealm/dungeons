@@ -4,12 +4,17 @@
 {% else %}
     <div class="d-flex">
         <div class="flex-grow-1">
-            <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" style="width: 100%;">
+            <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %}{% if style.multiple %} multiple{% endif %} name="{{ style.name }}" style="width: 100%;">
                 {% if not style.required %}
                     <option value="">&nbsp;</option>
                 {% endif %}
+                {% if style.multiple %}
+                    {% set values = value|split(',') %}
+                {% else %}
+                    {% set values = [value] %}
+                {% endif %}
                 {% for name, item in style.options %}
-                    <option{% if name == value %} selected{% endif %} value="{{ name }}">{{ item }}</option>
+                    <option{% if name in values %} selected{% endif %} value="{{ name }}">{{ item }}</option>
                 {% endfor %}
             </select>
         </div>

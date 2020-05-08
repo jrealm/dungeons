@@ -11,6 +11,10 @@ trait Wrapper {
         foreach ($this->columns() ?? $this->table()->getColumns() as $name => $column) {
             if ($column instanceof File) {
                 $form = Attachment::wrap($form, $name);
+            } else if ($column->multiple()) {
+                if (is_array(@$form[$name])) {
+                    $form[$name] = implode(',', $form[$name]);
+                }
             }
         }
 
