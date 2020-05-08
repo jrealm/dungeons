@@ -28,6 +28,16 @@ return new class() extends dungeons\web\backend\ListController {
             $field['label'] = $labels[$field['name']] ?? "[{$field['name']}]";
             $field['readonly'] = true;
 
+            switch ($field['name']) {
+            case 'title':
+            case 'content':
+            case 'url':
+                $field['column'] = $this->table()->{$field['name']};
+                break;
+            default:
+                $field['unordered'] = true;
+            }
+
             $fields[] = $field;
         }
 

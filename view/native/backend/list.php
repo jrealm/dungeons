@@ -177,17 +177,18 @@ if (!$filters) {
     $selected = false;
 
     foreach ($result['styles'] as $style) {
-        if ($style['unordered']) {
+        if (@$style['unordered']) {
             continue;
         }
 
+        $column = @$style['column'];
         $name = $style['name'];
 
         $filter = [
             'label' => $style['label'],
             'name' => $name,
-            'pattern' => $style['column']->pattern(),
-            'search' => $style['column']->searchStyle(),
+            'pattern' => $column ? $column->pattern() : @$style['pattern'],
+            'search' => $column ? $column->searchStyle() : null,
             'type' => $style['type'],
         ];
 
@@ -199,9 +200,16 @@ if (!$filters) {
             $filter['type'] = 'select';
         }
 
-        if (!$selected && $style['column']->inSearch()) {
+        if (!$selected && $column && $column->inSearch()) {
             $filter['selected'] = true;
             $selected = true;
+        }
+
+        switch ($filter['type']) {
+        case 'anchor':
+        case 'html':
+        case 'textarea':
+            $filter['type'] = 'text';
         }
 
         $filters[] = $filter;

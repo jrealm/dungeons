@@ -1,1 +1,5 @@
-<a data-ajax href="{{ controller.node }}/{{ data[style.relation.column.name()] }}/{{ style.relation.alias }}">{{ data[style.name] }}</a>
+{% if style.readonly %}
+    <a data-ajax href="{{ controller.node }}/{{ data[style.relation.column.name()] }}/{{ style.relation.alias }}">{{ data[style.name] }}</a>
+{% else %}
+    <input class="{{ class }}" name="{{ style.name }}" type="number" value="{{ data[style.name] }}">
+{% endif %}

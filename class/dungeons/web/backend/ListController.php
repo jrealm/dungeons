@@ -84,7 +84,7 @@ class ListController extends BackendController {
         $search = @$form['q'];
 
         if ($search) {
-            $columns = $this->columns() ?? $this->table()->getColumns();
+            $columns = $this->table()->getColumns();
             $conditions = [];
             $search = json_decode(base64_urldecode($search), true);
 
