@@ -12,11 +12,11 @@ class In extends AbstractCriterion {
             return '1 <> 1';
 
         case 1:
-            return "{$this->columnName()} = ?";
+            return "{$this->column->expression()} = ?";
 
         default:
             $values = implode(',', array_fill(0, $count, '?'));
-            return "{$this->columnName()} IN ({$values})";
+            return "{$this->column->expression()} IN ({$values})";
         }
     }
 

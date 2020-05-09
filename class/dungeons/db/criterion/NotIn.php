@@ -12,11 +12,11 @@ class NotIn extends AbstractCriterion {
             return false;
 
         case 1:
-            return "{$this->columnName()} <> ?";
+            return "{$this->column->expression()} <> ?";
 
         default:
             $values = implode(',', array_fill(0, $count, '?'));
-            return "{$this->columnName()} NOT IN ({$values})";
+            return "{$this->column->expression()} NOT IN ({$values})";
         }
     }
 

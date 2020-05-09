@@ -299,6 +299,14 @@ class Model {
     protected function fetch($statement) {
         $rows = $statement->fetchAll();
 
+        foreach ($this->table->getColumns() as $column) {
+            if ($column->pseudo()) {
+                continue;
+            }
+
+            $rows = array_map([$column, 'pack'], $rows);
+        }
+
         foreach ($rows as &$row) {
             $row['.title'] = $this->toString($row);
         }

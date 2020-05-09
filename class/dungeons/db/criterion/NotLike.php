@@ -5,7 +5,7 @@ namespace dungeons\db\criterion;
 class NotLike extends AbstractCriterion {
 
     public function make() {
-        return "{$this->columnName()} NOT LIKE ?";
+        return "{$this->column->expression()} NOT LIKE ?";
     }
 
 }

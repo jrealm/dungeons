@@ -145,19 +145,17 @@ class Dialect {
                 continue;
             }
 
-            $prefix = $relation['column']->alias();
-            $column = $relation['column']->mapping();
             $foreign = $relation['foreign']->mapping();
             $target = $relation['target']->mapping();
 
             switch ($relation['type']) {
             case 'association':
-                $command = "{$command} LEFT JOIN {$foreign} AS _{$alias} ON (_{$alias}.{$target} = _{$prefix}.{$column})";
+                $command = "{$command} LEFT JOIN {$foreign} AS _{$alias} ON (_{$alias}.{$target} = {$relation['column']->expression()})";
                 break;
 
             case 'composition':
                 $selection = "SELECT {$target} AS \"id\", COUNT(*) AS \"count\" FROM {$foreign} GROUP BY {$target}";
-                $command = "{$command} LEFT JOIN ({$selection}) AS _{$alias} ON (_{$alias}.id = _{$prefix}.{$column})";
+                $command = "{$command} LEFT JOIN ({$selection}) AS _{$alias} ON (_{$alias}.id = {$relation['column']->expression()})";
                 break;
             }
         }

@@ -46,6 +46,10 @@ abstract class Column extends ValueObject {
         return new criterion\Equal($this, [$value]);
     }
 
+    public function expression() {
+        return "_{$this->alias()}.{$this->mapping()}";
+    }
+
     public function generate($value) {
         return $value;
     }
@@ -112,6 +116,10 @@ abstract class Column extends ValueObject {
 
     public function notNull() {
         return new criterion\NotNull($this, []);
+    }
+
+    public function pack($row) {
+        return $row;
     }
 
     public function regenerate($value) {

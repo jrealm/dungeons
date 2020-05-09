@@ -26,8 +26,4 @@ abstract class AbstractCriterion implements Criterion {
         return $bindings;
     }
 
-    protected function columnName() {
-        return "_{$this->column->alias()}.{$this->column->mapping()}";
-    }
-
 }
