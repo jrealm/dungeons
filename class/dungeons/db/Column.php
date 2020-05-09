@@ -46,8 +46,12 @@ abstract class Column extends ValueObject {
         return new criterion\Equal($this, [$value]);
     }
 
-    public function expression() {
-        return "_{$this->alias()}.{$this->mapping()}";
+    public function expression($prefix = null) {
+        if ($prefix === null) {
+            $prefix = $this->alias();
+        }
+
+        return "_{$prefix}.{$this->mapping()}";
     }
 
     public function generate($value) {

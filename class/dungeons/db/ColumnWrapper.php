@@ -23,6 +23,10 @@ class ColumnWrapper extends Column {
         return $this->column->convert($value);
     }
 
+    public function expression($prefix = null) {
+        return $this->column->expression($prefix ?? $this->alias);
+    }
+
     public function generate($value) {
         return $this->column->generate($value);
     }

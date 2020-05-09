@@ -87,15 +87,7 @@ class Dialect {
                 continue;
             }
 
-            $default = $column->default();
-            $expression = "_{$column->alias()}.{$column->mapping()}";
-
-            if (!is_null($default)) {
-                $default = var_export($default, true);
-                $expression = "COALESCE({$expression}, {$default})";
-            }
-
-            $expressions[$name] = "{$expression} AS \"{$name}\"";
+            $expressions[$name] = "{$column->expression()} AS \"{$name}\"";
         }
 
         $names = implode(', ', $expressions);
