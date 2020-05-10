@@ -180,6 +180,10 @@ class Model {
     public function toString($data) {
         $title = $this->table->title() ?? 'title';
 
+        if (is_object($title)) {
+            return $title->toString($data);
+        }
+
         return isset($this->table->$title) ? "{$data[$title]}" : null;
     }
 

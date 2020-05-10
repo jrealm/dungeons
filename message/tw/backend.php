@@ -30,7 +30,11 @@ return [
 
     'password' => '變更密碼',
 
+    'print' => '列印',
+
     'search' => '查詢',
+
+    'subtotal' => '小計',
 
     'title' => '後台管理',
 

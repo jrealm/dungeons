@@ -12,7 +12,7 @@ $result['path'] = $path;
 
 //--
 
-$controls = [];
+$controls = $controller->controls() ?? [];
 
 if ($controller->hasPermission("{$node}/new")) {
     $controls[] = [

@@ -22,4 +22,7 @@ return [
     'new.icon' => 'fas fa-plus',
     'new.submit.button' => 'btn-info',
 
+    'print.button' => 'btn-app',
+    'print.icon' => 'fas fa-file-export',
+
 ];

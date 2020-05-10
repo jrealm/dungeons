@@ -11,7 +11,7 @@
     {% if result.controls %}
         <div class="card">
             <div class="card-body p-1">
-                {% for item in result.controls | sort((a, b) => a.ranking <=> b.ranking) %}
+                {% for item in result.controls|sort((a, b) => a.ranking <=> b.ranking) %}
                     {% if item.least is not null %}
                         {% set selectable = random() + 1 %}
                         <button class="btn {{ item.class }} m-1" data-ajax="{{ build(item.path, item.parameters) }}" data-least="{{ item.least }}"{% if item.least %} disabled{% endif %}>
@@ -44,7 +44,7 @@
                                         <div class="{{ classes }} mb-2 pl-0">
                                             {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                         </div>
-                                        {% set input = input | merge({'name': '-' ~ input.name}) %}
+                                        {% set input = input|merge({'name': '-' ~ input.name}) %}
                                         <div class="{{ classes }} mb-2 pl-0">
                                             {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                         </div>
@@ -65,14 +65,14 @@
         </div>
     {% endif %}
     {% if result.data is not null %}
-        {% set actions = result.actions | sort((a, b) => a.ranking <=> b.ranking) %}
+        {% set actions = result.actions|sort((a, b) => a.ranking <=> b.ranking) %}
         <div class="card">
             <div class="card-body p-0">
                 <div class="d-xl-flex mx-2">
                     <div class="mt-2">
                         {% if result.groups %}
                             <div class="btn-group mr-1">
-                                <button type="button" class="btn btn-default">{{ i18n('options/list-group.' ~ form.g | default(0)) }}</button>
+                                <button type="button" class="btn btn-default">{{ i18n('options/list-group.' ~ form.g|default(0)) }}</button>
                                 <button type="button" class="btn btn-default dropdown-icon dropdown-toggle" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
                                     {% for group in result.groups %}
@@ -100,7 +100,7 @@
                                                 {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                             </div>
                                             <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mt-1 mt-md-0 p-0" data-name="{{ input.name }}">
-                                                {% set input = input | merge({'name': '-' ~ input.name}) %}
+                                                {% set input = input|merge({'name': '-' ~ input.name}) %}
                                                 {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
                                             </div>
                                         {% else %}
@@ -154,7 +154,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% set num = (result.page - 1) * result.size %}
+                        {% set num, total = (result.page - 1) * result.size, {} %}
                         {% for data in result.data %}
                             <tr>
                                 <td>{{ num + loop.index }}</td>
@@ -181,14 +181,25 @@
                                     </td>
                                 {% endif %}
                                 {% for style in result.styles %}
+                                    {% if style.column.subTotal and data[style.name] %}
+                                        {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
+                                    {% endif %}
                                     <td>
                                         {% include 'backend/component/' ~ style.type ~ '.twig' with {'controller': controller, 'data': data, 'style': style} only %}
                                     </td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
+                        {% if total %}
+                            <tr>
+                                <td class="text-center" colspan="{{ (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('backend.subtotal') }}</td>
+                                {% for style in result.styles %}
+                                    <td>{{ total[style.name] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endif %}
                         {% if not result.data %}
-                            <tr><td class="text-center" colspan="{{ actions|length + result.styles|length + 1 + (selectable ? 1 : 0) }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                            <tr><td class="text-center" colspan="{{ result.styles|length + (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('error.DataNotFound') }}</td></tr>
                         {% endif %}
                     </tbody>
                 </table>
@@ -196,7 +207,7 @@
             {% if result.count > result.size and result.size > 0 %}
                 <div class="card-footer">
                     <ul class="float-right m-0 pagination">
-                        {% set max = (result.count / result.size) | round(0, 'ceil') %}
+                        {% set max = (result.count / result.size)|round(0, 'ceil') %}
                         {% if result.page > 1 %}
                             {{ _self.pager(result, -1, '&laquo;') }}
                         {% endif %}
@@ -234,5 +245,5 @@
     {% else %}
         {% set path = build(data.path, data.parameters, {p: page}) %}
     {% endif %}
-    <li class="page-item{% if not diff %} active{% endif %}"><a class="page-link" data-ajax href="{{ path }}">{{ label | default(page) | raw }}</a></li>
+    <li class="page-item{% if not diff %} active{% endif %}"><a class="page-link" data-ajax href="{{ path }}">{{ label|default(page)|raw }}</a></li>
 {% endmacro %}
