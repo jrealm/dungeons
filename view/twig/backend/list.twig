@@ -184,7 +184,7 @@
                                     {% if style.column.subTotal and data[style.name] %}
                                         {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
                                     {% endif %}
-                                    <td>
+                                    <td data-column="{{ style.name }}">
                                         {% include 'backend/component/' ~ style.type ~ '.twig' with {'controller': controller, 'data': data, 'style': style} only %}
                                     </td>
                                 {% endfor %}
