@@ -45,11 +45,10 @@ class DeleteController extends BackendController {
             ];
         }
 
-        $model = $this->table()->model();
         $list = [];
 
         foreach ($args as $id) {
-            $data = $model->delete($id);
+            $data = $this->delete($this->table(), $id);
 
             if (is_null($data)) {
                 break;
@@ -67,6 +66,36 @@ class DeleteController extends BackendController {
         }
 
         return ['success' => true, 'list' => $list];
+    }
+
+    private function delete($table, $data) {
+        $data = $table->model()->delete($data);
+
+        if ($data) {
+            foreach ($table->getRelations() as $relation) {
+                if ($relation['type'] === 'composition') {
+                    if (empty($relation['enable'])) {
+                        $foreign = table($relation['foreign']);
+                        $target = $foreign->{$relation['target']}->mapping();
+                    } else {
+                        $foreign = $relation['foreign'];
+                        $target = $relation['target']->mapping();
+                    }
+
+                    $column = $relation['column']->mapping();
+
+                    foreach ($foreign->model()->query(["{$target}" => $data[$column]]) as $child) {
+                        $child = $this->delete($foreign, $child);
+
+                        if (!$child) {
+                            return $child;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
 }

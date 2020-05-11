@@ -56,6 +56,7 @@ $styles = [];
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'column' => $column,
+        'disabled' => $column->disabled(),
         'label' => $labels[$name] ?? "[{$name}]",
         'name' => $name,
         'pattern' => $column->pattern(),
