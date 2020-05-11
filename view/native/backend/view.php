@@ -2,7 +2,6 @@
 
 use dungeons\Config;
 use dungeons\Message;
-use dungeons\view\Twig;
 
 $node = $controller->menu()['parent'];
 
@@ -100,4 +99,4 @@ default:
     $view = $controller->customView() ?? 'backend/view.twig';
 }
 
-(new Twig($view))->render($controller, $form, $result);
+resolve($view)->render($controller, $form, $result);

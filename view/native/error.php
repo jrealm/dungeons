@@ -7,4 +7,4 @@ $error = $result['error'] ?? 'error.Undefined';
 $result['error'] = $error;
 $result['message'] = $result['message'] ?? Message::get($error);
 
-require 'raw.php';
+resolve('raw.php')->render($controller, $form, $result);

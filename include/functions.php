@@ -1,6 +1,8 @@
 <?php //>
 
 use dungeons\Resource;
+use dungeons\view\Native;
+use dungeons\view\Twig;
 use Monolog\Handler\FirePHPHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
@@ -74,6 +76,15 @@ function render($template, $data) {
     $twig = new Environment(new ArrayLoader(['template' => $template]));
 
     return $twig->render('template', $data);
+}
+
+function resolve($view) {
+    switch (pathinfo($view, PATHINFO_EXTENSION)) {
+    case 'twig':
+        return new Twig($view);
+    }
+
+    return new Native($view);
 }
 
 function table($name) {

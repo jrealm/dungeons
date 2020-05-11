@@ -4,4 +4,4 @@ $result['type'] = 'backward';
 
 unset($result['data']);
 
-require __DIR__ . '/../raw.php';
+resolve('raw.php')->render($controller, $form, $result);

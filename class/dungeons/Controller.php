@@ -4,8 +4,6 @@ namespace dungeons;
 
 use dungeons\db\Connection;
 use dungeons\utility\ValueObject;
-use dungeons\view\Native;
-use dungeons\view\Twig;
 
 abstract class Controller extends ValueObject {
 
@@ -58,7 +56,7 @@ abstract class Controller extends ValueObject {
             }
         }
 
-        $this->resolve($view ?: 'raw.php')->render($this, $form, $result);
+        resolve($view ?: 'raw.php')->render($this, $form, $result);
     }
 
     protected function init() {
@@ -74,15 +72,6 @@ abstract class Controller extends ValueObject {
 
     protected function process($form) {
         return ['success' => true];
-    }
-
-    protected function resolve($view) {
-        switch (pathinfo($view, PATHINFO_EXTENSION)) {
-        case 'twig':
-            return new Twig($view);
-        }
-
-        return new Native($view);
     }
 
     protected function validate($form) {

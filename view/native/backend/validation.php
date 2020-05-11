@@ -26,4 +26,4 @@ foreach ($result as $error) {
 
 $result = ['type' => 'validation', 'target' => @$form['form-id'], 'errors' => $errors];
 
-require __DIR__ . '/../raw.php';
+resolve('raw.php')->render($controller, $form, $result);

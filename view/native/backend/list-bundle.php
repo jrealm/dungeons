@@ -2,7 +2,6 @@
 
 use dungeons\Config;
 use dungeons\Message;
-use dungeons\view\Twig;
 
 $path = $controller->node();
 
@@ -36,4 +35,4 @@ $result['styles'] = [
 
 //--
 
-(new Twig('backend/list.twig'))->render($controller, $form, $result);
+resolve('backend/list.twig')->render($controller, $form, $result);

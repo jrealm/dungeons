@@ -58,4 +58,4 @@ $result = [
 
 unlink($file);
 
-require __DIR__ . '/../raw.php';
+resolve('raw.php')->render($controller, $form, $result);

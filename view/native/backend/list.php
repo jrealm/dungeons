@@ -2,8 +2,6 @@
 
 use dungeons\Config;
 use dungeons\Message;
-use dungeons\view\Native;
-use dungeons\view\Twig;
 
 $node = $controller->node();
 $path = preg_replace('/^\/backend\/(.+)$/', '$1', $controller->path());
@@ -238,10 +236,10 @@ if ($table->enableTime()) {
 
 switch ($result['export']) {
 case 'xlsx':
-    $view = new Native('backend/export-xlsx.php');
+    $view = 'backend/export-xlsx.php';
     break;
 default:
-    $view = new Twig($controller->customView() ?? 'backend/list.twig');
+    $view = $controller->customView() ?? 'backend/list.twig';
 }
 
-$view->render($controller, $form, $result);
+resolve($view)->render($controller, $form, $result);

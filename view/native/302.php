@@ -6,7 +6,7 @@ if (defined('AJAX') && AJAX) {
         'path' => $result['path'],
     ];
 
-    require 'raw.php';
+    resolve('raw.php')->render($controller, $form, $result);
 } else {
     header("Location: {$result['path']}");
 }

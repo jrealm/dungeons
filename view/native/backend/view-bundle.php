@@ -3,7 +3,6 @@
 use dungeons\Config;
 use dungeons\db\column\Text;
 use dungeons\Message;
-use dungeons\view\Twig;
 
 $path = $controller->menu()['parent'];
 
@@ -67,4 +66,4 @@ $result['data']['id'] = $id;
 
 //--
 
-(new Twig('backend/view.twig'))->render($controller, $form, $result);
+resolve('backend/view.twig')->render($controller, $form, $result);
