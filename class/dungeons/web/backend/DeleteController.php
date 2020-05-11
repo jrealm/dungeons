@@ -50,7 +50,7 @@ class DeleteController extends BackendController {
         foreach ($args as $id) {
             $data = $this->delete($this->table(), $id);
 
-            if (is_null($data)) {
+            if ($data === null) {
                 break;
             }
 

@@ -87,7 +87,7 @@ class Model {
 
             $value = @$data[$name];
 
-            if (is_null($value)) {
+            if ($value === null) {
                 $value = $column->default();
             } else {
                 if ($value instanceof Attachment) {
@@ -134,7 +134,7 @@ class Model {
     }
 
     public function parents($data) {
-        if (!is_null($data)) {
+        if ($data !== null) {
             $relation = $this->table->getMasterRelation();
 
             if ($relation) {
@@ -201,7 +201,7 @@ class Model {
 
             $value = @$data[$name];
 
-            if (!is_null($value)) {
+            if ($value !== null) {
                 if ($value instanceof Attachment) {
                     $value->save();
                 }

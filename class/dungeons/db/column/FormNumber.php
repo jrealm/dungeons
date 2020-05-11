@@ -14,7 +14,7 @@ class FormNumber extends Text {
     }
 
     public function generate($value) {
-        if (is_null($value)) {
+        if ($value === null) {
             $date = date($this->pattern());
             $prefix = $this->prefix();
             $sequence = str_pad($this->nextSequence(), $this->length(), '0', STR_PAD_LEFT);

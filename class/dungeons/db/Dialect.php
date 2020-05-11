@@ -28,7 +28,7 @@ class Dialect {
     }
 
     public function makeInsertion($table, $columns = null) {
-        if (is_null($columns)) {
+        if ($columns === null) {
             $columns = $table->getColumns();
         }
 
@@ -111,7 +111,7 @@ class Dialect {
     }
 
     public function makeUpdation($table, $criteria, $columns = null) {
-        if (is_null($columns)) {
+        if ($columns === null) {
             $columns = $table->getColumns();
         }
 

@@ -16,7 +16,7 @@ class App extends AbstractApp {
 
         $this->controller = $this->find(@$info[3], PHP_SAPI);
 
-        if (is_null($this->controller)) {
+        if ($this->controller === null) {
             $this->controller = new Controller(['path' => @$info[3], 'view' => '404.php']);
         }
     }

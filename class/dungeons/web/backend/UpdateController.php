@@ -35,7 +35,7 @@ class UpdateController extends BackendController {
 
         $data = $this->table()->model()->update($form);
 
-        if (is_null($data)) {
+        if ($data === null) {
             return ['error' => 'error.DataNotFound'];
         }
 

@@ -9,7 +9,7 @@ class Connection {
     public static function getInstance() {
         static $instance;
 
-        if (is_null($instance) && defined('DB_NAME') && defined('DB_USER')) {
+        if ($instance === null && defined('DB_NAME') && defined('DB_USER')) {
             $instance = new Connection(DB_NAME, DB_USER, @constant('DB_PASSWORD'));
         }
 

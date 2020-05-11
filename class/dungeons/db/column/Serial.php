@@ -7,7 +7,7 @@ class Serial extends Integer {
     use Sequence;
 
     public function generate($value) {
-        if (is_null($value)) {
+        if ($value === null) {
             return $this->nextSequence();
         }
 

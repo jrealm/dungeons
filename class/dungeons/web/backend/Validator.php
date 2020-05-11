@@ -13,7 +13,7 @@ trait Validator {
         foreach ($this->columns() ?? $this->table()->getColumns() as $name => $column) {
             $value = @$form[$name];
 
-            if (is_null($value)) {
+            if ($value === null) {
                 if ($column->required()) {
                     $method = new ReflectionMethod(get_class($column), $this->generator());
 
@@ -30,7 +30,7 @@ trait Validator {
                     $id = @$form['id'];
                     $condition = [$column->equal($value)];
 
-                    if (!is_null($id)) {
+                    if ($id !== null) {
                         $condition[] = $this->table()->id->notEqual($id);
                     }
 

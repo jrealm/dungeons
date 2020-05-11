@@ -63,7 +63,7 @@ class UpdateBundle extends BackendController {
         foreach ($data as $name => $value) {
             $new = @$form[$name];
 
-            if (is_null($new)) {
+            if ($new === null) {
                 continue;
             }
 
@@ -91,7 +91,7 @@ class UpdateBundle extends BackendController {
         foreach ($this->styles() as $name => $style) {
             $value = @$form[$name];
 
-            if (is_null($value)) {
+            if ($value === null) {
                 if (@$style['required']) {
                     $errors[] = ['name' => $name, 'type' => 'required'];
                 }

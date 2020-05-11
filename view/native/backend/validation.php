@@ -10,11 +10,11 @@ foreach ($result as $error) {
     $name = $error['name'];
     $message = @$error['message'];
 
-    if (is_null($message)) {
+    if ($message === null) {
         $type = $error['type'];
         $template = @$labels["{$name}.{$type}"];
 
-        if (is_null($template)) {
+        if ($template === null) {
             $message = Message::get("validation.{$type}");
         } else {
             $message = render($template, $form);

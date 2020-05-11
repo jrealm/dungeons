@@ -18,7 +18,7 @@ return new class() extends dungeons\web\UserController {
 
         $user = model('User')->update($user);
 
-        if (is_null($user)) {
+        if ($user === null) {
             return ['error' => 'backend-login.error.UserNotFound'];
         }
 
@@ -37,7 +37,7 @@ return new class() extends dungeons\web\UserController {
 
         $current = @$form['current'];
 
-        if (is_null($current)) {
+        if ($current === null) {
             $errors[] = ['name' => 'current', 'type' => 'required'];
         } else if ($user['password'] !== md5($user['id'] . '::' . $current)) {
             $errors[] = ['name' => 'current', 'message' => Message::get('backend-login.error.PasswordNotMatched')];
@@ -45,7 +45,7 @@ return new class() extends dungeons\web\UserController {
 
         $password = @$form['password'];
 
-        if (is_null($password)) {
+        if ($password === null) {
             $errors[] = ['name' => 'password', 'type' => 'required'];
         } else if ($password === $current) {
             $errors[] = ['name' => 'password', 'message' => Message::get('backend-login.error.PasswordNotChanged')];
@@ -53,7 +53,7 @@ return new class() extends dungeons\web\UserController {
 
         $confirm = @$form['confirm'];
 
-        if (is_null($confirm)) {
+        if ($confirm === null) {
             $errors[] = ['name' => 'confirm', 'type' => 'required'];
         } else if ($confirm !== $password) {
             $errors[] = ['name' => 'confirm', 'message' => Message::get('backend-login.error.PasswordNotConfirmed')];
