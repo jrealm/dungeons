@@ -1,5 +1,6 @@
 <?php //>
 
+$result['backward'] = @$form['r'];
 $result['type'] = 'backward';
 
 unset($result['data']);

@@ -19,7 +19,7 @@
                             {{ item.label }}
                         </button>
                     {% else %}
-                        <a class="btn {{ item.class }} m-1" data-ajax href="{{ item.path }}">
+                        <a class="btn {{ item.class }} m-1" data-ajax href="{{ build(item.path, result.backward) }}">
                             <i class="{{ item.icon }}"></i>
                             {{ item.label }}
                         </a>
@@ -173,7 +173,7 @@
                                                     <i class="{{ action.icon }}"></i>
                                                 </button>
                                             {% else %}
-                                                <a class="btn {{ action.class }}" data-ajax href="{{ controller.node }}/{{ data.id }}" title="{{ action.label }}">
+                                                <a class="btn {{ action.class }}" data-ajax href="{{ build(controller.node ~ '/' ~ data.id, result.backward) }}" title="{{ action.label }}">
                                                     <i class="{{ action.icon }}"></i>
                                                 </a>
                                             {% endif %}

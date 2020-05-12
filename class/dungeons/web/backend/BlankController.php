@@ -36,4 +36,8 @@ class BlankController extends BackendController {
         return ['success' => true, 'data' => $data];
     }
 
+    protected function wrap() {
+        return array_merge($this->wrapGet(), $this->wrapJson());
+    }
+
 }

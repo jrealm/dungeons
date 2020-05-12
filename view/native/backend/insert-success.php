@@ -6,6 +6,7 @@ case 'modal':
     $result['type'] = 'refresh';
     break;
 default:
+    $result['backward'] = @$form['r'];
     $result['type'] = 'backward';
 }
 

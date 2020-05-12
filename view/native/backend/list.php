@@ -224,7 +224,11 @@ if (!$filters) {
 
 //--
 
-$result['parameters'] = array_intersect_key($form, array_flip(['g', 'o', 'p', 'q', 's']));
+$result['parameters'] = array_intersect_key($form, array_flip(['g', 'o', 'p', 'q']));
+
+if ($result['parameters']) {
+    $result['backward'] = ['r' => base64_urlencode(http_build_query($result['parameters']))];
+}
 
 if ($table->enableTime()) {
     $result['groups'] = $table->disableTime() ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];

@@ -5,8 +5,14 @@
 
     "use strict";
 
-    var backward = function () {
-        $(".breadcrumb-item a").last().click();
+    var backward = function (parameters) {
+        var anchor = $(".breadcrumb-item a").last();
+
+        if (parameters) {
+            anchor.attr("href", anchor.attr("href") + "?" + atob(parameters));
+        }
+
+        anchor.click();
     };
 
     var combine = function (data, name, value) {
@@ -150,7 +156,7 @@
 
         switch (response.type) {
         case "backward":
-            backward();
+            backward(response.backward);
             break;
         case "download":
             download(response);
@@ -427,8 +433,8 @@
         }
 
         perform(button.data("ajax"), form, options);
-    }).delegate("button[data-backward]", "click", function () {
-        backward();
+    }).delegate("button[data-backward]", "click", function (event) {
+        backward($(event.currentTarget).data("backward"));
     }).delegate("button[data-search]", "click", function (event) {
         var form = serialize($(event.currentTarget).data("form"));
         var path = history.state.path.replace(/(\?.*)/, "");

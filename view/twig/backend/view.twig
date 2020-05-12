@@ -10,12 +10,13 @@
     <div class="card card-tabs">
         <div class="card-body form-wrapper" id="_{{ formId }}">
             {% include 'backend/form-input.twig' %}
+            <input name="r" type="hidden" value="{{ form.r }}">
         </div>
         {% if result.buttons %}
             <div class="card-footer text-right">
             {% for button in result.buttons | sort((a, b) => a.ranking <=> b.ranking) %}
                 {% if button.method == 'cancel' %}
-                    <button class="btn {{ button.class }}" data-backward>{{ button.label }}</button>
+                    <button class="btn {{ button.class }}" data-backward="{{ form.r }}">{{ button.label }}</button>
                 {% else %}
                     <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
                 {% endif %}
