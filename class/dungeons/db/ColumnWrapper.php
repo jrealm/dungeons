@@ -12,7 +12,7 @@ class ColumnWrapper extends Column {
         $this->alias = $alias;
         $this->column = $column;
         $this->relation = $relation;
-        $this->values = &$column->values;
+        $this->values = $column->values;
     }
 
     public function alias() {
@@ -24,6 +24,18 @@ class ColumnWrapper extends Column {
     }
 
     public function expression($prefix = null) {
+        if ($this->relation['column']->multiple() && $this->relation['type'] === 'association') {
+            $title = $this->mapping();
+            $foreign = $this->relation['foreign']->mapping();
+            $id = $this->relation['target']->mapping();
+            $column = $this->relation['column']->expression();
+            $ranking = $this->relation['foreign']->ranking() ?? $this->relation['foreign']->id();
+
+            $expr = "SELECT {$title} FROM {$foreign} WHERE {$id}::TEXT = ANY(STRING_TO_ARRAY({$column}, ',')) ORDER BY {$ranking}";
+
+            return "(SELECT STRING_AGG(M.{$title}, ',') FROM ({$expr}) AS M)";
+        }
+
         return $this->column->expression($prefix ?? $this->alias);
     }
 

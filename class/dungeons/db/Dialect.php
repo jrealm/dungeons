@@ -133,7 +133,7 @@ class Dialect {
 
     private function makeRelationJoin($command, $relations) {
         foreach ($relations as $alias => $relation) {
-            if (empty($relation['enable'])) {
+            if (empty($relation['enable']) || $relation['column']->multiple()) {
                 continue;
             }
 
