@@ -2,13 +2,7 @@
 
 return new class() extends dungeons\web\backend\InsertController {
 
-    public function available() {
-        if ($this->method() === 'POST') {
-            return preg_match("/^\/backend\/page\/block\/[\d]+\/item\/insert$/", $this->path());
-        }
-
-        return false;
-    }
+    use dungeons\web\backend\SubCreation;
 
     protected function init() {
         $this->table(table('BlockItem'));
