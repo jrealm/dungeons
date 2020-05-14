@@ -109,13 +109,8 @@ class ListController extends BackendController {
                     $from = @$conditions[$name];
                     $to = @$conditions["-{$name}"];
 
-                    if ($from === null) {
-                        if ($to === null) {
-                            continue;
-                        } else {
-                            $from = $to;
-                            $to = null;
-                        }
+                    if ($from === null && $to === null) {
+                        continue;
                     }
 
                     switch ($column->searchStyle()) {
@@ -123,8 +118,14 @@ class ListController extends BackendController {
                         $criteria->add($column->like("%{$from}%", true));
                         break;
                     case 'between':
-                        if ($to !== null) {
-                            $criteria->add($column->between($from, $to));
+                        if ($from !== $to) {
+                            if ($from === null) {
+                                $criteria->add($column->lessThanOrEqual($to));
+                            } else if ($to === null) {
+                                $criteria->add($column->greaterThanOrEqual($from));
+                            } else {
+                                $criteria->add($column->between($from, $to));
+                            }
                             break;
                         }
                     default:

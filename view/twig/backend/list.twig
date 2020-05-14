@@ -204,28 +204,29 @@
                     </tbody>
                 </table>
             </div>
-            {% if result.count > result.size and result.size > 0 %}
-                <div class="card-footer">
-                    <ul class="float-right m-0 pagination">
-                        {% set max = (result.count / result.size)|round(0, 'ceil') %}
-                        {% if result.page > 1 %}
-                            {{ _self.pager(result, -1, '&laquo;') }}
+            {% if result.count %}
+                <div class="align-items-center card-footer d-flex">
+                    <span class="text-muted">
+                        {{ include(template_from_string(i18n('backend.list.rows'))) }}
+                    </span>
+                    <div class="ml-auto">
+                        {% if result.count > result.size and result.size > 0 %}
+                            <ul class="mb-0 pagination">
+                                {% set from, max, to = result.page - 3, (result.count / result.size)|round(0, 'ceil'), result.page + 3 %}
+                                {% if result.page > 1 %}
+                                    {{ _self.pager(result, -1, '&laquo;') }}
+                                {% endif %}
+                                {% for num in from..to %}
+                                    {% if 1 <= num and num <= max %}
+                                        {{ _self.pager(result, num - result.page) }}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if result.page < max %}
+                                    {{ _self.pager(result, 1, '&raquo;') }}
+                                {% endif %}
+                            </ul>
                         {% endif %}
-                        {% for num in 3..1 %}
-                            {% if result.page > num %}
-                                {{ _self.pager(result, -num) }}
-                            {% endif %}
-                        {% endfor %}
-                        {{ _self.pager(result, 0) }}
-                        {% for num in 1..3 %}
-                            {% if result.page + num <= max %}
-                                {{ _self.pager(result, num) }}
-                            {% endif %}
-                        {% endfor %}
-                        {% if result.page < max %}
-                            {{ _self.pager(result, 1, '&raquo;') }}
-                        {% endif %}
-                    </ul>
+                    </div>
                 </div>
             {% endif %}
         </div>

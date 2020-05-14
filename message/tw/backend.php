@@ -20,6 +20,8 @@ return [
 
     'export' => '匯出',
 
+    'list.rows' => '共 {{ result.count|number_format }} 筆資料',
+
     'logout' => '登出',
 
     'new' => '新增',
