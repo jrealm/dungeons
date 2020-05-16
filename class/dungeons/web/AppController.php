@@ -37,7 +37,8 @@ class AppController extends MemberController {
     protected function authorize() {
         if (parent::authorize()) {
             $node = $this->getMenuName();
-            $menu = @$this->loadMenus()[$node];
+            $menus = $this->loadMenus();
+            $menu = @$menus[$node];
 
             if ($menu) {
                 $this->menu($menu)->node($node);

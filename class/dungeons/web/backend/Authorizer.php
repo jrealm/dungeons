@@ -11,7 +11,8 @@ trait Authorizer {
     private $permissions;
 
     public function hasPermission($node) {
-        $menu = @$this->loadMenus()[$node];
+        $menus = $this->loadMenus();
+        $menu = @$menus[$node];
 
         if ($menu) {
             $user = $this->user();
