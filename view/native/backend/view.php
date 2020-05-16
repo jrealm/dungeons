@@ -9,7 +9,7 @@ $result['path'] = $node;
 
 //--
 
-$buttons = [];
+$buttons = $controller->buttons() ?? [];
 
 $buttons[] = [
     'class' => Config::get('backend.edit.cancel.button'),

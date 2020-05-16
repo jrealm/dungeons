@@ -5,7 +5,7 @@
     <div class="d-flex">
         <div class="flex-grow-1">
             <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %}{% if style.multiple %} multiple{% endif %} name="{{ style.name }}" style="width: 100%;">
-                {% if not style.required %}
+                {% if not style.required or value is null %}
                     <option value="">&nbsp;</option>
                 {% endif %}
                 {% if style.multiple %}

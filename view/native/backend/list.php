@@ -38,7 +38,7 @@ $controls[] = [
     'icon' => Config::get('backend.export.icon'),
     'label' => Message::get('backend.export'),
     'least' => 0,
-    'parameters' => array_intersect_key($form, array_flip(['o', 'q'])) + ['t' => $controller->exportFormat()],
+    'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q'])) + ['t' => $controller->exportFormat()],
     'path' => $path,
     'ranking' => 300,
 ];
@@ -47,7 +47,7 @@ $result['controls'] = $controls;
 
 //--
 
-$actions = [];
+$actions = $controller->actions() ?? [];
 
 if ($controller->hasPermission("{$node}/")) {
     $actions[] = [
@@ -179,18 +179,28 @@ if (!$filters) {
             continue;
         }
 
-        $column = @$style['column'];
-        $name = $style['name'];
+        if (@$style['relation'] && $style['relation']['type'] === 'association') {
+            $name = $style['relation']['column']->name();
 
-        $filter = [
-            'label' => $style['label'],
-            'name' => $name,
-            'pattern' => $column ? $column->pattern() : @$style['pattern'],
-            'search' => $column ? $column->searchStyle() : null,
-            'type' => $style['type'],
-        ];
+            $filter = [
+                'label' => $style['label'],
+                'name' => $name,
+            ];
 
-        $options = @$style['options'];
+            $options = $bundles[$name];
+        } else {
+            $column = @$style['column'];
+
+            $filter = [
+                'label' => $style['label'],
+                'name' => $style['name'],
+                'pattern' => $column ? $column->pattern() : @$style['pattern'],
+                'search' => $column ? $column->searchStyle() : null,
+                'type' => $style['type'],
+            ];
+
+            $options = @$style['options'];
+        }
 
         if ($options) {
             $filter['options'] = $options;

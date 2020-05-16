@@ -9,7 +9,7 @@ $result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->
 
 //--
 
-$buttons = [];
+$buttons = $controller->buttons() ?? [];
 
 $buttons[] = [
     'class' => Config::get('backend.new.cancel.button'),

@@ -15,6 +15,23 @@
         anchor.click();
     };
 
+    var build = function (href, extra, excludes) {
+        var data = parse(href);
+        var parameters = [];
+
+        $.each($.extend(data.parameters, extra), function (name, value) {
+            if (!excludes || excludes.indexOf(name) < 0) {
+                parameters.push(name + "=" + encodeURIComponent(value));
+            }
+        });
+
+        if (parameters.length) {
+            return data.url + "?" + parameters.join("&");
+        } else {
+            return data.url;
+        }
+    };
+
     var combine = function (data, name, value) {
         if (empty(value)) {
             value = null;
@@ -124,6 +141,27 @@
             }
         };
     }());
+
+    var parse = function (href) {
+        var parameters = {};
+        var url;
+
+        $.each(href.split(/[?&]/), function (index, text) {
+            if (index) {
+                index = text.indexOf("=");
+
+                if (index < 0) {
+                    parameters[text] = "";
+                } else {
+                    parameters[text.substring(0, index)] = decodeURIComponent(text.substring(index + 1));
+                }
+            } else {
+                url = text;
+            }
+        });
+
+        return {parameters, url};
+    };
 
     var perform = function (path, parameters, options) {
         overlay.show();
@@ -437,7 +475,7 @@
         backward($(event.currentTarget).data("backward"));
     }).delegate("button[data-search]", "click", function (event) {
         var form = serialize($(event.currentTarget).data("form"));
-        var path = history.state.path.replace(/(\?.*)/, "");
+        var path = history.state.path;
         var search = {};
 
         $.each(Object.keys(form), function (ignore, name) {
@@ -449,7 +487,9 @@
         });
 
         if (Object.keys(search).length) {
-            path += "?q=" + encode(JSON.stringify(search));
+            path = build(path, {q: encode(JSON.stringify(search))}, ["p"]);
+        } else {
+            path = build(path, {}, ["p", "q"]);
         }
 
         redirect({path});
