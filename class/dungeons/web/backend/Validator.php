@@ -37,6 +37,24 @@ trait Validator {
                     if ($this->table()->model()->count($condition)) {
                         $errors[] = ['name' => $name, 'type' => 'duplicated'];
                     }
+                } else {
+                    $alias = $column->association();
+
+                    if ($alias) {
+                        $relation = $this->table()->getRelations()[$alias];
+
+                        if (empty($relation['enable'])) {
+                            $foreign = table($relation['foreign']);
+                            $target = $foreign->{$relation['target']};
+                        } else {
+                            $foreign = $relation['foreign'];
+                            $target = $relation['target'];
+                        }
+
+                        if (!$foreign->model()->count([$target->equal($value)])) {
+                            $errors[] = ['name' => $name, 'type' => 'not-found'];
+                        }
+                    }
                 }
             }
         }

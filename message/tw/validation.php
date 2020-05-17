@@ -14,6 +14,8 @@ return [
 
     'integer' => '資料格式錯誤',
 
+    'not-found' => '查無資料',
+
     'required' => '必填',
 
     'timestamp' => '時間格式錯誤',
