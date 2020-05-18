@@ -67,171 +67,177 @@
     {% if result.data is not null %}
         <div class="card">
             {% block content_title %}{% endblock %}
-            <div class="card-body p-0">
-                <div class="d-xl-flex mx-2">
-                    <div class="mt-2">
-                        {% if result.groups %}
-                            <div class="btn-group mr-1">
-                                <button type="button" class="btn btn-default">{{ i18n('options/list-group.' ~ form.g|default(0)) }}</button>
-                                <button type="button" class="btn btn-default dropdown-icon dropdown-toggle" data-toggle="dropdown"></button>
-                                <div class="dropdown-menu">
-                                    {% for group in result.groups %}
-                                        {% set path = build(result.path, result.parameters, {g: group ?: null}) %}
-                                        <a class="dropdown-item" data-ajax href="{{ path }}">{{ i18n('options/list-group.' ~ group) }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="mt-2">
-                        {% if result.simple_filters %}
-                            <div class="d-flex" id="_{{ formId }}">
-                                <div class="mr-1">
-                                    <select class="form-control select2bs4" data-search style="min-width:10rem;">
-                                        {% for input in result.simple_filters %}
-                                            <option value="{{ input.name }}"{% if input.selected %} selected{% endif %}>{{ input.label }}</option>
+            {% block content_filter %}
+                <div class="card-body p-0">
+                    <div class="d-xl-flex mx-2">
+                        <div class="mt-2">
+                            {% if result.groups %}
+                                <div class="btn-group mr-1">
+                                    <button type="button" class="btn btn-default">{{ i18n('options/list-group.' ~ form.g|default(0)) }}</button>
+                                    <button type="button" class="btn btn-default dropdown-icon dropdown-toggle" data-toggle="dropdown"></button>
+                                    <div class="dropdown-menu">
+                                        {% for group in result.groups %}
+                                            {% set path = build(result.path, result.parameters, {g: group ?: null}) %}
+                                            <a class="dropdown-item" data-ajax href="{{ path }}">{{ i18n('options/list-group.' ~ group) }}</a>
                                         {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="row ml-0 mr-1" style="width:24rem;">
-                                    {% for input in result.simple_filters %}
-                                        {% if input.search == 'between' %}
-                                            <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mr-1 p-0" data-name="{{ input.name }}">
-                                                {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
-                                            </div>
-                                            <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mt-1 mt-md-0 p-0" data-name="{{ input.name }}">
-                                                {% set input = input|merge({'name': '-' ~ input.name}) %}
-                                                {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
-                                            </div>
-                                        {% else %}
-                                            <div class="{% if not input.selected %}d-none{% endif %} col p-0" data-name="{{ input.name }}">
-                                                {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <div>
-                                    <button class="btn btn-default" data-form="#_{{ formId }}" data-search title="{{ i18n('backend.search') }}">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-2">
-                {% set actions = result.actions|sort((a, b) => a.ranking <=> b.ranking) %}
-                <table class="table table-hover table-responsive table-striped">
-                    <thead>
-                        <tr>
-                            <th class="w-1">#</th>
-                            {% if selectable %}
-                                <th class="w-1">
-                                    <div class="d-inline icheck-primary">
-                                        <input data-all id="_{{ selectable }}" type="checkbox"><label for="_{{ selectable }}"></label>
                                     </div>
-                                </th>
+                                </div>
                             {% endif %}
-                            {% if actions %}
-                                <th class="w-1">{{ i18n('backend.operation') }}</th>
-                            {% endif %}
-                            {% for style in result.styles %}
-                                <th>
-                                    {% if style.unordered %}
-                                        {{ style.label }}
-                                    {% else %}
-                                        {% if not result.orders[style.name] %}
-                                            {% set icon, order = 'fas fa-sort', style.name %}
-                                        {% elseif result.orders[style.name] > 0 %}
-                                            {% set icon, order = 'fas fa-sort-up', '-' ~ style.name %}
-                                        {% else %}
-                                            {% set icon, order = 'fas fa-sort-down', null %}
-                                        {% endif %}
-                                        <a data-ajax href="{{ build(result.path, result.parameters, {o: order}) }}">{{ style.label }}<i class="{{ icon }} ml-2"></i></a>
-                                    {% endif %}
-                                </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% set num, total = (result.page - 1) * result.size, {} %}
-                        {% for data in result.data %}
-                            <tr>
-                                <td>{{ num + loop.index }}</td>
-                                {% if selectable %}
-                                    <td>
-                                        <div class="d-inline icheck-primary">
-                                            <input data-id="{{ data.id }}" id="_{{ selectable }}_{{ data.id }}" type="checkbox"><label for="_{{ selectable }}_{{ data.id }}"></label>
-                                        </div>
-                                    </td>
-                                {% endif %}
-                                {% if actions %}
-                                    <td>
-                                        {% for action in actions %}
-                                            {% if action.method %}
-                                                <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label }}">
-                                                    <i class="{{ action.icon }}"></i>
-                                                </button>
+                        </div>
+                        <div class="mt-2">
+                            {% if result.simple_filters %}
+                                <div class="d-flex" id="_{{ formId }}">
+                                    <div class="mr-1">
+                                        <select class="form-control select2bs4" data-search style="min-width:10rem;">
+                                            {% for input in result.simple_filters %}
+                                                <option value="{{ input.name }}"{% if input.selected %} selected{% endif %}>{{ input.label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="row ml-0 mr-1" style="width:24rem;">
+                                        {% for input in result.simple_filters %}
+                                            {% if input.search == 'between' %}
+                                                <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mr-1 p-0" data-name="{{ input.name }}">
+                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                                </div>
+                                                <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mt-1 mt-md-0 p-0" data-name="{{ input.name }}">
+                                                    {% set input = input|merge({'name': '-' ~ input.name}) %}
+                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                                </div>
                                             {% else %}
-                                                <a class="btn {{ action.class }}" data-ajax href="{{ build(controller.node ~ '/' ~ data.id, result.backward) }}" title="{{ action.label }}">
-                                                    <i class="{{ action.icon }}"></i>
-                                                </a>
+                                                <div class="{% if not input.selected %}d-none{% endif %} col p-0" data-name="{{ input.name }}">
+                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                                </div>
                                             {% endif %}
                                         {% endfor %}
-                                    </td>
-                                {% endif %}
-                                {% for style in result.styles %}
-                                    {% if style.column.subTotal and data[style.name] %}
-                                        {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
-                                    {% endif %}
-                                    <td data-column="{{ style.name }}">
-                                        {% include 'backend/component/' ~ style.type ~ '.twig' with {'controller': controller, 'data': data, 'style': style} only %}
-                                    </td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                        {% block subtotal %}
-                            {% if total %}
-                                <tr>
-                                    <td class="text-center" colspan="{{ (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('backend.subtotal') }}</td>
-                                    {% for style in result.styles %}
-                                        <td>{{ total[style.name] }}</td>
-                                    {% endfor %}
-                                </tr>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-default" data-form="#_{{ formId }}" data-search title="{{ i18n('backend.search') }}">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             {% endif %}
-                        {% endblock %}
-                        {% if not result.data %}
-                            <tr><td class="text-center" colspan="{{ result.styles|length + (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('error.DataNotFound') }}</td></tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-            {% if result.count %}
-                <div class="align-items-center card-footer d-flex">
-                    <span class="text-muted">
-                        {{ include(template_from_string(i18n('backend.list.rows'))) }}
-                    </span>
-                    <div class="ml-auto">
-                        {% if result.count > result.size and result.size > 0 %}
-                            <ul class="mb-0 pagination">
-                                {% set from, max, to = result.page - 3, (result.count / result.size)|round(0, 'ceil'), result.page + 3 %}
-                                {% if result.page > 1 %}
-                                    {{ _self.pager(result, -1, '&laquo;') }}
-                                {% endif %}
-                                {% for num in from..to %}
-                                    {% if 1 <= num and num <= max %}
-                                        {{ _self.pager(result, num - result.page) }}
-                                    {% endif %}
-                                {% endfor %}
-                                {% if result.page < max %}
-                                    {{ _self.pager(result, 1, '&raquo;') }}
-                                {% endif %}
-                            </ul>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
-            {% endif %}
+            {% endblock %}
+            {% block content_body %}
+                <div class="card-body p-2">
+                    {% set actions = result.actions|sort((a, b) => a.ranking <=> b.ranking) %}
+                    <table class="table table-hover table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th class="w-1">#</th>
+                                {% if selectable %}
+                                    <th class="w-1">
+                                        <div class="d-inline icheck-primary">
+                                            <input data-all id="_{{ selectable }}" type="checkbox"><label for="_{{ selectable }}"></label>
+                                        </div>
+                                    </th>
+                                {% endif %}
+                                {% if actions %}
+                                    <th class="w-1">{{ i18n('backend.operation') }}</th>
+                                {% endif %}
+                                {% for style in result.styles %}
+                                    <th>
+                                        {% if style.unordered %}
+                                            {{ style.label }}
+                                        {% else %}
+                                            {% if not result.orders[style.name] %}
+                                                {% set icon, order = 'fas fa-sort', style.name %}
+                                            {% elseif result.orders[style.name] > 0 %}
+                                                {% set icon, order = 'fas fa-sort-up', '-' ~ style.name %}
+                                            {% else %}
+                                                {% set icon, order = 'fas fa-sort-down', null %}
+                                            {% endif %}
+                                            <a data-ajax href="{{ build(result.path, result.parameters, {o: order}) }}">{{ style.label }}<i class="{{ icon }} ml-2"></i></a>
+                                        {% endif %}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set num, total = (result.page - 1) * result.size, {} %}
+                            {% for data in result.data %}
+                                <tr>
+                                    <td>{{ num + loop.index }}</td>
+                                    {% if selectable %}
+                                        <td>
+                                            <div class="d-inline icheck-primary">
+                                                <input data-id="{{ data.id }}" id="_{{ selectable }}_{{ data.id }}" type="checkbox"><label for="_{{ selectable }}_{{ data.id }}"></label>
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                    {% if actions %}
+                                        <td>
+                                            {% for action in actions %}
+                                                {% if action.method %}
+                                                    <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label }}">
+                                                        <i class="{{ action.icon }}"></i>
+                                                    </button>
+                                                {% else %}
+                                                    <a class="btn {{ action.class }}" data-ajax href="{{ build(controller.node ~ '/' ~ data.id, result.backward) }}" title="{{ action.label }}">
+                                                        <i class="{{ action.icon }}"></i>
+                                                    </a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    {% endif %}
+                                    {% for style in result.styles %}
+                                        {% if style.column.subTotal and data[style.name] %}
+                                            {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
+                                        {% endif %}
+                                        <td data-column="{{ style.name }}">
+                                            {% include 'backend/component/' ~ style.type ~ '.twig' with {'controller': controller, 'data': data, 'style': style} only %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            {% block subtotal %}
+                                {% if total %}
+                                    <tr>
+                                        <td class="text-center" colspan="{{ (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('backend.subtotal') }}</td>
+                                        {% for style in result.styles %}
+                                            <td>{{ total[style.name] }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endif %}
+                            {% endblock %}
+                            {% if not result.data %}
+                                <tr><td class="text-center" colspan="{{ result.styles|length + (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endblock %}
+            {% block content_pager %}
+                {% if result.count %}
+                    <div class="align-items-center card-footer d-flex">
+                        <span class="text-muted">
+                            {{ include(template_from_string(i18n('backend.list.rows'))) }}
+                        </span>
+                        <div class="ml-auto">
+                            {% if result.count > result.size and result.size > 0 %}
+                                <ul class="mb-0 pagination">
+                                    {% set from, max, to = result.page - 3, (result.count / result.size)|round(0, 'ceil'), result.page + 3 %}
+                                    {% if result.page > 1 %}
+                                        {{ _self.pager(result, -1, '&laquo;') }}
+                                    {% endif %}
+                                    {% for num in from..to %}
+                                        {% if 1 <= num and num <= max %}
+                                            {{ _self.pager(result, num - result.page) }}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if result.page < max %}
+                                        {{ _self.pager(result, 1, '&raquo;') }}
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
         </div>
     {% endif %}
 {% endblock %}

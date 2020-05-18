@@ -185,6 +185,7 @@ if (!$filters) {
             $filter = [
                 'label' => $style['label'],
                 'name' => $name,
+                'type' => null,
             ];
 
             $options = $bundles[$name];
