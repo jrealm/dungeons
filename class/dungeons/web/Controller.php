@@ -17,9 +17,9 @@ class Controller extends AbstractController {
 
         case 'POST':
             if (preg_match('/^application\/json$/i', @$_SERVER['CONTENT_TYPE'])) {
-                return $this->wrapJson();
+                return array_merge($this->wrapGet(), $this->wrapJson());
             } else {
-                return $this->wrapPost();
+                return array_merge($this->wrapGet(), $this->wrapPost());
             }
 
         default:

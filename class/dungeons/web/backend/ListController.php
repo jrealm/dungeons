@@ -80,7 +80,7 @@ class ListController extends BackendController {
     }
 
     protected function wrap() {
-        $form = $this->wrapGet();
+        $form = parent::wrap();
         $search = @$form['q'];
 
         if ($search) {
@@ -140,7 +140,7 @@ class ListController extends BackendController {
             }
         }
 
-        return array_merge($this->wrapJson(), $form);
+        return $form;
     }
 
     private function groupFilter($group) {

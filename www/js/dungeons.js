@@ -256,14 +256,14 @@
         }
     };
 
-    var redirect = function (state, replace) {
+    var redirect = function (state, replace, parameters) {
         if (replace) {
             history.replaceState(state, "", state.path);
         } else {
             history.pushState(state, "", state.path);
         }
 
-        perform(state.path, {});
+        perform(state.path, parameters || {});
     };
 
     var saveMenu = function () {
@@ -474,12 +474,13 @@
     }).delegate("button[data-backward]", "click", function (event) {
         backward($(event.currentTarget).data("backward"));
     }).delegate("button[data-search]", "click", function (event) {
-        var form = serialize($(event.currentTarget).data("form"));
+        var form = $(event.currentTarget).data("form");
+        var data = serialize(form);
         var path = history.state.path;
         var search = {};
 
-        $.each(Object.keys(form), function (ignore, name) {
-            var value = $.trim(form[name]);
+        $.each(Object.keys(data), function (ignore, name) {
+            var value = $.trim(data[name]);
 
             if (value) {
                 search[name] = encodeURIComponent(value);
@@ -492,7 +493,7 @@
             path = build(path, {}, ["p", "q"]);
         }
 
-        redirect({path});
+        redirect({path}, false, {"form-id": form});
     }).delegate("input[data-all][type=checkbox]", "change", function (event) {
         var list = $("input[data-id][type=checkbox]");
 
