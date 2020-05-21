@@ -21,7 +21,11 @@ abstract class Column extends ValueObject {
             'filter' => $filter,
         ]);
 
-        return $this->association($alias)->invisible($super);
+        if ($super) {
+            $this->invisible(true);
+        }
+
+        return $this->association($alias);
     }
 
     public function between($from, $to) {

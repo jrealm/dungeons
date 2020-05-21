@@ -109,7 +109,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 
     $style = [
         'column' => $column,
-        'label' => $labels[$name] ?? "[{$name}]",
+        'label' => $labels[$name] ?? $column->label() ?? "[{$name}]",
         'name' => $name,
         'relation' => $column->relation(),
         'type' => $column->listStyle(),
@@ -143,7 +143,7 @@ $filters = [];
 
 foreach ($controller->filters() ?? [] as $name => $column) {
     $filter = [
-        'label' => $labels[$name] ?? "[{$name}]",
+        'label' => $labels[$name] ?? $column->label() ?? "[{$name}]",
         'name' => $name,
         'pattern' => $column->pattern(),
         'search' => $column->searchStyle(),
@@ -179,13 +179,12 @@ if (!$filters) {
             continue;
         }
 
-        if (@$style['relation'] && $style['relation']['type'] === 'association') {
+        if (@$style['relation'] && $style['relation']['type'] === 'association' && $style['column']->delegation()) {
             $name = $style['relation']['column']->name();
 
             $filter = [
                 'label' => $style['label'],
                 'name' => $name,
-                'type' => null,
             ];
 
             $options = $bundles[$name];
@@ -203,7 +202,7 @@ if (!$filters) {
             $options = @$style['options'];
         }
 
-        if ($options) {
+        if (is_array($options)) {
             $filter['options'] = $options;
             $filter['search'] = null;
             $filter['type'] = 'select';
