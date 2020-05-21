@@ -507,6 +507,13 @@
         $("input[data-all][type=checkbox]").prop("checked", list.length === checked.length);
 
         toggleControls(checked);
+    }).delegate("select[data-ajax]", "change", function (event) {
+        var parameters = {};
+        var select = $(event.currentTarget);
+        parameters[select.attr("name")] = select.val();
+        perform(select.data("ajax"), parameters);
+    }).delegate("select[name=p]", "change", function (event) {
+        redirect({path: build(history.state.path, {p: $(event.currentTarget).val()})});
     }).ready(function () {
         $("ul[data-widget=treeview]").on("collapsed.lte.treeview expanded.lte.treeview", saveMenu);
 

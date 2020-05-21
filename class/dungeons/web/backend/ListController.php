@@ -41,8 +41,10 @@ class ListController extends BackendController {
             $page = 1;
             $size = 0;
         } else {
+            $setting = $this->loadSetting();
+
             $page = $this->positive_integer(@$form['p'], 1);
-            $size = $this->positive_integer(@$form['s'], 10);
+            $size = $this->positive_integer(@$form['s'], $setting['pageSize'] ?? 10);
         }
 
         $orders = preg_split('/[, ]/', @$form['o'], 0, PREG_SPLIT_NO_EMPTY);
@@ -65,6 +67,11 @@ class ListController extends BackendController {
             $model = $this->table()->model();
 
             $count = $model->count($form);
+
+            if ($count <= ($page - 1) * $size) {
+                $page = intval(ceil($count / $size));
+            }
+
             $data = $count ? $model->query($form, $orders ?: true, $size, $page) : [];
         }
 

@@ -1,6 +1,6 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set breadcrumbs, conditions, description, formId, title = result.breadcrumbs, controller.conditions, result.sub_title, random(), controller.menu().title %}
+{% set breadcrumbs, conditions, description, formId, max, title = result.breadcrumbs, controller.conditions, result.sub_title, random(), 0, controller.menu().title %}
 
 {% block header %}
     {% include 'backend/header.twig' %}
@@ -213,24 +213,25 @@
             {% endblock %}
             {% block content_pager %}
                 {% if result.count %}
-                    <div class="align-items-center card-footer d-flex">
-                        <span class="text-muted">
+                    {% set max = (result.count / result.size)|round(0, 'ceil') %}
+                    <div class="card-footer">
+                        <div class="float-left my-2 text-muted">
                             {{ include(template_from_string(i18n('backend.list.rows'))) }}
-                        </span>
-                        <div class="ml-auto">
+                        </div>
+                        <div class="float-right">
                             {% if result.count > result.size and result.size > 0 %}
                                 <ul class="mb-0 pagination">
-                                    {% set from, max, to = result.page - 3, (result.count / result.size)|round(0, 'ceil'), result.page + 3 %}
-                                    {% if result.page > 1 %}
-                                        {{ _self.pager(result, -1, '&laquo;') }}
+                                    {% set from, to = result.page - 2, result.page + 2 %}
+                                    {% if from > 1 %}
+                                        {{ _self.pager(result, 1 - result.page, '&laquo;') }}
                                     {% endif %}
                                     {% for num in from..to %}
                                         {% if 1 <= num and num <= max %}
                                             {{ _self.pager(result, num - result.page) }}
                                         {% endif %}
                                     {% endfor %}
-                                    {% if result.page < max %}
-                                        {{ _self.pager(result, 1, '&raquo;') }}
+                                    {% if to < max %}
+                                        {{ _self.pager(result, max - result.page, '&raquo;') }}
                                     {% endif %}
                                 </ul>
                             {% endif %}
@@ -248,6 +249,27 @@
     initForm($("#_{{ formId }}"));
 {% endblock %}
 
+{% block page %}
+    <select name="p">
+        {% for page in 1..max %}
+            <option{% if result.page == page %} selected{% endif %} value="{{ page }}">{{ page }}</option>
+        {% endfor %}
+    </select>
+    / {{ max }}
+{% endblock %}
+
+{% block page_size %}
+    {% set sizes = [10, 20, 30, 50, 100] %}
+    <select data-ajax="user/change-page-size" name="s">
+        {% for size in sizes %}
+            <option{% if result.size == size %} selected{% endif %} value="{{ size }}">{{ size }}</option>
+        {% endfor %}
+        {% if result.size not in sizes %}
+            <option selected value="{{ result.count }}">{{ result.count }}</option>
+        {% endif %}
+    </select>
+{% endblock %}
+
 {% macro pager(data, diff, label) %}
     {% set page = data.page + diff %}
     {% if page == 1 %}
@@ -255,5 +277,5 @@
     {% else %}
         {% set path = build(data.path, data.parameters, {p: page}) %}
     {% endif %}
-    <li class="page-item{% if not diff %} active{% endif %}"><a class="page-link" data-ajax href="{{ path }}">{{ label|default(page)|raw }}</a></li>
+    <li class="page-item{% if not diff %} active{% endif %}"><a class="page-link px-2" data-ajax href="{{ path }}">{{ label|default(page)|raw }}</a></li>
 {% endmacro %}

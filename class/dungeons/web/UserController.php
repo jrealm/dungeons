@@ -44,4 +44,16 @@ class UserController extends Controller {
         return false;
     }
 
+    protected function loadSetting() {
+        if (defined('APP_DATA')) {
+            $file = APP_DATA . 'setting/' . $this->user()['id'];
+
+            if (is_file($file) && is_readable($file)) {
+                return json_decode(file_get_contents($file), true);
+            }
+        }
+
+        return [];
+    }
+
 }

@@ -20,7 +20,7 @@ return [
 
     'export' => '匯出',
 
-    'list.rows' => '共 {{ result.count|number_format }} 筆資料',
+    'list.rows' => '共 {{ result.count }} 筆資料，第 {{ block("page", "backend/list.twig") }} 頁，每頁 {{ block("page_size", "backend/list.twig") }} 筆',
 
     'logout' => '登出',
 
