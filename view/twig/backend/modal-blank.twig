@@ -9,7 +9,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{ (result.breadcrumbs | reverse)[1].title }}</h4>
+                    <h4 class="modal-title">{{ (result.breadcrumbs|reverse)[1].title }}</h4>
                     <button class="close" data-dismiss="modal">
                         <span>&times;</span>
                     </button>
@@ -19,7 +19,7 @@
                     <input name="form-type" type="hidden" value="modal">
                 </div>
                 <div class="justify-content-end modal-footer">
-                    {% for button in result.buttons | sort((a, b) => a.ranking <=> b.ranking) %}
+                    {% for button in result.buttons|sort((a, b) => a.ranking <=> b.ranking) %}
                         {% if button.method == 'cancel' %}
                             <button class="btn {{ button.class }}" data-dismiss="modal">{{ button.label }}</button>
                         {% else %}

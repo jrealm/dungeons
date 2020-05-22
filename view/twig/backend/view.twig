@@ -14,7 +14,7 @@
         </div>
         {% if result.buttons %}
             <div class="card-footer text-right">
-            {% for button in result.buttons | sort((a, b) => a.ranking <=> b.ranking) %}
+            {% for button in result.buttons|sort((a, b) => a.ranking <=> b.ranking) %}
                 {% if button.method == 'cancel' %}
                     <button class="btn {{ button.class }}" data-backward="{{ form.r }}">{{ button.label }}</button>
                 {% else %}

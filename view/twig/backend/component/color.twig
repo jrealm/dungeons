@@ -6,7 +6,7 @@
     </div>
 {% else %}
     <div class="input-group" data-format="color">
-        <input class="{{ class }}"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" placeholder="{{ style.remark }}" type="text" value="{{ data[style.name] }}">
+        {% include 'backend/component/input.twig' with {type: 'text'} %}
         <div class="color-picker input-group-append">
             <span class="input-group-text">&nbsp;&nbsp;&nbsp;</span>
         </div>

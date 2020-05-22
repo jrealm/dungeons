@@ -42,15 +42,15 @@
                                     {% if input.search == 'between' %}
                                         {% set classes = input.type == 'timestame' ? 'col-12 col-sm-6' : 'col' %}
                                         <div class="{{ classes }} mb-2 pl-0">
-                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {data: conditions, style: input} only %}
                                         </div>
-                                        {% set input = input|merge({'name': '-' ~ input.name}) %}
+                                        {% set input = input|merge({name: '-' ~ input.name}) %}
                                         <div class="{{ classes }} mb-2 pl-0">
-                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {data: conditions, style: input} only %}
                                         </div>
                                     {% else %}
                                         <div class="col mb-2 pl-0">
-                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                            {% include 'backend/component/' ~ input.type ~ '.twig' with {data: conditions, style: input} only %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -98,15 +98,15 @@
                                         {% for input in result.simple_filters %}
                                             {% if input.search == 'between' %}
                                                 <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mr-1 p-0" data-name="{{ input.name }}">
-                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {data: conditions, style: input} only %}
                                                 </div>
                                                 <div class="{% if not input.selected %}d-none{% endif %} col-12 col-md mt-1 mt-md-0 p-0" data-name="{{ input.name }}">
-                                                    {% set input = input|merge({'name': '-' ~ input.name}) %}
-                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                                    {% set input = input|merge({name: '-' ~ input.name}) %}
+                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {data: conditions, style: input} only %}
                                                 </div>
                                             {% else %}
                                                 <div class="{% if not input.selected %}d-none{% endif %} col p-0" data-name="{{ input.name }}">
-                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {'class': 'form-control', 'data': conditions, 'style': input} only %}
+                                                    {% include 'backend/component/' ~ input.type ~ '.twig' with {data: conditions, style: input} only %}
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -125,7 +125,7 @@
             {% block content_body %}
                 <div class="card-body p-2">
                     {% set actions = result.actions|sort((a, b) => a.ranking <=> b.ranking) %}
-                    <table class="table table-hover table-responsive table-striped">
+                    <table class="table table-hover table-responsive table-striped" id="_{{ formId }}_table">
                         <thead>
                             <tr>
                                 <th class="w-1">#</th>
@@ -189,7 +189,7 @@
                                             {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
                                         {% endif %}
                                         <td data-column="{{ style.name }}">
-                                            {% include 'backend/component/' ~ style.type ~ '.twig' with {'controller': controller, 'data': data, 'style': style} only %}
+                                            {% include 'backend/component/' ~ style.type ~ '.twig' with {controller: controller, data: data, grid: true, style: style} only %}
                                         </td>
                                     {% endfor %}
                                 </tr>
@@ -210,6 +210,13 @@
                         </tbody>
                     </table>
                 </div>
+                {% if result.buttons %}
+                    <div class="card-body p-2 text-right">
+                        {% for button in result.buttons|sort((a, b) => a.ranking <=> b.ranking) %}
+                            <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}" data-form="#_{{ formId }}_table">{{ button.label }}</button>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             {% endblock %}
             {% block content_pager %}
                 {% if result.count %}
@@ -246,7 +253,7 @@
 {% block postprocess %}
     {{ parent() }}
 
-    initForm($("#_{{ formId }}"));
+    initForm($("#_{{ formId }}, #_{{ formId }}_table"));
 {% endblock %}
 
 {% block page %}
@@ -260,13 +267,13 @@
 
 {% block page_size %}
     {% set sizes = [10, 20, 30, 50, 100] %}
+    {% if result.size not in sizes %}
+        {% set sizes = sizes|merge([result.size])|sort %}
+    {% endif %}
     <select data-reaction="user/change-page-size" name="s">
         {% for size in sizes %}
             <option{% if result.size == size %} selected{% endif %} value="{{ size }}">{{ size }}</option>
         {% endfor %}
-        {% if result.size not in sizes %}
-            <option selected value="{{ result.count }}">{{ result.count }}</option>
-        {% endif %}
     </select>
 {% endblock %}
 

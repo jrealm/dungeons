@@ -1,5 +1,5 @@
 {% if style.readonly %}
     <div class="py-2">{{ data[style.name] }}</div>
 {% else %}
-    <input class="{{ class }}" data-format="date" data-pattern="{{ datetime_format(style.pattern) }}"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" placeholder="{{ style.placeholder }}" type="text" value="{{ data[style.name] }}">
+    {% include 'backend/component/input.twig' with {format: 'date', pattern: datetime_format(style.pattern), type: 'text'} %}
 {% endif %}

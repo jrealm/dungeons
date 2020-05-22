@@ -38,7 +38,7 @@ $controls[] = [
     'icon' => Config::get('backend.export.icon'),
     'label' => Message::get('backend.export'),
     'least' => 0,
-    'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q'])) + ['t' => $controller->exportFormat()],
+    'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q', 's'])) + ['t' => $controller->exportFormat()],
     'path' => $path,
     'ranking' => 300,
 ];
@@ -59,6 +59,10 @@ if ($controller->hasPermission("{$node}/")) {
 }
 
 $result['actions'] = $actions;
+
+//--
+
+$result['buttons'] = $controller->buttons() ?? [];
 
 //--
 
@@ -117,7 +121,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     ];
 
     if (empty($style['type'])) {
-        $style['readonly'] = true;
+        $style['readonly'] = !$column->editable();
         $style['type'] = $column->formStyle();
 
         if ($style['type'] === 'hidden') {
@@ -234,7 +238,7 @@ if (!$filters) {
 
 //--
 
-$result['parameters'] = array_intersect_key($form, array_flip(['g', 'o', 'p', 'q']));
+$result['parameters'] = array_intersect_key($form, array_flip(['g', 'o', 'p', 'q', 's']));
 
 if ($result['parameters']) {
     $result['backward'] = ['r' => base64_urlencode(http_build_query($result['parameters']))];

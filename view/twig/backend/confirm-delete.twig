@@ -29,7 +29,7 @@
 
     modal.on("hidden.bs.modal", function () {
         if (modal.data("submit")) {
-            perform("{{ controller.node }}", {args: {{ result.args | json_encode | raw }}, confirm: 1});
+            perform("{{ controller.node }}", {args: {{ result.args|json_encode|raw }}, confirm: 1});
         }
 
         modal.remove();

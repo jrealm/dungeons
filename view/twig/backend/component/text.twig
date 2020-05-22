@@ -1,5 +1,5 @@
 {% if style.readonly %}
     <div class="py-2">{{ data[style.name] }}</div>
 {% else %}
-    <input class="{{ class }}"{% if style.disabled %} disabled{% endif %} name="{{ style.name }}" placeholder="{{ style.placeholder }}" type="text" value="{{ data[style.name] }}">
+    {% include 'backend/component/input.twig' with {type: 'text'} %}
 {% endif %}

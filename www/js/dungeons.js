@@ -282,8 +282,9 @@
 
     var serialize = function (expression) {
         var data = {};
+        var form = $(expression);
 
-        $(expression).find("input,select,textarea").each(function (ignore, element) {
+        form.find("input,select,textarea").each(function (ignore, element) {
             if (element.name) {
                 switch (element.type) {
                 case "checkbox":
@@ -308,6 +309,28 @@
                 combine(data, element.name, element.value);
             }
         });
+
+        if (form.is("table")) {
+            var list = {};
+
+            $.each(Object.keys(data), function (ignore, name) {
+                var tokens = name.split("@");
+
+                if (tokens.length === 2) {
+                    var id = tokens[1];
+
+                    if (!list[id]) {
+                        list[id] = {id};
+                    }
+
+                    list[id][tokens[0]] = data[name];
+
+                    delete data[name];
+                }
+            });
+
+            data.list = list;
+        }
 
         return data;
     };

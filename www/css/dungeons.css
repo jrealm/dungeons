@@ -4,6 +4,10 @@ td, th {
     white-space: nowrap;
 }
 
+td input[type=number] {
+    min-width: 8rem;
+}
+
 th a, th:hover a {
     color: inherit;
 }
