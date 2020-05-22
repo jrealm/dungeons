@@ -260,7 +260,7 @@
 
 {% block page_size %}
     {% set sizes = [10, 20, 30, 50, 100] %}
-    <select data-ajax="user/change-page-size" name="s">
+    <select data-reaction="user/change-page-size" name="s">
         {% for size in sizes %}
             <option{% if result.size == size %} selected{% endif %} value="{{ size }}">{{ size }}</option>
         {% endfor %}

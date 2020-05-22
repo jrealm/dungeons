@@ -507,11 +507,11 @@
         $("input[data-all][type=checkbox]").prop("checked", list.length === checked.length);
 
         toggleControls(checked);
-    }).delegate("select[data-ajax]", "change", function (event) {
+    }).delegate("select[data-reaction]", "change", function (event) {
         var parameters = {};
         var select = $(event.currentTarget);
         parameters[select.attr("name")] = select.val();
-        perform(select.data("ajax"), parameters);
+        perform(select.data("reaction"), parameters);
     }).delegate("select[name=p]", "change", function (event) {
         redirect({path: build(history.state.path, {p: $(event.currentTarget).val()})});
     }).ready(function () {

@@ -31,12 +31,21 @@ class ColumnWrapper extends Column {
             $column = $this->relation['column']->expression();
             $ranking = $this->relation['foreign']->ranking() ?? $this->relation['foreign']->id();
 
-            $expr = "SELECT {$title} FROM {$foreign} WHERE {$id}::TEXT = ANY(STRING_TO_ARRAY({$column}, ',')) ORDER BY {$ranking}";
+            $expression = "SELECT {$title} FROM {$foreign} WHERE {$id}::TEXT = ANY(STRING_TO_ARRAY({$column}, ',')) ORDER BY {$ranking}";
 
-            return "(SELECT STRING_AGG(M.{$title}, ',') FROM ({$expr}) AS M)";
+            return "(SELECT STRING_AGG(M.{$title}, ',') FROM ({$expression}) AS M)";
         }
 
-        return $this->column->expression($prefix ?? $this->alias);
+        $default = $this->default();
+        $expression = $this->column->expression($prefix ?? $this->alias);
+
+        if ($default !== null) {
+            $default = var_export($default, true);
+
+            return "COALESCE({$expression}, {$default})";
+        }
+
+        return $expression;
     }
 
     public function generate($value) {

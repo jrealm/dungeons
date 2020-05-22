@@ -4,7 +4,7 @@
 {% else %}
     <div class="d-flex">
         <div class="flex-grow-1">
-            <select class="{{ class }} select2bs4"{% if style.disabled %} disabled{% endif %}{% if style.multiple %} multiple{% endif %} name="{{ style.name }}" style="width: 100%;">
+            <select class="{{ class }} select2bs4"{% if style.column.reaction %} data-reaction="{{ style.column.reaction }}"{% endif %}{% if style.disabled %} disabled{% endif %}{% if style.multiple %} multiple{% endif %} name="{{ style.name }}" style="width: 100%;">
                 {% if not style.required or value is null %}
                     <option value="">&nbsp;</option>
                 {% endif %}
