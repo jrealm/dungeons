@@ -211,7 +211,7 @@
                     </table>
                 </div>
                 {% if result.buttons %}
-                    <div class="card-body p-2 text-right">
+                    <div class="card-body p-2 text-center">
                         {% for button in result.buttons|sort((a, b) => a.ranking <=> b.ranking) %}
                             <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}" data-form="#_{{ formId }}_table">{{ button.label }}</button>
                         {% endfor %}

@@ -310,7 +310,7 @@
             }
         });
 
-        if (form.is("table")) {
+        if (form.is("table") || form.hasClass("editable-list")) {
             var list = {};
 
             $.each(Object.keys(data), function (ignore, name) {
