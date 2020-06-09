@@ -76,13 +76,13 @@ class DeleteController extends BackendController {
                 if ($relation['type'] === 'composition') {
                     if (empty($relation['enable'])) {
                         $foreign = table($relation['foreign']);
-                        $target = $foreign->{$relation['target']}->mapping();
+                        $target = $foreign->{$relation['target']}->name();
                     } else {
                         $foreign = $relation['foreign'];
-                        $target = $relation['target']->mapping();
+                        $target = $relation['target']->name();
                     }
 
-                    $column = $relation['column']->mapping();
+                    $column = $relation['column']->name();
 
                     foreach ($foreign->model()->query(["{$target}" => $data[$column]]) as $child) {
                         $child = $this->delete($foreign, $child);

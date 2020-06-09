@@ -5,7 +5,7 @@ namespace dungeons\service;
 class Funpay {
 
     public function execute($args) {
-        $data = array_intersect_key($args, array_flip(['amount', 'orderid', 'phone', 'redirect_url', 'remark', 'type', 'url', 'userid']));
+        $data = array_intersect_key($args, array_flip(['amount', 'orderid', 'phone', 'quota', 'redirect_url', 'remark', 'type', 'url', 'userid']));
 
         ksort($data);
 
