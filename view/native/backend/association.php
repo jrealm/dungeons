@@ -4,7 +4,7 @@ $bundles = [];
 $relations = [];
 
 foreach ($controller->table()->getRelations() as $relation) {
-    if ($relation['type'] === 'association' && !$relation['column']->invisible() && !$relation['column']->lazy()) {
+    if ($relation['type'] === 'association' && !$relation['column']->invisible()) {
         if (empty($relation['enable'])) {
             $foreign = table($relation['foreign']);
             $target = $foreign->{$relation['target']};
@@ -14,11 +14,14 @@ foreach ($controller->table()->getRelations() as $relation) {
         }
 
         $bundle = [];
-        $model = $foreign->model();
-        $name = $target->name();
 
-        foreach ($model->query($relation['filter']) as $data) {
-            $bundle[$data[$name]] = $model->toString($data);
+        if (!$relation['column']->lazy()) {
+            $model = $foreign->model();
+            $name = $target->name();
+
+            foreach ($model->query($relation['filter']) as $data) {
+                $bundle[$data[$name]] = $model->toString($data);
+            }
         }
 
         $bundles[$relation['column']->name()] = $bundle;
