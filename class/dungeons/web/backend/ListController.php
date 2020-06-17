@@ -16,6 +16,7 @@ class ListController extends BackendController {
         }
 
         $this->exportFormat('xlsx');
+        $this->defaultRanking(true);
         $this->view('backend/list.php');
     }
 
@@ -72,7 +73,7 @@ class ListController extends BackendController {
                 $page = intval(ceil($count / $size));
             }
 
-            $data = $count ? $model->query($form, $orders ?: true, $size, $page) : [];
+            $data = $count ? $model->query($form, $orders ?: $this->defaultRanking(), $size, $page) : [];
         }
 
         return [

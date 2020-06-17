@@ -4,7 +4,7 @@ $bundles = [];
 $relations = [];
 
 foreach ($controller->table()->getRelations() as $relation) {
-    if ($relation['type'] === 'association' && !$relation['column']->invisible()) {
+    if ($relation['type'] === 'association' && !$relation['column']->invisible() && !$relation['column']->lazy()) {
         if (empty($relation['enable'])) {
             $foreign = table($relation['foreign']);
             $target = $foreign->{$relation['target']};
