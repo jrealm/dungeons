@@ -18,8 +18,9 @@
     "require": {
         "almasaeed2010/adminlte": "^3.0",
         "filp/whoops": "^2.7",
-        "mhor/php-mediainfo": "^4.1",
+        "mhor/php-mediainfo": "^5.1",
         "monolog/monolog": "^2.0",
+        "nesbot/carbon": "^2.35",
         "phpmailer/phpmailer": "^6.1",
         "phpoffice/phpspreadsheet": "^1.12",
         "tecnickcom/tcpdf": "^6.3",
