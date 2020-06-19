@@ -27,7 +27,7 @@ class App extends AbstractApp {
             define('LANGUAGE', $info[2]);
         } else {
             define('APP_ROOT', APP_PATH);
-            define('LANGUAGE', Config::get('system.language'));
+            define('LANGUAGE', defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : Config::get('system.language'));
         }
 
         define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
