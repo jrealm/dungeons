@@ -37,6 +37,8 @@ class Funpay {
         //--
 
         if ($response === false) {
+            logger('funpay-error')->info($request);
+
             return false;
         }
 

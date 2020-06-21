@@ -70,9 +70,11 @@ class Lcpay {
 
         $context = stream_context_create($options);
 
-        $response = file_get_contents($args['url'], false, $context);
+        $response = @file_get_contents($args['url'], false, $context);
 
         if ($response === false) {
+            logger('lcpay-error')->info($request);
+
             return false;
         }
 

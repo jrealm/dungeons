@@ -12,7 +12,6 @@ $tbl->add('username', Text::class)
     ->unique(true);
 
 $tbl->add('nickname', Text::class)
-    ->required(true)
     ->unique(true);
 
 $tbl->add('password', Password::class)
