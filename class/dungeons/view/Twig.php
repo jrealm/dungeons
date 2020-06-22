@@ -22,6 +22,14 @@ class Twig {
         if (defined('APP_HOME')) {
             $path = APP_HOME . 'view/twig/';
 
+            if (defined('CUSTOM_APP')) {
+                $custom = $path . CUSTOM_APP . '/';
+
+                if (is_dir($custom)) {
+                    $paths[] = $custom;
+                }
+            }
+
             if (is_dir($path)) {
                 $paths[] = $path;
             }
