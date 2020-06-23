@@ -46,11 +46,17 @@ class UpdateBundle extends BackendController {
             return ['error' => 'error.DataNotFound'];
         }
 
-        if (!defined('APP_DATA') || create_folder(APP_DATA . $this->folder()) === false) {
+        if (!defined('APP_DATA')) {
             return ['error' => 'error.UpdateFailed'];
         }
 
-        $file = APP_DATA . $this->file();
+        $path = defined('CUSTOM_APP') ? (APP_DATA . CUSTOM_APP . '/') : APP_DATA;
+
+        if (create_folder($path . $this->folder()) === false) {
+            return ['error' => 'error.UpdateFailed'];
+        }
+
+        $file = $path . $this->file();
 
         if (file_exists($file)) {
             if (!is_file($file) || !is_writable($file)) {

@@ -8,6 +8,14 @@ class Resource {
 
     public static function find($path) {
         if (defined('APP_HOME')) {
+            if (defined('CUSTOM_APP')) {
+                $file = APP_HOME . CUSTOM_APP . '/' . $path;
+
+                if (file_exists($file)) {
+                    return $file;
+                }
+            }
+
             $file = APP_HOME . $path;
 
             if (file_exists($file)) {
@@ -18,6 +26,26 @@ class Resource {
         $file = DUNGEONS . $path;
 
         return file_exists($file) ? $file : false;
+    }
+
+    public static function getDataFile($path) {
+        if (defined('APP_DATA')) {
+            if (defined('CUSTOM_APP')) {
+                $file = APP_DATA . CUSTOM_APP . '/' . $path;
+
+                if (is_file($file)) {
+                    return $file;
+                }
+            }
+
+            $file = APP_DATA . $path;
+
+            if (is_file($file)) {
+                return $file;
+            }
+        }
+
+        return null;
     }
 
     public static function load($path, $resolve = true) {
@@ -63,7 +91,20 @@ class Resource {
 
     public static function union($path) {
         $base = self::load(DUNGEONS . $path, false);
-        $extend = defined('APP_HOME') ? self::load(APP_HOME . $path, false) : null;
+
+        if (defined('APP_HOME')) {
+            $extend = self::load(APP_HOME . $path, false);
+
+            if (defined('CUSTOM_APP')) {
+                $custom = self::load(APP_HOME . CUSTOM_APP . '/' . $path, false);
+
+                if ($custom) {
+                    $extend = $extend ? array_merge($extend, $custom) : $custom;
+                }
+            }
+        } else {
+            $extend = null;
+        }
 
         if ($base) {
             return $extend ? array_merge($base, $extend) : $base;

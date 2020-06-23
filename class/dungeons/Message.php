@@ -17,10 +17,10 @@ class Message {
             $path = 'message/' . constant('LANGUAGE') . '/' . $name;
             $bundle = Resource::union("{$path}.php");
 
-            if ($bundle && defined('APP_DATA')) {
-                $file = APP_DATA . $path;
+            if ($bundle) {
+                $file = Resource::getDataFile($path);
 
-                if (is_file($file)) {
+                if ($file) {
                     foreach (json_decode(file_get_contents($file), true) as $key => $value) {
                         if (key_exists($key, $bundle)) {
                             $bundle[$key] = $value;
