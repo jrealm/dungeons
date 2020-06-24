@@ -12,9 +12,9 @@ class Message {
         return self::load($name)[$key] ?? "{{$token}}";
     }
 
-    public static function load($name) {
+    public static function load($name, $language = null) {
         if (!key_exists($name, self::$bundles)) {
-            $path = 'message/' . constant('LANGUAGE') . '/' . $name;
+            $path = 'message/' . ($language ?? constant('LANGUAGE')) . '/' . $name;
             $bundle = Resource::union("{$path}.php");
 
             if ($bundle) {

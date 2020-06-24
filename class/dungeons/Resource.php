@@ -32,13 +32,9 @@ class Resource {
         if (defined('APP_DATA')) {
             if (defined('CUSTOM_APP')) {
                 $file = APP_DATA . CUSTOM_APP . '/' . $path;
-
-                if (is_file($file)) {
-                    return $file;
-                }
+            } else {
+                $file = APP_DATA . $path;
             }
-
-            $file = APP_DATA . $path;
 
             if (is_file($file)) {
                 return $file;
