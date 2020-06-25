@@ -202,6 +202,9 @@
         case "location":
             location.href = response.path;
             break;
+        case "open":
+            window.open(response.path);
+            break;
         case "redirect":
             if (response.message) {
                 toastr.info(response.message);
