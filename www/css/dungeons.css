@@ -24,6 +24,10 @@ th a, th:hover a {
     background-image: url(img/redox-02.png);
 }
 
+.daterangepicker select {
+    vertical-align: middle;
+}
+
 .dropdown-menu {
     min-width: 1rem;
 }

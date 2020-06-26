@@ -50,6 +50,8 @@
         }
     };
 
+    var dayNames = {tw: ["日", "一", "二", "三", "四", "五", "六"]};
+
     var destroy = function (target) {
         target.find("div[data-format=color]").each(function (ignore, element) {
             $(element).data("colorpicker").destroy();
@@ -119,6 +121,8 @@
     var execute = function (script) {
         $.globalEval("(function () {" + script + "}());");
     };
+
+    var monthNames = {tw: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]};
 
     var overlay = (function () {
         var overlays = 0;
@@ -388,7 +392,7 @@
 
             input.daterangepicker({
                 autoUpdateInput: false,
-                locale: {format: input.data("pattern")},
+                locale: {daysOfWeek: dayNames[settings.language], format: input.data("pattern"), monthNames: monthNames[settings.language]},
                 showDropdowns: true,
                 singleDatePicker: true,
                 timePicker: input.data("format").indexOf("time") >= 0,
