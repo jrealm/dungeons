@@ -15,21 +15,25 @@ class Member extends Model {
     }
 
     protected function before($type, $prev, $curr) {
-        switch ($type) {
-        case self::INSERT:
-            $encrypt = isset($curr['password']);
-            break;
-        case self::UPDATE:
-            if (isset($curr['password'])) {
-                $encrypt = ($curr['password'] !== $prev['password']);
-            } else {
-                $curr['password'] = $prev['password'];
-            }
-            break;
-        }
+        foreach (['password', 'payment_password'] as $name) {
+            $encrypt = false;
 
-        if (!empty($encrypt)) {
-            $curr['password'] = md5("{$curr['id']}::{$curr['password']}");
+            switch ($type) {
+            case self::INSERT:
+                $encrypt = isset($curr[$name]);
+                break;
+            case self::UPDATE:
+                if (isset($curr[$name])) {
+                    $encrypt = ($curr[$name] !== $prev[$name]);
+                } else {
+                    $curr[$name] = $prev[$name];
+                }
+                break;
+            }
+
+            if (!empty($encrypt)) {
+                $curr[$name] = md5("{$curr['id']}::{$curr[$name]}");
+            }
         }
 
         return $curr;

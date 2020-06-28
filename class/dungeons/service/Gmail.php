@@ -22,7 +22,7 @@ class Gmail {
         $mailer->isSMTP();
 
         $mailer->FromName = $args['from'];
-        $mailer->Subject = $args['subject'];
+        $mailer->Subject = render($args['subject'], $args);
         $mailer->Body = render($args['content'], $args);
 
         $mailer->AddAddress($args['to']);
