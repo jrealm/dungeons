@@ -28,6 +28,8 @@ return new class() extends dungeons\web\UserController {
 
         Session::set('User', $user);
 
+        model('UserLog')->insert(['user_id' => $user['id'], 'type' => 3]);
+
         return ['success' => true];
     }
 
