@@ -128,3 +128,20 @@ CREATE TABLE base_member (
     payment_password TEXT        NULL,
     disabled         BOOLEAN NOT NULL
 );
+
+CREATE TABLE base_member_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    member_id   INTEGER   NOT NULL,
+    type        INTEGER   NOT NULL, -- 1:登入, 2:登出, 3:重設密碼, 4:密碼錯誤, 5:忘記密碼, 6:重設交易密碼
+    ip          TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL
+);
+
+CREATE TABLE base_sms_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    sender      INTEGER       NULL,
+    receiver    TEXT      NOT NULL,
+    content     TEXT      NOT NULL,
+    ip          TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL
+);
