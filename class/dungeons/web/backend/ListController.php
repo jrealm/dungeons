@@ -126,7 +126,7 @@ class ListController extends BackendController {
                         $criteria->add($column->like("%{$from}%", true));
                         break;
                     case 'between':
-                        if ($from !== $to && !$column->association()) {
+                        if ($from !== $to && !$column->association() && !$column->options()) {
                             if ($from === null) {
                                 $criteria->add($column->lessThanOrEqual($to));
                             } else if ($to === null) {
