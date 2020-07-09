@@ -5,9 +5,7 @@ namespace dungeons\service;
 class MitakeSms {
 
     public function execute($args) {
-        if ($args['prefix'] !== '+886') {
-            $args['phone'] = "{$args['prefix']}{$args['phone']}";
-        }
+        $args['phone'] = $args['prefix'] . ltrim($args['phone'], '0');
 
         $response = file_get_contents(render($args['url'], $args));
 

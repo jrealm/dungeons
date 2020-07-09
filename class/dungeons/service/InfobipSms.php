@@ -5,11 +5,7 @@ namespace dungeons\service;
 class InfobipSms {
 
     public function execute($args) {
-        if ($args['prefix'] === '+886') {
-            $args['phone'] = preg_replace('/^09([\d]{8})$/', '9$1', $args['phone']);
-        }
-
-        $phone = "{$args['prefix']}{$args['phone']}";
+        $phone = $args['prefix'] . ltrim($args['phone'], '0');
         $data = json_encode(['messages' => [['destinations' => [['to' => $phone]], 'text' => $args['text']]]]);
 
         $ch = curl_init();
