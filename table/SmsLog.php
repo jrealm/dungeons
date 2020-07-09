@@ -9,8 +9,7 @@ use dungeons\db\Table;
 $tbl = new Table('base_sms_log', false);
 
 $tbl->add('sender', Creator::class)
-    ->readonly(true)
-    ->required(true);
+    ->readonly(true);
 
 $tbl->add('receiver', Text::class)
     ->readonly(true)
@@ -19,6 +18,9 @@ $tbl->add('receiver', Text::class)
 $tbl->add('content', Text::class)
     ->readonly(true)
     ->required(true);
+
+$tbl->add('response', Text::class)
+    ->readonly(true);
 
 $tbl->add('ip', RemoteAddress::class)
     ->readonly(true)

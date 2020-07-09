@@ -142,6 +142,7 @@ CREATE TABLE base_sms_log (
     sender      INTEGER       NULL,
     receiver    TEXT      NOT NULL,
     content     TEXT      NOT NULL,
+    response    TEXT          NULL,
     ip          TEXT      NOT NULL,
     create_time TIMESTAMP NOT NULL
 );
