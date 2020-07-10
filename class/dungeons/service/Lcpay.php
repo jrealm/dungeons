@@ -80,6 +80,17 @@ class Lcpay {
 
         //--
 
+        $result = json_decode($response, true);
+
+        if ($result === false) {
+            $result = [];
+        } else if (@$result['status'] !== 'success') {
+            logger('lcpay-error')->info($request);
+            logger('lcpay-error')->info($response);
+
+            return null;
+        }
+
         $result['request'] = $request;
         $result['response'] = $response;
 
