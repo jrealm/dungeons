@@ -4,8 +4,8 @@ namespace dungeons\db\criterion;
 
 class Equal extends AbstractCriterion {
 
-    public function make() {
-        return "{$this->column->expression()} = ?";
+    protected function build($expression) {
+        return "{$expression} = ?";
     }
 
 }

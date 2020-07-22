@@ -4,8 +4,8 @@ namespace dungeons\db\criterion;
 
 class NotNull extends AbstractCriterion {
 
-    public function make() {
-        return "{$this->column->expression()} IS NOT NULL";
+    protected function build($expression) {
+        return "{$expression} IS NOT NULL";
     }
 
 }

@@ -26,4 +26,16 @@ abstract class AbstractCriterion implements Criterion {
         return $bindings;
     }
 
+    public function make() {
+        $expression = $this->column->expression();
+
+        if ($this->column->multilingual()) {
+            $expression = $expression . '__' . LANGUAGE;
+        }
+
+        return $this->build($expression);
+    }
+
+    abstract protected function build($expression);
+
 }

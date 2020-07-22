@@ -4,8 +4,8 @@ namespace dungeons\db\criterion;
 
 class ILike extends AbstractCriterion {
 
-    public function make() {
-        return "LOWER({$this->column->expression()}) LIKE ?";
+    protected function build($expression) {
+        return "LOWER({$expression}) LIKE ?";
     }
 
 }

@@ -4,7 +4,7 @@ namespace dungeons\db\criterion;
 
 class NotIn extends AbstractCriterion {
 
-    public function make() {
+    protected function build($expression) {
         $count = count($this->values);
 
         switch ($count) {
@@ -12,11 +12,11 @@ class NotIn extends AbstractCriterion {
             return false;
 
         case 1:
-            return "{$this->column->expression()} <> ?";
+            return "{$expression} <> ?";
 
         default:
             $values = implode(',', array_fill(0, $count, '?'));
-            return "{$this->column->expression()} NOT IN ({$values})";
+            return "{$expression} NOT IN ({$values})";
         }
     }
 
