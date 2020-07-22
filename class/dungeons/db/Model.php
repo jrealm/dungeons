@@ -85,19 +85,14 @@ class Model {
                 continue;
             }
 
-            $value = @$data[$name];
-
-            if ($value === null) {
-                $value = $column->default();
-            } else {
-                if ($value instanceof Attachment) {
-                    $value->save();
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $prop = "{$name}__{$lang}";
+                    $data[$prop] = $this->forInsert($column, $data, $prop);
                 }
-
-                $value = $column->convert($value);
+            } else {
+                $data[$name] = $this->forInsert($column, $data, $name);
             }
-
-            $data[$name] = $column->generate($value);
         }
 
         $data = $this->before(self::INSERT, null, $data);
@@ -111,10 +106,19 @@ class Model {
                 continue;
             }
 
-            $value = $data[$name];
-            $bindings[] = $value;
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $value = $data["{$name}__{$lang}"];
+                    $bindings[] = $value;
 
-            $statement->bindValue(count($bindings), $value, $column->type());
+                    $statement->bindValue(count($bindings), $value, $column->type());
+                }
+            } else {
+                $value = $data[$name];
+                $bindings[] = $value;
+
+                $statement->bindValue(count($bindings), $value, $column->type());
+            }
         }
 
         $this->execute($statement, $bindings);
@@ -199,17 +203,14 @@ class Model {
                 continue;
             }
 
-            $value = @$data[$name];
-
-            if ($value !== null) {
-                if ($value instanceof Attachment) {
-                    $value->save();
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $prop = "{$name}__{$lang}";
+                    $data[$prop] = $this->forUpdate($column, $data, $prop);
                 }
-
-                $value = $column->convert($value);
+            } else {
+                $data[$name] = $this->forUpdate($column, $data, $name);
             }
-
-            $data[$name] = $column->regenerate($value);
         }
 
         $data = $this->before(self::UPDATE, $previous, $data);
@@ -224,10 +225,19 @@ class Model {
                 continue;
             }
 
-            $value = $data[$name];
-            $bindings[] = $value;
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $value = $data["{$name}__{$lang}"];
+                    $bindings[] = $value;
 
-            $statement->bindValue(count($bindings), $value, $column->type());
+                    $statement->bindValue(count($bindings), $value, $column->type());
+                }
+            } else {
+                $value = $data[$name];
+                $bindings[] = $value;
+
+                $statement->bindValue(count($bindings), $value, $column->type());
+            }
         }
 
         $this->execute($statement, $criteria->bind($statement, $bindings));
@@ -318,40 +328,96 @@ class Model {
         return $rows;
     }
 
+    private function cleanup($data) {
+        unset($data['.title']);
+
+        foreach ($this->table->getColumns() as $name => $column) {
+            if ($column->multilingual()) {
+                unset($data[$name]);
+            }
+        }
+
+        return $data;
+    }
+
+    private function forInsert($column, $data, $name) {
+        $value = @$data[$name];
+
+        if ($value === null) {
+            $value = $column->default();
+        } else {
+            if ($value instanceof Attachment) {
+                $value->save();
+            }
+
+            $value = $column->convert($value);
+        }
+
+        return $column->generate($value);
+    }
+
+    private function forUpdate($column, $data, $name) {
+        $value = @$data[$name];
+
+        if ($value !== null) {
+            if ($value instanceof Attachment) {
+                $value->save();
+            }
+
+            $value = $column->convert($value);
+        }
+
+        return $column->regenerate($value);
+    }
+
     private function log($prev, $curr) {
         if (!$this->table->traceable()) {
             return;
         }
 
         if ($prev) {
+            $prev = $this->cleanup($prev);
             $dataId = $prev['id'];
 
             if ($curr) {
                 $diff = [];
 
                 foreach ($this->table->getColumns() as $name => $column) {
-                    if ($column->pseudo() || $column->readonly() || $prev[$name] === $curr[$name]) {
+                    if ($column->pseudo() || $column->readonly()) {
                         continue;
                     }
 
-                    $diff[$name] = $curr[$name];
+                    if ($column->multilingual()) {
+                        foreach (LANGUAGES as $lang) {
+                            $prop = "{$name}__{$lang}";
+
+                            if ($prev[$prop] !== $curr[$prop]) {
+                                $diff[$prop] = $curr[$prop];
+                            }
+                        }
+                    } else {
+                        if ($prev[$name] !== $curr[$name]) {
+                            $diff[$name] = $curr[$name];
+                        }
+                    }
                 }
 
                 $type = self::UPDATE;
-                $prev = json_encode($prev);
-                $curr = json_encode($diff);
+                $prev = json_encode($prev, JSON_UNESCAPED_UNICODE);
+                $curr = json_encode($diff, JSON_UNESCAPED_UNICODE);
             } else {
                 $type = self::DELETE;
-                $prev = json_encode($prev);
+                $prev = json_encode($prev, JSON_UNESCAPED_UNICODE);
                 $curr = null;
             }
         } else {
             if ($curr) {
+                $curr = $this->cleanup($curr);
                 $dataId = $curr['id'];
 
                 $type = self::INSERT;
                 $prev = null;
-                $curr = json_encode($curr);
+                $curr = json_encode($curr, JSON_UNESCAPED_UNICODE);
             } else {
                 return;
             }

@@ -127,6 +127,12 @@ abstract class Column extends ValueObject {
     }
 
     public function pack($row) {
+        if ($this->multilingual()) {
+            $name = $this->name();
+
+            $row[$name] = $row[$name . '__' . LANGUAGE];
+        }
+
         return $row;
     }
 

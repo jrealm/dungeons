@@ -30,6 +30,7 @@ class App extends AbstractApp {
             define('LANGUAGE', defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : Config::get('system.language'));
         }
 
+        define('LANGUAGES', preg_split('/\|/', $languages));
         define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
         $this->controller = $this->find(@$info[3], $_SERVER['REQUEST_METHOD']);

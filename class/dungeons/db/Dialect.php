@@ -39,7 +39,15 @@ class Dialect {
                 continue;
             }
 
-            $expressions[] = $column->mapping();
+            $expression = $column->mapping();
+
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $expressions[] = "{$expression}__{$lang}";
+                }
+            } else {
+                $expressions[] = $expression;
+            }
         }
 
         $names = implode(', ', $expressions);
@@ -87,7 +95,15 @@ class Dialect {
                 continue;
             }
 
-            $expressions[$name] = "{$column->expression()} AS \"{$name}\"";
+            $expression = $column->expression();
+
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $expressions["{$name}__{$lang}"] = "{$expression}__{$lang} AS \"{$name}__{$lang}\"";
+                }
+            } else {
+                $expressions[$name] = "{$expression} AS \"{$name}\"";
+            }
         }
 
         $names = implode(', ', $expressions);
@@ -122,7 +138,15 @@ class Dialect {
                 continue;
             }
 
-            $expressions[] = "{$column->mapping()} = ?";
+            $expression = $column->mapping();
+
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $expressions[] = "{$expression}__{$lang} = ?";
+                }
+            } else {
+                $expressions[] = "{$expression} = ?";
+            }
         }
 
         $set = implode(', ', $expressions);

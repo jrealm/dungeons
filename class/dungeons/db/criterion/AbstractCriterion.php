@@ -7,6 +7,7 @@ use dungeons\db\Criterion;
 abstract class AbstractCriterion implements Criterion {
 
     protected $column;
+    protected $language = LANGUAGE;
     protected $values;
 
     public function __construct($column, $values) {
@@ -30,10 +31,16 @@ abstract class AbstractCriterion implements Criterion {
         $expression = $this->column->expression();
 
         if ($this->column->multilingual()) {
-            $expression = $expression . '__' . LANGUAGE;
+            $expression = $expression . '__' . $this->language;
         }
 
         return $this->build($expression);
+    }
+
+    public function with($language) {
+        $this->language = $language;
+
+        return $this;
     }
 
     abstract protected function build($expression);

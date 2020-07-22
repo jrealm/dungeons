@@ -57,6 +57,7 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
         'column' => $column,
         'disabled' => $column->disabled(),
         'label' => $labels[$name] ?? "[{$name}]",
+        'multilingual' => $column->multilingual(),
         'name' => $name,
         'pattern' => $column->pattern(),
         'placeholder' => $labels["{$name}.blankPlaceholder"] ?? @$labels["{$name}.placeholder"],
