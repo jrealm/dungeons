@@ -15,12 +15,14 @@ rm -rf www/bootstrap
 mkdir -p www/bootstrap
 cp -R vendor/twbs/bootstrap/dist/* www/bootstrap
 
-cd www
+if [ -f config.php ] ; then
+    cd www
 
-if [ ! -f ../data/init-db.sh ] ; then
-    php index.php /console/init-db > ../data/init-db.sh
-    chmod a+x ../data/init-db.sh
-    ../data/init-db.sh
+    if [ ! -f ../data/init-db.sh ] ; then
+        php index.php /console/init-db > ../data/init-db.sh
+        chmod a+x ../data/init-db.sh
+        ../data/init-db.sh
+    fi
+
+    php index.php /console/init-multilingual
 fi
-
-php index.php /console/init-multilingual
