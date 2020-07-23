@@ -18,10 +18,36 @@ cp -R vendor/twbs/bootstrap/dist/* www/bootstrap
 if [ -f config.php ] ; then
     cd www
 
-    if [ ! -f ../data/init-db.sh ] ; then
-        php index.php /console/init-db > ../data/init-db.sh
-        chmod a+x ../data/init-db.sh
-        ../data/init-db.sh
+    php index.php /console/init-db | sh
+
+    if [ -f ../data/dungeons-upgrade ] ; then
+        current=`cat ../data/dungeons-upgrade`
+        latest=`cat ../vendor/jrealm/dungeons/doc/dungeons-upgrade`
+
+        while [ $latest -gt $current ] ; do
+            current=`expr $current + 1`
+            sh "../vendor/jrealm/dungeons/doc/upgrade.${current}"
+        done
+
+        echo $current > ../data/dungeons-upgrade
+    else
+        cp ../vendor/jrealm/dungeons/doc/dungeons-upgrade ../data
+    fi
+
+    if [ -f ../data/upgrade ] ; then
+        current=`cat ../data/upgrade`
+        latest=`cat ../doc/upgrade`
+
+        while [ $latest -gt $current ] ; do
+            current=`expr $current + 1`
+            sh "../doc/upgrade.${current}"
+        done
+
+        echo $current > ../data/upgrade
+    else
+        if [ -f ../doc/upgrade ] ; then
+            cp ../doc/upgrade ../data
+        fi
     fi
 
     php index.php /console/init-multilingual
