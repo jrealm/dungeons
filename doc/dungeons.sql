@@ -72,13 +72,13 @@ CREATE TABLE base_user_log (
 
 CREATE TABLE base_group (
     id    INTEGER NOT NULL PRIMARY KEY,
-    title TEXT    NOT NULL UNIQUE
+    title TEXT        NULL UNIQUE
 );
 
 CREATE TABLE base_page (
     id           INTEGER   NOT NULL PRIMARY KEY,
     path         TEXT      NOT NULL UNIQUE,
-    title        TEXT      NOT NULL,
+    title        TEXT          NULL,
     enable_time  TIMESTAMP     NULL,
     disable_time TIMESTAMP     NULL
 );
@@ -113,7 +113,7 @@ CREATE TABLE base_block_item (
 CREATE TABLE base_menu (
     id           INTEGER   NOT NULL PRIMARY KEY,
     parent_id    INTEGER       NULL,
-    title        TEXT      NOT NULL,
+    title        TEXT          NULL,
     url          TEXT          NULL,
     enable_time  TIMESTAMP     NULL,
     disable_time TIMESTAMP     NULL,

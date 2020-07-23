@@ -13,6 +13,7 @@ class App extends AbstractApp {
         preg_match("/^(\/({$languages}))?(\/.*)?$/", @$_SERVER['argv'][1], $info);
 
         define('LANGUAGE', @$info[2] ? $info[2] : Config::get('system.language'));
+        define('LANGUAGES', preg_split('/\|/', $languages));
 
         $this->controller = $this->find(@$info[3], PHP_SAPI);
 

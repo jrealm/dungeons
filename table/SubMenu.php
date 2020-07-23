@@ -13,6 +13,7 @@ $tbl->add('parent_id', Integer::class)
     ->readonly(true);
 
 $tbl->add('title', Text::class)
+    ->multilingual(true)
     ->required(true);
 
 $tbl->add('url', Text::class);

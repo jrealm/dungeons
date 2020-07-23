@@ -12,6 +12,7 @@ $tbl->add('path', Text::class)
     ->unique(true);
 
 $tbl->add('title', Text::class)
+    ->multilingual(true)
     ->required(true);
 
 $tbl->add('enable_time', EnableTime::class);

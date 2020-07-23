@@ -1,0 +1,6 @@
+createuser "{{ result.db_user }}" --no-createrole --no-createdb --no-inherit --no-superuser -U postgres 2> /dev/null
+createdb "{{ result.db_name }}" --owner="{{ result.db_user }}" -U postgres 2> /dev/null
+
+if [ "$?" = "0" ] ; then
+    psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" < ../vendor/jrealm/dungeons/doc/dungeons.sql > /dev/null
+fi

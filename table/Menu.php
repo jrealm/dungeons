@@ -9,6 +9,7 @@ use dungeons\db\Table;
 $tbl = new Table('base_menu');
 
 $tbl->add('title', Text::class)
+    ->multilingual(true)
     ->required(true);
 
 $tbl->add('enable_time', EnableTime::class);
