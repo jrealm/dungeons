@@ -1,0 +1,41 @@
+------------------------------------------------------------
+menu
+============================================================
+
+    '{{ result.path }}' => ['icon' => '', 'ranking' => 0, 'parent' => '', 'group' => true, 'tag' => 'query'],
+
+    '{{ result.path }}/' => ['parent' => '{{ result.path }}', 'tag' => 'query'],
+
+    '{{ result.path }}/delete' => ['parent' => '{{ result.path }}', 'tag' => 'delete'],
+
+    '{{ result.path }}/insert' => ['parent' => '{{ result.path }}', 'tag' => 'insert'],
+
+    '{{ result.path }}/new' => ['parent' => '{{ result.path }}', 'tag' => 'insert'],
+
+    '{{ result.path }}/update' => ['parent' => '{{ result.path }}', 'tag' => 'update'],
+
+============================================================
+
+    '{{ result.path }}' => '{{ result.model }}',
+
+    '{{ result.path }}/' => '{{ cfg('i18n/label.tw.edit') }} {{ result.model }}',
+
+    '{{ result.path }}/new' => '{{ cfg('i18n/label.tw.new') }} {{ result.model }}',
+
+============================================================
+
+    '{{ result.path }}' => '{{ result.model }}',
+
+    '{{ result.path }}/' => '{{ cfg('i18n/label.cn.edit') }} {{ result.model }}',
+
+    '{{ result.path }}/new' => '{{ cfg('i18n/label.cn.new') }} {{ result.model }}',
+
+============================================================
+
+    '{{ result.path }}' => '{{ result.model }}',
+
+    '{{ result.path }}/' => '{{ cfg('i18n/label.en.edit') }} {{ result.model }}',
+
+    '{{ result.path }}/new' => '{{ cfg('i18n/label.en.new') }} {{ result.model }}',
+
+============================================================

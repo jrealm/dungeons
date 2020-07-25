@@ -2,14 +2,14 @@ cp -R vendor/jrealm/dungeons/{doc/config-sample.php,www} .
 cp vendor/jrealm/dungeons/doc/gitignore .gitignore
 echo 'Require all denied' > .htaccess
 
-mkdir -p class config controller/backend data doc logs menu message/{en,tw}/{menu,options,table} table view/{native,twig} www/files
+mkdir -p class config controller/backend data doc logs menu message table view/{native,twig} www/files
 chmod 777 data logs www/files
 
 rm -rf www/adminlte
 mkdir -p www/adminlte
 cp -R vendor/almasaeed2010/adminlte/{dist,plugins} www/adminlte
 
-mkdir -p www/{,en/,tw/}backend
+mkdir -p www/backend www/{cn,en,tw,vn}/backend
 
 rm -rf www/bootstrap
 mkdir -p www/bootstrap

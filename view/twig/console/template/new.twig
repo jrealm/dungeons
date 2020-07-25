@@ -1,0 +1,11 @@
+<?php //>
+
+return new class() extends dungeons\web\backend\BlankController {
+
+    protected function init() {
+        $table = table('{{ result.model }}');
+
+        $this->table($table);
+    }
+
+};

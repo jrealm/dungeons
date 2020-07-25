@@ -1,0 +1,9 @@
+<?php //>
+
+return [
+
+{% for name in result.metadata|keys %}
+    '{{ name }}' => '{{ cfg('i18n/label.' ~ result.language ~ '.' ~ name) }}',
+
+{% endfor %}
+];

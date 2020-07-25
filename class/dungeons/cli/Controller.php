@@ -17,7 +17,27 @@ class Controller extends AbstractController {
     }
 
     protected function wrap() {
-        return array_splice($_SERVER['argv'], 2);
+        $form = [];
+
+        foreach (array_splice($_SERVER['argv'], 2) as $arg) {
+            if ($arg[0] === '-') {
+                $name = ltrim($arg, '-');
+                $pos = strpos($name, '=');
+
+                if ($pos === false) {
+                    $value = true;
+                } else {
+                    $value = substr($name, $pos + 1);
+                    $name = substr($name, 0, $pos);
+                }
+
+                $this->$name($value);
+            } else {
+                $form[] = $arg;
+            }
+        }
+
+        return $form;
     }
 
 }
