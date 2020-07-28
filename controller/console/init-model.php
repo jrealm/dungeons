@@ -130,6 +130,30 @@ return new class() extends dungeons\cli\Controller {
 
             $row['is_nullable'] = ($row['is_nullable'] === 'YES');
 
+            switch ($name) {
+            case 'create_time':
+                $row['data_type'] = 'createTime';
+                break;
+            case 'creator':
+                $row['data_type'] = 'creator';
+                break;
+            case 'disable_time':
+                $row['data_type'] = 'disableTime';
+                break;
+            case 'enable_time':
+                $row['data_type'] = 'enableTime';
+                break;
+            case 'image':
+                $row['data_type'] = 'image';
+                break;
+            case 'mail':
+                $row['data_type'] = 'email';
+                break;
+            case 'password':
+                $row['data_type'] = 'password';
+                break;
+            }
+
             $metadata[$name] = $row;
         }
 
