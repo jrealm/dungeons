@@ -25,7 +25,9 @@ class Gmail {
         $mailer->Subject = render($args['subject'], $args);
         $mailer->Body = render($args['content'], $args);
 
-        $mailer->AddAddress($args['to']);
+        foreach (preg_split('/[\s;,]/', $args['to'], 0, PREG_SPLIT_NO_EMPTY) as $to) {
+            $mailer->AddAddress($to);
+        }
 
         return $mailer->Send();
     }
