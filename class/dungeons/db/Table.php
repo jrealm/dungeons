@@ -78,7 +78,7 @@ class Table extends ValueObject {
                 $column = $relation['foreign']->$column;
             }
 
-            $column = new ColumnWrapper($alias, $column, $relation);
+            $column = (new ColumnWrapper($alias, $column, $relation))->wrapper($name);
         }
 
         $this->columns[$name] = $column;
