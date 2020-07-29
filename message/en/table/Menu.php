@@ -4,6 +4,8 @@ return [
 
     'title' => 'TITLE',
 
+    'url' => 'URL',
+
     'item_count' => 'SUB MENU',
 
     'enable_time' => 'ENABLE TIME',

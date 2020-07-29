@@ -4,6 +4,8 @@ return [
 
     'title' => '名称',
 
+    'url' => '网址',
+
     'item_count' => '子选单',
 
     'enable_time' => '上架时间',

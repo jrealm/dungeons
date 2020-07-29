@@ -12,6 +12,8 @@ $tbl->add('title', Text::class)
     ->multilingual(true)
     ->required(true);
 
+$tbl->add('url', Text::class);
+
 $tbl->add('enable_time', EnableTime::class);
 
 $tbl->add('disable_time', DisableTime::class);
