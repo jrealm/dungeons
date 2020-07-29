@@ -4,6 +4,8 @@ namespace dungeons\web;
 
 class MemberController extends Controller {
 
+    use MemberAware;
+
     public function execute() {
         if ($this->authorize()) {
             parent::execute();
@@ -11,22 +13,12 @@ class MemberController extends Controller {
     }
 
     protected function authorize() {
-        $member = Session::get('Member');
+        $member = $this->member();
 
         if ($member) {
-            $current = model('Member')->queryById($member['id']);
+            define('MEMBER_ID', $member['id']);
 
-            if ($current && $current['password'] === $member['password']) {
-                define('MEMBER_ID', $current['id']);
-
-                Session::set('Member', $current);
-
-                $this->member($current);
-
-                return true;
-            }
-
-            Session::remove('Member');
+            return true;
         }
 
         if (defined('AJAX') && AJAX) {

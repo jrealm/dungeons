@@ -4,6 +4,8 @@ namespace dungeons\web;
 
 class UserController extends Controller {
 
+    use UserAware;
+
     public function available() {
         return ($this->method() === 'POST' && $this->name() === $this->path());
     }
@@ -15,22 +17,12 @@ class UserController extends Controller {
     }
 
     protected function authorize() {
-        $user = Session::get('User');
+        $user = $this->user();
 
         if ($user) {
-            $current = model('User')->queryById($user['id']);
+            define('USER_ID', $user['id']);
 
-            if ($current && $current['password'] === $user['password']) {
-                define('USER_ID', $current['id']);
-
-                Session::set('User', $current);
-
-                $this->user($current);
-
-                return true;
-            }
-
-            Session::remove('User');
+            return true;
         }
 
         if (defined('AJAX') && AJAX) {

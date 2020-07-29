@@ -11,6 +11,12 @@ class Model {
     const UPDATE = 2;
     const DELETE = 3;
 
+    protected static $globalFilter = false;
+
+    public static function enableGlobalFilter() {
+        self::$globalFilter = true;
+    }
+
     protected $db;
     protected $dialect;
     protected $filter;
@@ -19,6 +25,7 @@ class Model {
     public function __construct($db, $table) {
         $this->db = $db;
         $this->dialect = $db->getDialect();
+        $this->filter = self::$globalFilter;
         $this->table = $table;
     }
 
