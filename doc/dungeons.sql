@@ -124,6 +124,7 @@ CREATE TABLE base_member (
     id               INTEGER NOT NULL PRIMARY KEY,
     username         TEXT    NOT NULL UNIQUE,
     nickname         TEXT        NULL UNIQUE,
+    mobile           TEXT        NULL UNIQUE,
     password         TEXT    NOT NULL,
     payment_password TEXT        NULL,
     disabled         BOOLEAN NOT NULL

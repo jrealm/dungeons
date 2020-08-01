@@ -2,7 +2,7 @@
 
 return [
 
-    'system' => ['icon' => 'fas fa-desktop', 'ranking' => 100, 'parent' => null],
+    'system' => ['icon' => 'fas fa-desktop', 'ranking' => 200, 'parent' => null],
 
     'configuration' => ['icon' => 'fas fa-cogs', 'ranking' => 100, 'parent' => 'system'],
 

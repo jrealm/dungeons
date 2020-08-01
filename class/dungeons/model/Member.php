@@ -2,6 +2,7 @@
 
 namespace dungeons\model;
 
+use dungeons\db\Criteria;
 use dungeons\db\Model;
 
 class Member extends Model {
@@ -11,7 +12,11 @@ class Member extends Model {
     }
 
     public function queryByUsername($username) {
-        return $this->queryValidMember(['username' => $username]);
+        $criteria = Criteria::createOr();
+        $criteria->add($this->table->username->equal($username));
+        $criteria->add($this->table->mobile->equal($username));
+
+        return $this->queryValidMember([$criteria]);
     }
 
     protected function before($type, $prev, $curr) {

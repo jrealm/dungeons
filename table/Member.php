@@ -14,6 +14,9 @@ $tbl->add('username', Text::class)
 $tbl->add('nickname', Text::class)
     ->unique(true);
 
+$tbl->add('mobile', Text::class)
+    ->unique(true);
+
 $tbl->add('password', Password::class)
     ->required(true);
 
