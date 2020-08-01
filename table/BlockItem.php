@@ -15,9 +15,11 @@ $tbl->add('block_id', Integer::class)
     ->readonly(true)
     ->required(true);
 
-$tbl->add('title', Text::class);
+$tbl->add('title', Text::class)
+    ->multilingual(true);
 
-$tbl->add('content', Text::class);
+$tbl->add('content', Text::class)
+    ->multilingual(true);
 
 $tbl->add('image', Image::class);
 

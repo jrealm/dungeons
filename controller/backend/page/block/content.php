@@ -10,11 +10,18 @@ return new class() extends dungeons\web\backend\GetController {
         $fields = [];
         $labels = Message::load("module/{$data['module']}");
         $module = Config::load("module/{$data['module']}");
+        $table = $this->table();
 
         foreach ($module['fields'] as $field) {
-            $field['label'] = $labels[$field['name']] ?? "[{$field['name']}]";
-            $field['placeholder'] = @$labels["{$field['name']}.placeholder"];
-            $field['remark'] = @$labels["{$field['name']}.remark"];
+            $name = $field['name'];
+
+            $field['label'] = $labels[$name] ?? "[{$name}]";
+            $field['placeholder'] = @$labels["{$name}.placeholder"];
+            $field['remark'] = @$labels["{$name}.remark"];
+
+            if (isset($table->$name)) {
+                $field['multilingual'] = $table->$name->multilingual();
+            }
 
             $options = @$field['options'];
 
