@@ -15,9 +15,16 @@ trait BlockItem {
         $fields = [];
         $labels = Message::load("module/{$sub}");
         $module = Config::load("module/{$sub}");
+        $table = $this->table();
 
         foreach ($module['fields'] as $field) {
-            $field['label'] = $labels[$field['name']] ?? "[{$field['name']}]";
+            $name = $field['name'];
+
+            $field['label'] = $labels[$name] ?? "[{$name}]";
+
+            if (isset($table->$name)) {
+                $field['multilingual'] = $table->$name->multilingual();
+            }
 
             $fields[] = $field;
         }

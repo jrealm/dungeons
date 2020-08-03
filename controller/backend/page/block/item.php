@@ -16,14 +16,16 @@ return new class() extends dungeons\web\backend\ListController {
         $module = Config::load("module/{$sub}");
 
         foreach ($module['fields'] as $field) {
-            $field['label'] = $labels[$field['name']] ?? "[{$field['name']}]";
+            $name = $field['name'];
+
+            $field['label'] = $labels[$name] ?? "[{$name}]";
             $field['readonly'] = true;
 
-            switch ($field['name']) {
+            switch ($name) {
             case 'title':
             case 'content':
             case 'url':
-                $field['column'] = $this->table()->{$field['name']};
+                $field['column'] = $this->table()->{$name};
                 break;
             default:
                 $field['unordered'] = true;
