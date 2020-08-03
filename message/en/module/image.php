@@ -2,8 +2,8 @@
 
 return [
 
-    'html' => 'Web Editor',
-
     'image' => 'Image',
+
+    'content' => 'Description',
 
 ];
