@@ -33,10 +33,12 @@ class App extends AbstractApp {
         define('LANGUAGES', preg_split('/\|/', $languages));
         define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
-        $this->controller = $this->find(@$info[3], $_SERVER['REQUEST_METHOD']);
+        $path = @$info[3] ?? '/';
+
+        $this->controller = $this->find($path, $_SERVER['REQUEST_METHOD']);
 
         if ($this->controller === null) {
-            $this->controller = new Controller(['path' => $info[3], 'view' => '404.php']);
+            $this->controller = new Controller(['path' => $path, 'view' => '404.php']);
         }
     }
 
