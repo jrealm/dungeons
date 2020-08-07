@@ -12,8 +12,8 @@ trait Validator {
 
         foreach ($this->columns() ?? $this->table()->getColumns() as $name => $column) {
             if ($column->multilingual()) {
-                foreach (LANGUAGES as $lang) {
-                    $errors = $this->validateInput($errors, $column, $form, $name, $lang);
+                foreach (LANGUAGES as $language) {
+                    $errors = $this->validateInput($errors, $column, $form, $name, $language);
                 }
             } else {
                 $errors = $this->validateInput($errors, $column, $form, $name, null);
