@@ -20,7 +20,7 @@ return new class() extends dungeons\web\backend\UpdateController {
             foreach ($module['fields'] as $field) {
                 $name = $field['name'];
 
-                if (empty($table->$name)) {
+                if (empty($table->{$name})) {
                     $value = @$form[$name];
 
                     if ($value instanceof Attachment) {
@@ -50,8 +50,8 @@ return new class() extends dungeons\web\backend\UpdateController {
             foreach ($module['fields'] as $field) {
                 $name = $field['name'];
 
-                if (isset($table->$name)) {
-                    $field['multilingual'] = $table->$name->multilingual();
+                if (isset($table->{$name})) {
+                    $field['multilingual'] = $table->{$name}->multilingual();
                 }
 
                 if (@$field['multilingual']) {

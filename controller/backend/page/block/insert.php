@@ -21,7 +21,7 @@ return new class() extends dungeons\web\backend\InsertController {
                 $name = $field['name'];
                 $value = @$field['default'];
 
-                if (empty($table->$name)) {
+                if (empty($table->{$name})) {
                     $extra[$name] = $value;
                 } else {
                     $form[$name] = $value;

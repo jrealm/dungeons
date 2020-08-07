@@ -19,8 +19,8 @@ return new class() extends dungeons\web\backend\GetController {
             $field['placeholder'] = @$labels["{$name}.placeholder"];
             $field['remark'] = @$labels["{$name}.remark"];
 
-            if (isset($table->$name)) {
-                $field['multilingual'] = $table->$name->multilingual();
+            if (isset($table->{$name})) {
+                $field['multilingual'] = $table->{$name}->multilingual();
             }
 
             $options = @$field['options'];

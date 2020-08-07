@@ -31,7 +31,7 @@ class Controller extends AbstractController {
                     $name = substr($name, 0, $pos);
                 }
 
-                $this->$name($value);
+                $this->{$name}($value);
             } else {
                 $form[] = $arg;
             }

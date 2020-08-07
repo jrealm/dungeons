@@ -154,9 +154,9 @@ class ListController extends BackendController {
     private function groupFilter($group) {
         $criteria = Criteria::createAnd();
         $enable = $this->table()->enableTime();
-        $enable = $enable ? $this->table()->$enable : null;
+        $enable = $enable ? $this->table()->{$enable} : null;
         $disable = $this->table()->disableTime();
-        $disable = $disable ? $this->table()->$disable : null;
+        $disable = $disable ? $this->table()->{$disable} : null;
         $now = date(Config::get('system.timestamp'));
 
         switch ($group) {

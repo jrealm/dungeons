@@ -195,7 +195,7 @@ class Model {
             return $title->toString($data);
         }
 
-        return isset($this->table->$title) ? "{$data[$title]}" : null;
+        return isset($this->table->{$title}) ? "{$data[$title]}" : null;
     }
 
     public function update($data) {
@@ -277,7 +277,7 @@ class Model {
             $enable = $this->table->enableTime();
 
             if ($enable) {
-                $column = $this->table->$enable;
+                $column = $this->table->{$enable};
                 $now = date($column->pattern());
 
                 $conditions[] = $column->notNull();
@@ -287,7 +287,7 @@ class Model {
             $disable = $this->table->disableTime();
 
             if ($disable) {
-                $column = $this->table->$disable;
+                $column = $this->table->{$disable};
                 $now = date($column->pattern());
 
                 $conditions[] = Criteria::createOr($column->isNull(), $column->greaterThan($now));
@@ -298,11 +298,11 @@ class Model {
             foreach ($conditions as $name => $value) {
                 if ($value instanceof Criterion) {
                     $criteria->add($value);
-                } else if (isset($this->table->$name)) {
+                } else if (isset($this->table->{$name})) {
                     if (is_array($value)) {
-                        $criteria->add($this->table->$name->in($value));
+                        $criteria->add($this->table->{$name}->in($value));
                     } else {
-                        $criteria->add($this->table->$name->equal($value));
+                        $criteria->add($this->table->{$name}->equal($value));
                     }
                 }
             }

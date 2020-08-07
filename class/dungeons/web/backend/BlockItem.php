@@ -22,8 +22,8 @@ trait BlockItem {
 
             $field['label'] = $labels[$name] ?? "[{$name}]";
 
-            if (isset($table->$name)) {
-                $field['multilingual'] = $table->$name->multilingual();
+            if (isset($table->{$name})) {
+                $field['multilingual'] = $table->{$name}->multilingual();
             }
 
             $fields[] = $field;
