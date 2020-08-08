@@ -7,7 +7,7 @@ trait MemberAware {
     private $member;
 
     public function member() {
-        if (is_null($this->member)) {
+        if ($this->member === null) {
             $this->member = false;
 
             $member = Session::get('Member');

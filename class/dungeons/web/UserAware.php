@@ -7,7 +7,7 @@ trait UserAware {
     private $user;
 
     public function user() {
-        if (is_null($this->user)) {
+        if ($this->user === null) {
             $this->user = false;
 
             $user = Session::get('User');

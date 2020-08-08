@@ -9,7 +9,7 @@ return new class() extends dungeons\cli\Controller {
     protected function process($form) {
         $table = @$form[0];
 
-        if (is_null($table)) {
+        if ($table === null) {
             return ['message' => 'invalid arguments'];
         }
 
@@ -17,7 +17,7 @@ return new class() extends dungeons\cli\Controller {
 
         $model = $this->model();
 
-        if (is_null($model)) {
+        if ($model === null) {
             $tokens = explode('_', $table);
             $model = implode(array_map('ucfirst', array_splice($tokens, 1)));
         }
@@ -26,7 +26,7 @@ return new class() extends dungeons\cli\Controller {
 
         $path = $this->node();
 
-        if (is_null($path)) {
+        if ($path === null) {
             $path = strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1-', $model));
         }
 
