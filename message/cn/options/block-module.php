@@ -10,4 +10,6 @@ return [
 
     'html' => '网页编辑器',
 
+    'company-info' => '公司资讯',
+
 ];

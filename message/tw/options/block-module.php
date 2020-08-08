@@ -10,4 +10,6 @@ return [
 
     'html' => '網頁編輯器',
 
+    'company-info' => '公司資訊',
+
 ];

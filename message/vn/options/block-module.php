@@ -10,4 +10,6 @@ return [
 
     'html' => 'Web Editor',
 
+    'company-info' => 'Company Info',
+
 ];
