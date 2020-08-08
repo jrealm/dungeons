@@ -10,6 +10,8 @@ return [
 
     'email' => 'EMAIL ERROR',
 
+    'file' => 'Invalid File Format',
+
     'image' => 'IMAGE UPLOAD ERROR',
 
     'integer' => 'DATA ERROR',

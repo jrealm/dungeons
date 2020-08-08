@@ -8,6 +8,8 @@ return [
 
     'carousel' => '圖片輪播',
 
+    'download' => '檔案下載',
+
     'html' => '網頁編輯器',
 
     'company-info' => '公司資訊',

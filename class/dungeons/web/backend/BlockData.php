@@ -132,12 +132,14 @@ trait BlockData {
             case 'timestamp':
                 $options->pattern(Config::get("system.{$field['type']}"));
                 break;
+            case 'file':
+                $options->mimeType(@$field['mimeType']);
+                break;
             case 'image':
                 $options->mimeType('image\/[\w]+');
                 break;
             case 'double':
             case 'email':
-            case 'file':
             case 'integer':
             case 'url':
                 break;

@@ -5,6 +5,10 @@ namespace dungeons;
 class Attachment {
 
     public static function validate($file, $mime_type) {
+        if ($mime_type === null) {
+            return true;
+        }
+
         if ($file instanceof self) {
             if (preg_match("/^{$mime_type}$/", $file->info['mime_type'])) {
                 return true;
@@ -51,6 +55,7 @@ class Attachment {
                 $content = base64_decode(substr($data, strpos($data, ',')));
 
                 if (file_put_contents($file, $content) !== false) {
+                    chmod($file, 0644);
                     return $file;
                 }
             }

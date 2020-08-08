@@ -403,6 +403,32 @@
             });
         });
 
+        form.find("input[data-format=file]").on("change", function (event) {
+            var file = event.currentTarget.files && event.currentTarget.files[0];
+            var input = $(event.currentTarget).siblings("input[data-file]");
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    var preview;
+
+                    if (file.type.startsWith("image/")) {
+                        preview = "<img class=\"border shadow\" src=\"" + reader.result + "\">";
+                    } else {
+                        preview = "<span><a class=\"btn btn-default p-3\">" + file.name + "</a></span>";
+                    }
+
+                    input.val(reader.result);
+                    input.siblings("input[data-filename]").val(file.name);
+                    input.closest("div").find(".file-preview").html(preview);
+                    input.closest("div").siblings(".invalid-feedback").hide().empty();
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
         form.find("input[data-format=image]").on("change", function (event) {
             var file = event.currentTarget.files && event.currentTarget.files[0];
             var input = $(event.currentTarget).siblings("input[data-image]");
@@ -415,7 +441,7 @@
                     reader.onload = function () {
                         input.val(reader.result);
                         input.siblings("input[data-filename]").val(file.name);
-                        input.closest("div").find(".image-preview").html("<img class=\"border shadow\" src=\"" + reader.result + "\">");
+                        input.closest("div").find(".file-preview").html("<img class=\"border shadow\" src=\"" + reader.result + "\">");
                     };
 
                     reader.readAsDataURL(file);

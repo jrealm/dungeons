@@ -1,0 +1,26 @@
+<div>
+    <span class="file-preview">
+        {% set file = find('File', {path: data[style.name]}) %}
+        {% if file %}
+            {% if file.width and file.height %}
+                <a data-gallery="gallery" data-title="{{ data['.title'] }}" data-toggle="lightbox" data-type="image" href="{{ file.path|img }}">
+                    <img class="border shadow" src="{{ file.path|img }}">
+                </a>
+            {% else %}
+                <span>
+                    <a class="btn btn-default p-3" href="{{ file.path|pathname }}" download="{{ file.name }}">{{ file.name }}</a>
+                </span>
+            {% endif %}
+        {% endif %}
+    </span>
+    {% if not style.readonly %}
+        <label class="align-top">
+            <input data-file name="{{ style.name }}" type="hidden" value="{{ data[style.name] }}">
+            {% if not style.disabled %}
+                <input data-filename name="{{ style.name }}#filename" type="hidden">
+                <input class="d-none" data-format="file" type="file">
+                <a class="btn btn-default btn-lg" title="{{ i18n('backend.browser') }}"><i class="far fa-file"></i></a>
+            {% endif %}
+        </label>
+    {% endif %}
+</div>

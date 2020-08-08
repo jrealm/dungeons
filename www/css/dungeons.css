@@ -32,12 +32,12 @@ th a, th:hover a {
     min-width: 1rem;
 }
 
-.image-preview {
+.file-preview {
     display: inline-block;
     max-width: calc(100% - 60px);
 }
 
-.image-preview img {
+.file-preview img {
     background-image: url(img/transparent.jpg);
     max-height: 200px;
     max-width: 100%;
@@ -51,7 +51,7 @@ th a, th:hover a {
     cursor: pointer;
 }
 
-.table .image-preview img {
+.table .file-preview img {
     max-width: 200px;
 }
 
