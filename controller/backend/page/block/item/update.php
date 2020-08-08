@@ -1,3 +1,3 @@
 <?php //>
 
-return new dungeons\web\backend\UpdateController('BlockItem');
+return new dungeons\web\backend\block\item\UpdateController('BlockItem');

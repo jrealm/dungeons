@@ -1,7 +1,3 @@
 <?php //>
 
-return new class() extends dungeons\web\backend\GetController {
-
-    use dungeons\web\backend\BlockItem;
-
-};
+return new dungeons\web\backend\block\item\GetController('BlockItem');

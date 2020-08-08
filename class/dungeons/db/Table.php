@@ -124,6 +124,16 @@ class Table extends ValueObject {
         return Connection::getInstance()->getModel($this);
     }
 
+    public function parent() {
+        $master = $this->getMasterRelation();
+
+        if ($master) {
+            return @$master['enable'] ? $master['foreign'] : table($master['foreign']);
+        }
+
+        return null;
+    }
+
     public function register($relation) {
         $alias = $relation['alias'];
 

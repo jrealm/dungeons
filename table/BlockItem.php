@@ -25,6 +25,8 @@ $tbl->add('image', Image::class);
 
 $tbl->add('url', Url::class);
 
+$tbl->add('extra', Text::class);
+
 $tbl->add('enable_time', EnableTime::class);
 
 $tbl->add('disable_time', DisableTime::class);

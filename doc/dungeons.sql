@@ -105,6 +105,7 @@ CREATE TABLE base_block_item (
     content      TEXT          NULL,
     image        TEXT          NULL,
     url          TEXT          NULL,
+    extra        TEXT          NULL,
     enable_time  TIMESTAMP     NULL,
     disable_time TIMESTAMP     NULL,
     ranking      INTEGER   NOT NULL
