@@ -2,10 +2,10 @@
 
 return [
 
-    'enable_time' => 'ENABLE TIME',
+    'enable_time' => 'Enable Time',
 
-    'disable_time' => 'DISABLE TIME',
+    'disable_time' => 'Disable Time',
 
-    'ranking' => 'RANKING',
+    'ranking' => 'Ranking',
 
 ];

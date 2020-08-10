@@ -6,7 +6,7 @@ return [
 
     'title' => '标题',
 
-    'block_count' => '区块',
+    'block_count' => '网页区块',
 
     'enable_time' => '上架时间',
 

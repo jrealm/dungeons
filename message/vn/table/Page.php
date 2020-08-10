@@ -2,14 +2,14 @@
 
 return [
 
-    'path' => 'PATH',
+    'path' => 'Path',
 
-    'title' => 'TITLE',
+    'title' => 'Title',
 
-    'block_count' => 'BLOCK',
+    'block_count' => 'Content Block',
 
-    'enable_time' => 'ENABLE TIME',
+    'enable_time' => 'Enable Time',
 
-    'disable_time' => 'DISABLE TIME',
+    'disable_time' => 'Disable Time',
 
 ];

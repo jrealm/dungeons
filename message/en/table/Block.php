@@ -2,16 +2,16 @@
 
 return [
 
-    'module' => 'MODULE',
+    'module' => 'Module',
 
-    'name' => 'NAME',
+    'name' => 'Name',
 
-    'item_count' => 'SUB ITEM',
+    'item_count' => 'Sub Item',
 
-    'enable_time' => 'ENABLE TIME',
+    'enable_time' => 'Enable Time',
 
-    'disable_time' => 'DISABLE TIME',
+    'disable_time' => 'Disable Time',
 
-    'ranking' => 'RANKING',
+    'ranking' => 'Ranking',
 
 ];

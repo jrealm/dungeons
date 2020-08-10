@@ -2,36 +2,36 @@
 
 return [
 
-    'site' => 'WEBSITE MANAGEMENT',
+    'site' => 'Website Management',
 
-    'menu' => 'MENU',
+    'menu' => 'Menu',
 
-    'menu/' => 'EDIT MENU',
+    'menu/' => 'Edit Menu',
 
-    'menu/new' => 'NEW MENU',
+    'menu/new' => 'New Menu',
 
-    'menu/item' => 'SUB MENU',
+    'menu/item' => 'Sub Menu',
 
-    'menu/item/' => 'EDIT SUB MENU',
+    'menu/item/' => 'Edit Sub Menu',
 
-    'menu/item/new' => 'NEW SUB MENU',
+    'menu/item/new' => 'New Sub Menu',
 
-    'page' => 'PAGE',
+    'page' => 'Page',
 
-    'page/' => 'EDIT PAGE',
+    'page/' => 'Edit Page',
 
-    'page/new' => 'NEW PAGE',
+    'page/new' => 'New Page',
 
-    'page/block' => 'BLOCK',
+    'page/block' => 'Block',
 
-    'page/block/' => 'EDIT BLOCK',
+    'page/block/' => 'Edit Block',
 
-    'page/block/new' => 'NEW BLOCK',
+    'page/block/new' => 'New Block',
 
-    'page/block/item' => 'BLOCK ITEM',
+    'page/block/item' => 'Block Item',
 
-    'page/block/item/' => 'EDIT BLOCK ITEM',
+    'page/block/item/' => 'Edit Block Item',
 
-    'page/block/item/new' => 'NEW BLOCK ITEM',
+    'page/block/item/new' => 'New Block Item',
 
 ];

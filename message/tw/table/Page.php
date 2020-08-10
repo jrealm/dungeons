@@ -6,7 +6,7 @@ return [
 
     'title' => '標題',
 
-    'block_count' => '區塊',
+    'block_count' => '網頁區塊',
 
     'enable_time' => '上架時間',
 
