@@ -9,7 +9,7 @@ trait SubList {
             $info = pathinfo($this->name());
             $pattern = preg_quote($info['dirname'], '/');
 
-            return preg_match("/^{$pattern}\/[\d]+\/{$info['basename']}$/", $this->path());
+            return preg_match("/^{$pattern}\/[\d-]+\/{$info['basename']}$/", $this->path());
         }
 
         return false;

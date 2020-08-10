@@ -101,8 +101,10 @@ $labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
-    if ($column->association() || $column->invisible()) {
-        continue;
+    if (!$column->visible()) {
+        if ($column->association() || $column->invisible()) {
+            continue;
+        }
     }
 
     if ($column->isCounter()) {

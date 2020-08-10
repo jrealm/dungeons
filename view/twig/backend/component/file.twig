@@ -8,7 +8,7 @@
                 </a>
             {% else %}
                 <span>
-                    <a class="btn btn-default p-3" href="{{ file.path|pathname }}" download="{{ file.name }}">{{ file.name }}</a>
+                    <a class="btn btn-default p-3" download="{{ file.name }}" href="{{ file.path|pathname }}">{{ file.name }}</a>
                 </span>
             {% endif %}
         {% endif %}
