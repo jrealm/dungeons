@@ -8,6 +8,8 @@ if [ "$?" = "0" ] ; then
         psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" < ../doc/schema.sql > /dev/null
     fi
 
+    php index.php /console/init-multilingual
+
     if [ -f ../doc/data.sql ] ; then
         psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" < ../doc/data.sql > /dev/null
     fi
