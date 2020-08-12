@@ -26,6 +26,7 @@ return [
 
     'new' => 'NEW',
     'new.cancel' => 'CANCEL',
+    'new.next' => 'NEXT',
     'new.submit' => 'SAVE',
 
     'operation' => 'OPERATION',

@@ -11,7 +11,12 @@ trait BlockForm {
         $moduleName = @array_pop($list)['module'];
 
         if (!$moduleName) {
-            $moduleName = array_pop($list)['module'];
+            $moduleName = @array_pop($list)['module'];
+
+            if (!$moduleName) {
+                return $styles;
+            }
+
             $moduleName = Config::load("module/{$moduleName}")['sub-module'];
         }
 

@@ -18,7 +18,11 @@ $buttons[] = [
     'ranking' => 100,
 ];
 
-if ($controller->hasPermission("{$node}/insert")) {
+$button = $controller->button();
+
+if ($button) {
+    $buttons[] = $button;
+} else if ($controller->hasPermission("{$node}/insert")) {
     $buttons[] = [
         'class' => Config::get('backend.new.submit.button'),
         'label' => Message::get('backend.new.submit'),

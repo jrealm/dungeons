@@ -20,6 +20,7 @@ return [
     'new.button' => 'btn-app',
     'new.cancel.button' => 'btn-default',
     'new.icon' => 'fas fa-plus',
+    'new.next.button' => 'btn-info',
     'new.submit.button' => 'btn-info',
 
     'print.button' => 'btn-app',

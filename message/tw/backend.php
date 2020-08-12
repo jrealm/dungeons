@@ -26,6 +26,7 @@ return [
 
     'new' => '新增',
     'new.cancel' => '取消',
+    'new.next' => '下一步',
     'new.submit' => '新增',
 
     'operation' => '操作',
