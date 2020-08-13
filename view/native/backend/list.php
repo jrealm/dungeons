@@ -1,6 +1,5 @@
 <?php //>
 
-use dungeons\Config;
 use dungeons\Message;
 
 $node = $controller->node();
@@ -14,9 +13,9 @@ $controls = $controller->controls() ?? [];
 
 if ($controller->hasPermission("{$node}/new")) {
     $controls[] = [
-        'class' => Config::get('backend.new.button'),
-        'icon' => Config::get('backend.new.icon'),
-        'label' => Message::get('backend.new'),
+        'class' => cfg('backend.new.button'),
+        'icon' => cfg('backend.new.icon'),
+        'label' => i18n('backend.new'),
         'path' => "{$path}/new",
         'ranking' => 100,
     ];
@@ -24,9 +23,9 @@ if ($controller->hasPermission("{$node}/new")) {
 
 if ($controller->hasPermission("{$node}/delete")) {
     $controls[] = [
-        'class' => Config::get('backend.multiple-delete.button'),
-        'icon' => Config::get('backend.delete.icon'),
-        'label' => Message::get('backend.delete'),
+        'class' => cfg('backend.multiple-delete.button'),
+        'icon' => cfg('backend.delete.icon'),
+        'label' => i18n('backend.delete'),
         'least' => 1,
         'path' => "{$node}/delete",
         'ranking' => 200,
@@ -34,9 +33,9 @@ if ($controller->hasPermission("{$node}/delete")) {
 }
 
 $controls[] = [
-    'class' => Config::get('backend.export.button'),
-    'icon' => Config::get('backend.export.icon'),
-    'label' => Message::get('backend.export'),
+    'class' => cfg('backend.export.button'),
+    'icon' => cfg('backend.export.icon'),
+    'label' => i18n('backend.export'),
     'least' => 0,
     'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q', 's'])) + ['t' => $controller->exportFormat()],
     'path' => $path,
@@ -51,9 +50,9 @@ $actions = $controller->actions() ?? [];
 
 if ($controller->hasPermission("{$node}/")) {
     $actions[] = [
-        'class' => Config::get('backend.edit.button'),
-        'icon' => Config::get('backend.edit.icon'),
-        'label' => Message::get('backend.edit'),
+        'class' => cfg('backend.edit.button'),
+        'icon' => cfg('backend.edit.icon'),
+        'label' => i18n('backend.edit'),
         'ranking' => 100,
     ];
 }

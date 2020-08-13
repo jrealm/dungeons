@@ -3,7 +3,6 @@
 namespace dungeons\web\backend\block;
 
 use dungeons\Config;
-use dungeons\Message;
 use dungeons\web\backend\BlankController as Controller;
 use dungeons\web\backend\BlockForm;
 use dungeons\web\backend\SubCreation;
@@ -56,8 +55,8 @@ class BlankController extends Controller {
                 $this->columns($table->getColumns(['module', 'name', 'enable_time', 'disable_time', 'ranking']));
             } else {
                 $this->button([
-                    'class' => Config::get('backend.new.next.button'),
-                    'label' => Message::get('backend.new.next'),
+                    'class' => cfg('backend.new.next.button'),
+                    'label' => i18n('backend.new.next'),
                     'method' => 'new',
                     'ranking' => 200,
                 ]);

@@ -15,7 +15,7 @@ foreach ($result as $error) {
         $template = @$labels["{$name}.{$type}"];
 
         if ($template === null) {
-            $message = Message::get("validation.{$type}");
+            $message = i18n("validation.{$type}");
         } else {
             $message = render($template, $form);
         }

@@ -2,7 +2,6 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\Config;
 use dungeons\db\Criteria;
 use dungeons\web\BackendController;
 
@@ -157,7 +156,7 @@ class ListController extends BackendController {
         $enable = $enable ? $this->table()->{$enable} : null;
         $disable = $this->table()->disableTime();
         $disable = $disable ? $this->table()->{$disable} : null;
-        $now = date(Config::get('system.timestamp'));
+        $now = date(cfg('system.timestamp'));
 
         switch ($group) {
         case 1:

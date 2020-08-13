@@ -1,6 +1,5 @@
 <?php //>
 
-use dungeons\Config;
 use dungeons\Message;
 
 $node = $controller->menu()['parent'];
@@ -12,8 +11,8 @@ $result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->
 $buttons = $controller->buttons() ?? [];
 
 $buttons[] = [
-    'class' => Config::get('backend.new.cancel.button'),
-    'label' => Message::get('backend.new.cancel'),
+    'class' => cfg('backend.new.cancel.button'),
+    'label' => i18n('backend.new.cancel'),
     'method' => 'cancel',
     'ranking' => 100,
 ];
@@ -24,8 +23,8 @@ if ($button) {
     $buttons[] = $button;
 } else if ($controller->hasPermission("{$node}/insert")) {
     $buttons[] = [
-        'class' => Config::get('backend.new.submit.button'),
-        'label' => Message::get('backend.new.submit'),
+        'class' => cfg('backend.new.submit.button'),
+        'label' => i18n('backend.new.submit'),
         'method' => 'insert',
         'ranking' => 200,
     ];

@@ -1,7 +1,5 @@
 <?php //>
 
-use dungeons\Message;
-
 return new class() extends dungeons\web\backend\GetController {
 
     use dungeons\web\backend\Authorizer;
@@ -47,7 +45,7 @@ return new class() extends dungeons\web\backend\GetController {
         unset($nodes['system']);
 
         $styles[] = [
-            'label' => Message::get('table/Group.permissions'),
+            'label' => i18n('table/Group.permissions'),
             'name' => 'permissions',
             'options' => $nodes,
             'type' => 'checkbox-tree',

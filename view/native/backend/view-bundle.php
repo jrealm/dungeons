@@ -1,8 +1,6 @@
 <?php //>
 
-use dungeons\Config;
 use dungeons\db\column\Text;
-use dungeons\Message;
 
 $path = $controller->menu()['parent'];
 
@@ -13,16 +11,16 @@ $result['path'] = $path;
 $buttons = [];
 
 $buttons[] = [
-    'class' => Config::get('backend.edit.cancel.button'),
-    'label' => Message::get('backend.edit.cancel'),
+    'class' => cfg('backend.edit.cancel.button'),
+    'label' => i18n('backend.edit.cancel'),
     'method' => 'cancel',
     'ranking' => 100,
 ];
 
 if ($controller->hasPermission("{$path}/update")) {
     $buttons[] = [
-        'class' => Config::get('backend.edit.button'),
-        'label' => Message::get('backend.edit.submit'),
+        'class' => cfg('backend.edit.button'),
+        'label' => i18n('backend.edit.submit'),
         'method' => 'update',
         'ranking' => 200,
     ];

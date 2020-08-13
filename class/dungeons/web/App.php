@@ -3,7 +3,6 @@
 namespace dungeons\web;
 
 use dungeons\App as AbstractApp;
-use dungeons\Config;
 
 class App extends AbstractApp {
 
@@ -18,7 +17,7 @@ class App extends AbstractApp {
 
         define('APP_PATH', preg_replace('/^(.*\/)[^\/]+$/', '$1', $_SERVER['SCRIPT_NAME']));
 
-        $languages = Config::get('system.supportedLanguages');
+        $languages = cfg('system.supportedLanguages');
 
         preg_match("/^(\/({$languages}))?(\/.*)?$/", $_SERVER['PATH_INFO'], $info);
 
@@ -27,7 +26,7 @@ class App extends AbstractApp {
             define('LANGUAGE', $info[2]);
         } else {
             define('APP_ROOT', APP_PATH);
-            define('LANGUAGE', defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : Config::get('system.language'));
+            define('LANGUAGE', defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : cfg('system.language'));
         }
 
         define('LANGUAGES', preg_split('/\|/', $languages));

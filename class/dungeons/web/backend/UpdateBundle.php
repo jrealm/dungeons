@@ -3,6 +3,7 @@
 namespace dungeons\web\backend;
 
 use dungeons\Attachment;
+use dungeons\db\Connection;
 use dungeons\Resource;
 use dungeons\web\BackendController;
 
@@ -82,10 +83,16 @@ class UpdateBundle extends BackendController {
             }
         }
 
+        if (file_exists($file)) {
+            $info = pathinfo($file);
+            $id = Connection::getInstance()->nextSequence('base_ranking');
+            $backup = $info['dirname'] . '/.' . $info['basename'] . '.' . $id . '.' . $this->user()['id'];
+
+            rename($file, $backup);
+        }
+
         if ($diff) {
             file_put_contents($file, json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        } else if (file_exists($file)) {
-            unlink($file);
         }
 
         return ['success' => true];

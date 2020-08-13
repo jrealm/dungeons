@@ -130,7 +130,7 @@ trait BlockData {
             case 'date':
             case 'time':
             case 'timestamp':
-                $options->pattern(Config::get("system.{$field['type']}"));
+                $options->pattern(cfg("system.{$field['type']}"));
                 break;
             case 'file':
                 $options->mimeType(@$field['mimeType']);

@@ -2,7 +2,6 @@
 
 namespace dungeons\web\backend;
 
-use dungeons\Config;
 use dungeons\Resource;
 
 trait Authorizer {
@@ -32,7 +31,7 @@ trait Authorizer {
 
     private function loadMenus() {
         if (!$this->menus) {
-            $this->menus = Resource::loadMenu(Config::get('backend.menus'));
+            $this->menus = Resource::loadMenu(cfg('backend.menus'));
         }
 
         return $this->menus;

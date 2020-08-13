@@ -1,6 +1,5 @@
 <?php //>
 
-use dungeons\Message;
 use dungeons\web\Session;
 
 return new class() extends dungeons\web\UserController {
@@ -42,7 +41,7 @@ return new class() extends dungeons\web\UserController {
         if ($current === null) {
             $errors[] = ['name' => 'current', 'type' => 'required'];
         } else if ($user['password'] !== md5($user['id'] . '::' . $current)) {
-            $errors[] = ['name' => 'current', 'message' => Message::get('backend-login.error.PasswordNotMatched')];
+            $errors[] = ['name' => 'current', 'message' => i18n('backend-login.error.PasswordNotMatched')];
         }
 
         $password = @$form['password'];
@@ -50,7 +49,7 @@ return new class() extends dungeons\web\UserController {
         if ($password === null) {
             $errors[] = ['name' => 'password', 'type' => 'required'];
         } else if ($password === $current) {
-            $errors[] = ['name' => 'password', 'message' => Message::get('backend-login.error.PasswordNotChanged')];
+            $errors[] = ['name' => 'password', 'message' => i18n('backend-login.error.PasswordNotChanged')];
         }
 
         $confirm = @$form['confirm'];
@@ -58,7 +57,7 @@ return new class() extends dungeons\web\UserController {
         if ($confirm === null) {
             $errors[] = ['name' => 'confirm', 'type' => 'required'];
         } else if ($confirm !== $password) {
-            $errors[] = ['name' => 'confirm', 'message' => Message::get('backend-login.error.PasswordNotConfirmed')];
+            $errors[] = ['name' => 'confirm', 'message' => i18n('backend-login.error.PasswordNotConfirmed')];
         }
 
         return $errors;

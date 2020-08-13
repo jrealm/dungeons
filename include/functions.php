@@ -1,5 +1,7 @@
 <?php //>
 
+use dungeons\Config;
+use dungeons\Message;
 use dungeons\Resource;
 use dungeons\view\Native;
 use dungeons\view\Twig;
@@ -15,6 +17,10 @@ function base64_urldecode($data) {
 
 function base64_urlencode($data) {
     return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($data));
+}
+
+function cfg($token, $default = null) {
+    return Config::get($token, $default);
 }
 
 function create_folder($path) {
@@ -41,6 +47,10 @@ function create_folder($path) {
 
 function execute($args) {
     return (new $args['class']())->execute($args);
+}
+
+function i18n($token) {
+    return Message::get($token);
 }
 
 function isolate_require() {

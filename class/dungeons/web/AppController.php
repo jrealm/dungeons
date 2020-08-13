@@ -2,7 +2,6 @@
 
 namespace dungeons\web;
 
-use dungeons\Config;
 use dungeons\Resource;
 
 class AppController extends MemberController {
@@ -56,7 +55,7 @@ class AppController extends MemberController {
 
     private function loadMenus() {
         if (!$this->menus) {
-            $this->menus = Resource::loadMenu(Config::get('app.menus'));
+            $this->menus = Resource::loadMenu(cfg('app.menus'));
         }
 
         return $this->menus;

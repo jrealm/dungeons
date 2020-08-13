@@ -3,16 +3,15 @@
 namespace dungeons\cli;
 
 use dungeons\App as AbstractApp;
-use dungeons\Config;
 
 class App extends AbstractApp {
 
     protected function __construct() {
-        $languages = Config::get('system.supportedLanguages');
+        $languages = cfg('system.supportedLanguages');
 
         preg_match("/^(\/({$languages}))?(\/.*)?$/", @$_SERVER['argv'][1], $info);
 
-        define('LANGUAGE', @$info[2] ? $info[2] : Config::get('system.language'));
+        define('LANGUAGE', @$info[2] ? $info[2] : cfg('system.language'));
         define('LANGUAGES', preg_split('/\|/', $languages));
 
         $this->controller = $this->find(@$info[3], PHP_SAPI);
