@@ -19,12 +19,14 @@ return new class() extends dungeons\web\backend\GetController {
                 if ($tag) {
                     $name = @$menu['group'] ? $path : $parent;
 
-                    if (key_exists('tags', $menus[$name])) {
+                    if (!key_exists('tags', $menus[$name])) {
+                        $menus[$name]['tags'] = [];
+                    }
+
+                    if ($tag !== 'system') {
                         if (!in_array($tag, $menus[$name]['tags'])) {
                             $menus[$name]['tags'][] = $tag;
                         }
-                    } else {
-                        $menus[$name]['tags'] = [$tag];
                     }
 
                     if ($name === $parent) {
