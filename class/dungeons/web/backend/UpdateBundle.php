@@ -41,7 +41,14 @@ class UpdateBundle extends BackendController {
     }
 
     protected function process($form) {
-        $data = $this->data();
+        $allow = $this->allow();
+        $name = $this->args()[1];
+
+        if ($allow === null || in_array($name, $allow)) {
+            $data = $this->data();
+        } else {
+            $data = null;
+        }
 
         if (!$data) {
             return ['error' => 'error.DataNotFound'];

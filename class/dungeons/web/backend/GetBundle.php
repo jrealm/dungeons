@@ -31,7 +31,13 @@ abstract class GetBundle extends BackendController {
     protected function process($form) {
         list($folder, $name) = $this->args();
 
-        $data = $this->load($folder, $name);
+        $allow = $this->allow();
+
+        if ($allow === null || in_array($name, $allow)) {
+            $data = $this->load($folder, $name);
+        } else {
+            $data = null;
+        }
 
         if (!$data) {
             return ['error' => 'error.DataNotFound'];

@@ -14,6 +14,10 @@ return new class() extends dungeons\web\backend\ListBundle {
             $this->folder("config/{$folder}");
             $this->labels(Message::load("config-{$folder}"));
         }
+
+        if ($this->user()['id'] !== 1) {
+            $this->allow(preg_split('/\|/', cfg('backend.cfg.bundles')));
+        }
     }
 
 };

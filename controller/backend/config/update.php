@@ -8,6 +8,10 @@ return new class() extends dungeons\web\backend\UpdateBundle {
 
         $this->folder($folder === 'base' ? $prefix : "{$prefix}/{$folder}");
 
+        if ($this->user()['id'] !== 1) {
+            $this->allow(preg_split('/\|/', cfg('backend.cfg.bundles')));
+        }
+
         parent::init();
     }
 

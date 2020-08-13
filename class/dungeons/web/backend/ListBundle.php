@@ -40,6 +40,7 @@ class ListBundle extends BackendController {
             }
         }
 
+        $allow = $this->allow();
         $data = [];
         $labels = $this->labels();
 
@@ -49,11 +50,13 @@ class ListBundle extends BackendController {
             if (@$info['extension'] === 'php') {
                 $name = $info['filename'];
 
-                $data[] = [
-                    'id' => $name,
-                    'name' => $name,
-                    'remark' => @$labels[$name],
-                ];
+                if ($allow === null || in_array($name, $allow)) {
+                    $data[] = [
+                        'id' => $name,
+                        'name' => $name,
+                        'remark' => @$labels[$name],
+                    ];
+                }
             }
         }
 

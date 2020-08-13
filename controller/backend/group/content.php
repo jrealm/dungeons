@@ -42,7 +42,7 @@ return new class() extends dungeons\web\backend\GetController {
             }
         }
 
-        unset($nodes['system']);
+        unset($nodes['system']['nodes']['multilingual']);
 
         $styles[] = [
             'label' => i18n('table/Group.permissions'),
