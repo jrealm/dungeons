@@ -8,6 +8,8 @@ return new class() extends dungeons\web\backend\GetBundle {
         if ($this->user()['id'] !== 1) {
             $this->allow(preg_split('/\|/', cfg('backend.cfg.bundles')));
         }
+
+        $this->category('config');
     }
 
     protected function load($folder, $name) {

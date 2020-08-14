@@ -34,9 +34,17 @@ abstract class GetBundle extends BackendController {
         $allow = $this->allow();
 
         if ($allow === null || in_array($name, $allow)) {
+            $category = $this->category();
             $data = $this->load($folder, $name);
+
+            if ($folder === 'base') {
+                $prefix = "{$category}.{$name}";
+            } else {
+                $prefix = "{$category}.{$folder}.{$name}";
+            }
         } else {
             $data = null;
+            $prefix = null;
         }
 
         if (!$data) {
@@ -47,7 +55,7 @@ abstract class GetBundle extends BackendController {
 
         unset($data['@']);
 
-        return ['success' => true, 'data' => $data, 'styles' => $styles];
+        return ['success' => true, 'data' => $data, 'prefix' => $prefix, 'styles' => $styles];
     }
 
 }

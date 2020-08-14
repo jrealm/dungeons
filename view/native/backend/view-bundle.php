@@ -48,7 +48,7 @@ foreach ($result['data'] as $name => $ignore) {
     $style = $result['styles'][$name] ?? ['column' => Text::class];
     $column = new $style['column']();
 
-    $style['label'] = $name;
+    $style['label'] = i18n("{$result['prefix']}.{$name}");
     $style['name'] = $name;
     $style['pattern'] = $style['pattern'] ?? $column->pattern();
     $style['type'] = $column->formStyle();
