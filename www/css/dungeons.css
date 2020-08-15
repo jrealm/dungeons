@@ -43,6 +43,14 @@ th a, th:hover a {
     max-width: 100%;
 }
 
+.hint {
+    color: transparent;
+}
+
+.hint::selection {
+    color: gray;
+}
+
 .modal-wrapper .operators {
     display: none;
 }

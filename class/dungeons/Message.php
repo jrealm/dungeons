@@ -6,10 +6,10 @@ class Message {
 
     private static $bundles = [];
 
-    public static function get($token) {
+    public static function get($token, $default = null) {
         list($name, $key) = preg_split('/\./', $token, 2);
 
-        return self::load($name)[$key] ?? "{{$token}}";
+        return self::load($name)[$key] ?? $default ?? "{{$token}}";
     }
 
     public static function load($name, $language = null) {

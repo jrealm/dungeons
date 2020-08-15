@@ -2,30 +2,34 @@
 
 return [
 
-    'system' => 'SYSTEM MANAGEMENT',
+    'system' => 'System Management',
 
-    'configuration' => 'CONFIGURATION',
+    'configuration' => 'Configuration',
 
-    'config/base' => 'CONFIG',
+    'config/base' => 'Config',
 
-    'config/base/' => 'EDIT CONFIG',
+    'config/base/' => 'Edit Config',
 
-    'multilingual' => 'MULTILINGUAL',
+    'multilingual' => 'Multilingual',
 
-    'message/base' => 'MESSAGE',
+    'message/base' => 'Message',
 
-    'message/base/' => 'EDIT MESSAGE',
+    'message/base/' => 'Edit Message',
 
-    'message/menu' => 'MENU',
+    'message/menu' => 'Menu',
 
-    'message/menu/' => 'EDIT MENU',
+    'message/menu/' => 'Edit Menu',
 
-    'message/options' => 'OPTIONS',
+    'message/options' => 'Options',
 
-    'message/options/' => 'EDIT OPTIONS',
+    'message/options/' => 'Edit Options',
 
-    'message/table' => 'TABLE',
+    'message/table' => 'Table',
 
-    'message/table/' => 'EDIT TABLE',
+    'message/table/' => 'Edit Table',
+
+    'message/template' => 'Message Template',
+
+    'message/template/' => 'Edit Message Template',
 
 ];

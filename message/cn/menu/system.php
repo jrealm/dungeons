@@ -28,4 +28,8 @@ return [
 
     'message/table/' => '编辑资料表',
 
+    'message/template' => '讯息样板',
+
+    'message/template/' => '编辑讯息样板',
+
 ];

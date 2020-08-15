@@ -28,4 +28,8 @@ return [
 
     'message/table/' => '編輯資料表',
 
+    'message/template' => '訊息樣板',
+
+    'message/template/' => '編輯訊息樣板',
+
 ];

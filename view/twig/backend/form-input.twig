@@ -13,6 +13,7 @@
                         {{ input.label }} ({{ cfg('i18n/' ~ lang ~ '.title') }})
                     </label>
                     <span class="invalid-feedback" data-name="{{ input.name }}"></span>
+                    {% if input.label != input.name %}<span style="hint">{{ input.name }}</span>{% endif %}
                     {% include 'backend/component/' ~ input.type ~ '.twig' with {data: data, style: input} only %}
                     <span class="text-secondary text-xs">{{ input.remark }}</span>
                 </div>
@@ -30,6 +31,7 @@
                     {{ style.label }}
                 </label>
                 <span class="invalid-feedback" data-name="{{ style.name }}"></span>
+                {% if style.label != style.name %}<span class="hint">{{ style.name }}</span>{% endif %}
                 {% include 'backend/component/' ~ style.type ~ '.twig' with {data: data, style: style} only %}
                 <span class="text-secondary text-xs">{{ style.remark }}</span>
             </div>

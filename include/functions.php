@@ -49,8 +49,8 @@ function execute($args) {
     return (new $args['class']())->execute($args);
 }
 
-function i18n($token) {
-    return Message::get($token);
+function i18n($token, $default = null) {
+    return Message::get($token, $default);
 }
 
 function isolate_require() {

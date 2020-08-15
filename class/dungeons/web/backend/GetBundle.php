@@ -40,7 +40,7 @@ abstract class GetBundle extends BackendController {
             if ($folder === 'base') {
                 $prefix = "{$category}.{$name}";
             } else {
-                $prefix = "{$category}.{$folder}.{$name}";
+                $prefix = "{$category}-{$folder}.{$name}";
             }
         } else {
             $data = null;

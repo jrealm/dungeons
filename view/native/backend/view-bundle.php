@@ -38,6 +38,7 @@ $result['sub_title'] = $id;
 
 //--
 
+$prefix = $result['prefix'];
 $styles = [];
 
 foreach ($result['data'] as $name => $ignore) {
@@ -48,7 +49,7 @@ foreach ($result['data'] as $name => $ignore) {
     $style = $result['styles'][$name] ?? ['column' => Text::class];
     $column = new $style['column']();
 
-    $style['label'] = i18n("{$result['prefix']}.{$name}");
+    $style['label'] = i18n("{$prefix}.{$name}", $name);
     $style['name'] = $name;
     $style['pattern'] = $style['pattern'] ?? $column->pattern();
     $style['type'] = $column->formStyle();
