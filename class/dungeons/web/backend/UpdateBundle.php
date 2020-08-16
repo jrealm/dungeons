@@ -3,6 +3,7 @@
 namespace dungeons\web\backend;
 
 use dungeons\Attachment;
+use dungeons\db\column\File;
 use dungeons\db\Connection;
 use dungeons\Resource;
 use dungeons\web\BackendController;
@@ -32,16 +33,35 @@ class UpdateBundle extends BackendController {
     }
 
     protected function init() {
-        $file = "{$this->folder()}/{$this->args()[1]}";
-        $data = Resource::union("{$file}.php");
+        list($folder, $name) = $this->args();
 
+        $columns = [];
+        $file = "{$this->folder()}/{$name}";
+        $data = Resource::union("{$file}.php");
+        $prefix = "{$this->category()}/{$folder}.{$name}";
+
+        foreach ($data as $name => $ignore) {
+            $class = cfg("style/{$prefix}.{$name}");
+
+            if ($class) {
+                $columns[$name] = new $class();
+            }
+        }
+
+        $this->columns($columns);
         $this->data($data);
         $this->file($file);
-        $this->styles($data['@'] ?? []);
     }
 
     protected function process($form) {
-        $allow = $this->allow();
+        $node = dirname($this->getMenuName());
+
+        if ($this->user()['id'] === 1) {
+            $allow = null;
+        } else {
+            $allow = preg_split('/\|/', cfg("backend.{$node}"));
+        }
+
         $name = $this->args()[1];
 
         if ($allow === null || in_array($name, $allow)) {
@@ -108,16 +128,15 @@ class UpdateBundle extends BackendController {
     protected function validate($form) {
         $errors = [];
 
-        foreach ($this->styles() as $name => $style) {
+        foreach ($this->columns() as $name => $column) {
             $value = @$form[$name];
 
             if ($value === null) {
-                if (@$style['required']) {
+                if ($column->required()) {
                     $errors[] = ['name' => $name, 'type' => 'required'];
                 }
             } else {
-                $options = new $style['column']();
-                $type = validate($value, $options);
+                $type = validate($value, $column);
 
                 if ($type) {
                     $errors[] = ['name' => $name, 'type' => $type];
@@ -131,12 +150,9 @@ class UpdateBundle extends BackendController {
     protected function wrap() {
         $form = parent::wrap();
 
-        foreach ($this->styles() as $name => $style) {
-            switch ($style['column']) {
-            case 'File':
-            case 'Image':
+        foreach ($this->columns() as $name => $column) {
+            if ($column instanceof File) {
                 $form = Attachment::wrap($form, $name);
-                break;
             }
         }
 

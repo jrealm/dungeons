@@ -6,11 +6,8 @@ return new class() extends dungeons\web\backend\UpdateBundle {
         $folder = $this->args()[0];
         $prefix = 'config';
 
+        $this->category('config');
         $this->folder($folder === 'base' ? $prefix : "{$prefix}/{$folder}");
-
-        if ($this->user()['id'] !== 1) {
-            $this->allow(preg_split('/\|/', cfg('backend.cfg.bundles')));
-        }
 
         parent::init();
     }
