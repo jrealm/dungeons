@@ -40,9 +40,15 @@ class ListBundle extends BackendController {
             }
         }
 
-        $allow = $this->allow();
+        $node = $this->getMenuName();
+
+        if ($this->user()['id'] === 1) {
+            $allow = null;
+        } else {
+            $allow = preg_split('/\|/', cfg("backend.{$node}"));
+        }
+
         $data = [];
-        $labels = $this->labels();
 
         foreach ($files as $file) {
             $info = pathinfo($file);
@@ -54,7 +60,7 @@ class ListBundle extends BackendController {
                     $data[] = [
                         'id' => $name,
                         'name' => $name,
-                        'remark' => @$labels[$name],
+                        'remark' => i18n("{$node}.{$name}", ''),
                     ];
                 }
             }

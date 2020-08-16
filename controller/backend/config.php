@@ -1,7 +1,5 @@
 <?php //>
 
-use dungeons\Message;
-
 return new class() extends dungeons\web\backend\ListBundle {
 
     protected function init() {
@@ -9,14 +7,8 @@ return new class() extends dungeons\web\backend\ListBundle {
 
         if ($folder === 'base') {
             $this->folder('config');
-            $this->labels(Message::load('config'));
         } else {
             $this->folder("config/{$folder}");
-            $this->labels(Message::load("config-{$folder}"));
-        }
-
-        if ($this->user()['id'] !== 1) {
-            $this->allow(preg_split('/\|/', cfg('backend.cfg.bundles')));
         }
     }
 

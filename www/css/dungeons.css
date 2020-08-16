@@ -45,6 +45,7 @@ th a, th:hover a {
 
 .hint {
     color: transparent;
+    cursor: default;
 }
 
 .hint::selection {
