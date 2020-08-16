@@ -46,12 +46,15 @@ foreach ($result['data'] as $name => $ignore) {
         continue;
     }
 
-    $style = $result['styles'][$name] ?? ['column' => Text::class];
-    $column = new $style['column']();
+    $class = cfg("style/{$prefix}.{$name}", Text::class);
+    $column = new $class();
 
+    $style = [];
     $style['label'] = i18n("{$prefix}.{$name}", $name);
     $style['name'] = $name;
     $style['pattern'] = $style['pattern'] ?? $column->pattern();
+    $style['placeholder'] = i18n("{$prefix}.{$name}.placeholder", '');
+    $style['remark'] = i18n("{$prefix}.{$name}.remark", '');
     $style['type'] = $column->formStyle();
 
     $styles[] = $style;

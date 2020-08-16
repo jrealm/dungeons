@@ -31,31 +31,25 @@ abstract class GetBundle extends BackendController {
     protected function process($form) {
         list($folder, $name) = $this->args();
 
-        $allow = $this->allow();
+        $node = rtrim($this->getMenuName(), '/');
+
+        if ($this->user()['id'] === 1) {
+            $allow = null;
+        } else {
+            $allow = preg_split('/\|/', cfg("backend.{$node}"));
+        }
 
         if ($allow === null || in_array($name, $allow)) {
-            $category = $this->category();
             $data = $this->load($folder, $name);
-
-            if ($folder === 'base') {
-                $prefix = "{$category}.{$name}";
-            } else {
-                $prefix = "{$category}-{$folder}.{$name}";
-            }
         } else {
             $data = null;
-            $prefix = null;
         }
 
         if (!$data) {
             return ['error' => 'error.DataNotFound'];
         }
 
-        $styles = $data['@'] ?? [];
-
-        unset($data['@']);
-
-        return ['success' => true, 'data' => $data, 'prefix' => $prefix, 'styles' => $styles];
+        return ['success' => true, 'data' => $data, 'prefix' => "{$this->category()}/{$folder}.{$name}"];
     }
 
 }
