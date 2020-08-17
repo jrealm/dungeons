@@ -4,11 +4,11 @@ return [
 
     'class' => 'dungeons\service\Newebpay',
 
-    'MerchantID' => 'MS110953386',
+    'MerchantID' => '',
 
-    'HashKey' => '9UhqPKtX28DT6l9RcHRzMTCTgePRZNUl',
+    'HashKey' => '',
 
-    'HashIV' => 'ChtyFTYxfkC7l0VP',
+    'HashIV' => '',
 
     'RespondType' => 'JSON',
 
@@ -16,8 +16,8 @@ return [
 
     'CREDIT' => 1,
 
-    'NotifyURL' => 'https://ntc.fungame.asia/jrealm/mastercard/recharge/newebpay-notice',
+    'NotifyURL' => '',
 
-    'url' => 'https://ccore.newebpay.com/MPG/mpg_gateway',
+    'url' => 'https://core.newebpay.com/MPG/mpg_gateway',
 
 ];
