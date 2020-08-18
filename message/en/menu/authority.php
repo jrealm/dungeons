@@ -2,18 +2,18 @@
 
 return [
 
-    'authority' => 'RIGHTS MANAGEMENT',
+    'authority' => 'Authority Management',
 
-    'user' => 'USER',
+    'user' => 'User',
 
-    'user/' => 'EDIT USER',
+    'user/' => 'Edit User',
 
-    'user/new' => 'NEW USER',
+    'user/new' => 'New User',
 
-    'group' => 'GROUP',
+    'group' => 'Group',
 
-    'group/' => 'EDIT GROUP',
+    'group/' => 'Edit Group',
 
-    'group/new' => 'NEW GROUP',
+    'group/new' => 'New Group',
 
 ];

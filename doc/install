@@ -1,5 +1,5 @@
 cp -R vendor/jrealm/dungeons/{doc/config-sample.php,www} .
-cp vendor/jrealm/dungeons/doc/gitignore .gitignore
+[ ! -f .gitignore ] && cp vendor/jrealm/dungeons/doc/gitignore .gitignore
 echo 'Require all denied' > .htaccess
 
 mkdir -p class config controller/backend data doc logs menu message table view/{native,twig} www/files

@@ -1,4 +1,4 @@
-{% for style in result.styles %}
+{% for style in result.styles|filter(s => s.tab == tab) %}
     {% if style.multilingual %}
         {% for lang in constant('LANGUAGES') %}
             {% set input = style|merge({name: style.name ~ '__' ~ lang}) %}

@@ -39,6 +39,10 @@ return [
 
     'subtotal' => '小計',
 
+    'tab.default' => '基本資料',
+
+    'tab.style' => '樣式',
+
     'title' => '後台管理',
 
 ];

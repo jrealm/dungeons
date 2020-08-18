@@ -1,15 +1,39 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set breadcrumbs, data, description, formId, title = result.breadcrumbs, result.data, result.sub_title, random(), controller.menu().title %}
+{% set breadcrumbs, data, description, formId, tabs, title = result.breadcrumbs, result.data, result.sub_title, random(), [], controller.menu().title %}
 
 {% block header %}
     {% include 'backend/header.twig' %}
 {% endblock %}
 
 {% block content %}
-    <div class="card card-tabs">
+    {% for style in result.styles %}
+        {% if style.tab and style.tab not in tabs %}
+            {% set tabs = tabs|merge([style.tab]) %}
+        {% endif %}
+    {% endfor %}
+    <div class="card">
+        {% if tabs %}
+            <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#default-tab">{{ i18n('backend.tab.default') }}</a></li>
+                    {% for tab in tabs %}
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{{ tab }}-tab">{{ i18n('backend.tab.' ~ tab) }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         <div class="card-body form-wrapper" id="_{{ formId }}">
-            {% include 'backend/form-input.twig' %}
+            <div class="tab-content">
+                <div class="active tab-pane" id="default-tab">
+                    {% include 'backend/form-input.twig' %}
+                </div>
+                {% for tab in tabs %}
+                    <div class="tab-pane" id="{{ tab }}-tab">
+                        {% include 'backend/form-input.twig' with {tab: tab} %}
+                    </div>
+                {% endfor %}
+            </div>
             <input name="r" type="hidden" value="{{ form.r }}">
         </div>
         {% if result.buttons %}

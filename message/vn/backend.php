@@ -2,43 +2,47 @@
 
 return [
 
-    'browser' => 'BROWSER',
+    'browser' => 'Browser',
 
     'close' => 'Close',
 
-    'copyright' => 'COPYRIGHT © 2020',
+    'copyright' => 'Copyright © 2020',
 
-    'delete' => 'DELETE',
-    'delete.cancel' => 'CANCEL',
-    'delete.confirm' => 'CONFIRM DELETE',
-    'delete.confirm.message' => 'CONFIRM DELETE ?',
-    'delete.submit' => 'DELETE',
+    'delete' => 'Delete',
+    'delete.cancel' => 'Cancel',
+    'delete.confirm' => 'Confirm Delete',
+    'delete.confirm.message' => 'Confirm Delete ?',
+    'delete.submit' => 'Delete',
 
-    'edit' => 'EDIT',
-    'edit.cancel' => 'CANCEL',
-    'edit.submit' => 'SAVE',
+    'edit' => 'Edit',
+    'edit.cancel' => 'Cancel',
+    'edit.submit' => 'Save',
 
-    'export' => 'EXPORT',
+    'export' => 'Export',
 
     'list.rows' => 'Total {{ result.count }} rows, {{ block("page", "backend/list.twig") }} pages, {{ block("page_size", "backend/list.twig") }} rows per page',
 
-    'logout' => 'SIGN OUT',
+    'logout' => 'Sign Out',
 
-    'new' => 'NEW',
-    'new.cancel' => 'CANCEL',
-    'new.next' => 'NEXT',
-    'new.submit' => 'SAVE',
+    'new' => 'New',
+    'new.cancel' => 'Cancel',
+    'new.next' => 'Next',
+    'new.submit' => 'Save',
 
-    'operation' => 'OPERATION',
+    'operation' => 'Operation',
 
-    'password' => 'PASSWORD',
+    'password' => 'Password',
 
     'print' => 'Print',
 
-    'search' => 'SEARCH',
+    'search' => 'Search',
 
     'subtotal' => 'Sub Total',
 
-    'title' => 'BACKOFFICE',
+    'tab.default' => 'Data',
+
+    'tab.style' => 'Style',
+
+    'title' => 'Backend',
 
 ];
