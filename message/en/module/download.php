@@ -4,13 +4,13 @@ return [
 
     'backgroundColor' => 'Background Color',
 
-    'contentBgColor' => 'Content BG Color',
+    'contentBgColor' => 'File BG Color',
 
-    'contentColor' => 'Content Color',
+    'contentColor' => 'File Color',
+
+    'contentMarginY' => 'File Vertical Spacing',
 
     'fliud' => 'Fliud Block',
-
-    'innerMarginY' => 'Inner Vertical Spacing',
 
     'paddingX' => 'Horizontal Spacing',
 

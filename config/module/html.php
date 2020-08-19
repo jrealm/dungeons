@@ -12,12 +12,12 @@ return [
         'tab' => 'style',
         'type' => 'radio',
     ], [
-        'options' => 'padding',
+        'options' => 'spacing',
         'name' => 'paddingX',
         'tab' => 'style',
         'type' => 'radio',
     ], [
-        'options' => 'padding',
+        'options' => 'spacing',
         'name' => 'paddingY',
         'tab' => 'style',
         'type' => 'radio',

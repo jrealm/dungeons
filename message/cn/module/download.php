@@ -8,9 +8,9 @@ return [
 
     'contentColor' => '档案前景色',
 
-    'fliud' => '满版区块',
+    'contentMarginY' => '档案垂直间距',
 
-    'innerMarginY' => '内垂直间距',
+    'fliud' => '满版区块',
 
     'paddingX' => '水平间距',
 

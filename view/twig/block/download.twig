@@ -1,6 +1,6 @@
 {% set bgcolor = contentBgColor ? ('background-color:' ~ contentBgColor ~ ';') : '' %}
 {% set color = contentColor ? ('color:' ~ contentColor ~ ';') : '' %}
-{% set margin = innerMarginY ? (' my-' ~ innerMarginY) : '' %}
+{% set margin = contentMarginY ? (' my-' ~ contentMarginY) : '' %}
 {% set padding = paddingX ? ('px-' ~ paddingX) : '' %}
 <div class="{{ padding }}">
     <div class="row row-cols-1 row-cols-md-3">

@@ -8,9 +8,9 @@ return [
 
     'contentColor' => '檔案前景色',
 
-    'fliud' => '滿版區塊',
+    'contentMarginY' => '檔案垂直間距',
 
-    'innerMarginY' => '內垂直間距',
+    'fliud' => '滿版區塊',
 
     'paddingX' => '水平間距',
 
