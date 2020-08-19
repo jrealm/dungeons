@@ -1,0 +1,8 @@
+{% set padding = paddingX ? ('px-' ~ paddingX) : '' %}
+<div class="row">
+    <div class="col">
+        <div class="{{ padding }}">
+            {{ content|raw }}
+        </div>
+    </div>
+</div>

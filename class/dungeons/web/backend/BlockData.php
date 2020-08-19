@@ -65,12 +65,13 @@ trait BlockData {
         $moduleName = @$form['module'];
         $table = $this->table();
 
-        if (!$moduleName) {
+        if ($moduleName) {
+            $module = Config::load("module/{$moduleName}");
+        } else {
             $block = $table->parent()->model()->get($form['block_id']);
             $moduleName = Config::load("module/{$block['module']}")['sub-module'];
+            $module = Config::load("sub-module/{$moduleName}");
         }
-
-        $module = Config::load("module/{$moduleName}");
 
         foreach ($module['fields'] as $field) {
             $name = $field['name'];

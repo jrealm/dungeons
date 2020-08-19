@@ -17,7 +17,7 @@ class ListController extends Controller {
 
         $fields = [];
         $labels = Message::load("module/{$sub}");
-        $module = Config::load("module/{$sub}");
+        $module = Config::load("sub-module/{$sub}");
         $table = $this->table();
 
         foreach ($module['fields'] as $field) {

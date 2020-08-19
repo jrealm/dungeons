@@ -1,0 +1,21 @@
+{% set bgcolor = contentBgColor ? ('background-color:' ~ contentBgColor ~ ';') : '' %}
+{% set color = contentColor ? ('color:' ~ contentColor ~ ';') : '' %}
+{% set margin = innerMarginY ? (' my-' ~ innerMarginY) : '' %}
+{% set padding = paddingX ? ('px-' ~ paddingX) : '' %}
+<div class="{{ padding }}">
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for item in items %}
+            {% set file = find('File', {path: item.file}) %}
+            <div class="col">
+                <div class="card{{ margin }}" style="{{ bgcolor }}border:1px solid rgba(0, 0, 0, 0.125);">
+                    <div class="card-body">
+                        <a class="text-decoration-none" download="{{ file.name }}" href="{{ item.file|pathname }}" style="{{ color }}">
+                            <i class="fas fa-2x fa-download"></i>
+                            {{ item.title }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

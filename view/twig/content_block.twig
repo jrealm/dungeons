@@ -1,3 +1,8 @@
 {% for data in page.blocks %}
-    {% include 'block/' ~ data.module ~ '.twig' with data only %}
+    {% set container = (data.fliud == 'true') ? 'container-fliud overflow-hidden' : 'container' %}
+    {% set padding = data.paddingY ? (' py-' ~ data.paddingY) : '' %}
+    {% set bgcolor = data.backgroundColor ? ('background-color:' ~ data.backgroundColor ~ ';') : '' %}
+    <div class="{{ container }}{{ padding }}" style="{{ bgcolor }}">
+        {% include 'block/' ~ data.module ~ '.twig' with data only %}
+    </div>
 {% endfor %}

@@ -12,6 +12,4 @@ return [
         'type' => 'file',
     ]],
 
-    'sub-module' => null,
-
 ];

@@ -2,8 +2,14 @@
 
 return [
 
+    'backgroundColor' => 'Background Color',
+
+    'content' => 'Brief',
+
+    'fliud' => 'Fliud Block',
+
     'image' => 'Image',
 
-    'content' => 'Description',
+    'paddingY' => 'Vertical Spacing',
 
 ];

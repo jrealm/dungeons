@@ -29,7 +29,7 @@ class BlankController extends Controller {
             $block = $table->parent()->model()->get($this->args()[0]);
             $data = $result['data'];
             $parent = Config::load("module/{$block['module']}");
-            $module = Config::load("module/{$parent['sub-module']}");
+            $module = Config::load("sub-module/{$parent['sub-module']}");
 
             foreach ($module['fields'] as $field) {
                 $value = @$field['default'];

@@ -10,7 +10,9 @@ trait BlockForm {
     public function remix($styles, $list) {
         $moduleName = @array_pop($list)['module'];
 
-        if (!$moduleName) {
+        if ($moduleName) {
+            $module = Config::load("module/{$moduleName}");
+        } else {
             $moduleName = @array_pop($list)['module'];
 
             if (!$moduleName) {
@@ -18,11 +20,11 @@ trait BlockForm {
             }
 
             $moduleName = Config::load("module/{$moduleName}")['sub-module'];
+            $module = Config::load("sub-module/{$moduleName}");
         }
 
         $fields = [];
         $labels = Message::load("module/{$moduleName}");
-        $module = Config::load("module/{$moduleName}");
         $table = $this->table();
 
         foreach ($module['fields'] as $field) {
