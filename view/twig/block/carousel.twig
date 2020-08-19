@@ -1,31 +1,28 @@
 {% set id = random() %}
-{% set padding = paddingX ? ('px-' ~ paddingX) : '' %}
 <div class="row">
     <div class="col">
-        <div class="{{ padding }}">
-            <div class="carousel carousel-fade slide" data-ride="carousel" id="carousel-{{ id }}">
-                <ol class="carousel-indicators">
-                    {% for item in items %}
-                        <li class="{{ loop.first ? 'active' : '' }}" data-slide-to="{{ loop.index0 }}" data-target="#carousel-{{ id }}"></li>
-                    {% endfor %}
-                </ol>
-                <div class="carousel-inner">
-                    {% for item in items %}
-                        <div class="{% if loop.first %}active {% endif %}carousel-item" data-interval="{{ (interval < 0 ? 0 : interval) * 1000 }}">
-                            <img class="d-block w-100" src="{{ item.image|img }}">
-                            <div class="carousel-caption d-md-block d-none">
-                                <p class="text-center">{{ item.content }}</p>
-                            </div>
+        <div class="carousel carousel-fade slide" data-ride="carousel" id="carousel-{{ id }}">
+            <ol class="carousel-indicators">
+                {% for item in items %}
+                    <li class="{{ loop.first ? 'active' : '' }}" data-slide-to="{{ loop.index0 }}" data-target="#carousel-{{ id }}"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+                {% for item in items %}
+                    <div class="{% if loop.first %}active {% endif %}carousel-item" data-interval="{{ (interval < 0 ? 0 : interval) * 1000 }}">
+                        <img class="d-block w-100" src="{{ item.image|img }}">
+                        <div class="carousel-caption d-md-block d-none">
+                            <p class="text-center">{{ item.content }}</p>
                         </div>
-                    {% endfor %}
-                </div>
-                <a class="carousel-control-prev" data-slide="prev" href="#carousel-{{ id }}" role="button">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" data-slide="next" href="#carousel-{{ id }}" role="button">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
+                    </div>
+                {% endfor %}
             </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#carousel-{{ id }}" role="button">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#carousel-{{ id }}" role="button">
+                <span class="carousel-control-next-icon"></span>
+            </a>
         </div>
     </div>
 </div>

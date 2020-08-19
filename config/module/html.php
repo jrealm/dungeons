@@ -7,6 +7,7 @@ return [
         'required' => true,
         'type' => 'html',
     ], [
+        'default' => true,
         'options' => 'yes-no',
         'name' => 'fliud',
         'tab' => 'style',

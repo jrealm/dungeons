@@ -3,6 +3,7 @@
 return [
 
     'fields' => [[
+        'default' => true,
         'options' => 'yes-no',
         'name' => 'fliud',
         'tab' => 'style',

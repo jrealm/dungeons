@@ -2,10 +2,22 @@
 
 return [
 
-    'title' => 'Title',
+    'aBgColor' => 'Article Background Color',
 
-    'content' => 'Content',
+    'aPadding' => 'Article Padding',
+
+    'content' => 'Article',
+
+    'fliud' => 'Fliud Block',
+
+    'iBgColor' => 'Image Background Color',
+
+    'iPadding' => 'Image Padding',
 
     'image' => 'Image',
+
+    'position' => 'Position',
+
+    'weight' => 'Weight',
 
 ];

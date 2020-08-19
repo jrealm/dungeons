@@ -10,6 +10,8 @@ return [
 
     'image' => '圖片',
 
+    'paddingX' => '水平間距',
+
     'paddingY' => '垂直間距',
 
 ];

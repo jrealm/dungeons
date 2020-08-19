@@ -10,6 +10,8 @@ return [
 
     'image' => 'Image',
 
+    'paddingX' => 'Horizontal Spacing',
+
     'paddingY' => 'Vertical Spacing',
 
 ];
