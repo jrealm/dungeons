@@ -7,7 +7,7 @@ return new class() extends dungeons\web\UserController {
     protected function process($form) {
         $user = $this->user();
 
-        Session::remove('User');
+        Session::destroy();
 
         model('UserLog')->insert(['user_id' => $user['id'], 'type' => 2]);
 

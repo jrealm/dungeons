@@ -4,6 +4,10 @@ namespace dungeons\web;
 
 class Session {
 
+    public static function destroy() {
+        return session_destroy();
+    }
+
     public static function get($name, $default = null) {
         return $_SESSION[$name] ?? $default;
     }
