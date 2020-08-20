@@ -8,6 +8,8 @@ return [
 
     'carousel' => 'Image Carousel',
 
+    'youtube' => 'Youtube',
+
     'download' => 'File Download',
 
     'html' => 'Web Editor',

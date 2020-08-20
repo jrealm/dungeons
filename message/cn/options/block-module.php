@@ -8,6 +8,8 @@ return [
 
     'carousel' => '图片轮播',
 
+    'youtube' => 'Youtube',
+
     'download' => '档案下载',
 
     'html' => '网页编辑器',
