@@ -466,7 +466,7 @@
         }
 
         if ($.fn.summernote) {
-            form.find("textarea[data-format=html]").summernote().filter("[data-disabled]").summernote("disable");
+            form.find("textarea[data-format=html]").summernote({height: 300}).filter("[data-disabled]").summernote("disable");
         }
     };
 
