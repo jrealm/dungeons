@@ -2,17 +2,17 @@
 
 return [
 
-    'aBgColor' => '文章背景色',
+    'aBgColor' => '文章区背景色',
 
-    'aPadding' => '文章间距',
+    'aPadding' => '文章区间距',
 
     'content' => '文章',
 
     'fliud' => '满版区块',
 
-    'iBgColor' => '图片背景色',
+    'iBgColor' => '图片区背景色',
 
-    'iPadding' => '图片间距',
+    'iPadding' => '图片区间距',
 
     'image' => '图片',
 
