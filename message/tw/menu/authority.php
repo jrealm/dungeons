@@ -10,6 +10,8 @@ return [
 
     'user/new' => '新增帳號',
 
+    'user-log' => '帳號紀錄',
+
     'group' => '群組',
 
     'group/' => '編輯群組',

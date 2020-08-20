@@ -13,6 +13,7 @@ $tbl->add('user_id', Integer::class)
     ->required(true);
 
 $tbl->add('type', Integer::class)
+    ->options('UserLogType')
     ->readonly(true)
     ->required(true);
 
@@ -23,5 +24,7 @@ $tbl->add('ip', RemoteAddress::class)
 $tbl->add('create_time', CreateTime::class)
     ->readonly(true)
     ->required(true);
+
+$tbl->ranking('-id');
 
 return $tbl;

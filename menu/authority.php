@@ -16,7 +16,9 @@ return [
 
     'user/update' => ['parent' => 'user', 'tag' => 'update'],
 
-    'group' => ['icon' => 'fas fa-users', 'ranking' => 200, 'parent' => 'authority', 'group' => true, 'tag' => 'query'],
+    'user-log' => ['icon' => 'far fa-list-alt', 'ranking' => 200, 'parent' => 'authority', 'group' => true, 'tag' => 'query'],
+
+    'group' => ['icon' => 'fas fa-users', 'ranking' => 300, 'parent' => 'authority', 'group' => true, 'tag' => 'query'],
 
     'group/' => ['parent' => 'group', 'tag' => 'query'],
 

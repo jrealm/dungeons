@@ -10,6 +10,8 @@ return [
 
     'user/new' => 'New User',
 
+    'user-log' => 'User Log',
+
     'group' => 'Group',
 
     'group/' => 'Edit Group',

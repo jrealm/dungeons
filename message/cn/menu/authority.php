@@ -10,6 +10,8 @@ return [
 
     'user/new' => '新增帐号',
 
+    'user-log' => '帐号纪录',
+
     'group' => '群组',
 
     'group/' => '编辑群组',
