@@ -39,6 +39,10 @@ class Attachment {
     }
 
     private static function getFolder() {
+        if (defined('FILES_HOME')) {
+            return create_folder(FILES_HOME . date('Ymd/'));
+        }
+
         if (defined('APP_HOME')) {
             return create_folder(APP_HOME . 'www/files/' . date('Ymd/'));
         }
