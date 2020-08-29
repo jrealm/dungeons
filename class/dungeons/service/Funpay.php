@@ -44,6 +44,10 @@ class Funpay {
 
         $result = json_decode($response, true);
 
+        if ($result) {
+            $response = json_encode($result, JSON_UNESCAPED_UNICODE);
+        }
+
         if (@$result['code'] !== 0) {
             logger('funpay-error')->info($response, $data);
 
