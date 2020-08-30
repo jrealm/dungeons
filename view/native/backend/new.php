@@ -75,7 +75,10 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 
         if ($options) {
             $style['options'] = Message::load("options/{$options}");
-            $style['type'] = 'radio';
+
+            if ($style['type'] !== 'select') {
+                $style['type'] = 'radio';
+            }
         } else if (key_exists($name, $bundles)) {
             $style['multiple'] = $column->multiple();
             $style['options'] = $bundles[$name];

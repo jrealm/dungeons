@@ -550,6 +550,30 @@
         }
 
         redirect({path}, false, {"form-id": form});
+    }).delegate("button[data-upload]", "click", function (event) {
+        var input = $(event.currentTarget).siblings("input");
+
+        if (!input.data("binding")) {
+            input.on("change", function () {
+                var file = input[0].files && input[0].files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function () {
+                        perform(input.data("ajax"), {file: reader.result, "file#filename": file.name});
+
+                        input.val('');
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            input.data("binding", true);
+        }
+
+        input.click();
     }).delegate("input[data-all][type=checkbox]", "change", function (event) {
         var list = $("input[data-id][type=checkbox]");
 

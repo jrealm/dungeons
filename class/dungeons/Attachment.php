@@ -106,6 +106,10 @@ class Attachment {
         return $this->info['path'];
     }
 
+    public function info() {
+        return $this->info;
+    }
+
     public function save($parent_id = -1) {
         $this->info['parent_id'] = $parent_id;
 
