@@ -10,7 +10,10 @@ class GetController extends Controller {
     use BlockForm;
 
     protected function init() {
-        $this->columns($this->table()->getColumns([
+        $table = $this->table();
+        $table->module->formStyle('select');
+
+        $this->columns($table->getColumns([
             'id',
             'page_id',
             'module',

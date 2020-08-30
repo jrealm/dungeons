@@ -12,6 +12,8 @@ class BlankController extends Controller {
     use BlockForm, SubCreation;
 
     protected function init() {
+        $this->table()->module->blankStyle('select');
+
         $this->validationView('backend/validation.php');
     }
 
