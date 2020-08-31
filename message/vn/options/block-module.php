@@ -14,6 +14,8 @@ return [
 
     'multi-intro' => 'Multi-Introduction',
 
+    'faq-list' => 'FAQ',
+
     'download' => 'File Download',
 
     'html' => 'Web Editor',

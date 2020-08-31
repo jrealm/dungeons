@@ -14,6 +14,8 @@ return [
 
     'multi-intro' => '多欄式簡介',
 
+    'faq-list' => 'FAQ',
+
     'download' => '檔案下載',
 
     'html' => '網頁編輯器',

@@ -14,6 +14,8 @@ return [
 
     'multi-intro' => '多栏式简介',
 
+    'faq-list' => 'FAQ',
+
     'download' => '档案下载',
 
     'html' => '网页编辑器',

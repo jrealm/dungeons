@@ -1,0 +1,30 @@
+{% if title %}
+    {% set color = color ? ('color:' ~ color ~ ';') : '' %}
+    <div class="row">
+        <div class="col h3" style="{{ color }}">{{ title }}</div>
+    </div>
+{% endif %}
+<div class="row">
+    <div class="accordion col" id="accordion__{{ id }}">
+        {% set qBgColor = questionBgColor ? ('background-color:' ~ questionBgColor ~ ';') : '' %}
+        {% set qColor = questionColor ? ('color:' ~ questionColor ~ ';') : '' %}
+        {% set aBgColor = answerBgColor ? ('background-color:' ~ answerBgColor ~ ';') : '' %}
+        {% set aColor = answerColor ? ('color:' ~ answerColor ~ ';') : '' %}
+        {% for item in items %}
+            <div class="card">
+                <div class="card-header" style="{{ qBgColor }}">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" data-target="#collapse__{{ item.id }}" data-toggle="collapse" style="{{ qColor }}" type="button">
+                            {{ item.title }}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse{% if loop.first %} show{% endif %}" data-parent="#accordion__{{ id }}" id="collapse__{{ item.id }}" style="{{ aBgColor }}">
+                    <div class="card-body" style="{{ aColor }}">
+                        {{ item.content|raw }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
