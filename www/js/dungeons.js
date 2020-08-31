@@ -442,6 +442,7 @@
                         input.val(reader.result);
                         input.siblings("input[data-filename]").val(file.name);
                         input.closest("div").find(".file-preview").html("<img class=\"border shadow\" src=\"" + reader.result + "\">");
+                        input.parent().siblings("a[data-remove]").removeClass("d-none");
                     };
 
                     reader.readAsDataURL(file);
@@ -510,6 +511,14 @@
         }
 
         return false;
+    }).delegate("a[data-remove]", "click", function (event) {
+        var anchor = $(event.currentTarget);
+
+        anchor.addClass("d-none");
+        anchor.siblings(".file-preview").empty();
+        anchor.siblings("label").find("input").each(function (ignore, element) {
+            $(element).val("");
+        });
     }).delegate("a[data-toggle=lightbox]", "click", function (event) {
         $(event.currentTarget).ekkoLightbox();
 
@@ -563,7 +572,7 @@
                     reader.onload = function () {
                         perform(input.data("ajax"), {file: reader.result, "file#filename": file.name});
 
-                        input.val('');
+                        input.val("");
                     };
 
                     reader.readAsDataURL(file);

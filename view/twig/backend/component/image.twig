@@ -15,5 +15,8 @@
                 <a class="btn btn-default btn-lg" title="{{ i18n('backend.browser') }}"><i class="far fa-file-image"></i></a>
             {% endif %}
         </label>
+        {% if not style.disabled and not style.required %}
+            <a class="align-top btn btn-default btn-lg{% if not data[style.name] %} d-none{% endif %}" data-remove title="{{ i18n('backend.remove') }}"><i class="fas fa-times"></i></a>
+        {% endif %}
     {% endif %}
 </div>

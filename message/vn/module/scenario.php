@@ -16,7 +16,7 @@ return [
 
     'fliud' => 'Fliud Block',
 
-    'image' => 'Image',
+    'image' => 'Background Image',
 
     'paddingX' => 'Horizontal Spacing',
 

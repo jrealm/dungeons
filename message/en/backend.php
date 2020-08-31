@@ -35,6 +35,8 @@ return [
 
     'print' => 'Print',
 
+    'remove' => 'Remove',
+
     'search' => 'Search',
 
     'subtotal' => 'Sub Total',

@@ -35,6 +35,8 @@ return [
 
     'print' => '列印',
 
+    'remove' => '移除',
+
     'search' => '查詢',
 
     'subtotal' => '小計',

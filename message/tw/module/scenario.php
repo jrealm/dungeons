@@ -16,7 +16,7 @@ return [
 
     'fliud' => '滿版區塊',
 
-    'image' => '圖片',
+    'image' => '背景圖',
 
     'paddingX' => '水平間距',
 
