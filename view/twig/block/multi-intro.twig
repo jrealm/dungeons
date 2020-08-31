@@ -1,0 +1,46 @@
+{% if title %}
+    {% set color = color ? ('color:' ~ color ~ ';') : '' %}
+    <div class="row">
+        <div class="col h{{ size }} mb-0 text-center" style="{{ color }}">{{ title }}</div>
+    </div>
+{% endif %}
+{% if items %}
+    {% if not column %}
+        {% set column = items|length > 4 ? 4 : items|length %}
+    {% endif %}
+    {% if column == 1 %}
+        {% set column = 'col-12' %}
+    {% elseif column == 2 %}
+        {% set column = 'col-12 col-md-6' %}
+    {% elseif column == 3 %}
+        {% set column = 'col-12 col-md-6 col-lg-4' %}
+    {% else %}
+        {% set column = 'col-12 col-md-6 col-lg-3' %}
+    {% endif %}
+    <div class="row{% if not title %} mt-n{{ innerPaddingY }}{% endif %}">
+        {% for item in items %}
+            {% set bgcolor = item.backgroundColor ? ('background-color:' ~ item.backgroundColor ~ ';') : '' %}
+            {% set borderColor = item.borderColor ? ('border-color:' ~ item.borderColor ~ ' !important;') : '' %}
+            {% set borderWidth = 'border-width:' ~  item.borderSize ~ 'px !important;' %}
+            {% set btnBgColor = item.buttonBgColor ? ('background-color:' ~ item.buttonBgColor ~ ' !important;') : '' %}
+            {% set btnColor = item.buttonColor ? ('color:' ~ item.buttonColor ~ ';') : '' %}
+            {% set color = item.color ? ('color:' ~ item.color ~ ';') : '' %}
+            <div class="{{ column }} mt-{{ innerPaddingY }}">
+                <div class="border p-3{% if item.rounded %} rounded{% endif %}{% if item.shadow %} shadow-lg{% endif %}" style="{{ bgcolor }}{{ borderColor }}{{ borderWidth }}">
+                    {% if item.image %}
+                        <img class="d-block mb-2 mx-auto" src="{{ item.image|img }}" style="max-width: {{ item.imageWidth }}%;">
+                    {% endif %}
+                    {% if item.title %}
+                        <div class="h5 text-center" style="{{ color }}">{{ item.title }}</div>
+                    {% endif %}
+                    {% if item.content %}
+                        <div class="mb-2">{{ item.content|raw }}</div>
+                    {% endif %}
+                    {% if item.url and item.button %}
+                        <a class="btn btn-primary btn-block" href="{{ item.url }}" style="{{ btnBgColor }}{{ btnColor }}">{{ item.button }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

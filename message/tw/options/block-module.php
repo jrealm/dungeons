@@ -10,6 +10,8 @@ return [
 
     'youtube' => 'Youtube',
 
+    'multi-intro' => '多欄式簡介',
+
     'download' => '檔案下載',
 
     'html' => '網頁編輯器',

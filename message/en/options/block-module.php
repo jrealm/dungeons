@@ -10,6 +10,8 @@ return [
 
     'youtube' => 'Youtube',
 
+    'multi-intro' => 'Multi-Introduction',
+
     'download' => 'File Download',
 
     'html' => 'Web Editor',

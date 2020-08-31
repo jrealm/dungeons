@@ -10,6 +10,8 @@ return [
 
     'youtube' => 'Youtube',
 
+    'multi-intro' => '多栏式简介',
+
     'download' => '档案下载',
 
     'html' => '网页编辑器',
