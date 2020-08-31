@@ -19,7 +19,7 @@ return [
         'name' => 'url',
         'type' => 'url',
     ], [
-        'default' => '50',
+        'default' => 50,
         'options' => 'image-width',
         'name' => 'imageWidth',
         'tab' => 'style',

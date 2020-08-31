@@ -26,7 +26,7 @@
             {% set btnColor = item.buttonColor ? ('color:' ~ item.buttonColor ~ ';') : '' %}
             {% set color = item.color ? ('color:' ~ item.color ~ ';') : '' %}
             <div class="{{ column }} mt-{{ innerPaddingY }}">
-                <div class="border p-3{% if item.rounded %} rounded{% endif %}{% if item.shadow %} shadow-lg{% endif %}" style="{{ bgcolor }}{{ borderColor }}{{ borderWidth }}">
+                <div class="border p-3{% if item.rounded == 'true' %} rounded{% endif %}{% if item.shadow == 'true' %} shadow-lg{% endif %}" style="{{ bgcolor }}{{ borderColor }}{{ borderWidth }}">
                     {% if item.image %}
                         <img class="d-block mb-2 mx-auto" src="{{ item.image|img }}" style="max-width: {{ item.imageWidth }}%;">
                     {% endif %}
@@ -37,7 +37,7 @@
                         <div class="mb-2">{{ item.content|raw }}</div>
                     {% endif %}
                     {% if item.url and item.button %}
-                        <a class="btn btn-primary btn-block" href="{{ item.url }}" style="{{ btnBgColor }}{{ btnColor }}">{{ item.button }}</a>
+                        <a class="btn btn-primary btn-block" href="{{ item.url }}" style="border:0;{{ btnBgColor }}{{ btnColor }}">{{ item.button }}</a>
                     {% endif %}
                 </div>
             </div>
