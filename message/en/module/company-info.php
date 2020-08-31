@@ -2,14 +2,24 @@
 
 return [
 
-    'title' => 'Company Name',
+    'backgroundColor' => 'Background Color',
+
+    'color' => 'Color',
 
     'content' => 'Address',
 
+    'fliud' => 'Fliud Block',
+
     'mail' => 'E-mail',
+
+    'map' => 'Map Information',
+
+    'paddingX' => 'Horizontal Spacing',
+
+    'paddingY' => 'Vertical Spacing',
 
     'phone' => 'Phone',
 
-    'map' => 'Map Information',
+    'title' => 'Company Name',
 
 ];

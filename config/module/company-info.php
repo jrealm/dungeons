@@ -22,6 +22,30 @@ return [
         'name' => 'map',
         'required' => true,
         'type' => 'textarea',
+    ], [
+        'default' => true,
+        'options' => 'yes-no',
+        'name' => 'fliud',
+        'tab' => 'style',
+        'type' => 'radio',
+    ], [
+        'options' => 'spacing',
+        'name' => 'paddingX',
+        'tab' => 'style',
+        'type' => 'radio',
+    ], [
+        'options' => 'spacing',
+        'name' => 'paddingY',
+        'tab' => 'style',
+        'type' => 'radio',
+    ], [
+        'name' => 'color',
+        'tab' => 'style',
+        'type' => 'color',
+    ], [
+        'name' => 'backgroundColor',
+        'tab' => 'style',
+        'type' => 'color',
     ]],
 
     'sub-module' => null,

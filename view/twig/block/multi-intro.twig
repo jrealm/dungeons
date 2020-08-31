@@ -17,7 +17,7 @@
     {% else %}
         {% set column = 'col-12 col-md-6 col-lg-3' %}
     {% endif %}
-    <div class="row{% if not title %} mt-n{{ innerPaddingY }}{% endif %}">
+    <div class="{% if not title %}mt-n{{ innerPaddingY }} {% endif %}row">
         {% for item in items %}
             {% set bgcolor = item.backgroundColor ? ('background-color:' ~ item.backgroundColor ~ ';') : '' %}
             {% set borderColor = item.borderColor ? ('border-color:' ~ item.borderColor ~ ' !important;') : '' %}

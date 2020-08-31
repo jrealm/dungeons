@@ -1,0 +1,26 @@
+<div class="no-gutters row">
+    <div class="col-12 col-lg-6 p-0" style="min-height:350px;">
+        <iframe frameborder="0" src="{{ map|raw }}"></iframe>
+    </div>
+    {% set textColor = color ? ('color:' ~ color ~ ';') : '' %}
+    <div class="col-12 col-lg-6 p-5" style="{{ textColor }}">
+        {% if title %}
+            <p class="h5">{{ title }}</p>
+            <hr style="border:0.5px solid {{ color }};">
+        {% endif %}
+        {% if content %}
+            <p>{{ label.content }} :</p>
+            <p class="h5">{{ content }}</p>
+            <hr style="border:0.5px solid {{ color }};">
+        {% endif %}
+        {% if mail %}
+            <p>{{ label.mail }} :</p>
+            <p class="h5">{{ mail }}</p>
+            <hr style="border:0.5px solid {{ color }};">
+        {% endif %}
+        {% if phone %}
+            <p>{{ label.phone }} :</p>
+            <p class="h5">{{ phone }}</p>
+        {% endif %}
+    </div>
+</div>
