@@ -10,6 +10,8 @@ return [
 
     'youtube' => 'Youtube',
 
+    'scenario' => '情境圖文',
+
     'multi-intro' => '多欄式簡介',
 
     'download' => '檔案下載',

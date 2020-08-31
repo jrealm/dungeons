@@ -10,6 +10,8 @@ return [
 
     'youtube' => 'Youtube',
 
+    'scenario' => 'Scenario',
+
     'multi-intro' => 'Multi-Introduction',
 
     'download' => 'File Download',
