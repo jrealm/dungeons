@@ -5,6 +5,7 @@ return [
     'fields' => [[
         'name' => 'content',
         'required' => true,
+        'tab' => 'content',
         'type' => 'html',
     ], [
         'default' => true,
@@ -24,7 +25,7 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ]],
 

@@ -5,6 +5,7 @@ return [
     'fields' => [[
         'name' => 'image',
         'required' => true,
+        'tab' => 'content',
         'type' => 'image',
     ], [
         'default' => true,
@@ -24,7 +25,7 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ]],
 

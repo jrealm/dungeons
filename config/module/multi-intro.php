@@ -4,6 +4,7 @@ return [
 
     'fields' => [[
         'name' => 'title',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'default' => true,
@@ -29,11 +30,11 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'color',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'options' => 'column-count',

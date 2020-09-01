@@ -5,10 +5,12 @@ return [
     'fields' => [[
         'name' => 'image',
         'required' => true,
+        'tab' => 'content',
         'type' => 'image',
     ], [
         'name' => 'content',
         'required' => true,
+        'tab' => 'content',
         'type' => 'html',
     ],[
         'default' => true,
@@ -23,7 +25,7 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'iBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'options' => 'spacing',
@@ -32,7 +34,7 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'aBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'default' => 1,

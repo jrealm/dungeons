@@ -41,8 +41,9 @@ return [
 
     'subtotal' => 'Sub Total',
 
+    'tab.color' => 'Color',
+    'tab.content' => 'Content',
     'tab.default' => 'Data',
-
     'tab.style' => 'Style',
 
     'title' => 'Backend',

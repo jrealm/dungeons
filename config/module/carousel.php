@@ -3,6 +3,11 @@
 return [
 
     'fields' => [[
+        'default' => 5,
+        'name' => 'interval',
+        'tab' => 'content',
+        'type' => 'integer',
+    ], [
         'default' => true,
         'options' => 'yes-no',
         'name' => 'fliud',
@@ -20,13 +25,8 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
-    ], [
-        'default' => 5,
-        'name' => 'interval',
-        'tab' => 'style',
-        'type' => 'integer',
     ]],
 
     'sub-module' => 'image',

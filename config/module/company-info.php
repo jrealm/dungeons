@@ -5,22 +5,27 @@ return [
     'fields' => [[
         'name' => 'title',
         'required' => true,
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'content',
         'required' => true,
+        'tab' => 'content',
         'type' => 'textarea',
     ],[
         'name' => 'mail',
         'required' => true,
+        'tab' => 'content',
         'type' => 'email',
     ],[
         'name' => 'phone',
         'required' => true,
+        'tab' => 'content',
         'type' => 'text',
     ],[
         'name' => 'map',
         'required' => true,
+        'tab' => 'content',
         'type' => 'textarea',
     ], [
         'default' => true,
@@ -40,11 +45,11 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'color',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ]],
 

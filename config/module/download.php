@@ -20,15 +20,15 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'contentColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'contentBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'options' => 'spacing',

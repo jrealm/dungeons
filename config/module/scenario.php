@@ -4,19 +4,24 @@ return [
 
     'fields' => [[
         'name' => 'image',
+        'tab' => 'content',
         'type' => 'image',
     ], [
         'name' => 'title',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'content',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'multilingual' => true,
         'name' => 'button',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'path',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'default' => true,
@@ -36,23 +41,23 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'titleColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'contentColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'buttonColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'buttonBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ]],
 

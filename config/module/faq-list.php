@@ -4,6 +4,7 @@ return [
 
     'fields' => [[
         'name' => 'title',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'default' => true,
@@ -23,27 +24,27 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'color',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'questionColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'questionBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'answerColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'answerBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ]],
 

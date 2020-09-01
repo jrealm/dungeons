@@ -4,19 +4,24 @@ return [
 
     'fields' => [[
         'name' => 'image',
+        'tab' => 'content',
         'type' => 'image',
     ], [
         'name' => 'title',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'content',
+        'tab' => 'content',
         'type' => 'html',
     ], [
         'multilingual' => true,
         'name' => 'button',
+        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'url',
+        'tab' => 'content',
         'type' => 'url',
     ], [
         'default' => 50,
@@ -26,7 +31,7 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'borderColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'default' => 0,
@@ -48,19 +53,19 @@ return [
         'type' => 'radio',
     ], [
         'name' => 'color',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'backgroundColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'buttonColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ], [
         'name' => 'buttonBgColor',
-        'tab' => 'style',
+        'tab' => 'color',
         'type' => 'color',
     ]],
 
