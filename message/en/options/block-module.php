@@ -18,6 +18,8 @@ return [
 
     'download' => 'File Download',
 
+    'download-intro' => 'File Introduction & Download',
+
     'html' => 'Web Editor',
 
     'company-info' => 'Company Info',

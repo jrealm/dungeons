@@ -18,6 +18,8 @@ return [
 
     'download' => '檔案下載',
 
+    'download-intro' => '檔案簡介+下載',
+
     'html' => '網頁編輯器',
 
     'company-info' => '公司資訊',

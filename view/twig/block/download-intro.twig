@@ -1,0 +1,32 @@
+{% set mapping = {
+    'audio': '-audio',
+    'image': '-image',
+    'pdf': '-pdf',
+    'plain': '-alt',
+    'video': '-video',
+    'vnd.openxmlformats-officedocument.wordprocessingml.document': '-word',
+    'vnd.openxmlformats-officedocument.presentationml.presentation': '-powerpoint',
+    'vnd.openxmlformats-officedocument.spreadsheetml.sheet': '-excel',
+    'x-gzip': '-archive',
+    'zip': '-archive',
+} %}
+<div class="pt-{{ contentMarginY }} row row-cols-1 row-cols-md-2">
+    {% for item in items %}
+        {% set file = find('File', {path: item.file}) %}
+        {% set type, types = '', file.mime_type|split('/') %}
+        {% if types[0] in ['application', 'text'] %}
+            {% set type = mapping[types[1]] %}
+        {% else %}
+            {% set type = mapping[types[0]] %}
+        {% endif %}
+        <div class="col mb-{{ contentMarginY }} media">
+            <a class="ml-3 text-secondary" download="{{ file.name }}" href="{{ item.file|pathname }}" style="cursor:pointer;">
+                <i class="fa-5x fa-file{{ type }} far"></i>
+            </a>
+            <div class="media-body mx-3">
+                <h5>{{ item.title }}</h5>
+                {{ item.content }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

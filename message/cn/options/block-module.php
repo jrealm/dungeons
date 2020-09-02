@@ -18,6 +18,8 @@ return [
 
     'download' => '档案下载',
 
+    'download-intro' => '档案简介+下载',
+
     'html' => '网页编辑器',
 
     'company-info' => '公司资讯',
