@@ -14,6 +14,8 @@ return [
 
     'scenario-intro' => '情境图+简介',
 
+    'multi-scenario' => '多栏式背景图文',
+
     'multi-intro' => '多栏式简介',
 
     'faq-list' => 'FAQ',

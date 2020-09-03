@@ -10,13 +10,17 @@ return [
 
     'buttonColor' => '按钮颜色',
 
-    'content' => '次标',
+    'content' => '内容',
 
     'contentColor' => '次标颜色',
 
     'fliud' => '满版区块',
 
     'image' => '背景图',
+
+    'alignItems' => '内容垂直对齐',
+
+    'justifyContent' => '内容水平对齐',
 
     'paddingX' => '水平间距',
 

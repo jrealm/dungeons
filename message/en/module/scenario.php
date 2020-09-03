@@ -10,13 +10,17 @@ return [
 
     'buttonColor' => 'Button Color',
 
-    'content' => 'Sub Title',
+    'content' => 'Content',
 
     'contentColor' => 'Sub Title Color',
 
     'fliud' => 'Fliud Block',
 
     'image' => 'Background Image',
+
+    'alignItems' => 'Item Align',
+
+    'justifyContent' => 'Content Justify',
 
     'paddingX' => 'Horizontal Spacing',
 
