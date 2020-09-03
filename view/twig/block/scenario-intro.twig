@@ -1,0 +1,22 @@
+{% if items|length > 1 %}
+    {% set column = 'col-12 col-md-6' %}
+{% else %}
+    {% set column = 'col-12' %}
+{% endif %}
+<div class="pt-{{ innerPaddingY }} row">
+    {% for item in items %}
+        {% set bg = item.image ? ('background-image:url(' ~ item.image|img ~ ');') : '' %}
+        <div class="{{ column }} mb-{{ innerPaddingY }}">
+            {% set bgColor = item.backgroundColor ? ('background-color:' ~ item.backgroundColor ~ ';') : '' %}
+            <div class="py-5{% if item.rounded == 'true' %} rounded{% endif %} text-center" style="{{ bg }}{{ bgColor }}">
+                {% set color = item.color ? ('color:' ~ item.color ~ ';') : '' %}
+                <h1 class="display-4" style="{{ color }}">{% if item.title %}{{ item.title }}{% else %}&nbsp;{% endif %}</h1>
+            </div>
+            {% if item.content %}
+                {% set bgcolor = item.contentBgColor ? ('background-color:' ~ item.contentBgColor ~ ';') : '' %}
+                {% set borderColor = item.borderColor ? ('border-color:' ~ item.borderColor ~ ' !important;') : '' %}
+                <div class="border mt-3 p-3{% if item.rounded == 'true' %} rounded{% endif %}" style="{{ bgcolor }}{{ borderColor }}">{{ item.content|raw }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

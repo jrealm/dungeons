@@ -12,6 +12,8 @@ return [
 
     'scenario' => 'Scenario',
 
+    'scenario-intro' => 'Scenario & Introduction',
+
     'multi-intro' => 'Multi-Introduction',
 
     'faq-list' => 'FAQ',
