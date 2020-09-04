@@ -7,8 +7,8 @@ class Ranking extends Serial {
     public function __construct($values = []) {
         parent::__construct($values);
 
-        $this->formStyle('hidden');
         $this->sequence('base_ranking');
+        $this->tab('other');
 
         $this->table()->ranking($this->name());
     }

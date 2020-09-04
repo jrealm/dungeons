@@ -4,15 +4,12 @@ return [
 
     'fields' => [[
         'name' => 'image',
-        'tab' => 'content',
         'type' => 'image',
     ], [
         'name' => 'title',
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'content',
-        'tab' => 'content',
         'type' => 'html',
     ], [
         'default' => false,

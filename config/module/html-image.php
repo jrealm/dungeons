@@ -5,12 +5,10 @@ return [
     'fields' => [[
         'name' => 'image',
         'required' => true,
-        'tab' => 'content',
         'type' => 'image',
     ], [
         'name' => 'content',
         'required' => true,
-        'tab' => 'content',
         'type' => 'html',
     ],[
         'default' => true,

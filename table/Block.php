@@ -4,6 +4,7 @@ use dungeons\db\column\DisableTime;
 use dungeons\db\column\EnableTime;
 use dungeons\db\column\Image;
 use dungeons\db\column\Integer;
+use dungeons\db\column\Ranking;
 use dungeons\db\column\Text;
 use dungeons\db\column\Url;
 use dungeons\db\Table;
@@ -39,10 +40,8 @@ $tbl->add('enable_time', EnableTime::class);
 
 $tbl->add('disable_time', DisableTime::class);
 
-$tbl->add('ranking', Integer::class)
-    ->required(true);
+$tbl->add('ranking', Ranking::class);
 
-$tbl->ranking('ranking');
 $tbl->title('name');
 
 $tbl->id->composite('item', 'BlockItem', 'block_id');

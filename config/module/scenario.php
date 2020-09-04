@@ -4,24 +4,19 @@ return [
 
     'fields' => [[
         'name' => 'image',
-        'tab' => 'content',
         'type' => 'image',
     ], [
         'name' => 'title',
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'content',
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'multilingual' => true,
         'name' => 'button',
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'name' => 'path',
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'default' => true,

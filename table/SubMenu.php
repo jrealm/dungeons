@@ -3,6 +3,7 @@
 use dungeons\db\column\DisableTime;
 use dungeons\db\column\EnableTime;
 use dungeons\db\column\Integer;
+use dungeons\db\column\Ranking;
 use dungeons\db\column\Text;
 use dungeons\db\Table;
 
@@ -22,9 +23,6 @@ $tbl->add('enable_time', EnableTime::class);
 
 $tbl->add('disable_time', DisableTime::class);
 
-$tbl->add('ranking', Integer::class)
-    ->required(true);
-
-$tbl->ranking('ranking');
+$tbl->add('ranking', Ranking::class);
 
 return $tbl;

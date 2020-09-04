@@ -13,7 +13,7 @@ CREATE SEQUENCE base_id START WITH 100000000;
 
 CREATE SEQUENCE base_manipulation;
 
-CREATE SEQUENCE base_ranking START WITH 10000;
+CREATE SEQUENCE base_ranking START WITH 100 INCREMENT BY 100;
 
 CREATE TABLE base_manipulation_log (
     id         INTEGER   NOT NULL PRIMARY KEY DEFAULT NEXTVAL('base_manipulation'),

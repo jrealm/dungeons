@@ -5,7 +5,6 @@ return [
     'fields' => [[
         'name' => 'content',
         'required' => true,
-        'tab' => 'content',
         'type' => 'html',
     ], [
         'default' => true,

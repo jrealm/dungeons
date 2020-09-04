@@ -5,19 +5,16 @@ return [
     'fields' => [[
         'name' => 'video',
         'required' => true,
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'default' => true,
         'options' => 'yes-no',
         'name' => 'autoplay',
-        'tab' => 'content',
         'type' => 'radio',
     ], [
         'default' => 1,
         'options' => 'visible',
         'name' => 'controls',
-        'tab' => 'content',
         'type' => 'radio',
     ], [
         'default' => true,

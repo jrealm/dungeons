@@ -42,8 +42,8 @@ return [
     'subtotal' => '小計',
 
     'tab.color' => '顏色',
-    'tab.content' => '內容',
     'tab.default' => '基本資料',
+    'tab.other' => '其他',
     'tab.style' => '樣式',
 
     'title' => '後台管理',

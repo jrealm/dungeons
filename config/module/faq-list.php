@@ -4,7 +4,6 @@ return [
 
     'fields' => [[
         'name' => 'title',
-        'tab' => 'content',
         'type' => 'text',
     ], [
         'default' => true,

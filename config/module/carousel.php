@@ -5,7 +5,6 @@ return [
     'fields' => [[
         'default' => 5,
         'name' => 'interval',
-        'tab' => 'content',
         'type' => 'integer',
     ], [
         'default' => true,
