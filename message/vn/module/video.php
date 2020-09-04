@@ -14,6 +14,8 @@ return [
 
     'paddingY' => 'Vertical Spacing',
 
+    'platform' => 'Platform',
+
     'ratio' => 'Aspect Ratio',
 
     'video' => 'Video Id',

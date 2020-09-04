@@ -14,6 +14,8 @@ return [
 
     'paddingY' => '垂直间距',
 
+    'platform' => '影音平台',
+
     'ratio' => '画面比例',
 
     'video' => '影片代码',

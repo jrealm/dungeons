@@ -8,7 +8,7 @@ return [
 
     'carousel' => 'Image Carousel',
 
-    'youtube' => 'Youtube',
+    'video' => 'Video',
 
     'scenario' => 'Scenario',
 

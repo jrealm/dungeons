@@ -3,6 +3,11 @@
 return [
 
     'fields' => [[
+        'default' => 'youtube',
+        'options' => 'video-platform',
+        'name' => 'platform',
+        'type' => 'radio',
+    ], [
         'name' => 'video',
         'required' => true,
         'type' => 'text',

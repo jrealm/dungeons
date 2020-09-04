@@ -8,7 +8,7 @@ return [
 
     'carousel' => '图片轮播',
 
-    'youtube' => 'Youtube',
+    'video' => '影片',
 
     'scenario' => '情境图文',
 
