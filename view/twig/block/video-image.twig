@@ -1,0 +1,10 @@
+<div class="d-flex{{ position == 1 ? ' flex-column-reverse flex-md-row-reverse' : '' }} no-gutters row">
+    <div class="col-12 col-md-{{ weight == 2 ? 4 : (weight == 3 ? 8 : 6) }} p-{{ vPadding }}" style="{{ vBgColor ? ('background-color:' ~ vBgColor ~ ';') : '' }}">
+        <div class="embed-responsive embed-responsive-{{ ratio }}">
+            <iframe allow="autoplay" allowfullscreen class="embed-responsive-item" src="{{ video|video(platform, autoplay, controls)|raw }}"></iframe>
+        </div>
+    </div>
+    <div class="col-12 col-md-{{ weight == 2 ? 8 : (weight == 3 ? 4 : 6) }} p-{{ iPadding }}" style="{{ iBgColor ? ('background-color:' ~ iBgColor ~ ';') : '' }}">
+        <img class="d-block mx-auto" src="{{ image|img }}">
+    </div>
+</div>

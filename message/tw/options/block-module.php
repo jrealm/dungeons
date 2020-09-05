@@ -12,6 +12,8 @@ return [
 
     'video-html' => '影片+文章',
 
+    'video-image' => '影片+圖片',
+
     'scenario' => '情境圖文',
 
     'scenario-intro' => '情境圖+簡介',

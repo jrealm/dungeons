@@ -12,6 +12,8 @@ return [
 
     'video-html' => 'Video & Article',
 
+    'video-image' => 'Video & Image',
+
     'scenario' => 'Scenario',
 
     'scenario-intro' => 'Scenario & Introduction',
