@@ -16,7 +16,7 @@ return [
 
     'image' => '圖片',
 
-    'position' => '圖文位置',
+    'position' => '文章位置',
 
     'weight' => '圖文比例',
 

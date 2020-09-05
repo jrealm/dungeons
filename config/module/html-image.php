@@ -36,13 +36,13 @@ return [
         'type' => 'color',
     ], [
         'default' => 1,
-        'options' => 'html-image-position',
+        'options' => 'content-position',
         'name' => 'position',
         'tab' => 'style',
         'type' => 'radio',
     ], [
         'default' => 1,
-        'options' => 'html-image-weight',
+        'options' => 'content-weight',
         'name' => 'weight',
         'tab' => 'style',
         'type' => 'radio',

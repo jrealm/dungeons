@@ -16,7 +16,7 @@ return [
 
     'image' => 'Image',
 
-    'position' => 'Position',
+    'position' => 'Article Position',
 
     'weight' => 'Weight',
 

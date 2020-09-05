@@ -1,8 +1,8 @@
-<div class="d-flex{{ position == 2 ? ' flex-column-reverse flex-md-row-reverse' : '' }} no-gutters row">
-    <div class="col col-md-{{ weight == 2 ? 4 : (weight == 3 ? 8 : 6) }} p-{{ iPadding }}" style="{{ iBgColor ? ('background-color:' ~ iBgColor ~ ';') : '' }}">
+<div class="d-flex{{ position == 1 ? ' flex-column-reverse flex-md-row-reverse' : '' }} no-gutters row">
+    <div class="col-12 col-md-{{ weight == 2 ? 4 : (weight == 3 ? 8 : 6) }} p-{{ iPadding }}" style="{{ iBgColor ? ('background-color:' ~ iBgColor ~ ';') : '' }}">
         <img class="d-block mx-auto" src="{{ image|img }}">
     </div>
-    <div class="col col-md-{{ weight == 2 ? 8 : (weight == 3 ? 4 : 6) }} p-{{ aPadding }}" style="{{ aBgColor ? ('background-color:' ~ aBgColor ~ ';') : '' }}">
+    <div class="col-12 col-md-{{ weight == 2 ? 8 : (weight == 3 ? 4 : 6) }} p-{{ aPadding }}" style="{{ aBgColor ? ('background-color:' ~ aBgColor ~ ';') : '' }}">
         {{ content|raw }}
     </div>
 </div>
