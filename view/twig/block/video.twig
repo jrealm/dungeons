@@ -1,13 +1,7 @@
-{% set autoplay = (autoplay == 'true') ? 1 : 0 %}
-{% if platform == 'youtube' %}
-    {% set url = 'https://www.youtube.com/embed/' ~ video ~ '?rel=0&mute=' ~ autoplay %}
-{% elseif platform == 'vimeo' %}
-    {% set url = 'https://player.vimeo.com/video/' ~ video ~ '?muted=' ~ autoplay %}
-{% endif %}
 <div class="no-gutters row">
     <div class="col p-0">
         <div class="embed-responsive embed-responsive-{{ ratio }}">
-            <iframe allow="autoplay" allowfullscreen class="embed-responsive-item" src="{{ url|raw }}&autoplay={{ autoplay }}&controls={{ controls }}"></iframe>
+            <iframe allow="autoplay" allowfullscreen class="embed-responsive-item" src="{{ video|video(platform, autoplay, controls)|raw }}"></iframe>
         </div>
     </div>
 </div>

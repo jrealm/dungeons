@@ -10,6 +10,8 @@ return [
 
     'video' => 'Video',
 
+    'video-html' => 'Video & Article',
+
     'scenario' => 'Scenario',
 
     'scenario-intro' => 'Scenario & Introduction',
