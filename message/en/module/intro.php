@@ -2,8 +2,6 @@
 
 return [
 
-    'backgroundColor' => 'Background Color',
-
     'borderColor' => 'Border Color',
 
     'borderSize' => 'Border Size',
@@ -16,8 +14,6 @@ return [
 
     'color' => 'Title Color',
 
-    'content' => 'Content',
-
     'image' => 'Image',
 
     'imageWidth' => 'Image Width',
@@ -25,8 +21,6 @@ return [
     'rounded' => 'Rounded',
 
     'shadow' => 'Shadow',
-
-    'title' => 'Title',
 
     'url' => 'URL',
 

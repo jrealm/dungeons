@@ -8,14 +8,10 @@ return [
 
     'color' => '標題顏色',
 
-    'content' => '內容',
-
     'contentBgColor' => '內容背景色',
 
     'image' => '背景圖',
 
     'rounded' => '圓角',
-
-    'title' => '標題',
 
 ];

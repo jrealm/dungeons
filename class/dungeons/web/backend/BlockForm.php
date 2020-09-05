@@ -30,7 +30,7 @@ trait BlockForm {
         foreach ($module['fields'] as $field) {
             $name = $field['name'];
 
-            $field['label'] = $labels[$name] ?? "[{$name}]";
+            $field['label'] = $labels[$name] ?? i18n("block.{$name}", $name);
             $field['placeholder'] = @$labels["{$name}.placeholder"];
             $field['remark'] = @$labels["{$name}.remark"];
 

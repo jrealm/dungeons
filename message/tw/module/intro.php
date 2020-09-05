@@ -2,8 +2,6 @@
 
 return [
 
-    'backgroundColor' => '背景色',
-
     'borderColor' => '邊框顏色',
 
     'borderSize' => '邊框尺寸',
@@ -16,8 +14,6 @@ return [
 
     'color' => '標題顏色',
 
-    'content' => '內容',
-
     'image' => '圖示',
 
     'imageWidth' => '圖示寬度',
@@ -25,8 +21,6 @@ return [
     'rounded' => '圓角',
 
     'shadow' => '陰影',
-
-    'title' => '標題',
 
     'url' => 'URL',
 

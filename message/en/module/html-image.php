@@ -8,8 +8,6 @@ return [
 
     'content' => 'Article',
 
-    'fliud' => 'Fliud Block',
-
     'iBgColor' => 'Image Background Color',
 
     'iPadding' => 'Image Padding',

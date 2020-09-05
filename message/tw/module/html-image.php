@@ -8,8 +8,6 @@ return [
 
     'content' => '文章',
 
-    'fliud' => '滿版區塊',
-
     'iBgColor' => '圖片區背景色',
 
     'iPadding' => '圖片區間距',

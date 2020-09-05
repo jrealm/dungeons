@@ -6,6 +6,4 @@ return [
 
     'file' => 'File',
 
-    'title' => 'Title',
-
 ];
