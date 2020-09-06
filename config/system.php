@@ -4,6 +4,8 @@ return [
 
     'date' => 'Y-m-d',
 
+    'googleTranslateKey' => '',
+
     'language' => 'tw',
 
     'supportedLanguages' => 'tw',
