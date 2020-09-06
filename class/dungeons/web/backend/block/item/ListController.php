@@ -27,7 +27,7 @@ class ListController extends Controller {
                 continue;
             }
 
-            $field['label'] = $labels[$name] ?? "[{$name}]";
+            $field['label'] = $labels[$name] ?? i18n("block.{$name}", $name);
             $field['readonly'] = true;
 
             switch ($name) {

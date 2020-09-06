@@ -17,7 +17,7 @@ return [
         'type' => 'text',
     ], [
         'name' => 'url',
-        'type' => 'url',
+        'type' => 'text',
     ], [
         'default' => 50,
         'options' => 'image-width',

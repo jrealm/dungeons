@@ -40,7 +40,9 @@ trait BlockForm {
 
             $options = @$field['options'];
 
-            if ($options) {
+            if (is_array($options)) {
+                $field['options'] = $options;
+            } else if (is_string($options)) {
                 $field['options'] = Message::load("options/{$options}");
             }
 
