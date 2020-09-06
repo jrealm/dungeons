@@ -32,4 +32,6 @@ return [
 
     'company-info' => '公司资讯',
 
+    'reference' => '引用',
+
 ];

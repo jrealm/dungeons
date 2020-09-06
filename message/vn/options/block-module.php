@@ -32,4 +32,6 @@ return [
 
     'company-info' => 'Company Info',
 
+    'reference' => 'Reference',
+
 ];

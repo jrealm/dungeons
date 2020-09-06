@@ -15,8 +15,18 @@ return new Twig\TwigFunction('block_data', function ($arg) {
     }
 
     $blocks = [];
+    $list = [];
 
     foreach (model('Block')->query(['page_id' => $page['id']]) as $block) {
+        if ($block['module'] === 'reference') {
+            $extra = json_decode($block['extra'], true);
+            $block = model('Block')->get($extra['target']);
+
+            if (!$block) {
+                continue;
+            }
+        }
+
         $extra = json_decode($block['extra'], true);
 
         if ($extra) {
@@ -35,6 +45,7 @@ return new Twig\TwigFunction('block_data', function ($arg) {
         $block['label'] = Message::load("module/{$block['module']}");
 
         $blocks[$block['id']] = $block;
+        $list[] = $block['id'];
     }
 
     foreach (model('BlockItem')->query(['block_id' => array_keys($blocks)]) as $item) {
@@ -57,7 +68,11 @@ return new Twig\TwigFunction('block_data', function ($arg) {
         $block['items'][] = $item;
     }
 
-    $page['blocks'] = $blocks;
+    $page['blocks'] = [];
+
+    foreach ($list as $id) {
+        $page['blocks'][] = $blocks[$id];
+    }
 
     return $page;
 });
