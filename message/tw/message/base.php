@@ -8,6 +8,8 @@ return [
 
     'backend' => '後台共用',
 
+    'block' => '網頁區塊',
+
     'bundle' => '資料集',
 
     'config' => '一般設定',

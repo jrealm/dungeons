@@ -8,6 +8,8 @@ return [
 
     'backend' => '后台共用',
 
+    'block' => '网页区块',
+
     'bundle' => '资料集',
 
     'config' => '一般设定',

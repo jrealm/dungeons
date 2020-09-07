@@ -8,6 +8,8 @@ return [
 
     'backend' => 'Backend',
 
+    'block' => 'Page Block',
+
     'bundle' => 'Bundle',
 
     'config' => 'Config',
