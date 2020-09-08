@@ -21,6 +21,10 @@ class Member extends Model {
 
     protected function before($type, $prev, $curr) {
         foreach (['password', 'payment_password'] as $name) {
+            if ($this->table->{$name}->encrypt() === false) {
+                continue;
+            }
+
             $encrypt = false;
 
             switch ($type) {
