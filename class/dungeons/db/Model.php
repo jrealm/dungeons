@@ -144,6 +144,10 @@ class Model {
         return false;
     }
 
+    public function lock() {
+        $this->execute($this->db->prepare("LOCK TABLE {$this->table->mapping()}"), []);
+    }
+
     public function parents($data) {
         if ($data !== null) {
             $relation = $this->table->getMasterRelation();

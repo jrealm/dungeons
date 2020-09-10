@@ -60,15 +60,19 @@ class Dialect {
         $expressions = [];
 
         foreach ($orders as $name) {
-            if ($name[0] === '-') {
-                $name = substr($name, 1);
-                $type = 'DESC';
+            if ($name === '?') {
+                $expressions[] = 'RANDOM()';
             } else {
-                $type = 'ASC';
-            }
+                if ($name[0] === '-') {
+                    $name = substr($name, 1);
+                    $type = 'DESC';
+                } else {
+                    $type = 'ASC';
+                }
 
-            if (key_exists($name, $columns)) {
-                $expressions[] = "\"{$name}\" {$type}";
+                if (key_exists($name, $columns)) {
+                    $expressions[] = "\"{$name}\" {$type}";
+                }
             }
         }
 
