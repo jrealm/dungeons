@@ -30,7 +30,8 @@ $tbl->add('title', Text::class)
 $tbl->add('content', Text::class)
     ->multilingual(true);
 
-$tbl->add('image', Image::class);
+$tbl->add('image', Image::class)
+    ->multilingual(cfg('multilingual.Block.image'));
 
 $tbl->add('url', Url::class);
 
