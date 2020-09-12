@@ -132,7 +132,7 @@
             {% endblock %}
             {% block content_body %}
                 <div class="card-body p-2">
-                    {% set actions = result.actions|sort((a, b) => a.ranking <=> b.ranking) %}
+                    {% set actions, templates = result.actions|sort((a, b) => a.ranking <=> b.ranking), {} %}
                     <table class="table table-hover table-responsive table-striped" id="_{{ formId }}_table">
                         <thead>
                             <tr>
@@ -148,6 +148,9 @@
                                     <th class="w-1">{{ i18n('backend.operation') }}</th>
                                 {% endif %}
                                 {% for style in result.styles %}
+                                    {% if style.column.template %}
+                                        {% set templates = templates|merge({(style.name): template_from_string(style.column.template)}) %}
+                                    {% endif %}
                                     <th>
                                         {% if style.unordered %}
                                             {{ style.label }}
@@ -195,6 +198,9 @@
                                     {% for style in result.styles %}
                                         {% if style.column.subTotal and data[style.name] %}
                                             {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
+                                        {% endif %}
+                                        {% if templates[style.name] %}
+                                            {% set data = data|merge({'.content': include(templates[style.name], data, with_context = false)}) %}
                                         {% endif %}
                                         <td data-column="{{ style.name }}">
                                             {% include 'backend/component/' ~ style.type ~ '.twig' with {controller: controller, data: data, grid: true, style: style} only %}
