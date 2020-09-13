@@ -4,6 +4,8 @@ return [
 
     'DataNotFound' => 'NO DATA',
 
+    'DataOverdue' => 'The data is overdue, please refresh and edit again.',
+
     'DeleteFailed' => 'FAILED TO DELETE',
 
     'InsertFailed' => 'FAILED TO ADD',

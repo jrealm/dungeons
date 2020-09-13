@@ -3,6 +3,7 @@
 namespace dungeons\db;
 
 use dungeons\Attachment;
+use dungeons\db\criterion\Version;
 use PDO;
 
 class Model {
@@ -227,7 +228,13 @@ class Model {
         $data = $this->before(self::UPDATE, $previous, $data);
 
         $bindings = [];
-        $criteria = $this->createCriteria(['id' => $previous['id']]);
+        $conditions = ['id' => $previous['id']];
+
+        if ($this->table->versionable()) {
+            $conditions[] = new Version(@$data['__version__']);
+        }
+
+        $criteria = $this->createCriteria($conditions);
         $command = $this->dialect->makeUpdation($this->table, $criteria);
         $statement = $this->db->prepare($command);
 

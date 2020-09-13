@@ -4,6 +4,8 @@ return [
 
     'DataNotFound' => '查无资料',
 
+    'DataOverdue' => '资料逾期，请刷新后重新编辑。',
+
     'DeleteFailed' => '删除失败',
 
     'InsertFailed' => '新增失败',

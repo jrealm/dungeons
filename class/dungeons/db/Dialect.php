@@ -53,6 +53,11 @@ class Dialect {
         $names = implode(', ', $expressions);
         $values = implode(',', array_fill(0, count($expressions), '?'));
 
+        if ($table->versionable()) {
+            $names = "{$names}, __version__";
+            $values = "{$values},1";
+        }
+
         return "INSERT INTO {$table->mapping()} ({$names}) VALUES ({$values})";
     }
 
@@ -111,6 +116,11 @@ class Dialect {
         }
 
         $names = implode(', ', $expressions);
+
+        if ($table->versionable()) {
+            $names = "{$names}, __version__";
+        }
+
         $command = "SELECT {$names} FROM {$table->mapping()} AS _";
         $command = $this->makeRelationJoin($command, $table->getRelations());
         $command = $this->makeCriteria($command, $criteria);
@@ -151,6 +161,10 @@ class Dialect {
             } else {
                 $expressions[] = "{$expression} = ?";
             }
+        }
+
+        if ($table->versionable()) {
+            $expressions[] = "__version__ = __version__ + 1";
         }
 
         $set = implode(', ', $expressions);

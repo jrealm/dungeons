@@ -90,6 +90,10 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 
 $result['styles'] = $controller->remix($styles, $list);
 
+if ($table->versionable()) {
+    $result['styles'][] = ['name' => '__version__', 'type' => 'hidden'];
+}
+
 //--
 
 switch (@$form['args']) {

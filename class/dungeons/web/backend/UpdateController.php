@@ -40,6 +40,10 @@ class UpdateController extends BackendController {
         }
 
         if ($data === false) {
+            if ($this->table()->versionable()) {
+                return ['error' => 'error.DataOverdue'];
+            }
+
             return ['error' => 'error.UpdateFailed'];
         }
 

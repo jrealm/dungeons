@@ -43,6 +43,25 @@ return new class() extends dungeons\cli\Controller {
                         }
                     }
                 }
+
+                if ($table->versionable() && !$this->defined($table->mapping(), '__version__')) {
+                    $command = "ALTER TABLE {$table->mapping()} ADD COLUMN __version__ INTEGER";
+
+                    echo "{$command};\n";
+
+                    $statement = $this->db->prepare($command);
+                    $statement->execute();
+
+                    //--
+
+                    $command = "UPDATE {$table->mapping()} SET __version__ = 1";
+
+                    echo "{$command};\n";
+
+                    $statement = $this->db->prepare($command);
+                    $statement->execute();
+
+                }
             }
         }
 
@@ -77,13 +96,17 @@ return new class() extends dungeons\cli\Controller {
         $statement->execute();
     }
 
-    private function defined($table, $column, $language) {
+    private function defined($table, $column, $language = null) {
+        if ($language) {
+            $column = "{$column}__{$language}";
+        }
+
         $command = "
             SELECT COUNT(*) as \"count\"
               FROM information_schema.columns
              WHERE table_catalog = CURRENT_DATABASE()
                AND table_name = '{$table}'
-               AND column_name = '{$column}__{$language}'
+               AND column_name = '{$column}'
         ";
 
         $statement = $this->db->prepare($command);
