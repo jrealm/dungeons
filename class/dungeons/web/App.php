@@ -3,6 +3,7 @@
 namespace dungeons\web;
 
 use dungeons\App as AbstractApp;
+use dungeons\Resource;
 
 class App extends AbstractApp {
 
@@ -39,6 +40,21 @@ class App extends AbstractApp {
         if ($this->controller === null) {
             $this->controller = new Controller(['path' => $path, 'view' => '404.php']);
         }
+    }
+
+    protected function find($path, $method) {
+        if (defined('VIEW_CONTROLLER')) {
+            switch (VIEW_CONTROLLER) {
+            case 'twig':
+                $view = ($path === '/') ? 'index.twig' : "{$path}.twig";
+                if (Resource::find("view/twig/{$view}")) {
+                    return new Controller(['view' => $view]);
+                }
+                break;
+            }
+        }
+
+        return parent::find($path, $method);
     }
 
 }
