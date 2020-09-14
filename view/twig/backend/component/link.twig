@@ -1,4 +1,4 @@
-{% if grid %}
+{% if grid or style.readonly %}
     <button class="btn btn-link p-0" data-ajax="{{ data['.content'] }}">{{ data[style.name] }}</button>
 {% else %}
     {% include 'backend/component/input.twig' with {type: 'text'} %}
