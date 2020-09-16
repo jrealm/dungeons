@@ -19,7 +19,6 @@
         "almasaeed2010/adminlte": "^3.0",
         "filp/whoops": "^2.7",
         "guzzlehttp/guzzle": "^7.0",
-        "jrealm/dungeons-core": "dev-master",
         "mhor/php-mediainfo": "^5.1",
         "monolog/monolog": "^2.0",
         "nesbot/carbon": "^2.35",
