@@ -82,6 +82,23 @@ function model($name) {
     return table($name)->model();
 }
 
+function post_content($url, $content, $timeout = 30) {
+    $ch = curl_init($url);
+
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+
+    $result = curl_exec($ch);
+
+    curl_close($ch);
+
+    return $result;
+}
+
 function render($template, $data) {
     $twig = new Environment(new ArrayLoader(['template' => $template]));
 

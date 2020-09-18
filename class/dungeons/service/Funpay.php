@@ -20,19 +20,7 @@ class Funpay {
         $data['sign'] = md5($sign);
 
         $request = json_encode($data);
-
-        //--
-
-        $ch = curl_init($args['location']);
-
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-
-        $response = curl_exec($ch);
-
-        curl_close($ch);
+        $response = post_content($args['location'], $request);
 
         //--
 

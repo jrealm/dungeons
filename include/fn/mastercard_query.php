@@ -24,18 +24,7 @@ return function ($number) {
 
     //--
 
-    $ch = curl_init($paytend['url'] . '/api/mastercard/masterCardQuery.html');
-
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-    $response = curl_exec($ch);
-
-    curl_close($ch);
+    $response = post_content("{$paytend['url']}/api/mastercard/masterCardQuery.html", $param, 300);
 
     logger('card-query')->info($response);
 
