@@ -40,4 +40,27 @@ class RSA {
         }
     }
 
+    public static function sign($data, $keyfile) {
+        $key = openssl_pkey_get_private(file_get_contents($keyfile));
+
+        if ($key) {
+            openssl_sign($data, $signature, $key);
+            openssl_free_key($key);
+
+            return base64_encode($signature);
+        }
+    }
+
+    public static function verify($data, $keyfile, $signature) {
+        $key = openssl_pkey_get_public(file_get_contents($keyfile));
+
+        if ($key) {
+            $res = openssl_verify($data, base64_decode($signature), $key);
+
+            openssl_free_key($key);
+
+            return $res ? $signature : false;
+        }
+    }
+
 }
