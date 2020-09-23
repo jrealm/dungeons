@@ -2,6 +2,8 @@
 
 namespace dungeons\service;
 
+use dungeons\utility\Fn;
+
 class Funpay {
 
     public function execute($args) {
@@ -19,8 +21,15 @@ class Funpay {
 
         $data['sign'] = md5($sign);
 
+        //--
+
         $request = json_encode($data);
-        $response = post_content($args['location'], $request);
+
+        logger('funpay')->info($request);
+
+        $response = Fn::http_post($args['location'], $data);
+
+        logger('funpay')->info($response);
 
         //--
 

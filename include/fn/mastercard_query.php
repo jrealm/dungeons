@@ -1,6 +1,7 @@
 <?php //>
 
 use dungeons\Config;
+use dungeons\utility\Fn;
 use dungeons\utility\RSA;
 
 return function ($number) {
@@ -20,11 +21,11 @@ return function ($number) {
         'signature' => md5($dataStr . $paytend['md5key']),
     ]);
 
-    logger('card-query-raw')->info(json_encode($param));
-
     //--
 
-    $response = post_content("{$paytend['url']}/api/mastercard/masterCardQuery.html", $param, 300);
+    logger('card-query-raw')->info($param);
+
+    $response = Fn::http_post("{$paytend['url']}/api/mastercard/masterCardQuery.html", $param);
 
     logger('card-query')->info($response);
 
