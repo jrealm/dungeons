@@ -13,13 +13,24 @@ require 'functions.php';
 if (defined('APP_HOME')) {
     require APP_HOME . 'config.php';
 
-    spl_autoload_register(function ($name) {
-        $file = APP_HOME . 'class/' . str_replace('\\', '/', $name) . '.php';
+    if (defined('CUSTOM_APP')) {
+        $folders = [APP_HOME . CUSTOM_APP . '/', APP_HOME];
+    } else {
+        $folders = [APP_HOME];
+    }
 
-        if (is_file($file)) {
-            isolate_require($file);
+    spl_autoload_register(function ($name) use ($folders) {
+        $file = 'class/' . str_replace('\\', '/', $name) . '.php';
+
+        foreach ($folders as $folder) {
+            $path = $folder . $file;
+
+            if (is_file($path)) {
+                isolate_require($path);
+                break;
+            }
         }
-    });
+    }, true, true);
 }
 
 ErrorHandler::register(logger('ERROR'));
