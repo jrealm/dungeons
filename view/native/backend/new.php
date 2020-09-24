@@ -94,6 +94,10 @@ $result['styles'] = $controller->remix($styles, $list);
 
 //--
 
+if ($controller->user()['id'] === 1) {
+    $result['superuser'] = true;
+}
+
 switch (@$form['args']) {
 case 'modal':
     $view = 'backend/modal-blank.twig';

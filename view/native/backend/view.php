@@ -96,6 +96,10 @@ if ($table->versionable()) {
 
 //--
 
+if ($controller->user()['id'] === 1) {
+    $result['superuser'] = true;
+}
+
 switch (@$form['args']) {
 case 'modal':
     $view = 'backend/modal-view.twig';
