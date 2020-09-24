@@ -17,7 +17,7 @@ $buttons[] = [
     'ranking' => 100,
 ];
 
-if ($controller->hasPermission("{$node}/update")) {
+if (!$controller->readonly() && $controller->hasPermission("{$node}/update")) {
     $buttons[] = [
         'class' => cfg('backend.edit.button'),
         'label' => i18n('backend.edit.submit'),
