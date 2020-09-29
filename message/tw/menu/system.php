@@ -32,4 +32,6 @@ return [
 
     'message/template/' => '編輯訊息樣板',
 
+    'text' => '網頁文字',
+
 ];

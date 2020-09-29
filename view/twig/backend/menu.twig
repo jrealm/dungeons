@@ -4,7 +4,8 @@
             <li class="has-treeview nav-item">
                 <a class="nav-link" data-branch="{{ path }}">
                     <i class="nav-icon {{ node.icon|default('far fa-circle') }}"></i>
-                    <p>{{ node.title }}<i class="fas fa-angle-left right"></i></p>
+                    {{ label(node.i18n) }}
+                    <i class="fas fa-angle-left right"></i>
                 </a>
                 <ul class="nav nav-treeview">
                     {{ _self.render(node.nodes) }}
@@ -14,7 +15,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-ajax data-leaf href="{{ path }}">
                     <i class="nav-icon {{ node.icon|default('far fa-circle') }}"></i>
-                    <p>{{ node.title }}</p>
+                    {{ label(node.i18n) }}
                 </a>
             </li>
         {% endif %}

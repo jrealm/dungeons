@@ -9,12 +9,18 @@
             {% for node in breadcrumbs %}
                 {% if node.path %}
                     {% if loop.last %}
-                        <li class="breadcrumb-item active" data-menu="{{ node.path }}">{{ node.title }}</li>
+                        <li class="breadcrumb-item active" data-menu="{{ node.path }}">
+                            {{ node.title ?: label(node.i18n) }}
+                        </li>
                     {% else %}
-                        <li class="breadcrumb-item" data-menu="{{ node.path }}"><a data-ajax href="{{ node.path }}">{{ node.title }}</a></li>
+                        <li class="breadcrumb-item" data-menu="{{ node.path }}">
+                            <a data-ajax href="{{ node.path }}">{{ node.title ?: label(node.i18n) }}</a>
+                        </li>
                     {% endif %}
                 {% else %}
-                    <li class="breadcrumb-item">{{ node.title }}</li>
+                    <li class="breadcrumb-item">
+                        {{ node.title ?: label(node.i18n) }}
+                    </li>
                 {% endif %}
             {% endfor %}
         </ol>

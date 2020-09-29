@@ -10,12 +10,12 @@
                         {% if input.required %}
                             <span class="text-danger">*</span>
                         {% endif %}
-                        {{ input.label }} ({{ cfg('i18n/' ~ lang ~ '.title') }})
+                        {{ input.label ?: label(input.i18n, input.name) }} ({{ cfg('i18n/' ~ lang ~ '.title') }})
                     </label>
                     <span class="invalid-feedback" data-name="{{ input.name }}"></span>
-                    {% if result.superuser and input.label != input.name %}<span class="hint">{{ input.name }}</span>{% endif %}
+                    {% if result.superuser %}<span class="hint">{{ input.name }}</span>{% endif %}
                     {% include 'backend/component/' ~ input.type ~ '.twig' with {data: data, style: input} only %}
-                    <span class="text-secondary text-xs">{{ input.remark }}</span>
+                    <span class="text-secondary text-xs">{{ input.remark ?: label(input.i18n ~ '.remark', '') }}</span>
                 </div>
             {% endif %}
         {% endfor %}
@@ -28,12 +28,12 @@
                     {% if style.required %}
                         <span class="text-danger">*</span>
                     {% endif %}
-                    {{ style.label }}
+                    {{ style.label ?: label(style.i18n, style.name) }}
                 </label>
                 <span class="invalid-feedback" data-name="{{ style.name }}"></span>
-                {% if result.superuser and style.label != style.name %}<span class="hint">{{ style.name }}</span>{% endif %}
+                {% if result.superuser %}<span class="hint">{{ style.name }}</span>{% endif %}
                 {% include 'backend/component/' ~ style.type ~ '.twig' with {data: data, style: style} only %}
-                <span class="text-secondary text-xs">{{ style.remark }}</span>
+                <span class="text-secondary text-xs">{{ style.remark ?: label(style.i18n ~ '.remark', '') }}</span>
             </div>
         {% endif %}
     {% endif %}

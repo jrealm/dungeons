@@ -32,6 +32,12 @@ th a, th:hover a {
     min-width: 1rem;
 }
 
+.editable-label {
+    background-color: plum;
+    color: darkblue;
+    cursor: context-menu;
+}
+
 .file-preview {
     display: inline-block;
     max-width: calc(100% - 60px);

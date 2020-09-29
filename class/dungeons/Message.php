@@ -21,11 +21,7 @@ class Message {
                 $file = Resource::getDataFile($path);
 
                 if ($file) {
-                    foreach (json_decode(file_get_contents($file), true) as $key => $value) {
-                        if (key_exists($key, $bundle)) {
-                            $bundle[$key] = $value;
-                        }
-                    }
+                    $bundle = array_merge($bundle, json_decode(file_get_contents($file), true));
                 }
             }
 

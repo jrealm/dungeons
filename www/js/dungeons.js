@@ -368,6 +368,10 @@
         });
     };
 
+    window.editLabel = function (name) {
+        perform("text", {name});
+    };
+
     window.initForm = function (form) {
         form.find("div[data-format=color]").each(function (ignore, element) {
             var target = $(element);

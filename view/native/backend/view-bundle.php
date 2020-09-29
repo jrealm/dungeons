@@ -12,7 +12,7 @@ $buttons = [];
 
 $buttons[] = [
     'class' => cfg('backend.edit.cancel.button'),
-    'label' => i18n('backend.edit.cancel'),
+    'i18n' => 'backend.edit.cancel',
     'method' => 'cancel',
     'ranking' => 100,
 ];
@@ -20,7 +20,7 @@ $buttons[] = [
 if ($controller->hasPermission("{$path}/update")) {
     $buttons[] = [
         'class' => cfg('backend.edit.button'),
-        'label' => i18n('backend.edit.submit'),
+        'i18n' => 'backend.edit.submit',
         'method' => 'update',
         'ranking' => 200,
     ];
@@ -50,11 +50,9 @@ foreach ($result['data'] as $name => $ignore) {
     $column = new $class();
 
     $style = [];
-    $style['label'] = i18n("{$prefix}.{$name}", $name);
+    $style['i18n'] = "{$prefix}.{$name}";
     $style['name'] = $name;
     $style['pattern'] = $style['pattern'] ?? $column->pattern();
-    $style['placeholder'] = i18n("{$prefix}.{$name}.placeholder", '');
-    $style['remark'] = i18n("{$prefix}.{$name}.remark", '');
     $style['type'] = $column->formStyle();
 
     $styles[] = $style;
@@ -67,5 +65,9 @@ $result['styles'] = $styles;
 $result['data']['id'] = $id;
 
 //--
+
+if ($controller->user()['id'] === 1) {
+    $result['superuser'] = true;
+}
 
 resolve('backend/view.twig')->render($controller, $form, $result);

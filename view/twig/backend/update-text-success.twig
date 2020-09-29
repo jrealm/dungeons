@@ -1,0 +1,9 @@
+{% extends 'backend/response.twig' %}
+
+{% block postprocess %}
+    toastr.info("{{ i18n('backend.success.update') }}");
+
+    $("[data-edit='{{ form.name }}']").html("{{ result.content|raw }}");
+
+    $(".modal-wrapper .modal").modal("hide");
+{% endblock %}

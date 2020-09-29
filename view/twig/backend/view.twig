@@ -1,8 +1,9 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set breadcrumbs, data, description, formId, tabs, title = result.breadcrumbs, result.data, result.sub_title, random(), [], controller.menu().title %}
+{% set data, formId, tabs = result.data, random(), [] %}
 
 {% block header %}
+    {% set breadcrumbs, description, title = result.breadcrumbs, result.sub_title, label(controller.menu().i18n) %}
     {% include 'backend/header.twig' %}
 {% endblock %}
 
@@ -15,9 +16,9 @@
     <div class="card card-outline card-outline-tabs card-primary">
         <div class="border-bottom-0 card-header p-0">
             <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#default-tab">{{ i18n('backend.tab.default') }}</a></li>
+                <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#default-tab">{{ label('backend.tab.default') }}</a></li>
                 {% for tab in tabs %}
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{{ tab }}-tab">{{ i18n('backend.tab.' ~ tab) }}</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{{ tab }}-tab">{{ label('backend.tab.' ~ tab) }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -38,9 +39,11 @@
             <div class="card-footer text-right">
             {% for button in result.buttons|sort((a, b) => a.ranking <=> b.ranking) %}
                 {% if button.method == 'cancel' %}
-                    <button class="btn {{ button.class }}" data-backward="{{ form.r }}">{{ button.label }}</button>
+                    <button class="btn {{ button.class }}" data-backward="{{ form.r }}">{{ button.label ?: label(button.i18n) }}</button>
                 {% else %}
-                    <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">{{ button.label }}</button>
+                    <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}{% if data.id %}/{{ data.id }}{% endif %}" data-form="#_{{ formId }}">
+                        {{ button.label ?: label(button.i18n) }}
+                    </button>
                 {% endif %}
             {% endfor %}
             </div>

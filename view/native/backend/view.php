@@ -12,7 +12,7 @@ $buttons = $controller->buttons() ?? [];
 
 $buttons[] = [
     'class' => cfg('backend.edit.cancel.button'),
-    'label' => i18n('backend.edit.cancel'),
+    'i18n' => 'backend.edit.cancel',
     'method' => 'cancel',
     'ranking' => 100,
 ];
@@ -20,7 +20,7 @@ $buttons[] = [
 if (!$controller->readonly() && $controller->hasPermission("{$node}/update")) {
     $buttons[] = [
         'class' => cfg('backend.edit.button'),
-        'label' => i18n('backend.edit.submit'),
+        'i18n' => 'backend.edit.submit',
         'method' => 'update',
         'ranking' => 200,
     ];
@@ -48,7 +48,6 @@ require 'association.php';
 
 //--
 
-$labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
@@ -57,12 +56,10 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
     $style = [
         'column' => $column,
         'disabled' => $readonly || $column->disabled(),
-        'label' => $labels[$name] ?? "[{$name}]",
+        'i18n' => "table/{$table->name()}.{$name}",
         'multilingual' => $column->multilingual(),
         'name' => $name,
         'pattern' => $column->pattern(),
-        'placeholder' => @$labels["{$name}.placeholder"],
-        'remark' => @$labels["{$name}.remark"],
         'required' => !$readonly && $column->required(),
         'tab' => $column->tab(),
         'type' => $column->invisible() ? 'hidden' : $column->formStyle(),

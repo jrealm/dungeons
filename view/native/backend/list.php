@@ -14,8 +14,8 @@ $controls = $controller->controls() ?? [];
 if ($controller->hasPermission("{$node}/new")) {
     $controls[] = [
         'class' => cfg('backend.new.button'),
+        'i18n' => 'backend.new',
         'icon' => cfg('backend.new.icon'),
-        'label' => i18n('backend.new'),
         'path' => "{$path}/new",
         'ranking' => 100,
     ];
@@ -24,8 +24,8 @@ if ($controller->hasPermission("{$node}/new")) {
 if ($controller->hasPermission("{$node}/delete")) {
     $controls[] = [
         'class' => cfg('backend.multiple-delete.button'),
+        'i18n' => 'backend.delete',
         'icon' => cfg('backend.delete.icon'),
-        'label' => i18n('backend.delete'),
         'least' => 1,
         'path' => "{$node}/delete",
         'ranking' => 200,
@@ -34,8 +34,8 @@ if ($controller->hasPermission("{$node}/delete")) {
 
 $controls[] = [
     'class' => cfg('backend.export.button'),
+    'i18n' => 'backend.export',
     'icon' => cfg('backend.export.icon'),
-    'label' => i18n('backend.export'),
     'least' => 0,
     'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q', 's'])) + ['t' => $controller->exportFormat()],
     'path' => $path,
@@ -51,8 +51,8 @@ $actions = $controller->actions() ?? [];
 if ($controller->hasPermission("{$node}/")) {
     $actions[] = [
         'class' => cfg('backend.edit.button'),
+        'i18n' => 'backend.edit',
         'icon' => cfg('backend.edit.icon'),
-        'label' => i18n('backend.edit'),
         'ranking' => 100,
     ];
 }
@@ -114,7 +114,8 @@ foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
 
     $style = [
         'column' => $column,
-        'label' => $labels[$name] ?? $column->label() ?? "[{$name}]",
+        'i18n' => "table/{$table->name()}.{$name}",
+        'label' => $column->label(),
         'name' => $name,
         'relation' => $column->relation(),
         'type' => $column->listStyle(),

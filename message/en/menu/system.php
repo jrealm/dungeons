@@ -32,4 +32,6 @@ return [
 
     'message/template/' => 'Edit Message Template',
 
+    'text' => 'Page Text',
+
 ];

@@ -32,4 +32,6 @@ return [
 
     'message/template/' => '编辑讯息样板',
 
+    'text' => '网页文字',
+
 ];

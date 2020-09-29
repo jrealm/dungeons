@@ -28,7 +28,7 @@ class Resource {
         return file_exists($file) ? $file : false;
     }
 
-    public static function getDataFile($path) {
+    public static function getDataFile($path, $verify = true) {
         if (defined('APP_DATA')) {
             if (defined('CUSTOM_APP')) {
                 $file = APP_DATA . CUSTOM_APP . '/' . $path;
@@ -36,7 +36,7 @@ class Resource {
                 $file = APP_DATA . $path;
             }
 
-            if (is_file($file)) {
+            if (!$verify || is_file($file)) {
                 return $file;
             }
         }
@@ -73,10 +73,8 @@ class Resource {
             $nodes = self::load("menu/{$name}.php");
 
             if ($nodes) {
-                $messages = Message::load("menu/{$name}");
-
                 foreach ($nodes as $path => $node) {
-                    $node['title'] = $messages[$path] ?? "<{$path}>";
+                    $node['i18n'] = "menu/{$name}.{$path}";
                     $bundle[$path] = $node;
                 }
             }

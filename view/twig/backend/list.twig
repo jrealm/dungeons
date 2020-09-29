@@ -1,8 +1,9 @@
 {% extends 'backend/content-wrapper.twig' %}
 
-{% set breadcrumbs, conditions, description, formId, max, title = result.breadcrumbs, controller.conditions, result.sub_title, random(), 0, controller.menu().title %}
+{% set conditions, formId, max = controller.conditions, random(), 0 %}
 
 {% block header %}
+    {% set breadcrumbs, description, title = result.breadcrumbs, result.sub_title, label(controller.menu().i18n) %}
     {% include 'backend/header.twig' %}
 {% endblock %}
 
@@ -16,20 +17,20 @@
                         {% set selectable = random() + 1 %}
                         <button class="btn {{ item.class }} m-1" data-ajax="{{ build(item.path, item.parameters) }}" data-least="{{ item.least }}"{% if item.least %} disabled{% endif %}>
                             <i class="{{ item.icon }}"></i>
-                            {{ item.label }}
+                            {{ item.label ?: label(item.i18n) }}
                         </button>
                     {% elseif item.upload %}
                         <span>
                             <input class="d-none" data-ajax="{{ build(item.path, item.parameters) }}" type="file">
                             <button class="btn {{ item.class }} m-1" data-upload="{{ item.upload }}" type="button">
                                 <i class="{{ item.icon }}"></i>
-                                {{ item.label }}
+                                {{ item.label ?: label(item.i18n) }}
                             </button>
                         </span>
                     {% else %}
                         <a class="btn {{ item.class }} m-1" data-ajax href="{{ build(item.path, result.backward) }}">
                             <i class="{{ item.icon }}"></i>
-                            {{ item.label }}
+                            {{ item.label ?: label(item.i18n) }}
                         </a>
                     {% endif %}
                 {% endfor %}
@@ -68,7 +69,7 @@
                 </div>
             </div>
             <div class="card-footer p-2 text-right">
-                <button class="btn btn-default" data-form="#_{{ formId }}" data-search>{{ i18n('backend.search') }}</button>
+                <button class="btn btn-default" data-form="#_{{ formId }}" data-search>{{ label('backend.search') }}</button>
             </div>
         </div>
     {% endif %}
@@ -86,7 +87,7 @@
                                     <div class="dropdown-menu">
                                         {% for group in result.groups %}
                                             {% set path = build(result.path, result.parameters, {g: group ?: null}) %}
-                                            <a class="dropdown-item" data-ajax href="{{ path }}">{{ i18n('options/list-group.' ~ group) }}</a>
+                                            <a class="dropdown-item" data-ajax href="{{ path }}">{{ label('options/list-group.' ~ group) }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -145,7 +146,7 @@
                                     </th>
                                 {% endif %}
                                 {% if actions %}
-                                    <th class="w-1">{{ i18n('backend.operation') }}</th>
+                                    <th class="w-1">{{ label('backend.operation') }}</th>
                                 {% endif %}
                                 {% for style in result.styles %}
                                     {% if style.column.template %}
@@ -153,7 +154,7 @@
                                     {% endif %}
                                     <th>
                                         {% if style.unordered %}
-                                            {{ style.label }}
+                                            {{ style.label ?: label(style.i18n) }}
                                         {% else %}
                                             {% if not result.orders[style.name] %}
                                                 {% set icon, order = 'fas fa-sort', style.name %}
@@ -162,7 +163,10 @@
                                             {% else %}
                                                 {% set icon, order = 'fas fa-sort-down', null %}
                                             {% endif %}
-                                            <a data-ajax href="{{ build(result.path, result.parameters, {o: order}) }}">{{ style.label }}<i class="{{ icon }} ml-2"></i></a>
+                                            <a data-ajax href="{{ build(result.path, result.parameters, {o: order}) }}">
+                                                {{ style.label ?: label(style.i18n) }}
+                                                <i class="{{ icon }} ml-2"></i>
+                                            </a>
                                         {% endif %}
                                     </th>
                                 {% endfor %}
@@ -184,11 +188,11 @@
                                         <td>
                                             {% for action in actions %}
                                                 {% if action.method %}
-                                                    <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label }}">
+                                                    <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label ?: i18n(action.i18n, '') }}">
                                                         <i class="{{ action.icon }}"></i>
                                                     </button>
                                                 {% else %}
-                                                    <a class="btn {{ action.class }}" data-ajax href="{{ build(controller.node ~ '/' ~ data.id, result.backward) }}" title="{{ action.label }}">
+                                                    <a class="btn {{ action.class }}" data-ajax href="{{ build(controller.node ~ '/' ~ data.id, result.backward) }}" title="{{ action.label ?: i18n(action.i18n, '') }}">
                                                         <i class="{{ action.icon }}"></i>
                                                     </a>
                                                 {% endif %}
@@ -211,7 +215,9 @@
                             {% block subtotal %}
                                 {% if total %}
                                     <tr>
-                                        <td class="text-center" colspan="{{ (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('backend.subtotal') }}</td>
+                                        <td class="text-center" colspan="{{ (actions ? 2 : 1) + (selectable ? 1 : 0) }}">
+                                            {{ label('backend.subtotal') }}
+                                        </td>
                                         {% for style in result.styles %}
                                             <td>{{ total[style.name] }}</td>
                                         {% endfor %}
@@ -219,7 +225,11 @@
                                 {% endif %}
                             {% endblock %}
                             {% if not result.data %}
-                                <tr><td class="text-center" colspan="{{ result.styles|length + (actions ? 2 : 1) + (selectable ? 1 : 0) }}">{{ i18n('error.DataNotFound') }}</td></tr>
+                                <tr>
+                                    <td class="text-center" colspan="{{ result.styles|length + (actions ? 2 : 1) + (selectable ? 1 : 0) }}">
+                                        {{ label('error.DataNotFound') }}
+                                    </td>
+                                </tr>
                             {% endif %}
                         </tbody>
                     </table>
@@ -227,7 +237,9 @@
                 {% if result.buttons %}
                     <div class="card-body p-2 text-center">
                         {% for button in result.buttons|sort((a, b) => a.ranking <=> b.ranking) %}
-                            <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}" data-form="#_{{ formId }}_table">{{ button.label }}</button>
+                            <button class="btn {{ button.class }}" data-ajax="{{ result.path }}/{{ button.method }}" data-form="#_{{ formId }}_table">
+                                {{ button.label ?: label(button.i18n) }}
+                            </button>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -237,7 +249,7 @@
                     {% set max = (result.count / result.size)|round(0, 'ceil') %}
                     <div class="card-footer">
                         <div class="float-left my-2 text-muted">
-                            {{ include(template_from_string(i18n('backend.list.rows'))) }}
+                            {{ include(template_from_string(label('backend.list.rows'))) }}
                         </div>
                         <div class="float-right">
                             {% if result.count > result.size and result.size > 0 %}

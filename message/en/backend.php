@@ -41,10 +41,16 @@ return [
 
     'subtotal' => 'Sub Total',
 
+    'success.update' => 'Update Completed',
+
     'tab.color' => 'Color',
     'tab.default' => 'Data',
     'tab.other' => 'Other',
     'tab.style' => 'Style',
+
+    'text.modify' => 'Modify Text',
+    'text.name' => 'Code',
+    'text.content' => 'Content',
 
     'title' => 'Backend',
 

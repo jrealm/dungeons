@@ -41,10 +41,16 @@ return [
 
     'subtotal' => '小計',
 
+    'success.update' => '更新成功',
+
     'tab.color' => '顏色',
     'tab.default' => '基本資料',
     'tab.other' => '其他',
     'tab.style' => '樣式',
+
+    'text.modify' => '修改網頁文字',
+    'text.name' => '代碼',
+    'text.content' => '內容',
 
     'title' => '後台管理',
 

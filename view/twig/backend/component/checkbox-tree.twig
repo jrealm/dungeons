@@ -8,7 +8,11 @@
         {% if loop.index0 and not padding %}<hr>{% endif %}
         {% if node.tags is null or node.tags|length > 0 %}
             <div class="form-group row">
-                <label class="col-md-5"><span class="d-none d-md-inline" style="padding-left:{{ padding }}px;"></span>{{ node.title }}</label>
+                <label class="col-md-5">
+                    <span class="d-none d-md-inline" style="padding-left:{{ padding }}px;">
+                        {{ node.title ?: i18n(node.i18n) }}
+                    </span>
+                </label>
                 <div class="col-md-7">
                     {% for tag in node.tags %}
                         {% set value = path ~ ':' ~ tag %}

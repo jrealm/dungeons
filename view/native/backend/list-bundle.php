@@ -11,8 +11,8 @@ $actions = [];
 if ($controller->hasPermission("{$path}/")) {
     $actions[] = [
         'class' => cfg('backend.edit.button'),
+        'i18n' => 'backend.edit',
         'icon' => cfg('backend.edit.icon'),
-        'label' => i18n('backend.edit'),
         'ranking' => 100,
     ];
 }
@@ -26,8 +26,8 @@ $result['breadcrumbs'] = $controller->createBreadcrumbs([]);
 //--
 
 $result['styles'] = [
-    ['label' => i18n('bundle.name'), 'name' => 'name', 'readonly' => true, 'type' => 'text', 'unordered' => true],
-    ['label' => i18n('bundle.remark'), 'name' => 'remark', 'readonly' => true, 'type' => 'text', 'unordered' => true],
+    ['i18n' => 'bundle.name', 'name' => 'name', 'readonly' => true, 'type' => 'text', 'unordered' => true],
+    ['i18n' => 'bundle.remark', 'name' => 'remark', 'readonly' => true, 'type' => 'text', 'unordered' => true],
 ];
 
 //--

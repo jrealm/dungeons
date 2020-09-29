@@ -44,4 +44,8 @@ return [
 
     'message/template/update' => ['parent' => 'message/template', 'tag' => 'update'],
 
+    'text' => ['parent' => 'multilingual', 'group' => true, 'tag' => 'update'],
+
+    'text/update' => ['parent' => 'text', 'tag' => 'update'],
+
 ];
