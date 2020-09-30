@@ -96,7 +96,6 @@ $result['orders'] = $orders;
 
 //--
 
-$labels = Message::load("table/{$table->name()}");
 $styles = [];
 
 foreach ($controller->columns() ?? $table->getColumns() as $name => $column) {
@@ -149,7 +148,8 @@ $filters = [];
 
 foreach ($controller->filters() ?? [] as $name => $column) {
     $filter = [
-        'label' => $labels[$name] ?? $column->label() ?? "[{$name}]",
+        'i18n' => "table/{$table->name()}.{$name}",
+        'label' => $column->label(),
         'name' => $name,
         'pattern' => $column->pattern(),
         'search' => $column->searchStyle(),
@@ -198,6 +198,7 @@ if (!$filters) {
             $column = @$style['column'];
 
             $filter = [
+                'i18n' => $style['i18n'],
                 'label' => $style['label'],
                 'name' => $style['name'],
                 'pattern' => $column ? $column->pattern() : @$style['pattern'],
