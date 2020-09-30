@@ -22,6 +22,10 @@ return [
 
     'timestamp' => 'TIME ERROR',
 
+    'tw-id' => 'ID number error',
+
+    'tw-tax-id' => 'Tax ID number error',
+
     'url' => 'URL ERROR',
 
 ];
