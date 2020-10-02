@@ -267,6 +267,8 @@
         if (replace) {
             history.replaceState(state, "", state.path);
         } else {
+            state.referer = history.state.path;
+
             history.pushState(state, "", state.path);
         }
 
@@ -510,6 +512,8 @@
             }).modal("hide");
         } else if (path === history.state.path) {
             perform(path, {});
+        } else if (path === history.state.referer) {
+            history.back();
         } else {
             redirect({path});
         }

@@ -86,12 +86,18 @@ th a, th:hover a {
     width: 1%;
 }
 
-@media (min-width: 1600px) {
-    .form-wrapper {
+@media (min-width: 1200px) {
+    .form-wrapper .tab-pane {
         column-count: 2;
     }
 
-    .form-wrapper > div {
+    .form-wrapper .tab-pane > div {
         break-inside: avoid;
+    }
+}
+
+@media (min-width: 1600px) {
+    .form-wrapper .tab-pane {
+        column-count: 3;
     }
 }

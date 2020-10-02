@@ -6,26 +6,31 @@ class InfobipSms {
 
     public function execute($args) {
         $phone = $args['prefix'] . ltrim($args['phone'], '0');
-        $data = json_encode(['messages' => [['destinations' => [['to' => $phone]], 'text' => $args['text']]]]);
 
-        $ch = curl_init();
+        if ($args['key'] === '00000') {
+            $response = '{"messages":[{"messageId":true}]}';
+        } else {
+            $data = json_encode(['messages' => [['destinations' => [['to' => $phone]], 'text' => $args['text']]]]);
 
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $args['url'],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $data,
-            CURLOPT_HTTPHEADER => [
-                "Authorization: App {$args['key']}",
-                'Content-Type: application/json',
-                'Accept: application/json'
-            ]
-        ]);
+            $ch = curl_init();
 
-        $response = curl_exec($ch);
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $args['url'],
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $data,
+                CURLOPT_HTTPHEADER => [
+                    "Authorization: App {$args['key']}",
+                    'Content-Type: application/json',
+                    'Accept: application/json'
+                ]
+            ]);
 
-        curl_close($ch);
+            $response = curl_exec($ch);
+
+            curl_close($ch);
+        }
 
         $result = json_decode($response, true);
 
