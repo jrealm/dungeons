@@ -16,7 +16,16 @@ return new class() extends dungeons\web\BackendController {
         $bundle = Resource::union("{$path}.php");
 
         $file = Resource::getDataFile($path, false);
-        $data = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+
+        if (file_exists($file)) {
+            if (!is_file($file) || !is_writable($file)) {
+                return ['error' => 'error.UpdateFailed'];
+            }
+
+            $data = json_decode(file_get_contents($file), true);
+        } else {
+            $data = [];
+        }
 
         if ($form['content'] === null || $form['content'] === @$bundle[$key]) {
             unset($data[$key]);

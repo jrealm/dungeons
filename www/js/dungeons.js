@@ -203,6 +203,11 @@
         case "download":
             download(response);
             break;
+        case "insert-images":
+            $.each(response.paths, function (ignore, path) {
+                $(response.target).summernote("insertImage", path);
+            });
+            break;
         case "location":
             location.href = response.path;
             break;
@@ -473,7 +478,41 @@
         }
 
         if ($.fn.summernote) {
-            form.find("textarea[data-format=html]").summernote({height: 300}).filter("[data-disabled]").summernote("disable");
+            form.find("textarea[data-format=html]").each(function (ignore, element) {
+                var editor = $(element);
+                var config = {height: 300};
+
+                if (editor.is("[data-disabled]")) {
+                    config.toolbar = [];
+
+                    editor.summernote(config).summernote("disable");
+                } else {
+                    config.callbacks = {
+                        onImageUpload: function (files) {
+                            var images = [];
+
+                            $.each(files, function (index, file) {
+                                var reader = new FileReader();
+
+                                reader.onload = function () {
+                                    images[index] = {file: reader.result, "file#filename": file.name};
+
+                                    if (images.length === files.length) {
+                                        perform("file/upload-images", {
+                                            images,
+                                            target: "#" + form.attr("id") + " textarea[name='" + editor.attr("name") + "']"
+                                        });
+                                    }
+                                };
+
+                                reader.readAsDataURL(file);
+                            });
+                        }
+                    };
+
+                    editor.summernote(config);
+                }
+            });
         }
     };
 
