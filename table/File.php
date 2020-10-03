@@ -22,6 +22,8 @@ $tbl->add('path', Text::class)
 
 $tbl->add('size', Integer::class);
 
+$tbl->add('hash', Text::class);
+
 $tbl->add('description', Text::class);
 
 $tbl->add('mime_type', Text::class);

@@ -36,6 +36,7 @@ CREATE TABLE base_file (
     name          TEXT      NOT NULL,
     path          TEXT          NULL UNIQUE,
     size          BIGINT        NULL,
+    hash          TEXT          NULL,
     description   TEXT          NULL,
     mime_type     TEXT          NULL,
     width         INTEGER       NULL,

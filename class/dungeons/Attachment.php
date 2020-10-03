@@ -85,6 +85,7 @@ class Attachment {
             'name' => $name,
             'path' => substr($file, strlen(dirname($file, 2)) + 1),
             'size' => filesize($file),
+            'hash' => md5_file($file),
             'mime_type' => $mime_type,
             'privilege' => 9,
         ];
@@ -111,9 +112,21 @@ class Attachment {
     }
 
     public function save($parent_id = -1) {
-        $this->info['parent_id'] = $parent_id;
+        $duplicated = model('File')->query([
+            'parent_id' => $parent_id,
+            'size' => $this->info['size'],
+            'hash' => $this->info['hash'],
+        ]);
 
-        $this->info = model('File')->insert($this->info);
+        if ($duplicated) {
+            unlink($this->info['file']);
+
+            $this->info = $duplicated[0];
+        } else {
+            $this->info['parent_id'] = $parent_id;
+
+            $this->info = model('File')->insert($this->info);
+        }
     }
 
 }
