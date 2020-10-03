@@ -422,7 +422,7 @@ class Model {
 
                 $type = self::UPDATE;
                 $prev = json_encode($prev, JSON_UNESCAPED_UNICODE);
-                $curr = json_encode($diff, JSON_UNESCAPED_UNICODE);
+                $curr = $diff ? json_encode($diff, JSON_UNESCAPED_UNICODE) : '{}';
             } else {
                 $type = self::DELETE;
                 $prev = json_encode($prev, JSON_UNESCAPED_UNICODE);

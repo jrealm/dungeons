@@ -107,15 +107,15 @@
     };
 
     var error = function (response) {
-        overlay.hide();
-
         switch (response.status) {
         case 401:
             location.reload();
-            break;
+            return;
         default:
             toastr.error(response.statusText);
         }
+
+        overlay.hide();
     };
 
     var execute = function (script) {
@@ -352,13 +352,13 @@
     var settings = $.extend({overview: "overview"}, $("script:last").data());
 
     var success = function (data) {
-        overlay.hide();
-
         if ($.isPlainObject(data)) {
             processJson(data);
         } else {
             $("response", data).each(processXml);
         }
+
+        setTimeout(overlay.hide);
     };
 
     var toggleControls = function (checked) {
