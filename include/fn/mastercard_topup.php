@@ -4,9 +4,11 @@ use dungeons\Config;
 use dungeons\utility\Fn;
 use dungeons\utility\RSA;
 
-return function ($number, $config = null) {
+return function ($orderNo, $number, $amount, $config = null) {
     $data = [
         'cardNo' => $number,
+        'orderNo' => $orderNo,
+        'amount' => $amount * 100,
         'randomStr' => md5(rand()),
     ];
 
@@ -23,32 +25,38 @@ return function ($number, $config = null) {
 
     //--
 
-    logger('card-query-raw')->info($param);
+    logger('card-topup-raw')->info($param);
 
-    $response = Fn::http_post("{$paytend['url']}/api/mastercard/masterCardQuery.html", $param);
+    $response = Fn::http_post("{$paytend['url']}/api/mastercard/masterCardTopup.html", $param);
 
-    logger('card-query')->info($response);
+    logger('card-topup')->info($response);
 
     //--
 
     $response = json_decode($response, true);
 
     if (@$response['respCode'] !== '00') {
-        logger('card-query')->error(json_encode($response, JSON_UNESCAPED_UNICODE));
+        logger('card-topup')->error(json_encode($response, JSON_UNESCAPED_UNICODE));
 
         return false;
     }
 
     $response = RSA::decrypt($response['respData'], $paytend['privateKeyFile']);
 
-    logger('card-query')->info($response);
+    logger('card-topup')->info($response);
 
     $response = json_decode($response, true);
 
+    switch (@$response['topupStatus']) {
+    case 1: // 成功
+    case 3: // 處理中
+        break;
+    default:
+        return null; // 失敗
+    }
+
     return [
-        'balance' => @$response['balance'] / 100,
-        'status' => $response['auditStatus'], // 0:未送審  1:審核中  2:成功  3:拒絕
-        'message' => @$response['auditDescription'],
-        'cardStatus' => $response['cardStatus'], // 4:未激活  5:正常  6:掛失  7:註銷  8:凍結
+        'status' => $response['topupStatus'],
+        'message' => $response['errMsg'],
     ];
 };

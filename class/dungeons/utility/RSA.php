@@ -5,7 +5,7 @@ namespace dungeons\utility;
 class RSA {
 
     public static function decrypt($data, $keyfile) {
-        $key = openssl_pkey_get_private(file_get_contents($keyfile));
+        $key = openssl_pkey_get_private(self::load($keyfile));
 
         if ($key) {
             $output = '';
@@ -23,7 +23,7 @@ class RSA {
     }
 
     public static function encrypt($data, $keyfile) {
-        $key = openssl_pkey_get_public(file_get_contents($keyfile));
+        $key = openssl_pkey_get_public(self::load($keyfile));
 
         if ($key) {
             $output = '';
@@ -41,7 +41,7 @@ class RSA {
     }
 
     public static function sign($data, $keyfile) {
-        $key = openssl_pkey_get_private(file_get_contents($keyfile));
+        $key = openssl_pkey_get_private(self::load($keyfile));
 
         if ($key) {
             openssl_sign($data, $signature, $key);
@@ -52,7 +52,7 @@ class RSA {
     }
 
     public static function verify($data, $keyfile, $signature) {
-        $key = openssl_pkey_get_public(file_get_contents($keyfile));
+        $key = openssl_pkey_get_public(self::load($keyfile));
 
         if ($key) {
             $res = openssl_verify($data, base64_decode($signature), $key);
@@ -61,6 +61,14 @@ class RSA {
 
             return $res ? $signature : false;
         }
+    }
+
+    private static function load($file) {
+        if (strpos($file, '-----BEGIN') === 0) {
+            return $file;
+        }
+
+        return file_get_contents($file);
     }
 
 }

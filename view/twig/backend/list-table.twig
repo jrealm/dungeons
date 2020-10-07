@@ -1,0 +1,100 @@
+{% set actions, templates = result.actions|sort((a, b) => a.ranking <=> b.ranking), {} %}
+<table class="table table-hover table-responsive table-striped" id="_{{ formId }}_table">
+    <thead>
+        <tr>
+            <th class="w-1">#</th>
+            {% if selectable %}
+                <th class="w-1">
+                    <div class="d-inline icheck-primary">
+                        <input data-all id="_{{ selectable }}" type="checkbox"><label for="_{{ selectable }}"></label>
+                    </div>
+                </th>
+            {% endif %}
+            {% if actions %}
+                <th class="w-1">{{ label('backend.operation') }}</th>
+            {% endif %}
+            {% for style in result.styles %}
+                {% if style.column.template %}
+                    {% set templates = templates|merge({(style.name): template_from_string(style.column.template)}) %}
+                {% endif %}
+                <th>
+                    {% if style.unordered %}
+                        {{ style.label ?: label(style.i18n) }}
+                    {% else %}
+                        {% if not result.orders[style.name] %}
+                            {% set icon, order = 'fas fa-sort', style.name %}
+                        {% elseif result.orders[style.name] > 0 %}
+                            {% set icon, order = 'fas fa-sort-up', '-' ~ style.name %}
+                        {% else %}
+                            {% set icon, order = 'fas fa-sort-down', null %}
+                        {% endif %}
+                        <a data-ajax href="{{ build(result.path, result.parameters, {o: order}) }}">
+                            {{ style.label ?: label(style.i18n) }}
+                            <i class="{{ icon }} ml-2"></i>
+                        </a>
+                    {% endif %}
+                </th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% set num, total = (result.page - 1) * result.size, {} %}
+        {% for data in result.data %}
+            <tr>
+                <td>{{ num + loop.index }}</td>
+                {% if selectable %}
+                    <td>
+                        <div class="d-inline icheck-primary">
+                            <input data-id="{{ data.id }}" id="_{{ selectable }}_{{ data.id }}" type="checkbox"><label for="_{{ selectable }}_{{ data.id }}"></label>
+                        </div>
+                    </td>
+                {% endif %}
+                {% if actions %}
+                    <td>
+                        {% for action in actions %}
+                            {% if action.method %}
+                                <button class="btn {{ action.class }}" data-ajax="{{ controller.node }}/{{ action.method }}/{{ data.id }}" title="{{ action.label ?: i18n(action.i18n, '') }}">
+                                    <i class="{{ action.icon }}"></i>
+                                </button>
+                            {% else %}
+                                <a class="btn {{ action.class }}" data-ajax href="{{ build(controller.node ~ '/' ~ data.id, result.backward) }}" title="{{ action.label ?: i18n(action.i18n, '') }}">
+                                    <i class="{{ action.icon }}"></i>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endif %}
+                {% for style in result.styles %}
+                    {% if style.column.subTotal and data[style.name] %}
+                        {% set total = total|merge({(style.name): total[style.name] + data[style.name]}) %}
+                    {% endif %}
+                    {% if templates[style.name] %}
+                        {% set data = data|merge({'.content': include(templates[style.name], data, with_context = false)}) %}
+                    {% endif %}
+                    <td data-column="{{ style.name }}">
+                        {% include 'backend/component/' ~ style.type ~ '.twig' with {controller: controller, data: data, grid: true, style: style} only %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        {% block subtotal %}
+            {% if total %}
+                <tr>
+                    <td class="text-center" colspan="{{ (actions ? 2 : 1) + (selectable ? 1 : 0) }}">
+                        {{ label('backend.subtotal') }}
+                    </td>
+                    {% for style in result.styles %}
+                        <td>{{ total[style.name] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+        {% endblock %}
+        {% if not result.data %}
+            <tr>
+                <td class="text-center" colspan="{{ result.styles|length + (actions ? 2 : 1) + (selectable ? 1 : 0) }}">
+                    {{ label('error.DataNotFound') }}
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
