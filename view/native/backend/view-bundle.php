@@ -31,10 +31,9 @@ $result['buttons'] = $buttons;
 //--
 
 $id = $controller->args()[1];
-$result['data']['.title'] = $id;
-
+$result['sub_title'] = i18n($result['prefix'], $id);
+$result['data']['.title'] = $result['sub_title'];
 $result['breadcrumbs'] = $controller->createBreadcrumbs([$result['data']]);
-$result['sub_title'] = $id;
 
 //--
 

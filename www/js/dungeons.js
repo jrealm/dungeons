@@ -299,6 +299,8 @@
         var form = $(expression);
 
         form.find("input,select,textarea").each(function (ignore, element) {
+            var input;
+
             if (element.name) {
                 switch (element.type) {
                 case "checkbox":
@@ -315,8 +317,16 @@
                     break;
 
                 case "select-multiple":
-                case "textarea":
                     combine(data, element.name, $(element).val());
+                    return;
+
+                case "textarea":
+                    input = $(element);
+                    if (input.is("[data-format=html]") && input.summernote("isEmpty")) {
+                        combine(data, element.name, null);
+                    } else {
+                        combine(data, element.name, input.val());
+                    }
                     return;
                 }
 
