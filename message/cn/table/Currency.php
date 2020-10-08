@@ -1,0 +1,21 @@
+<?php //>
+
+return [
+
+    'title' => '名称',
+
+    'code' => '代号',
+
+    'symbol' => '符号',
+
+    'icon' => '图示',
+
+    'rate_count' => '汇率',
+
+    'enable_time' => '上架时间',
+
+    'disable_time' => '下架时间',
+
+    'ranking' => '排序',
+
+];
