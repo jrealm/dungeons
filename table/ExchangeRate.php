@@ -39,4 +39,7 @@ $tbl->add('auto_modify', Boolean::class)
     ->default(true)
     ->required(true);
 
+$tbl->ranking('currency');
+$tbl->title('currency');
+
 return $tbl;

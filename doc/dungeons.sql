@@ -114,8 +114,10 @@ CREATE TABLE base_block_item (
 
 CREATE TABLE base_menu (
     id           INTEGER   NOT NULL PRIMARY KEY,
+    type         INTEGER       NULL,
     parent_id    INTEGER       NULL,
     title        TEXT          NULL,
+    icon         TEXT          NULL,
     url          TEXT          NULL,
     enable_time  TIMESTAMP     NULL,
     disable_time TIMESTAMP     NULL,

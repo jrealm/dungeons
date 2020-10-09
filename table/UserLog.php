@@ -13,7 +13,7 @@ $tbl->add('user_id', Integer::class)
     ->required(true);
 
 $tbl->add('type', Integer::class)
-    ->options('UserLogType')
+    ->options('user-log-type')
     ->readonly(true)
     ->required(true);
 

@@ -19,6 +19,8 @@ $tbl->add('enable_time', EnableTime::class);
 
 $tbl->add('disable_time', DisableTime::class);
 
+$tbl->ranking('path');
+
 $tbl->id->composite('block', 'Block', 'page_id');
 
 return $tbl;

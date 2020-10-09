@@ -10,6 +10,7 @@ return new class() extends dungeons\web\backend\ListController {
         $table->add('item_count', 'item.count');
 
         $names = [
+            'type',
             'title',
             'item_count',
             'enable_time',

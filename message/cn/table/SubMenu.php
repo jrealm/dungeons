@@ -4,6 +4,8 @@ return [
 
     'title' => '名称',
 
+    'icon' => '图示',
+
     'url' => '网址',
 
     'enable_time' => '上架时间',

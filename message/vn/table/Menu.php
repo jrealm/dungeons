@@ -2,16 +2,20 @@
 
 return [
 
-    'title' => 'TITLE',
+    'type' => 'Type',
+
+    'title' => 'Title',
+
+    'icon' => 'Icon',
 
     'url' => 'URL',
 
-    'item_count' => 'SUB MENU',
+    'item_count' => 'Sub Menu',
 
-    'enable_time' => 'ENABLE TIME',
+    'enable_time' => 'Enable Time',
 
-    'disable_time' => 'DISABLE TIME',
+    'disable_time' => 'Disable Time',
 
-    'ranking' => 'RANKING',
+    'ranking' => 'Ranking',
 
 ];

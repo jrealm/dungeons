@@ -27,6 +27,7 @@ $tbl->add('disabled', Boolean::class)
     ->default(false)
     ->required(true);
 
+$tbl->ranking('username');
 $tbl->title('username');
 
 return $tbl;

@@ -30,4 +30,6 @@ $tbl->add('create_time', CreateTime::class)
     ->readonly(true)
     ->required(true);
 
+$tbl->ranking('-id');
+
 return $tbl;

@@ -17,6 +17,8 @@ $tbl->add('title', Text::class)
     ->multilingual(true)
     ->required(true);
 
+$tbl->add('icon', Text::class);
+
 $tbl->add('url', Text::class);
 
 $tbl->add('enable_time', EnableTime::class);
