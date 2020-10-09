@@ -32,6 +32,8 @@ return [
 
     'message/template/' => '编辑讯息样板',
 
+    'sms-log' => '短讯纪录',
+
     'text' => '网页文字',
 
 ];

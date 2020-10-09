@@ -32,6 +32,8 @@ return [
 
     'message/template/' => 'Edit Message Template',
 
+    'sms-log' => 'SMS Log',
+
     'text' => 'Page Text',
 
 ];

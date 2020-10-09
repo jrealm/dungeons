@@ -44,6 +44,8 @@ return [
 
     'message/template/update' => ['parent' => 'message/template', 'tag' => 'update'],
 
+    'sms-log' => ['icon' => 'fas fa-sms', 'ranking' => 300, 'parent' => 'system', 'group' => true, 'tag' => 'query'],
+
     'text' => ['parent' => 'multilingual', 'group' => true, 'tag' => 'update'],
 
     'text/update' => ['parent' => 'text', 'tag' => 'update'],

@@ -99,9 +99,7 @@
                                     <div class="mr-1">
                                         <select class="form-control select2bs4" data-search style="min-width:10rem;">
                                             {% for input in result.simple_filters %}
-                                                <option value="{{ input.name }}"{% if input.selected %} selected{% endif %}>
-                                                    {{ input.label ?: i18n(input.i18n) }}
-                                                </option>
+                                                <option value="{{ input.name }}"{% if input.selected %} selected{% endif %}>{{ input.label ?: i18n(input.i18n) }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>

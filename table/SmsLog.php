@@ -2,6 +2,7 @@
 
 use dungeons\db\column\CreateTime;
 use dungeons\db\column\Creator;
+use dungeons\db\column\Integer;
 use dungeons\db\column\RemoteAddress;
 use dungeons\db\column\Text;
 use dungeons\db\Table;
@@ -20,6 +21,7 @@ $tbl->add('content', Text::class)
     ->required(true);
 
 $tbl->add('response', Text::class)
+    ->invisible(true)
     ->readonly(true);
 
 $tbl->add('ip', RemoteAddress::class)
@@ -28,6 +30,11 @@ $tbl->add('ip', RemoteAddress::class)
 
 $tbl->add('create_time', CreateTime::class)
     ->readonly(true)
+    ->required(true);
+
+$tbl->add('status', Integer::class)
+    ->default(0)
+    ->options('sms-status')
     ->required(true);
 
 $tbl->ranking('-id');

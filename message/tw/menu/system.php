@@ -32,6 +32,8 @@ return [
 
     'message/template/' => '編輯訊息樣板',
 
+    'sms-log' => '簡訊紀錄',
+
     'text' => '網頁文字',
 
 ];
