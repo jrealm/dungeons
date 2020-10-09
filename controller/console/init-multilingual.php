@@ -37,6 +37,11 @@ return new class() extends dungeons\cli\Controller {
                 $table = table($info['filename']);
 
                 foreach ($table->getColumns() as $column) {
+                    if (!$this->defined($table->mapping(), $column->mapping())) {
+                        echo HIR . "{$table->mapping()}.{$column->mapping()} NOT FOUND\n" . NOR;
+                        continue;
+                    }
+
                     if ($column->multilingual()) {
                         foreach (LANGUAGES as $language) {
                             $this->add($table->mapping(), $column->mapping(), $language);
@@ -47,7 +52,7 @@ return new class() extends dungeons\cli\Controller {
                 if ($table->versionable() && !$this->defined($table->mapping(), '__version__')) {
                     $command = "ALTER TABLE {$table->mapping()} ADD COLUMN __version__ INTEGER";
 
-                    echo "{$command};\n";
+                    echo HIG . "{$command};\n" . NOR;
 
                     $statement = $this->db->prepare($command);
                     $statement->execute();
@@ -56,7 +61,7 @@ return new class() extends dungeons\cli\Controller {
 
                     $command = "UPDATE {$table->mapping()} SET __version__ = 1";
 
-                    echo "{$command};\n";
+                    echo HIG . "{$command};\n" . NOR;
 
                     $statement = $this->db->prepare($command);
                     $statement->execute();
@@ -81,7 +86,7 @@ return new class() extends dungeons\cli\Controller {
 
         $command = "ALTER TABLE {$table} ADD COLUMN {$column}__{$language} {$type}";
 
-        echo "{$command};\n";
+        echo HIY . "{$command};\n" . NOR;
 
         $statement = $this->db->prepare($command);
         $statement->execute();
@@ -90,7 +95,7 @@ return new class() extends dungeons\cli\Controller {
 
         $command = "UPDATE {$table} SET {$column}__{$language} = {$column}";
 
-        echo "{$command};\n";
+        echo HIY . "{$command};\n" . NOR;
 
         $statement = $this->db->prepare($command);
         $statement->execute();
