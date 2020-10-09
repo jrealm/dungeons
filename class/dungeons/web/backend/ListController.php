@@ -23,16 +23,6 @@ class ListController extends BackendController {
         return $styles;
     }
 
-    protected function preprocess($form) {
-        $relation = $this->table()->getMasterRelation();
-
-        if ($relation) {
-            $form[$relation['column']->name()] = $this->args()[0];
-        }
-
-        return $form;
-    }
-
     protected function process($form) {
         $criteria = $this->criteria();
         $export = @$form['t'];

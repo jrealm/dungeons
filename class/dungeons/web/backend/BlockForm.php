@@ -24,15 +24,13 @@ trait BlockForm {
         }
 
         $fields = [];
-        $labels = Message::load("module/{$moduleName}");
         $table = $this->table();
 
         foreach ($module['fields'] as $field) {
             $name = $field['name'];
 
-            $field['label'] = $labels[$name] ?? i18n("block.{$name}", $name);
-            $field['placeholder'] = @$labels["{$name}.placeholder"];
-            $field['remark'] = @$labels["{$name}.remark"];
+            $field['i18n'] = Message::defined("module/{$moduleName}.{$name}", "block.{$name}");
+            $field['label'] = $field['i18n'] === null ? $name : null;
 
             if (isset($table->{$name})) {
                 $field['multilingual'] = $table->{$name}->multilingual();

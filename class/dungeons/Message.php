@@ -6,6 +6,18 @@ class Message {
 
     private static $bundles = [];
 
+    public static function defined(...$tokens) {
+        foreach ($tokens as $token) {
+            list($name, $key) = preg_split('/\./', $token, 2);
+
+            if (key_exists($key, self::load($name))) {
+                return $token;
+            }
+        }
+
+        return null;
+    }
+
     public static function get($token, $default = null) {
         list($name, $key) = preg_split('/\./', $token, 2);
 

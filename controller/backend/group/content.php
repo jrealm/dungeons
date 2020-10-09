@@ -43,7 +43,7 @@ return new class() extends dungeons\web\backend\GetController {
         }
 
         $styles[] = [
-            'label' => i18n('table/Group.permissions'),
+            'i18n' => 'table/Group.permissions',
             'name' => 'permissions',
             'options' => $nodes,
             'type' => 'checkbox-tree',

@@ -25,13 +25,11 @@ class ListController extends Controller {
     }
 
     protected function postprocess($form, $result) {
-        if (@$result['success']) {
-            foreach ($result['data'] as &$data) {
-                $module = Config::load("module/{$data['module']}");
+        foreach ($result['data'] as &$data) {
+            $module = Config::load("module/{$data['module']}");
 
-                if (!@$module['sub-module']) {
-                    unset($data['item_count']);
-                }
+            if (!@$module['sub-module']) {
+                unset($data['item_count']);
             }
         }
 

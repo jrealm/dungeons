@@ -15,4 +15,14 @@ trait SubList {
         return false;
     }
 
+    protected function preprocess($form) {
+        $relation = $this->table()->getMasterRelation();
+
+        if ($relation) {
+            $form[$relation['column']->name()] = $this->args()[0];
+        }
+
+        return $form;
+    }
+
 }

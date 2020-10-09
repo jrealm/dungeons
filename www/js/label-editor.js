@@ -15,15 +15,36 @@
         return false;
     };
 
+    var restore = function (ignore, element) {
+        var node = $(element);
+
+        if (!node.data("length")) {
+            node.empty();
+        }
+
+        node.off("click", edit).removeClass("editable-label");
+    };
+
+    var setup = function (ignore, element) {
+        var node = $(element);
+        var length = node.html().length;
+
+        if (!length) {
+            node.text("{" + node.data("edit") + "}");
+        }
+
+        node.addClass("editable-label").data("length", length).on("click", edit);
+    };
+
     var toggle = function () {
         var elements = $("[data-edit]");
 
         active = !active;
 
         if (active) {
-            elements.addClass("editable-label").on("click", edit);
+            elements.each(setup);
         } else {
-            elements.removeClass("editable-label").off("click", edit);
+            elements.each(restore);
         }
     };
 

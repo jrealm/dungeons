@@ -3,7 +3,7 @@
 {% block postprocess %}
     toastr.info("{{ i18n('backend.success.update') }}");
 
-    $("[data-edit='{{ form.name }}']").html("{{ result.content|raw }}");
+    $("[data-edit='{{ form.name }}']").data("length", {{ i18n(form.name, '')|length }}).html({{ i18n(form.name)|json_encode|raw }});
 
     $(".modal-wrapper .modal").modal("hide");
 {% endblock %}

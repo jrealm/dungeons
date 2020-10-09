@@ -16,7 +16,6 @@ class ListController extends Controller {
         $sub = Config::load("module/{$data['module']}")['sub-module'];
 
         $fields = [];
-        $labels = Message::load("module/{$sub}");
         $module = Config::load("sub-module/{$sub}");
         $table = $this->table();
 
@@ -27,7 +26,8 @@ class ListController extends Controller {
                 continue;
             }
 
-            $field['label'] = $labels[$name] ?? i18n("block.{$name}", $name);
+            $field['i18n'] = Message::defined("module/{$sub}.{$name}", "block.{$name}");
+            $field['label'] = $field['i18n'] === null ? $name : null;
             $field['readonly'] = true;
 
             switch ($name) {

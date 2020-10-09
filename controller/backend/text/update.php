@@ -63,7 +63,7 @@ return new class() extends dungeons\web\BackendController {
             }
         }
 
-        return ['success' => true, 'content' => $content];
+        return ['success' => true];
     }
 
 };

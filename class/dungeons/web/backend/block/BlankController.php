@@ -58,7 +58,7 @@ class BlankController extends Controller {
             } else {
                 $this->button([
                     'class' => cfg('backend.new.next.button'),
-                    'label' => i18n('backend.new.next'),
+                    'i18n' => 'backend.new.next',
                     'method' => 'new',
                     'ranking' => 200,
                 ]);
