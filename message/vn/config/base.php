@@ -11,6 +11,8 @@ return [
     'gmail.username' => 'Account',
     'gmail.to' => 'Default Recipient',
 
+    'newebpay' => 'NewebPay',
+
     'sms' => 'SMS',
 
     'system' => 'System',

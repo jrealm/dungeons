@@ -30,7 +30,13 @@ return [
 
     'message-table' => 'Table',
 
+    'privacy-policy' => 'Privacy Policy',
+    'privacy-policy.content' => 'Content',
+
     'register' => 'Register',
+
+    'terms-of-use' => 'Terms Of Use',
+    'terms-of-use.content' => 'Content',
 
     'validation' => 'Validation',
 

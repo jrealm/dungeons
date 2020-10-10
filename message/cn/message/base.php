@@ -30,7 +30,13 @@ return [
 
     'message-table' => '资料表',
 
+    'privacy-policy' => '私隐政策',
+    'privacy-policy.content' => '内容',
+
     'register' => '会员注册',
+
+    'terms-of-use' => '使用条款',
+    'terms-of-use.content' => '内容',
 
     'validation' => '资料验证',
 

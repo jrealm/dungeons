@@ -11,6 +11,8 @@ return [
     'gmail.username' => '帳號',
     'gmail.to' => '預設收件人',
 
+    'newebpay' => '藍星金流',
+
     'sms' => '簡訊',
 
     'system' => '系統',

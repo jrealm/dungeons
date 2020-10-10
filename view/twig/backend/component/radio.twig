@@ -7,7 +7,7 @@
         {% for name, item in style.options %}
             <span class="icheck-primary">
                 <input{% if name == value %} checked{% endif %}{% if style.disabled %} disabled{% endif %} id="{{ name }}-{{ id }}" name="{{ style.name }}{% if grid %}@{{ data.id }}{% endif %}" type="radio" value="{{ name }}">
-                <label class="mr-3" for="{{ name }}-{{ id }}">{{ item }}</label>
+                <label class="mb-2 mr-3" for="{{ name }}-{{ id }}">{{ item }}</label>
             </span>
         {% endfor %}
     </div>
