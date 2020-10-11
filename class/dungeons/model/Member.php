@@ -42,6 +42,7 @@ class Member extends Model {
 
             if (!empty($encrypt)) {
                 $curr[$name] = md5("{$curr['id']}::{$curr[$name]}");
+                $curr["{$name}_time"] = date(cfg('system.timestamp'));
             }
         }
 

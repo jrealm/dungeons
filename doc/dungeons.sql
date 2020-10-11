@@ -125,13 +125,18 @@ CREATE TABLE base_menu (
 );
 
 CREATE TABLE base_member (
-    id               INTEGER NOT NULL PRIMARY KEY,
-    username         TEXT    NOT NULL UNIQUE,
-    nickname         TEXT        NULL UNIQUE,
-    mobile           TEXT        NULL UNIQUE,
-    password         TEXT    NOT NULL,
-    payment_password TEXT        NULL,
-    disabled         BOOLEAN NOT NULL
+    id                    INTEGER   NOT NULL PRIMARY KEY,
+    username              TEXT      NOT NULL UNIQUE,
+    nickname              TEXT          NULL UNIQUE,
+    country_id            INTEGER       NULL,
+    mobile                TEXT          NULL UNIQUE,
+    mail                  TEXT          NULL UNIQUE,
+    password              TEXT      NOT NULL,
+    password_time         TIMESTAMP NOT NULL,
+    payment_password      TEXT          NULL,
+    payment_password_time TIMESTAMP     NULL,
+    create_time           TIMESTAMP NOT NULL,
+    disabled              BOOLEAN   NOT NULL
 );
 
 CREATE TABLE base_member_log (
