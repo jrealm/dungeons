@@ -10,6 +10,8 @@ return [
 
     'InsertFailed' => '新增失败',
 
+    'InvalidAmount' => '金额错误',
+
     'InvalidFileType' => '档案格式错误',
 
     'PermissionDenied' => '权限不足',

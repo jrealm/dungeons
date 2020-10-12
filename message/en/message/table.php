@@ -14,6 +14,10 @@ return [
 
     'Group' => 'Backend Group',
 
+    'Member' => 'Frontend Member',
+
+    'MemberLog' => 'Frontend Member Log',
+
     'Menu' => 'Site Menu',
 
     'Page' => 'Web Page',
@@ -25,5 +29,9 @@ return [
     'User' => 'Backend User',
 
     'UserLog' => 'Backend User Log',
+
+    'Wallet' => 'Wallet',
+
+    'WalletLog' => 'Wallet Detail',
 
 ];

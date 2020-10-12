@@ -40,6 +40,8 @@ return [
 
     'visible' => '隐藏/显示',
 
+    'wallet-log-type' => '钱包明细类型',
+
     'yes-no' => '是/否',
 
 ];

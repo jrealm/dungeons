@@ -10,6 +10,8 @@ return [
 
     'InsertFailed' => '新增失敗',
 
+    'InvalidAmount' => '金額錯誤',
+
     'InvalidFileType' => '檔案格式錯誤',
 
     'PermissionDenied' => '權限不足',

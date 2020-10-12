@@ -8,8 +8,12 @@ return [
 
     'currency' => 'System Management / Currency',
 
+    'member' => 'Member Management',
+
     'site' => 'Website Management',
 
     'system' => 'System Management',
+
+    'wallet' => 'Wallet Management',
 
 ];

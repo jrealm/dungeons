@@ -8,8 +8,12 @@ return [
 
     'currency' => '系统管理 / 货币',
 
+    'member' => '会员管理',
+
     'site' => '网站管理',
 
     'system' => '系统管理',
+
+    'wallet' => '钱包管理',
 
 ];

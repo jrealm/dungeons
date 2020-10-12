@@ -40,6 +40,8 @@ return [
 
     'visible' => 'Hide/Show',
 
+    'wallet-log-type' => 'Wallet Log Type',
+
     'yes-no' => 'Yes/No',
 
 ];

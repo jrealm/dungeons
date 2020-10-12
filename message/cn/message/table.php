@@ -14,6 +14,10 @@ return [
 
     'Group' => '后台帐号群组',
 
+    'Member' => '前台帐号',
+
+    'MemberLog' => '前台帐号纪录',
+
     'Menu' => '网站选单',
 
     'Page' => '网页',
@@ -25,5 +29,9 @@ return [
     'User' => '后台帐号',
 
     'UserLog' => '后台帐号纪录',
+
+    'Wallet' => '钱包',
+
+    'WalletLog' => '钱包明细',
 
 ];

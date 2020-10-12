@@ -14,6 +14,10 @@ return [
 
     'Group' => '後台帳號群組',
 
+    'Member' => '前台帳號',
+
+    'MemberLog' => '前台帳號紀錄',
+
     'Menu' => '網站選單',
 
     'Page' => '網頁',
@@ -25,5 +29,9 @@ return [
     'User' => '後台帳號',
 
     'UserLog' => '後台帳號紀錄',
+
+    'Wallet' => '錢包',
+
+    'WalletLog' => '錢包明細',
 
 ];

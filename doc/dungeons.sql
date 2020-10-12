@@ -124,29 +124,6 @@ CREATE TABLE base_menu (
     ranking      INTEGER   NOT NULL
 );
 
-CREATE TABLE base_member (
-    id                    INTEGER   NOT NULL PRIMARY KEY,
-    username              TEXT      NOT NULL UNIQUE,
-    nickname              TEXT          NULL UNIQUE,
-    country_id            INTEGER       NULL,
-    mobile                TEXT          NULL UNIQUE,
-    mail                  TEXT          NULL UNIQUE,
-    password              TEXT      NOT NULL,
-    password_time         TIMESTAMP NOT NULL,
-    payment_password      TEXT          NULL,
-    payment_password_time TIMESTAMP     NULL,
-    create_time           TIMESTAMP NOT NULL,
-    disabled              BOOLEAN   NOT NULL
-);
-
-CREATE TABLE base_member_log (
-    id          INTEGER   NOT NULL PRIMARY KEY,
-    member_id   INTEGER   NOT NULL,
-    type        INTEGER   NOT NULL, -- 1:登入, 2:登出, 3:重設密碼, 4:密碼錯誤, 5:忘記密碼, 6:重設交易密碼, 7:OTP登入
-    ip          TEXT      NOT NULL,
-    create_time TIMESTAMP NOT NULL
-);
-
 CREATE TABLE base_sms_log (
     id          INTEGER   NOT NULL PRIMARY KEY,
     sender      INTEGER       NULL,
@@ -187,5 +164,73 @@ CREATE TABLE base_country (
     code    TEXT    NOT NULL UNIQUE,
     prefix  TEXT    NOT NULL,
     ranking INTEGER NOT NULL
+);
+
+CREATE TABLE base_member (
+    id                    INTEGER   NOT NULL PRIMARY KEY,
+    username              TEXT      NOT NULL UNIQUE,
+    nickname              TEXT          NULL UNIQUE,
+    country_id            INTEGER       NULL,
+    mobile                TEXT          NULL UNIQUE,
+    mail                  TEXT          NULL UNIQUE,
+    password              TEXT      NOT NULL,
+    password_time         TIMESTAMP NOT NULL,
+    payment_password      TEXT          NULL,
+    payment_password_time TIMESTAMP     NULL,
+    create_time           TIMESTAMP NOT NULL,
+    disabled              BOOLEAN   NOT NULL
+);
+
+CREATE TABLE base_member_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    member_id   INTEGER   NOT NULL,
+    type        INTEGER   NOT NULL, -- 1:登入, 2:登出, 3:重設密碼, 4:密碼錯誤, 5:忘記密碼, 6:重設交易密碼, 7:OTP登入
+    ip          TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL
+);
+
+CREATE TABLE base_wallet (
+    id          INTEGER          NOT NULL PRIMARY KEY,
+    member_id   INTEGER          NOT NULL,
+    account     TEXT             NOT NULL,
+    currency_id INTEGER          NOT NULL,
+    balance     DOUBLE PRECISION NOT NULL,
+    frozen      DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE base_transaction (
+    id           INTEGER          NOT NULL PRIMARY KEY,
+    wallet_id    INTEGER          NOT NULL,
+    the_date     DATE             NOT NULL,
+    type         INTEGER          NOT NULL,
+    amount       DOUBLE PRECISION NOT NULL,
+    fee          DOUBLE PRECISION NOT NULL,
+    target       TEXT                 NULL,
+    bank_code    TEXT                 NULL,
+    bill_number  TEXT                 NULL,
+    payment      TEXT                 NULL, -- 付款資訊
+    request      TEXT                 NULL,
+    response     TEXT                 NULL,
+    notice       TEXT                 NULL,
+    creator      TEXT             NOT NULL,
+    create_time  TIMESTAMP        NOT NULL,
+    remark       TEXT                 NULL,
+    processor    TEXT                 NULL,
+    process_time TIMESTAMP            NULL,
+    rejection    TEXT                 NULL,
+    status       INTEGER          NOT NULL  -- 0:未入帳, 1:已入帳, 2:取消
+);
+
+CREATE TABLE base_wallet_log (
+    id             INTEGER          NOT NULL PRIMARY KEY,
+    wallet_id      INTEGER          NOT NULL,
+    transaction_id INTEGER          NOT NULL,
+    the_date       DATE             NOT NULL,
+    type           INTEGER          NOT NULL, -- 1:轉出, 2:轉入
+    debit          DOUBLE PRECISION NOT NULL, -- 轉入(借)(+)
+    credit         DOUBLE PRECISION NOT NULL, -- 轉出(貸)(-)
+    balance        DOUBLE PRECISION NOT NULL,
+    remark         TEXT                 NULL,
+    create_time    TIMESTAMP        NOT NULL
 );
 

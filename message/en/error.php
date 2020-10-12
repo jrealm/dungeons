@@ -10,6 +10,8 @@ return [
 
     'InsertFailed' => 'FAILED TO ADD',
 
+    'InvalidAmount' => 'Invalid Amount',
+
     'InvalidFileType' => 'INVALID FILE FORMAT',
 
     'PermissionDenied' => 'INSUFFICIENT PERMISSION',
