@@ -4,16 +4,16 @@ return [
 
     'authority' => 'Authority Management',
 
-    'country' => 'System Management / Country',
+    'base-member' => 'Member Management',
 
-    'currency' => 'System Management / Currency',
-
-    'member' => 'Member Management',
+    'base-wallet' => 'Wallet Management',
 
     'site' => 'Website Management',
 
     'system' => 'System Management',
 
-    'wallet' => 'Wallet Management',
+    'system-country' => 'System Management / Country',
+
+    'system-currency' => 'System Management / Currency',
 
 ];
