@@ -1,5 +1,5 @@
 
-CREATE TABLE base_member (
+CREATE TABLE common_member (
     id                    INTEGER   NOT NULL PRIMARY KEY,
     username              TEXT      NOT NULL UNIQUE,
     nickname              TEXT          NULL UNIQUE,
@@ -13,6 +13,8 @@ CREATE TABLE base_member (
     create_time           TIMESTAMP NOT NULL,
     disabled              BOOLEAN   NOT NULL
 );
+
+CREATE TABLE base_member () INHERITS (common_member);
 
 CREATE TABLE base_member_log (
     id          INTEGER   NOT NULL PRIMARY KEY,
