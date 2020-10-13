@@ -2,15 +2,15 @@ createuser "{{ result.db_user }}" --no-createrole --no-createdb --no-inherit --n
 createdb "{{ result.db_name }}" --owner="{{ result.db_user }}" -U postgres 2> /dev/null
 
 if [ "$?" = "0" ] ; then
-    psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" < ../vendor/jrealm/dungeons/doc/dungeons.sql > /dev/null
+    psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file=../vendor/jrealm/dungeons/doc/dungeons.sql &> /dev/null
 
     if [ -f ../doc/schema.sql ] ; then
-        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" < ../doc/schema.sql > /dev/null
+        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file=../doc/schema.sql &> /dev/null
     fi
 
     php index.php /console/init-multilingual
 
     if [ -f ../doc/data.sql ] ; then
-        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" < ../doc/data.sql > /dev/null
+        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file=../doc/data.sql &> /dev/null
     fi
 fi

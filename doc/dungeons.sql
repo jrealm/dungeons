@@ -9,10 +9,10 @@
  *  psql -d "${DB_NAME}" -U "${DB_USER}"
  */
 
-\i schema/base.sql
-\i schema/user.sql
-\i schema/file.sql
-\i schema/site.sql
-\i schema/member.sql
-\i schema/wallet.sql
+\ir schema/base.sql
+\ir schema/user.sql
+\ir schema/file.sql
+\ir schema/site.sql
+\ir schema/member.sql
+\ir schema/wallet.sql
 
