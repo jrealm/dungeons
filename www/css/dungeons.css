@@ -1,3 +1,4 @@
+@import url(label-editor.css);
 @import url(overlay.css);
 
 td, th {
@@ -30,12 +31,6 @@ th a, th:hover a {
 
 .dropdown-menu {
     min-width: 1rem;
-}
-
-.editable-label {
-    background-color: plum;
-    color: darkblue;
-    cursor: context-menu;
 }
 
 .file-preview {

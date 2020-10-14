@@ -10,7 +10,9 @@
     var count = 0;
 
     var edit = function (event) {
-        window.editLabel($(event.currentTarget).data("edit"));
+        if (window.editLabel) {
+            window.editLabel($(event.currentTarget).data("edit"));
+        }
 
         return false;
     };
