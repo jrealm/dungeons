@@ -6,19 +6,11 @@ return new class() extends dungeons\web\backend\ListController {
 
     protected function init() {
         $table = table('WalletLog');
+        $table->type->invisible(true);
+        $table->create_time->invisible(true);
         $table->add('tx_type', 'transaction.type');
 
-        $names = [
-            'the_date',
-            'tx_type',
-            'debit',
-            'credit',
-            'balance',
-            'remark',
-        ];
-
         $this->table($table);
-        $this->columns($table->getColumns($names));
     }
 
 };

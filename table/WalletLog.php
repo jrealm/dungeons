@@ -14,12 +14,12 @@ $tbl->add('wallet_id', Integer::class)
     ->readonly(true)
     ->required(true);
 
-$tbl->add('transaction_id', Integer::class)
-    ->associate('transaction', 'Transaction')
+$tbl->add('the_date', Date::class)
     ->readonly(true)
     ->required(true);
 
-$tbl->add('the_date', Date::class)
+$tbl->add('transaction_id', Integer::class)
+    ->associate('transaction', 'Transaction')
     ->readonly(true)
     ->required(true);
 

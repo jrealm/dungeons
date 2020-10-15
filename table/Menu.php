@@ -9,6 +9,9 @@ use dungeons\db\Table;
 
 $tbl = new Table('base_menu');
 
+$tbl->add('parent_id', Integer::class)
+    ->invisible(true);
+
 $tbl->add('type', Integer::class)
     ->options('menu-type');
 

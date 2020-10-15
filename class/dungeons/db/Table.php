@@ -10,6 +10,7 @@ use Exception;
 class Table extends ValueObject {
 
     private $columns = [];
+    private $names = [];
     private $relations = [];
 
     public function __construct($mapping, $traceable = true, $namespace = 'dungeons\model') {
@@ -49,6 +50,8 @@ class Table extends ValueObject {
 
         if (class_exists($typeName)) {
             $column = new $typeName(['name' => $name, 'table' => $this]);
+
+            $this->names[] = $name;
         } else {
             $tokens = preg_split('/\./', $typeName, 2);
 
@@ -74,8 +77,14 @@ class Table extends ValueObject {
 
             if ($relation['type'] === 'composition') {
                 $column = new Counter(['name' => $column]);
+
+                $this->names[] = $name;
             } else {
-                $column = $relation['foreign']->{$column};
+                $column = $relation['foreign']->{$column}->readonly(true);
+
+                $relation['column']->invisible(true);
+
+                array_splice($this->names, array_search($relation['column']->name(), $this->names), 0, $name);
             }
 
             $column = (new ColumnWrapper($alias, $column, $relation))->wrapper($name);
@@ -87,17 +96,13 @@ class Table extends ValueObject {
     }
 
     public function getColumns($names = null) {
-        if ($names) {
-            $columns = [];
+        $columns = [];
 
-            foreach ($names as $name) {
-                $columns[$name] = $this->columns[$name];
-            }
-
-            return $columns;
+        foreach ($names ?: $this->names as $name) {
+            $columns[$name] = $this->columns[$name];
         }
 
-        return $this->columns;
+        return $columns;
     }
 
     public function getMasterRelation() {
@@ -148,6 +153,7 @@ class Table extends ValueObject {
         foreach ($names as $name) {
             if (key_exists($name, $this->columns)) {
                 unset($this->columns[$name]);
+                array_splice($this->names, array_search($name, $this->names), 1);
             } else {
                 throw new Exception("Column `{$this->name()}`.`{$name}` not found.");
             }

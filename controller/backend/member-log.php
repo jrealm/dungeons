@@ -6,15 +6,7 @@ return new class() extends dungeons\web\backend\ListController {
         $table = table('MemberLog');
         $table->add('username', 'member.username');
 
-        $names = [
-            'username',
-            'type',
-            'ip',
-            'create_time',
-        ];
-
         $this->table($table);
-        $this->columns($table->getColumns($names));
     }
 
 };

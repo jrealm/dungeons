@@ -34,8 +34,8 @@ CREATE TABLE base_transaction (
 CREATE TABLE base_wallet_log (
     id             INTEGER          NOT NULL PRIMARY KEY,
     wallet_id      INTEGER          NOT NULL,
-    transaction_id INTEGER          NOT NULL,
     the_date       DATE             NOT NULL,
+    transaction_id INTEGER          NOT NULL,
     type           INTEGER          NOT NULL, -- 1:轉出, 2:轉入
     debit          DOUBLE PRECISION NOT NULL, -- 轉入(借)(+)
     credit         DOUBLE PRECISION NOT NULL, -- 轉出(貸)(-)
