@@ -3,6 +3,7 @@
 use dungeons\Config;
 use dungeons\Message;
 use dungeons\Resource;
+use dungeons\utility\ValueObject;
 use dungeons\view\Native;
 use dungeons\view\Twig;
 use Monolog\Handler\FirePHPHandler;
@@ -125,6 +126,10 @@ function table($name) {
 }
 
 function validate($value, $options) {
+    if (is_array($options)) {
+        $options = new ValueObject($options);
+    }
+
     foreach (preg_split('/\|/', $options->validation(), 0, PREG_SPLIT_NO_EMPTY) as $type) {
         if (!Resource::load("validator/{$type}.php")->validate($value, $options)) {
             return $type;

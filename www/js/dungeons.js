@@ -211,6 +211,9 @@
         case "location":
             location.href = response.path;
             break;
+        case "message":
+            toastr.info(response.message);
+            break;
         case "open":
             window.open(response.path);
             break;
@@ -534,8 +537,11 @@
 
     window.perform = perform;
 
-    window.toggleMenu = function () {
-        var menu = $("a[data-leaf][href='" + $(".breadcrumb-item[data-menu]").first().data("menu") + "']").blur();
+    window.toggleMenu = function (name) {
+        var menu;
+
+        name = name || $(".breadcrumb-item[data-menu]").first().data("menu");
+        menu = $("a[data-leaf][href='" + name + "']").blur();
 
         $("a.active[data-leaf]").removeClass("active");
 
