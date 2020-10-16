@@ -44,3 +44,11 @@ CREATE TABLE base_wallet_log (
     create_time    TIMESTAMP        NOT NULL
 );
 
+CREATE VIEW base_monthly_balance AS
+     SELECT wallet_id AS id,
+            SUM(debit) AS debit,
+            SUM(credit) AS credit
+       FROM base_wallet_log
+      WHERE create_time > LOCALTIMESTAMP - INTERVAL '1 month'
+   GROUP BY wallet_id;
+
