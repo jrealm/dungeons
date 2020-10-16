@@ -5,6 +5,8 @@ use dungeons\utility\Fn;
 use dungeons\utility\RSA;
 
 return function ($number, $info, $config = null) {
+    logger('card-active')->info($number, $info);
+
     $folder = defined('FILES_HOME') ? FILES_HOME : (APP_HOME . 'www/files/');
     $image = "{$folder}{$info['photocopy1']}";
 
