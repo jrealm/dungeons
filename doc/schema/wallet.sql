@@ -52,3 +52,12 @@ CREATE VIEW base_monthly_balance AS
       WHERE create_time > LOCALTIMESTAMP - INTERVAL '1 month'
    GROUP BY wallet_id;
 
+CREATE TABLE base_erc20_wallet (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    member_id   INTEGER   NOT NULL,
+    address     TEXT      NOT NULL,
+    public_key  TEXT      NOT NULL,
+    private_key TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL
+);
+

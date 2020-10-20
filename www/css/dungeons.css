@@ -61,6 +61,11 @@ th a, th:hover a {
     cursor: pointer;
 }
 
+.qr-code img {
+    display: block;
+    margin: 0 auto;
+}
+
 .table .file-preview img {
     max-width: 200px;
 }
