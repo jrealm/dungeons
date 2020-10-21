@@ -56,6 +56,8 @@ return function ($orderNo, $number, $amount, $config = null) {
     }
 
     return [
+        'request' => json_encode($data, JSON_UNESCAPED_UNICODE),
+        'response' => json_encode($response, JSON_UNESCAPED_UNICODE),
         'status' => $response['topupStatus'],
         'message' => $response['errMsg'],
     ];
