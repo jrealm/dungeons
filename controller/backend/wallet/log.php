@@ -10,6 +10,7 @@ return new class() extends dungeons\web\backend\ListController {
         $table->create_time->invisible(true);
         $table->add('tx_type', 'transaction.type');
 
+        $this->defaultPage(PHP_INT_MAX);
         $this->table($table);
     }
 

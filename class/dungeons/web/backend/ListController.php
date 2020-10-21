@@ -33,7 +33,7 @@ class ListController extends BackendController {
         } else {
             $setting = $this->loadSetting();
 
-            $page = $this->positive_integer(@$form['p'], 1);
+            $page = $this->positive_integer(@$form['p'], $this->defaultPage() ?? 1);
             $size = $this->positive_integer(@$form['s'], $setting['pageSize'] ?? 10);
         }
 
