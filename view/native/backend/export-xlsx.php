@@ -19,7 +19,7 @@ $x = 1;
 $y = 1;
 
 foreach ($result['styles'] as $style) {
-    setValue($sheet, $x++, $y, $style['label']);
+    setValue($sheet, $x++, $y, $style['label'] ?? i18n($style['i18n']));
 }
 
 foreach ($result['data'] as $data) {
