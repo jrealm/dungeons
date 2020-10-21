@@ -6,6 +6,8 @@ use dungeons\Controller as AbstractController;
 
 class Controller extends AbstractController {
 
+    private $handle;
+
     public function __construct() {
         parent::__construct();
 
@@ -14,6 +16,14 @@ class Controller extends AbstractController {
 
     public function available() {
         return ($this->method() === 'cli');
+    }
+
+    protected function acquireLock() {
+        $filename = APP_DATA . str_replace('/', '.', $this->name());
+
+        $this->handle = fopen($filename, 'w');
+
+        return flock($this->handle, LOCK_EX | LOCK_NB);
     }
 
     protected function wrap() {
