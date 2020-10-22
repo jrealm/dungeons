@@ -33,9 +33,10 @@ return new class() extends dungeons\web\backend\InsertController {
         }
 
         $tx = [
-            'wallet_id' => $wallet['id'],
             'the_date' => date(cfg('system.date')),
+            'wallet_id' => $wallet['id'],
             'amount' => $amount,
+            'fee' => 0,
             'creator' => $this->user()['username'],
             'status' => 1, //已入帳
         ];

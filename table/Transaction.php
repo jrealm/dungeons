@@ -3,6 +3,7 @@
 use dungeons\db\column\CreateTime;
 use dungeons\db\column\Date;
 use dungeons\db\column\Double;
+use dungeons\db\column\FormNumber;
 use dungeons\db\column\Integer;
 use dungeons\db\column\Text;
 use dungeons\db\column\Textarea;
@@ -11,10 +12,12 @@ use dungeons\db\Table;
 
 $tbl = new Table('base_transaction');
 
-$tbl->add('wallet_id', Integer::class)
-    ->associate('wallet', 'Wallet')
+$tbl->add('bill_number', FormNumber::class)
+    ->length(5)
+    ->prefix('T')
     ->readonly(true)
-    ->required(true);
+    ->required(true)
+    ->sequence('base_transaction_bill_number');
 
 $tbl->add('the_date', Date::class)
     ->readonly(true)
@@ -25,25 +28,30 @@ $tbl->add('type', Integer::class)
     ->readonly(true)
     ->required(true);
 
-$tbl->add('amount', Double::class)
+$tbl->add('wallet_id', Integer::class)
+    ->associate('wallet', 'Wallet')
     ->readonly(true)
+    ->required(true);
+
+$tbl->add('amount', Double::class)
     ->required(true);
 
 $tbl->add('fee', Double::class)
-    ->default(0)
-    ->readonly(true)
     ->required(true);
 
-$tbl->add('target', Text::class);
-
-$tbl->add('bank_code', Text::class)
+$tbl->add('target', Text::class)
     ->readonly(true);
 
-$tbl->add('bill_number', Text::class)
+$tbl->add('target_currency', Text::class)
     ->readonly(true);
 
-$tbl->add('payment', Text::class)
+$tbl->add('target_amount', Double::class)
     ->readonly(true);
+
+$tbl->add('target_fee', Double::class)
+    ->readonly(true);
+
+$tbl->add('payment', Text::class);
 
 $tbl->add('request', Text::class)
     ->invisible(true)
@@ -56,6 +64,9 @@ $tbl->add('response', Text::class)
 $tbl->add('notice', Text::class)
     ->invisible(true);
 
+$tbl->add('remark', Textarea::class)
+    ->readonly(true);
+
 $tbl->add('creator', Text::class)
     ->readonly(true)
     ->required(true);
@@ -63,9 +74,6 @@ $tbl->add('creator', Text::class)
 $tbl->add('create_time', CreateTime::class)
     ->readonly(true)
     ->required(true);
-
-$tbl->add('remark', Textarea::class)
-    ->readonly(true);
 
 $tbl->add('processor', Text::class);
 
