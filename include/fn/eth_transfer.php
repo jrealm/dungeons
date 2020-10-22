@@ -28,7 +28,7 @@ return function ($sender, $private, $receiver, $amount) {
 
     logger('eth_transfer')->info($raw, $transaction->getInput());
 
-    $content = file_get_contents("https://api.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex={$raw}&apikey={$key}");
+    $content = @file_get_contents("https://api.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex={$raw}&apikey={$key}");
     $response = json_decode($content, true);
 
     if (strpos(@$response['result'], '0x') === 0) {
