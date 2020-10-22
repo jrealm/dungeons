@@ -20,7 +20,7 @@
         "filp/whoops": "^2.7",
         "guzzlehttp/guzzle": "^7.0",
         "jrealm/dungeons-core": "^1.0",
-        "kornrunner/keccak": "^1.0",
+        "kornrunner/ethereum-offline-raw-tx": "^0.2.4",
         "mhor/php-mediainfo": "^5.1",
         "monolog/monolog": "^2.0",
         "nesbot/carbon": "^2.35",
