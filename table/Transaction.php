@@ -28,6 +28,10 @@ $tbl->add('type', Integer::class)
     ->readonly(true)
     ->required(true);
 
+$tbl->add('mode', Integer::class)
+    ->invisible(true)
+    ->readonly(true);
+
 $tbl->add('wallet_id', Integer::class)
     ->associate('wallet', 'Wallet')
     ->readonly(true)

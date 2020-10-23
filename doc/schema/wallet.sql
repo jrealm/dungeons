@@ -15,6 +15,7 @@ CREATE TABLE base_transaction (
     bill_number     TEXT             NOT NULL,
     the_date        DATE             NOT NULL,
     type            INTEGER          NOT NULL, -- (message/tw/options/transaction-type.php)
+    mode            INTEGER              NULL, -- 1:充值, 2:轉出
     wallet_id       INTEGER          NOT NULL,
     amount          DOUBLE PRECISION NOT NULL,
     fee             DOUBLE PRECISION NOT NULL,
