@@ -39,4 +39,14 @@ class Config {
         return self::$bundles[$name];
     }
 
+    public static function set($token, $value) {
+        list($name, $key) = preg_split('/\./', $token, 2);
+
+        if (!self::load($name)) {
+            self::$bundles[$name] = [];
+        }
+
+        self::$bundles[$name][$key] = $value;
+    }
+
 }

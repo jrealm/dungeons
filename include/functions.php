@@ -21,7 +21,13 @@ function base64_urlencode($data) {
 }
 
 function cfg($token, $default = null) {
-    return Config::get($token, $default);
+    if (is_array($token)) {
+        foreach ($token as $item => $value) {
+            Config::set($item, $value);
+        }
+    } else {
+        return Config::get($token, $default);
+    }
 }
 
 function create_folder($path) {
