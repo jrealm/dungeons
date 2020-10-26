@@ -23,7 +23,7 @@ return new class() extends dungeons\web\backend\GetController {
             $data['balance'] = $response['balance'];
 
             if ($data['status'] !== $response['status']) {
-                $data['status'] = $response['auditStatus'];
+                $data['status'] = $response['status'];
 
                 $this->table()->model()->update($data);
             }
