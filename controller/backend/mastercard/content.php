@@ -19,7 +19,7 @@ return new class() extends dungeons\web\backend\GetController {
         $response = Fn::mastercard_query($data['card_number']);
 
         if ($response) {
-            $data['balance'] = '€';
+            $data['currency'] = '€';
             $data['balance'] = $response['balance'];
 
             if ($data['status'] !== $response['status']) {
