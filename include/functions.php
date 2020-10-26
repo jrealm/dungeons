@@ -60,10 +60,6 @@ function i18n($token, $default = null) {
     return Message::get($token, $default);
 }
 
-function isolate_require() {
-    return require func_get_arg(0);
-}
-
 function logger($name) {
     static $loggers = [];
 
