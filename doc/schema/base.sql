@@ -21,7 +21,7 @@ CREATE TABLE base_manipulation_log (
 
 CREATE TABLE base_country (
     id      INTEGER NOT NULL PRIMARY KEY,
-    title   TEXT        NULL,
+    title   TEXT    NOT NULL,
     code    TEXT    NOT NULL UNIQUE,
     prefix  TEXT    NOT NULL,
     ranking INTEGER NOT NULL

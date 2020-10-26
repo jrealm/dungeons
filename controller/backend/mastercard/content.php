@@ -20,9 +20,9 @@ return new class() extends dungeons\web\backend\GetController {
 
         if ($response) {
             $data['balance'] = '€';
-            $data['balance'] = @$response['balance'] / 100;
+            $data['balance'] = $response['balance'];
 
-            if ($data['status'] !== $response['auditStatus']) {
+            if ($data['status'] !== $response['status']) {
                 $data['status'] = $response['auditStatus'];
 
                 $this->table()->model()->update($data);
