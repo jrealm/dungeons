@@ -1,0 +1,143 @@
+{% extends 'page-layout.twig' %}
+
+{% block title %}{{ i18n('lang.app.title') }} | {{ i18n('lang.register.title') }}{% endblock %}
+
+{% block content %}
+                        <p class="login-box-msg">
+                            {{ label('lang.register.message') }}
+                        </p>
+                        <form>
+                            <div class="member-form">
+                                {%~ block form %}{% endblock %}
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <button class="btn btn-block btn-success sms" data-label="{{ label('lang.sms.retry')|e }}" type="button">{{ label('lang.next') }}</button>
+                                </div>
+                            </div>
+                            <div class="d-none register-form">
+                                <div class="input-group mb-3">
+                                    <input class="form-control" name="code" placeholder="{{ i18n('lang.sms.code') }}" required type="tel">
+                                    <div class="input-group-append"><div class="input-group-text"><span class="fas fa-sms"></span></div></div>
+                                </div>
+                                {%~ block fields %}
+                                <div class="input-group mb-3">
+                                    <input class="form-control" name="password" placeholder="{{ i18n('lang.password') }}" required type="password">
+                                    <div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" name="confirm" placeholder="{{ i18n('lang.password.confirm') }}" required type="password">
+                                    <div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>
+                                </div>
+                                {%~ endblock %}
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-primary" type="submit">{{ label('lang.register.submit') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    {{ label('lang.register.terms') }}
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <a href="{{ constant('APP_ROOT') }}login">{{ label('lang.login.title') }}</a>
+                            </div>
+                        </div>
+{% endblock %}
+
+{% block script %}
+        <script>
+            var sms = $(".sms");
+
+            function disable_sms(seconds) {
+                if (seconds) {
+                    $(".member-form select").select2({disabled: true});
+                    $(".member-form input").prop("readonly", true);
+                    $(".register-form").removeClass("d-none");
+
+                    sms.html(sms.data("label") + " (" + seconds + ")").prop("disabled", true);
+
+                    setTimeout(function () {
+                        disable_sms(seconds - 1);
+                    }, 1000);
+                } else {
+                    sms.html(sms.data("label")).prop("disabled", false);
+                }
+            }
+
+            sms.click(function () {
+                var overlay = $(".overlay-wrapper");
+
+                if (overlay.is(":hidden")) {
+                    var data = {};
+
+                    $("form").find("input,select").each(function (ignore, element) {
+                        data[element.name] = element.value;
+                    });
+
+                    overlay.show();
+
+                    $.ajax({
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        type: "POST",
+                        url: "{{ constant('APP_ROOT') }}member/verify-register"
+                    }).done(function (response) {
+                        if (response.success) {
+                            disable_sms(response.frozen);
+                            toastr.info(response.message);
+                        } else {
+                            toastr.error(response.message || response.error);
+                        }
+                        overlay.hide();
+                    }).fail(function (response) {
+                        toastr.error(response.statusText);
+                        overlay.hide();
+                    });
+                }
+            });
+
+            $("form").submit(function () {
+                var overlay = $(".overlay-wrapper");
+
+                if (overlay.is(":hidden")) {
+                    var data = {};
+
+                    $("form").find("input,select").each(function (ignore, element) {
+                        data[element.name] = element.value;
+                    });
+
+                    overlay.show();
+
+                    $.ajax({
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        type: "POST",
+                        url: "{{ constant('APP_ROOT') }}member/register"
+                    }).done(function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            location.replace("{{ constant('APP_ROOT') }}");
+                        } else {
+                            toastr.error(response.message || response.error);
+                            overlay.hide();
+                        }
+                    }).fail(function (response) {
+                        toastr.error(response.statusText);
+                        overlay.hide();
+                    });
+                }
+
+                return false;
+            });
+
+            {%~ if result.time %}
+            disable_sms("{{ result.time }}");
+            {%~ endif %}
+        </script>
+{% endblock %}
