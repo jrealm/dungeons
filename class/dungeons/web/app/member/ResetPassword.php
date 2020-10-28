@@ -69,7 +69,7 @@ class ResetPassword extends Controller {
             'type' => 5, //忘記密碼
         ]);
 
-        return ['success' => true, 'message' => i18n('lang.forgot.success')];
+        return ['success' => true, 'message' => i18n('app.forgot.success')];
     }
 
     protected function verify($member, $form) {

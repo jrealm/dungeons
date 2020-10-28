@@ -33,7 +33,7 @@ class ChangePassword extends AppController {
             'type' => 3, //變更密碼
         ]);
 
-        return ['success' => true, 'message' => i18n('lang.save.success')];
+        return ['success' => true, 'message' => i18n('app.save.success')];
     }
 
     protected function validate($form) {

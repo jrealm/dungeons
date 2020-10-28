@@ -18,7 +18,7 @@ return new class() extends dungeons\web\Controller {
         if ($user['password'] !== md5($user['id'] . '::' . @$form['password'])) {
             model('UserLog')->insert(['user_id' => $user['id'], 'type' => 4]);
 
-            return ['success' => true, 'view' => 'error.php', 'error' => 'backend-login.error.PasswordNotMatched'];
+            return ['success' => true, 'view' => 'error.php', 'error' => 'error.PasswordNotMatched'];
         }
 
         Session::set('User', $user);

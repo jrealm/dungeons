@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <meta content="initial-scale=1, width=device-width" name="viewport">
-        <title>{{ i18n('lang.app.title') }}</title>
+        <title>{{ i18n('app.title') }}</title>
         <base href="{{ constant('APP_ROOT') }}">
         <link href="{{ constant('APP_PATH') }}favicon.ico" rel="icon">
         <link href="{{ constant('APP_PATH') }}adminlte/dist/css/adminlte.min.css" rel="stylesheet">
@@ -52,12 +52,12 @@
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item" data-ajax="member/password-form">
                                 <i class="fas fa-lock"></i>
-                                {# 變更密碼 #}{{ label('lang.password.change') }}
+                                {# 變更密碼 #}{{ label('app.password.change') }}
                             </button>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item" data-ajax="member/logout">
                                 <i class="fas fa-sign-out-alt"></i>
-                                {# 登出 #}{{ label('lang.logout') }}
+                                {# 登出 #}{{ label('app.logout') }}
                             </button>
                         </div>
                     </li>
@@ -65,7 +65,7 @@
             </nav>
             <aside class="elevation-4 main-sidebar sidebar-dark-primary">
                 <a class="brand-link text-center" href="." style="position:absolute;">
-                    {{ label('lang.app.title') }}
+                    {{ label('app.title') }}
                 </a>
                 <div class="sidebar">
                     <nav class="mt-2">
@@ -78,7 +78,7 @@
             <div class="content-wrapper"></div>
             <footer class="main-footer">
                 <div class="float-right">
-                    {{ label('lang.app.copyright') }}
+                    {{ label('app.copyright') }}
                 </div>
             </footer>
         </div>

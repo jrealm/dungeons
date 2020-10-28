@@ -1,30 +1,30 @@
 {% extends 'page-layout.twig' %}
 
-{% block title %}{{ i18n('lang.app.title') }} | {{ i18n('lang.login.title') }}{% endblock %}
+{% block title %}{{ i18n('app.title') }} | {{ i18n('app.login.title') }}{% endblock %}
 
 {% block content %}
                         <p class="login-box-msg">
-                            {{ label('lang.login.message') }}
+                            {{ label('app.login.message') }}
                         </p>
                         <form>
                             {%~ block form %}{% endblock %}
                             <div class="input-group mb-3">
-                                <input class="form-control" name="password" placeholder="{{ i18n('lang.password') }}" required type="password">
+                                <input class="form-control" name="password" placeholder="{{ i18n('app.password') }}" required type="password">
                                 <div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button class="btn btn-block btn-primary" type="submit">{{ label('lang.login.submit') }}</button>
+                                    <button class="btn btn-block btn-primary" type="submit">{{ label('app.login.submit') }}</button>
                                 </div>
                             </div>
                         </form>
                         <hr>
                         <div class="row mt-3">
                             <div class="col-6">
-                                <a href="{{ constant('APP_ROOT') }}member/forgot">{{ label('lang.forgot.title') }}</a>
+                                <a href="{{ constant('APP_ROOT') }}member/forgot">{{ label('app.forgot.title') }}</a>
                             </div>
                             <div class="col-6 text-right">
-                                <a href="{{ constant('APP_ROOT') }}member/register-form">{{ label('lang.register.title') }}</a>
+                                <a href="{{ constant('APP_ROOT') }}member/register-form">{{ label('app.register.title') }}</a>
                             </div>
                         </div>
 {% endblock %}

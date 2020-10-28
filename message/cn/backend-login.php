@@ -6,9 +6,6 @@ return [
 
     'current.password' => '目前的密码',
 
-    'error.PasswordNotChanged' => '新旧密码不可相同',
-    'error.PasswordNotConfirmed' => '与新密码不相符',
-    'error.PasswordNotMatched' => '密码错误',
     'error.ResetPasswordFailed' => '密码重设失败',
     'error.UserNotFound' => '查无此帐号',
 

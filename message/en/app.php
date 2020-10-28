@@ -2,10 +2,12 @@
 
 return [
 
-    'app.copyright' => 'Copyright © 2020',
-
     'button.cancel' => 'Cancel',
     'button.save' => 'Save',
+
+    'copyright' => 'Copyright © 2020',
+
+    'footer' => '',
 
     'forgot.confirm' => 'Confirm new password',
     'forgot.message' => 'Forgot password',
@@ -18,9 +20,21 @@ return [
     'login.submit' => 'Login',
     'login.title' => 'Login',
 
+    'logo' => '',
+
     'logout' => 'Logout',
 
+    'mail.code' => 'Verification code',
+
     'mastercard.not_found' => 'No card yet',
+
+    'next' => 'Next',
+
+    'passport.callout' => 'The uploaded photos are only used for identity verification and credit card opening.',
+    'passport.status.1' => 'Please wait patiently during the passport verification review.',
+    'passport.status.2' => 'Passport verification failed, the reason for return: {{ result.data.rejection|raw }}',
+    'passport.status.3' => 'Passport authentication has been passed.',
+    'passport.submit' => 'Submit',
 
     'password' => 'Password',
     'password.change' => 'Change password',

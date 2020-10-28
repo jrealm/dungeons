@@ -1,10 +1,10 @@
 {% extends 'page-layout.twig' %}
 
-{% block title %}{{ i18n('lang.app.title') }} | {{ i18n('lang.forgot.title') }}{% endblock %}
+{% block title %}{{ i18n('app.title') }} | {{ i18n('app.forgot.title') }}{% endblock %}
 
 {% block content %}
                         <p class="login-box-msg">
-                            {{ label('lang.forgot.message') }}
+                            {{ label('app.forgot.message') }}
                         </p>
                         <form>
                             <div class="member-form">
@@ -12,25 +12,25 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <button class="btn btn-block btn-success sms" data-label="{{ label('lang.sms.retry')|e }}" type="button">{{ label('lang.next') }}</button>
+                                    <button class="btn btn-block btn-success sms" data-label="{{ label('app.sms.retry')|e }}" type="button">{{ label('app.next') }}</button>
                                 </div>
                             </div>
                             <div class="d-none forgot-form">
                                 <div class="input-group mb-3">
-                                    <input class="form-control" name="code" placeholder="{{ i18n('lang.sms.code') }}" required type="tel">
+                                    <input class="form-control" name="code" placeholder="{{ i18n('app.sms.code') }}" required type="tel">
                                     <div class="input-group-append"><div class="input-group-text"><span class="fas fa-sms"></span></div></div>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input class="form-control" name="password" placeholder="{{ i18n('lang.forgot.password') }}" required type="password">
+                                    <input class="form-control" name="password" placeholder="{{ i18n('app.forgot.password') }}" required type="password">
                                     <div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input class="form-control" name="confirm" placeholder="{{ i18n('lang.forgot.confirm') }}" required type="password">
+                                    <input class="form-control" name="confirm" placeholder="{{ i18n('app.forgot.confirm') }}" required type="password">
                                     <div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <button class="btn btn-block btn-primary" type="submit">{{ label('lang.forgot.submit') }}</button>
+                                        <button class="btn btn-block btn-primary" type="submit">{{ label('app.forgot.submit') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                         <hr>
                         <div class="row mt-3">
                             <div class="col">
-                                <a href="{{ constant('APP_ROOT') }}login">{{ label('lang.login.title') }}</a>
+                                <a href="{{ constant('APP_ROOT') }}login">{{ label('app.login.title') }}</a>
                             </div>
                         </div>
 {% endblock %}

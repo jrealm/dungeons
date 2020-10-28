@@ -2,6 +2,8 @@
 
 return [
 
+    'ConnectFailed' => 'Connection failed',
+
     'DataNotFound' => 'No data',
 
     'DataOverdue' => 'The data is overdue, please refresh and edit again',
@@ -16,6 +18,10 @@ return [
 
     'InvalidPassword' => 'Please use a password of 6~16 characters',
 
+    'MemberDisabled' => 'Member disabled',
+
+    'MemberNotFound' => 'No such member',
+
     'PasswordNotChanged' => 'The old and new passwords cannot be the same',
 
     'PasswordNotConfirmed' => 'The password is not confirmed',
@@ -27,5 +33,9 @@ return [
     'Undefined' => 'Unknown error',
 
     'UpdateFailed' => 'Update failed',
+
+    'VerificationCodeNotMatched' => 'Verification code error',
+
+    'VerificationCodeTimeout' => 'The verification code is invalid, please try again',
 
 ];

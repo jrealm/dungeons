@@ -50,7 +50,7 @@ class Register extends Controller {
 
         Session::remove('Register');
 
-        return ['success' => true, 'message' => i18n('lang.register.success')];
+        return ['success' => true, 'message' => i18n('app.register.success')];
     }
 
 }
