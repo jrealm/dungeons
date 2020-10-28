@@ -2,22 +2,30 @@
 
 return [
 
-    'DataNotFound' => 'NO DATA',
+    'DataNotFound' => 'No data',
 
-    'DataOverdue' => 'The data is overdue, please refresh and edit again.',
+    'DataOverdue' => 'The data is overdue, please refresh and edit again',
 
-    'DeleteFailed' => 'FAILED TO DELETE',
+    'DeleteFailed' => 'Delete failed',
 
-    'InsertFailed' => 'FAILED TO ADD',
+    'InsertFailed' => 'Insert failed',
 
     'InvalidAmount' => 'Invalid Amount',
 
-    'InvalidFileType' => 'INVALID FILE FORMAT',
+    'InvalidFileType' => 'Invalid file format',
 
-    'PermissionDenied' => 'INSUFFICIENT PERMISSION',
+    'InvalidPassword' => 'Please use a password of 6~16 characters',
 
-    'Undefined' => 'UNKNOWN ERROR',
+    'PasswordNotChanged' => 'The old and new passwords cannot be the same',
 
-    'UpdateFailed' => 'UPDATE FAILED',
+    'PasswordNotConfirmed' => 'The password is not confirmed',
+
+    'PasswordNotMatched' => 'The password is not matched',
+
+    'PermissionDenied' => 'Permission denied',
+
+    'Undefined' => 'Unknown error',
+
+    'UpdateFailed' => 'Update failed',
 
 ];

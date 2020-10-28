@@ -14,6 +14,14 @@ return [
 
     'InvalidFileType' => '檔案格式錯誤',
 
+    'InvalidPassword' => '請使用 6~16 位數字與英文字母組合的密碼',
+
+    'PasswordNotChanged' => '新舊密碼不可相同',
+
+    'PasswordNotConfirmed' => '兩次輸入的密碼不一致',
+
+    'PasswordNotMatched' => '密碼錯誤',
+
     'PermissionDenied' => '權限不足',
 
     'Undefined' => '未知的錯誤',
