@@ -130,6 +130,8 @@ function table($name) {
 function validate($value, $options) {
     if (is_array($options)) {
         $options = new ValueObject($options);
+    } else if (is_string($options)) {
+        $options = new ValueObject(['validation' => $options]);
     }
 
     foreach (preg_split('/\|/', $options->validation(), 0, PREG_SPLIT_NO_EMPTY) as $type) {
