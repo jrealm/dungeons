@@ -13,6 +13,7 @@ CREATE TABLE base_master_card (
 CREATE TABLE base_member_passport_auth (
     id             INTEGER   NOT NULL PRIMARY KEY,
     member_id      INTEGER   NOT NULL,
+    mail           TEXT      NOT NULL,
     last_name      TEXT      NOT NULL,
     first_name     TEXT      NOT NULL,
     id_number      TEXT      NOT NULL,

@@ -1,0 +1,122 @@
+{% extends 'app-layout.twig' %}
+
+{% set formId = random() %}
+
+{% if result.data.status == 1 or result.data.status == 3 %}
+    {% set editable = false %}
+{% else %}
+    {% set editable = true %}
+{% endif %}
+
+{% block content %}
+    <div class="callout callout-info"><p>{{ label('app.passport.callout') }}</p></div>
+    {% if result.data %}
+        <div class="callout callout-warning"><p>{{ include(template_from_string(label('app.passport.status.' ~ result.data.status))) }}</p></div>
+    {% endif %}
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="card-body form-wrapper" id="_{{ formId }}">
+                <div class="form-group mb-0">
+                    <label><span class="text-danger">*</span> {{ label('table/Member.mail') }}</label>
+                    <span class="invalid-feedback" data-name="mail"></span>
+                    <input class="form-control" name="mail" type="email" value="{{ controller.member.mail }}">
+                </div>
+                <div class="{% if editable %}d-none {% endif %}mt-3 passport-form">
+                    {% if editable %}
+                        <div class="form-group">
+                            <label><span class="text-danger">*</span> {{ label('app.mail.code') }}</label>
+                            <span class="invalid-feedback" data-name="code"></span>
+                            <input class="form-control" name="code" type="text">
+                        </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.last_name') }}</label>
+                        <span class="invalid-feedback" data-name="last_name"></span>
+                        <input class="form-control" name="last_name" type="text" value="{{ result.data.last_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.first_name') }}</label>
+                        <span class="invalid-feedback" data-name="first_name"></span>
+                        <input class="form-control" name="first_name" type="text" value="{{ result.data.first_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.birthday') }}</label>
+                        <span class="invalid-feedback" data-name="birthday"></span>
+                        <input class="form-control" data-format="date" data-pattern="{{ datetime_format(cfg('system.date')) }}" name="birthday" type="text" value="{{ result.data.birthday }}">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.sex') }}</label>
+                        <span class="invalid-feedback" data-name="sex"></span>
+                        <select class="form-control select2bs4" name="sex" style="width:100%;">
+                            {% for name, item in result.options.sex %}
+                                <option{% if name == result.data.sex %} selected{% endif %} value="{{ name }}">{{ item }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.nationality_id') }}</label>
+                        <span class="invalid-feedback" data-name="nationality_id"></span>
+                        <select class="form-control select2bs4" name="nationality_id" style="width:100%;">
+                            {% for country in result.countries %}
+                                <option{% if country.id == result.data.nationality_id %} selected{% endif %} value="{{ country.id }}">{{ country.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.id_number') }}</label>
+                        <span class="invalid-feedback" data-name="id_number"></span>
+                        <input class="form-control" name="id_number" type="text" value="{{ result.data.id_number }}">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.photocopy1') }}</label>
+                        <span class="invalid-feedback" data-name="photocopy1"></span>
+                        <label class="d-block">
+                            <span class="file-preview">
+                                {% if result.data.photocopy1 %}
+                                    <img class="border shadow" src="{{ result.data.photocopy1|img }}">
+                                {% else %}
+                                    <img class="border shadow" src="{{ constant('APP_PATH') }}img/sf_t1.png">
+                                {% endif %}
+                            </span>
+                            <input data-error="{{ i18n('error.InvalidFileType') }}" data-image name="photocopy1" type="hidden" value="{{ result.data.photocopy1 }}">
+                            <input data-filename name="photocopy1#filename" type="hidden">
+                            <input accept="image/*" class="d-none" data-format="image" type="file">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ label('table/MemberPassportAuth.photocopy2') }}</label>
+                        <span class="invalid-feedback" data-name="photocopy2"></span>
+                        <label class="d-block">
+                            <span class="file-preview">
+                                {% if result.data.photocopy2 %}
+                                    <img class="border shadow" src="{{ result.data.photocopy2|img }}">
+                                {% else %}
+                                    <img class="border shadow" src="{{ constant('APP_PATH') }}img/sf_t3.png">
+                                {% endif %}
+                            </span>
+                            <input data-error="{{ i18n('error.InvalidFileType') }}" data-image name="photocopy2" type="hidden" value="{{ result.data.photocopy2 }}">
+                            <input data-filename name="photocopy2#filename" type="hidden">
+                            <input accept="image/*" class="d-none" data-format="image" type="file">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {% if editable %}
+                <div class="card-footer">
+                    <button class="btn btn-success next" data-ajax="member/verify-passport-mail" data-form="#_{{ formId }}">{{ label('app.next') }}</button>
+                    <button class="btn btn-primary d-none submit" data-ajax="member/apply-passport-auth" data-form="#_{{ formId }}">{{ label('app.passport.submit') }}</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block postprocess %}
+    {{ parent() }}
+
+    {% if not editable %}
+        $("#_{{ formId }} input, #_{{ formId }} select").prop("disabled", true);
+    {% endif %}
+
+    initForm($("#_{{ formId }}"));
+{% endblock %}

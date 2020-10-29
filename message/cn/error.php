@@ -10,6 +10,10 @@ return [
 
     'DeleteFailed' => '删除失败',
 
+    'EmailFailed' => 'Email 发送失败',
+
+    'EmailNotMatched' => 'Email 错误',
+
     'InsertFailed' => '新增失败',
 
     'InvalidAmount' => '金额错误',
@@ -21,6 +25,10 @@ return [
     'MemberDisabled' => '帐号已停用',
 
     'MemberNotFound' => '查无此帐号',
+
+    'PassportAuthApproved' => '护照认证已完成',
+
+    'PassportAuthApproving' => '护照认证审核中',
 
     'PasswordNotChanged' => '新旧密码不可相同',
 

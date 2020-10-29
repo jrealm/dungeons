@@ -2,6 +2,7 @@
 
 use dungeons\db\column\CreateTime;
 use dungeons\db\column\Date;
+use dungeons\db\column\Email;
 use dungeons\db\column\Image;
 use dungeons\db\column\Integer;
 use dungeons\db\column\Text;
@@ -13,6 +14,10 @@ $tbl = new Table('base_member_passport_auth');
 
 $tbl->add('member_id', Integer::class)
     ->associate('member', 'Member')
+    ->readonly(true)
+    ->required(true);
+
+$tbl->add('mail', Email::class)
     ->readonly(true)
     ->required(true);
 

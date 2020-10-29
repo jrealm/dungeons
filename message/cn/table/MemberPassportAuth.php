@@ -4,6 +4,8 @@ return [
 
     'username' => '会员',
 
+    'mail' => '电子邮件',
+
     'last_name' => '英文姓氏',
 
     'first_name' => '英文名字',

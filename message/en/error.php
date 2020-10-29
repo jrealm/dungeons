@@ -10,6 +10,10 @@ return [
 
     'DeleteFailed' => 'Delete failed',
 
+    'EmailFailed' => 'Email sending failed',
+
+    'EmailNotMatched' => 'Email error',
+
     'InsertFailed' => 'Insert failed',
 
     'InvalidAmount' => 'Invalid Amount',
@@ -21,6 +25,10 @@ return [
     'MemberDisabled' => 'Member disabled',
 
     'MemberNotFound' => 'No such member',
+
+    'PassportAuthApproved' => 'Passport verification completed',
+
+    'PassportAuthApproving' => 'Passport is auditing',
 
     'PasswordNotChanged' => 'The old and new passwords cannot be the same',
 

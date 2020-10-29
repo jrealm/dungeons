@@ -25,6 +25,7 @@ return [
     'logout' => '登出',
 
     'mail.code' => '驗證碼',
+    'mail.success' => 'Email 驗證碼已寄出，請查收。',
 
     'mastercard.not_found' => '尚無卡片資料',
 
@@ -35,6 +36,7 @@ return [
     'passport.status.2' => '護照認證審核未通過，退回原因為：{{ result.data.rejection|raw }}',
     'passport.status.3' => '護照認證已通過。',
     'passport.submit' => '送出',
+    'passport.success' => '護照認證申請提交成功。',
 
     'password' => '密碼',
     'password.change' => '變更密碼',
