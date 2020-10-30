@@ -8,4 +8,8 @@ return [
 
         'mastercard/' => '檢視萬事達卡',
 
+        'member-passport-auth' => '護照認證',
+
+        'member-passport-auth/' => '審核護照認證',
+
 ];

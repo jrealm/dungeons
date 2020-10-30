@@ -8,4 +8,8 @@ return [
 
         'mastercard/' => 'View Master Card',
 
+        'member-passport-auth' => 'Passport authentication',
+
+        'member-passport-auth/' => 'Audit Passport Authentication',
+
 ];
