@@ -1,0 +1,16 @@
+{% extends 'backend/content-wrapper.twig' %}
+
+{% block header %}
+    <div class="row mb-3">
+        <div class="col-1">
+            <a class="text-muted" data-ajax href="{{ constant('APP_ROOT') }}overview"><i class="fas fa-chevron-left"></i></a>
+        </div>
+        <div class="col-10 text-center">
+            <span class="h5">{% block app_header %}{{ label('menu/app.' ~ controller.name[1:]) }}{% endblock %}</span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postprocess %}
+    toggleMenu("{{ controller.name[1:] }}");
+{% endblock %}

@@ -2,8 +2,6 @@
 
 return [
 
-    'ConnectFailed' => 'Connection failed',
-
     'DataNotFound' => 'No data',
 
     'DataOverdue' => 'The data is overdue, please refresh and edit again',
@@ -25,10 +23,6 @@ return [
     'MemberDisabled' => 'Member disabled',
 
     'MemberNotFound' => 'No such member',
-
-    'PassportAuthApproved' => 'Passport verification completed',
-
-    'PassportAuthApproving' => 'Passport is auditing',
 
     'PasswordNotChanged' => 'The old and new passwords cannot be the same',
 

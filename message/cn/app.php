@@ -27,16 +27,7 @@ return [
     'mail.code' => '验证码',
     'mail.success' => 'Email 验证码已寄出，请查收。',
 
-    'mastercard.not_found' => '尚无卡片资料',
-
     'next' => '下一步',
-
-    'passport.callout' => '上传的照片仅用于身份核对及信用卡开卡。',
-    'passport.status.1' => '护照认证审核中，请耐心等候。',
-    'passport.status.2' => '护照认证审核未通过，退回原因为：{{ result.data.rejection|raw }}',
-    'passport.status.3' => '护照认证已通过。',
-    'passport.submit' => '送出',
-    'passport.success' => '护照认证申请提交成功。',
 
     'password' => '密码',
     'password.change' => '变更密码',

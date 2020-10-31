@@ -2,8 +2,6 @@
 
 return [
 
-    'ConnectFailed' => '连线失败',
-
     'DataNotFound' => '查无资料',
 
     'DataOverdue' => '资料逾期，请刷新后重新编辑。',
@@ -25,10 +23,6 @@ return [
     'MemberDisabled' => '帐号已停用',
 
     'MemberNotFound' => '查无此帐号',
-
-    'PassportAuthApproved' => '护照认证已完成',
-
-    'PassportAuthApproving' => '护照认证审核中',
 
     'PasswordNotChanged' => '新旧密码不可相同',
 

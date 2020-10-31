@@ -2,8 +2,6 @@
 
 return [
 
-    'ConnectFailed' => '連線失敗',
-
     'DataNotFound' => '查無資料',
 
     'DataOverdue' => '資料逾期，請刷新後重新編輯。',
@@ -25,10 +23,6 @@ return [
     'MemberDisabled' => '帳號已停用',
 
     'MemberNotFound' => '查無此帳號',
-
-    'PassportAuthApproved' => '護照認證已完成',
-
-    'PassportAuthApproving' => '護照認證審核中',
 
     'PasswordNotChanged' => '新舊密碼不可相同',
 
