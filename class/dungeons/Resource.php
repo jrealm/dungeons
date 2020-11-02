@@ -7,25 +7,15 @@ class Resource {
     private static $resources = [];
 
     public static function find($path) {
-        if (defined('APP_HOME')) {
-            if (defined('CUSTOM_APP')) {
-                $file = APP_HOME . CUSTOM_APP . '/' . $path;
-
-                if (file_exists($file)) {
-                    return $file;
-                }
-            }
-
-            $file = APP_HOME . $path;
+        foreach (RESOURCE_FOLDERS as $folder) {
+            $file = $folder . $path;
 
             if (file_exists($file)) {
                 return $file;
             }
         }
 
-        $file = DUNGEONS . $path;
-
-        return file_exists($file) ? $file : false;
+        return false;
     }
 
     public static function getDataFile($path, $verify = true) {
@@ -84,27 +74,17 @@ class Resource {
     }
 
     public static function union($path) {
-        $base = self::load(DUNGEONS . $path, false);
+        $bundle = null;
 
-        if (defined('APP_HOME')) {
-            $extend = self::load(APP_HOME . $path, false);
+        foreach (array_reverse(RESOURCE_FOLDERS) as $folder) {
+            $data = self::load($folder . $path, false);
 
-            if (defined('CUSTOM_APP')) {
-                $custom = self::load(APP_HOME . CUSTOM_APP . '/' . $path, false);
-
-                if ($custom) {
-                    $extend = $extend ? array_merge($extend, $custom) : $custom;
-                }
+            if ($data) {
+                $bundle = $bundle ? array_merge($bundle, $data) : $data;
             }
-        } else {
-            $extend = null;
         }
 
-        if ($base) {
-            return $extend ? array_merge($base, $extend) : $base;
-        } else {
-            return $extend;
-        }
+        return $bundle;
     }
 
 }

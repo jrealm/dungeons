@@ -8,9 +8,21 @@ if [ "$?" = "0" ] ; then
         psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../doc/schema.sql" --quiet 2>&1 | grep -v ": NOTICE:"
     fi
 
+    {%~ for pkg in constant('PACKAGES')|reverse %}
+    if [ -f ../vendor/{{ pkg }}/doc/schema.sql ] ; then
+        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/{{ pkg }}/doc/schema.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+    fi
+    {%~ endfor %}
+
     php index.php /console/init-multilingual
 
     if [ -f ../doc/data.sql ] ; then
         psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../doc/data.sql" --quiet 2>&1 | grep -v ": NOTICE:"
     fi
+
+    {%~ for pkg in constant('PACKAGES')|reverse %}
+    if [ -f ../vendor/{{ pkg }}/doc/data.sql ] ; then
+        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/{{ pkg }}/doc/data.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+    fi
+    {%~ endfor %}
 fi

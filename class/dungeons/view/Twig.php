@@ -19,23 +19,13 @@ class Twig {
     public function render($controller, $form, $result) {
         $paths = [];
 
-        if (defined('APP_HOME')) {
-            if (defined('CUSTOM_APP')) {
-                $path = APP_HOME . CUSTOM_APP . '/view/twig/';
-
-                if (is_dir($path)) {
-                    $paths[] = $path;
-                }
-            }
-
-            $path = APP_HOME . 'view/twig/';
+        foreach (RESOURCE_FOLDERS as $folder) {
+            $path = $folder . 'view/twig/';
 
             if (is_dir($path)) {
                 $paths[] = $path;
             }
         }
-
-        $paths[] = DUNGEONS . 'view/twig/';
 
         $twig = new Environment(new FilesystemLoader($paths));
 

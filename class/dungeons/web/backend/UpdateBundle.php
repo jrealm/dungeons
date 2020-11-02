@@ -74,11 +74,7 @@ class UpdateBundle extends BackendController {
             return ['error' => 'error.DataNotFound'];
         }
 
-        if (!defined('APP_DATA')) {
-            return ['error' => 'error.UpdateFailed'];
-        }
-
-        $path = defined('CUSTOM_APP') ? (APP_DATA . CUSTOM_APP . '/') : APP_DATA;
+        $path = Resource::getDataFile('', false);
 
         if (create_folder($path . $this->folder()) === false) {
             return ['error' => 'error.UpdateFailed'];

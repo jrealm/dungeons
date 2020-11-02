@@ -27,18 +27,19 @@ class ListBundle extends BackendController {
     }
 
     protected function process($form) {
-        $folder = DUNGEONS . $this->folder();
-        $files = is_dir($folder) ? scandir($folder) : [];
+        $files = [];
 
-        if (defined('APP_HOME')) {
-            $home = APP_HOME . $this->folder();
+        foreach (RESOURCE_FOLDERS as $folder) {
+            $path = $folder . $this->folder();
 
-            if (is_dir($home)) {
-                $files = array_unique(array_merge($files, scandir($home)));
-
-                sort($files);
+            if (is_dir($path)) {
+                $files = array_merge($files, scandir($path));
             }
         }
+
+        $files = array_unique($files);
+
+        sort($files);
 
         $node = $this->getMenuName();
 

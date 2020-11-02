@@ -8,18 +8,19 @@ use dungeons\db\column\FormNumber;
 return new class() extends dungeons\cli\Controller {
 
     protected function process($form) {
-        $folder = DUNGEONS . 'table';
-        $files = is_dir($folder) ? scandir($folder) : [];
+        $files = [];
 
-        if (defined('APP_HOME')) {
-            $home = APP_HOME . 'table';
+        foreach (RESOURCE_FOLDERS as $folder) {
+            $path = $folder . 'table';
 
-            if (is_dir($home)) {
-                $files = array_unique(array_merge($files, scandir($home)));
-
-                sort($files);
+            if (is_dir($path)) {
+                $files = array_merge($files, scandir($path));
             }
         }
+
+        $files = array_unique($files);
+
+        sort($files);
 
         //--
 
