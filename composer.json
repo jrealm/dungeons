@@ -21,7 +21,6 @@
         "guzzlehttp/guzzle": "^7.0",
         "jrealm/dungeons-core": "^1.0",
         "kornrunner/ethereum-offline-raw-tx": "^0.2.4",
-        "mhor/php-mediainfo": "^5.1",
         "monolog/monolog": "^2.0",
         "nesbot/carbon": "^2.35",
         "phpmailer/phpmailer": "^6.1",
@@ -31,5 +30,8 @@
         "twbs/bootstrap": "^4.4",
         "twig/string-extra": "^3.0",
         "twig/twig": "3.0.*"
+    },
+    "require-dev": {
+        "mhor/php-mediainfo": "^5.1"
     }
 }
