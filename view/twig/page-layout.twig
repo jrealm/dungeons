@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="initial-scale=1, width=device-width" name="viewport">
+        <title>{% block title %}{% endblock %}</title>
+        <base href="{{ constant('APP_PATH') }}">
+        <link href="favicon.ico" rel="icon">
+        <link href="adminlte/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="adminlte/plugins/select2/css/select2.min.css" rel="stylesheet">
+        <link href="adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet">
+        <link href="adminlte/plugins/toastr/toastr.min.css" rel="stylesheet">
+        <link href="adminlte/dist/css/adminlte.min.css" rel="stylesheet">
+        <link href="css/label-editor.css" rel="stylesheet">
+        <link href="css/overlay.css" rel="stylesheet">
+    </head>
+    <body class="hold-transition">
+        <div class="login-page">
+            <div class="login-box">
+                <div class="login-logo">
+                    {{ label('app.page.logo') }}
+                </div>
+                <div class="card">
+                    <div class="card-body login-card-body">
+                        {%~ block content %}{% endblock %}
+                    </div>
+                </div>
+                {{ label('app.page.footer')|raw }}
+            </div>
+        </div>
+        {%~ set languages = cfg('system.supportedLanguages')|split('|') %}
+        {%~ if languages|length > 1 %}
+        <ul class="navbar-nav position-absolute" style="right:25px;top:10px;">
+            <li class="dropdown nav-item">
+                <a class="nav-link" data-toggle="dropdown">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                {%~ for language in languages %}
+                    {%~ if loop.index0 %}
+                    <div class="dropdown-divider"></div>
+                    {%~ endif %}
+                    <a class="dropdown-item" href="{{ constant('APP_PATH') }}{{ language }}/">
+                        {{ cfg('i18n/' ~ language ~ '.title') }}
+                    </a>
+                {%~ endfor %}
+                </div>
+            </li>
+        </ul>
+        {%~ endif %}
+        <div class="modal-wrapper"></div>
+        <div class="overlay-wrapper" style="display: none;"><i class="fas fa-5x fa-circle-notch fa-spin text-light"></i></div>
+        <script src="adminlte/plugins/jquery/jquery.min.js"></script>
+        <script src="adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="adminlte/plugins/select2/js/select2.full.min.js"></script>
+        <script src="adminlte/plugins/toastr/toastr.min.js"></script>
+        <script src="adminlte/dist/js/adminlte.min.js"></script>
+        <script src="js/label-editor.js"></script>
+        <script>
+            $("select.select2bs4").select2({
+                theme: "bootstrap4"
+            });
+        </script>
+        {%~ block script %}{% endblock %}
+    </body>
+</html>

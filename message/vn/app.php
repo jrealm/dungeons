@@ -29,6 +29,9 @@ return [
 
     'next' => 'Next',
 
+    'page.footer' => '',
+    'page.logo' => '',
+
     'password' => 'Password',
     'password.change' => 'Change password',
     'password.confirm' => 'Confirm password',

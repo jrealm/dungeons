@@ -29,6 +29,9 @@ return [
 
     'next' => '下一步',
 
+    'page.footer' => '',
+    'page.logo' => '',
+
     'password' => '密码',
     'password.change' => '变更密码',
     'password.confirm' => '确认密码',
