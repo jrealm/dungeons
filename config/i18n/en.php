@@ -2,6 +2,8 @@
 
 return [
 
+    'currency' => 'USD',
+
     'title' => 'English',
 
 ];

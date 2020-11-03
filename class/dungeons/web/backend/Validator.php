@@ -35,7 +35,9 @@ trait Validator {
                 $method = new ReflectionMethod(get_class($column), $this->generator());
 
                 if ($method->getDeclaringClass()->getName() === Column::class) {
-                    $errors[] = ['name' => $name, 'type' => 'required'];
+                    if (!$column->readonly() || $this->generator() === 'generator') {
+                        $errors[] = ['name' => $name, 'type' => 'required'];
+                    }
                 }
             }
         } else {

@@ -17,10 +17,8 @@ if (defined('CUSTOM_APP')) {
     $folders = [APP_HOME];
 }
 
-if (defined('PACKAGES')) {
-    foreach (PACKAGES as $package) {
-        $folders[] = APP_HOME . 'vendor/' . $package . '/';
-    }
+foreach (PACKAGES as $package) {
+    $folders[] = APP_HOME . 'vendor/' . $package . '/';
 }
 
 spl_autoload_register(function ($name) use ($folders) {

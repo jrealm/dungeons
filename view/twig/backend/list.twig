@@ -206,10 +206,6 @@
 
 {% macro pager(data, diff, label) %}
     {% set page = data.page + diff %}
-    {% if page == 1 %}
-        {% set path = build(data.path, data.parameters, null, ['p']) %}
-    {% else %}
-        {% set path = build(data.path, data.parameters, {p: page}) %}
-    {% endif %}
+    {% set path = build(data.path, data.parameters, {p: page}) %}
     <li class="page-item{% if not diff %} active{% endif %}"><a class="page-link px-2" data-ajax href="{{ path }}">{{ label|default(page)|raw }}</a></li>
 {% endmacro %}
