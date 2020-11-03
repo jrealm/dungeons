@@ -30,8 +30,4 @@ return [
 
     'UserLog' => 'Backend User Log',
 
-    'Wallet' => 'Wallet',
-
-    'WalletLog' => 'Wallet Detail',
-
 ];

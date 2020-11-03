@@ -30,8 +30,4 @@ return [
 
     'UserLog' => '後台帳號紀錄',
 
-    'Wallet' => '錢包',
-
-    'WalletLog' => '錢包明細',
-
 ];

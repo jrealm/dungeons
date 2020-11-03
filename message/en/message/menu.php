@@ -6,8 +6,6 @@ return [
 
     'base-member' => 'Member Management',
 
-    'base-wallet' => 'Wallet Management',
-
     'site' => 'Website Management',
 
     'system' => 'System Management',

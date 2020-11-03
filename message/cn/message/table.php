@@ -30,8 +30,4 @@ return [
 
     'UserLog' => '后台帐号纪录',
 
-    'Wallet' => '钱包',
-
-    'WalletLog' => '钱包明细',
-
 ];

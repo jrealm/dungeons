@@ -15,5 +15,4 @@
 \ir schema/site.sql
 \ir schema/member.sql
 \ir schema/wallet.sql
-\ir schema/mastercard.sql
 

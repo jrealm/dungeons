@@ -40,8 +40,6 @@ return [
 
     'visible' => '隱藏/顯示',
 
-    'wallet-log-type' => '錢包明細類型',
-
     'yes-no' => '是/否',
 
 ];

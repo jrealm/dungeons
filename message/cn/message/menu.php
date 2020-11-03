@@ -6,8 +6,6 @@ return [
 
     'base-member' => '会员管理',
 
-    'base-wallet' => '钱包管理',
-
     'site' => '网站管理',
 
     'system' => '系统管理',
