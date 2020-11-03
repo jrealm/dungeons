@@ -18,7 +18,7 @@ cp -R vendor/twbs/bootstrap/dist/* www/bootstrap
 if [ -f config.php ] ; then
     cd www
 
-    php index.php /console/init-db | sh
+    php index.php /console/init-db | bash
 
     if [ -f ../data/dungeons-upgrade ] ; then
         current=`cat ../data/dungeons-upgrade`
@@ -26,7 +26,7 @@ if [ -f config.php ] ; then
 
         while [ $latest -gt $current ] ; do
             current=`expr $current + 1`
-            sh "../vendor/jrealm/dungeons/doc/upgrade.${current}"
+            bash "../vendor/jrealm/dungeons/doc/upgrade.${current}"
         done
 
         echo $current > ../data/dungeons-upgrade
@@ -40,7 +40,7 @@ if [ -f config.php ] ; then
 
         while [ $latest -gt $current ] ; do
             current=`expr $current + 1`
-            sh "../doc/upgrade.${current}"
+            bash "../doc/upgrade.${current}"
         done
 
         echo $current > ../data/upgrade

@@ -1,28 +1,28 @@
-createuser "{{ result.db_user }}" --no-createrole --no-createdb --no-inherit --no-superuser -U postgres 2> /dev/null
-createdb "{{ result.db_name }}" --owner="{{ result.db_user }}" -U postgres 2> /dev/null
+createuser "{{ result.db_user }}" --no-createrole --no-createdb --no-inherit --no-superuser -h 127.0.0.1 -U postgres 2> /dev/null
+createdb "{{ result.db_name }}" --owner="{{ result.db_user }}" -h 127.0.0.1 -U postgres 2> /dev/null
 
 if [ "$?" = "0" ] ; then
-    psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/jrealm/dungeons/doc/dungeons.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+    psql -h 127.0.0.1 -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/jrealm/dungeons/doc/dungeons.sql" --quiet 2>&1 | grep -v ": NOTICE:"
 
     if [ -f ../doc/schema.sql ] ; then
-        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../doc/schema.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+        psql -h 127.0.0.1 -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../doc/schema.sql" --quiet 2>&1 | grep -v ": NOTICE:"
     fi
 
     {%~ for pkg in constant('PACKAGES')|reverse %}
     if [ -f ../vendor/{{ pkg }}/doc/schema.sql ] ; then
-        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/{{ pkg }}/doc/schema.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+        psql -h 127.0.0.1 -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/{{ pkg }}/doc/schema.sql" --quiet 2>&1 | grep -v ": NOTICE:"
     fi
     {%~ endfor %}
 
     php index.php /console/init-multilingual
 
     if [ -f ../doc/data.sql ] ; then
-        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../doc/data.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+        psql -h 127.0.0.1 -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../doc/data.sql" --quiet 2>&1 | grep -v ": NOTICE:"
     fi
 
     {%~ for pkg in constant('PACKAGES')|reverse %}
     if [ -f ../vendor/{{ pkg }}/doc/data.sql ] ; then
-        psql -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/{{ pkg }}/doc/data.sql" --quiet 2>&1 | grep -v ": NOTICE:"
+        psql -h 127.0.0.1 -d "{{ result.db_name }}" -U "{{ result.db_user }}" --file="../vendor/{{ pkg }}/doc/data.sql" --quiet 2>&1 | grep -v ": NOTICE:"
     fi
     {%~ endfor %}
 fi

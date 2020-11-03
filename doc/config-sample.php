@@ -9,3 +9,5 @@ const DB_USER = 'sample';
 const DB_PASSWORD = null;
 
 const DEBUG = true;
+
+const PACKAGES = [];
