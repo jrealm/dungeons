@@ -14,5 +14,4 @@
 \ir schema/file.sql
 \ir schema/site.sql
 \ir schema/member.sql
-\ir schema/wallet.sql
 
