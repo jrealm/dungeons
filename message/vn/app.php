@@ -5,6 +5,8 @@ return [
     'button.cancel' => 'Cancel',
     'button.save' => 'Save',
 
+    'close' => 'Close',
+
     'copyright' => 'Copyright © 2020',
 
     'footer' => '',
@@ -26,6 +28,8 @@ return [
 
     'mail.code' => 'Verification code',
     'mail.success' => 'The verification code has been sent, please check.',
+
+    'message' => 'Message',
 
     'next' => 'Next',
 

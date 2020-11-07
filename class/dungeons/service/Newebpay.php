@@ -16,6 +16,8 @@ class Newebpay {
             'ItemDesc',
             'TradeLimit',
             'CREDIT',
+            'VACC',
+            'CustomerURL',
             'ReturnURL',
             'NotifyURL',
             'Email',

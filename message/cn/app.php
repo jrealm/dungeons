@@ -5,6 +5,8 @@ return [
     'button.cancel' => '取消',
     'button.save' => '储存',
 
+    'close' => '关闭',
+
     'copyright' => 'Copyright © 2020',
 
     'footer' => '',
@@ -26,6 +28,8 @@ return [
 
     'mail.code' => '验证码',
     'mail.success' => 'Email 验证码已寄出，请查收。',
+
+    'message' => '讯息',
 
     'next' => '下一步',
 
