@@ -1,4 +1,4 @@
-Header edit Set-Cookie ^(.*)$ "$1; SameSite=None; Secure"
+Header always edit Set-Cookie ^(.*)$ "$1; SameSite=None; Secure"
 
 RewriteEngine On
 
