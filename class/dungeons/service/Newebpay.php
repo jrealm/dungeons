@@ -17,6 +17,7 @@ class Newebpay {
             'TradeLimit',
             'CREDIT',
             'VACC',
+            'CVS',
             'CustomerURL',
             'ReturnURL',
             'NotifyURL',
