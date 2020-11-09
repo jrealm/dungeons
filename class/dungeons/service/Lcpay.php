@@ -60,6 +60,8 @@ class Lcpay {
 
         //--
 
+        logger('lcpay')->info($request);
+
         $options = [
             'http' => [
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -71,6 +73,8 @@ class Lcpay {
         $context = stream_context_create($options);
 
         $response = @file_get_contents($args['url'], false, $context);
+
+        logger('lcpay')->info($response);
 
         if ($response === false) {
             logger('lcpay-error')->info($request);
