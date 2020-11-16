@@ -38,8 +38,6 @@ $folders[] = DUNGEONS;
 
 define('RESOURCE_FOLDERS', $folders);
 
-ErrorHandler::register(logger('ERROR'));
-
 if (PHP_SAPI === 'cli') {
     $handler = PlainTextHandler::class;
     $loader = 'cli.php';
@@ -58,5 +56,7 @@ if (PHP_SAPI === 'cli') {
 if (defined('DEBUG') && DEBUG) {
     (new Run())->prependHandler(new $handler())->register();
 }
+
+ErrorHandler::register(logger('ERROR'));
 
 require $loader;
