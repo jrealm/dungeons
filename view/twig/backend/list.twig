@@ -181,6 +181,8 @@
     {{ parent() }}
 
     initForm($("#_{{ formId }}, #_{{ formId }}_table"));
+
+    $(".table-responsive").floatingScroll();
 {% endblock %}
 
 {% block page %}

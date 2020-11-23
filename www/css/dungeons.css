@@ -44,6 +44,10 @@ th a, th:hover a {
     max-width: 100%;
 }
 
+.fl-scrolls {
+    margin-bottom: 56px;
+};
+
 .hint {
     color: transparent;
     cursor: default;
