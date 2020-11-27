@@ -69,7 +69,9 @@
             target.find("textarea[data-format=html]").summernote("destroy");
         }
 
-        target.find(".table-responsive").floatingScroll("destroy");
+        if ($.fn.floatingScroll) {
+            target.find(".table-responsive").floatingScroll("destroy");
+        }
 
         target.hide().empty();
     };
