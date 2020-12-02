@@ -19,6 +19,9 @@
         <link href="{{ constant('APP_PATH') }}adminlte/plugins/toastr/toastr.min.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}css/jquery.floatingscroll.css" rel="stylesheet">
         <link href="{{ constant('APP_PATH') }}css/dungeons.css" rel="stylesheet">
+        {%~ if result.css %}
+        <link href="{{ constant('APP_PATH') }}css/{{ constant('APP_NAME') }}-backend.css" rel="stylesheet">
+        {%~ endif %}
     </head>
     <body class="hold-transition layout-fixed layout-footer-fixed layout-navbar-fixed">
         <div class="wrapper">
@@ -103,5 +106,11 @@
         <script src="{{ constant('APP_PATH') }}js/jquery.floatingscroll.min.js"></script>
         <script src="{{ constant('APP_PATH') }}js/label-editor.js"></script>
         <script data-language="{{ constant('LANGUAGE') }}" data-landing-path="{{ controller.args()|join('/') }}" src="{{ constant('APP_PATH') }}js/dungeons.js"></script>
+        {%~ if result.js %}
+        {%~ if cfg('backend.websocket') %}
+        <script src="{{ cfg('backend.websocket') }}"></script>
+        {%~ endif %}
+        <script src="{{ constant('APP_PATH') }}js/{{ constant('APP_NAME') }}-backend.js"></script>
+        {%~ endif %}
     </body>
 </html>

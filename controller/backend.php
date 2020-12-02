@@ -42,7 +42,12 @@ return new class() extends dungeons\web\UserController {
             }
         }
 
-        return ['success' => true, 'nodes' => $this->filter($nodes)];
+        return [
+            'success' => true,
+            'css' => file_exists(APP_HOME . 'www/css/' . APP_NAME . '-backend.css'),
+            'js' => file_exists(APP_HOME . 'www/js/' . APP_NAME . '-backend.js'),
+            'nodes' => $this->filter($nodes),
+        ];
     }
 
     private function filter($nodes) {
