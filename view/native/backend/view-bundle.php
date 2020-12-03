@@ -1,6 +1,7 @@
 <?php //>
 
 use dungeons\db\column\Text;
+use dungeons\Message;
 
 $path = $controller->menu()['parent'];
 
@@ -45,14 +46,22 @@ foreach ($result['data'] as $name => $ignore) {
         continue;
     }
 
-    $class = cfg("style/{$prefix}.{$name}", Text::class);
-    $column = new $class();
+    $options = cfg("style/{$prefix}.{$name}.options");
 
     $style = [];
     $style['i18n'] = "{$prefix}.{$name}";
     $style['name'] = $name;
-    $style['pattern'] = $style['pattern'] ?? $column->pattern();
-    $style['type'] = $column->formStyle();
+
+    if ($options) {
+        $style['options'] = Message::load("options/{$options}");
+        $style['type'] = 'radio';
+    } else {
+        $class = cfg("style/{$prefix}.{$name}", Text::class);
+        $column = new $class();
+
+        $style['pattern'] = $column->pattern();
+        $style['type'] = $column->formStyle();
+    }
 
     $styles[] = $style;
 }
