@@ -79,7 +79,7 @@ class Resource {
         foreach (array_reverse(RESOURCE_FOLDERS) as $folder) {
             $data = self::load($folder . $path, false);
 
-            if ($data) {
+            if (is_array($data)) {
                 $bundle = $bundle ? array_merge($bundle, $data) : $data;
             }
         }
